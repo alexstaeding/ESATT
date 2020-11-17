@@ -1,0 +1,113 @@
+### Intellij ###
+.idea/
+*.iws
+*.iml
+.idea_modules/
+atlassian-ide-plugin.xml
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.externalToolBuilders/
+*.launch
+.factorypath
+.recommenders/
+.apt_generated/
+.project
+.classpath
+
+### Linux ###
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### NetBeans ###
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+### Gradle ###
+.gradle
+build/
+out/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+.git/
+
+# compiled output
+out-tsc/
+# Only exists if Bazel was run
+bazel-out/
+
+# dependencies
+node_modules/
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+.c9/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+.sass-cache
+connect.lock
+coverage
+libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+typings
