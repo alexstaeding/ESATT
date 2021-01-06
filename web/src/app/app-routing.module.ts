@@ -1,11 +1,15 @@
-import {AppComponent} from './app.component';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
+    pathMatch: 'full',
+    redirectTo: 'dashboard'
+  },
+  {
+    path: 'dashboard',
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   }
 ];
 

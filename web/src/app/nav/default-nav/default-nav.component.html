@@ -1,0 +1,10 @@
+<mat-toolbar class="mat-elevation-z16">
+  <mat-toolbar-row class="container">
+    <span class="flex-spacer"></span>
+    <button
+      [color]="isActive('/dashboard') ? 'primary' : null"
+      mat-button routerLink="/dashboard">
+      Dashboard
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
