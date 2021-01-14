@@ -1,90 +1,121 @@
 {
-  "gender": {
-    "female": "Female",
-    "male": "Male",
-    "other": "Other"
-  },
-  "thesis": {
-    "pageTitle": "Theses - Overview",
-    "studentFirstName": "Student (First Name)",
-    "studentLastName": "Student (Last Name)",
-    "studentId": "Matriculation Number",
-    "supervisorFirstName": "Supervisor (First Name)",
-    "supervisorLastName": "Supervisor (Last Name)",
-    "thesisType": "Type Of Work",
-    "department": {
-      "departmentId": "Department Number",
-      "departmentName": "Department Name"
-    },
-    "subject": "Subject",
-    "title": "Title",
-    "status": {
-      "signUpDate": "Registration Date",
-      "signedUp": "Registered",
-      "dueDate": "Due Date",
-      "extendedDueDate": "Extended",
-      "presented": "Presented",
-      "submitted": "Submitted",
-      "graded": "Graded",
-      "reportCreated": "Report Created"
-    },
-    "course": "Course"
-  },
-  "thesis-detail": {
-    "english-title": "English Title",
-    "supervisor": "Supervisor",
-    "evaluator-firstname": "Evaluator (First Name)",
-    "evaluator-lastname": "Evaluator (Last Name)",
-    "extended-duedate": "Extended Due Date",
-    "assignmentDate": "Assignment Date",
-    "presentationDate": "Date of Presentation",
-    "submissionDate": "Submission Date",
-    "gradingDate": "Date of Rating",
-    "reportDate": "Date of Report Creation",
-    "department": "Department",
-    "note-placeholder": "Insert note here",
-    "student": {
-      "gender": "gender",
-      "email": "E-Mail"
-    },
-    "header": {
-      "thesis-detail": "Thesis-Details",
-      "information-on-thesis": "Information on Thesis",
-      "information-on-student": "Information on Student",
-      "status": "Status",
-      "notes": "Notes"
-    },
-    "date": "Date",
-    "notes": "Notes",
-    "buttons": {
+  "evaluation-scheme": {
+    "title": "Evaluation Schemes",
+    "name": "Name",
+    "description": "Description",
+    "created": "Created on",
+    "updated": "Last edited",
+    "add-button": "Create new Evaluation Scheme",
+    "detail": {
+      "title-new": "Create new Evaluation Scheme",
+      "title-edit": "Edit Evaluation Scheme",
+      "title-detail": "Evaluation Scheme Details",
+      "name": "Criterion",
+      "description": "Description",
+      "weight": "Weight",
+      "left": "left",
+      "name-error": "Please enter a name!",
+      "name-missing-error": "Please enter a name for the Evaluation scheme!",
+      "weight-error": "Not a number between 0 and 1!",
+      "total-weight-error": "The weights do not tally!",
+      "eg": "e.g.",
+      "add": "Add Criterion",
+      "add-subcriterion": "Add Sub-criterion",
+      "remove-criterion": "Remove Criterion",
+      "create": "Create new Evaluation Scheme",
+      "edit": "Edit",
       "save": "Save",
       "cancel": "Cancel",
-      "edit": "Edit",
-      "add-note": "Add note",
-      "delete-note": "Delete note",
-      "create": "Create new thesis",
-      "close": "Close",
-      "confirm-evalScheme": "Use this Evaluation scheme",
-      "other-evalScheme": "Choose different Evaluation scheme",
-      "calc-grade": "Calculate grade"
+      "delete-button": "Delete Criterion",
+      "close": "Close"
     },
-    "grading": {
-      "title": "Grading",
-      "choose-evalScheme": "Choose Evaluation Scheme",
-      "evalScheme-name": "Name",
-      "evalScheme-description": "Description",
-      "evalScheme-created": "Created on",
-      "evalScheme-updated": "Last edited",
-      "selected": {
-        "description": "Description",
-        "criterion": "Criterion",
-        "weight": "Weight",
-        "grade": "Grade",
-        "calculated-grade": "Calculated Grade",
-        "overwrite-grade": "Overwrite Grade"
+    "gender": {
+      "female": "Female",
+      "male": "Male",
+      "other": "Other"
+    },
+    "thesis": {
+      "pageTitle": "Theses - Overview",
+      "studentFirstName": "Student (First Name)",
+      "studentLastName": "Student (Last Name)",
+      "studentId": "Matriculation Number",
+      "supervisorFirstName": "Supervisor (First Name)",
+      "supervisorLastName": "Supervisor (Last Name)",
+      "thesisType": "Type Of Work",
+      "department": {
+        "departmentId": "Department Number",
+        "departmentName": "Department Name"
       },
-      "total-gradeError": "Entered grade wrong!",
-      "gradeError": "Not a grade!"
+      "subject": "Subject",
+      "title": "Title",
+      "status": {
+        "signUpDate": "Registration Date",
+        "signedUp": "Registered",
+        "dueDate": "Due Date",
+        "extendedDueDate": "Extended",
+        "presented": "Presented",
+        "submitted": "Submitted",
+        "graded": "Graded",
+        "reportCreated": "Report Created"
+      },
+      "course": "Course"
+    },
+    "thesis-detail": {
+      "english-title": "English Title",
+      "supervisor": "Supervisor",
+      "evaluator-firstname": "Evaluator (First Name)",
+      "evaluator-lastname": "Evaluator (Last Name)",
+      "extended-duedate": "Extended Due Date",
+      "assignmentDate": "Assignment Date",
+      "presentationDate": "Date of Presentation",
+      "submissionDate": "Submission Date",
+      "gradingDate": "Date of Rating",
+      "reportDate": "Date of Report Creation",
+      "department": "Department",
+      "note-placeholder": "Insert note here",
+      "student": {
+        "gender": "gender",
+        "email": "E-Mail"
+      },
+      "header": {
+        "thesis-detail": "Thesis-Details",
+        "information-on-thesis": "Information on Thesis",
+        "information-on-student": "Information on Student",
+        "status": "Status",
+        "notes": "Notes"
+      },
+      "date": "Date",
+      "notes": "Notes",
+      "buttons": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "add-note": "Add note",
+        "delete-note": "Delete note",
+        "create": "Create new thesis",
+        "close": "Close",
+        "confirm-evalScheme": "Use this Evaluation scheme",
+        "other-evalScheme": "Choose different Evaluation scheme",
+        "calc-grade": "Calculate grade"
+      },
+      "grading": {
+        "title": "Grading",
+        "choose-evalScheme": "Choose Evaluation Scheme",
+        "evalScheme-name": "Name",
+        "evalScheme-description": "Description",
+        "evalScheme-created": "Created on",
+        "evalScheme-updated": "Last edited",
+        "selected": {
+          "description": "Description",
+          "criterion": "Criterion",
+          "weight": "Weight",
+          "grade": "Grade",
+          "calculated-grade": "Calculated Grade",
+          "overwrite-grade": "Overwrite Grade"
+        },
+        "total-gradeError": "Entered grade wrong!",
+        "gradeError": "Not a grade!"
+      }
     }
   }
 }

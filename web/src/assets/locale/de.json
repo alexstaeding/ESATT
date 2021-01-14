@@ -1,4 +1,35 @@
 {
+  "evaluation-scheme": {
+    "title": "Bewertungsschemata",
+    "name": "Name",
+    "description": "Beschreibung",
+    "created": "Erstellt am",
+    "updated": "Zuletzt bearbeitet",
+    "add-button": "Neues Bewertungsschema erstellen",
+    "detail": {
+      "title-new": "Neues Bewertungsschema erstellen",
+      "title-edit": "Bewertungsschema bearbeiten",
+      "title-detail": "Bewertungsschema Details",
+      "name": "Kriterium",
+      "description": "Beschreibung",
+      "weight": "Gewichtung",
+      "left": "übrig",
+      "name-error": "Bitte geben Sie einen Namen ein!",
+      "name-missing-error": "Bitte geben Sie einen Namen für das Bewertungsschema ein!",
+      "weight-error": "Keine Zahl zwischen 0 und 1!",
+      "total-weight-error": "Die Gewichtungen gehen nicht auf!",
+      "eg": "z.B.",
+      "add": "Kriterium hinzufügen",
+      "add-subcriterion": "Unterkriterium hinzufügen",
+      "remove-criterion": "Kriterium entfernen",
+      "create": "Neues Bewertungsschema erstellen",
+      "edit": "Bearbeiten",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "delete-button": "Kriterium entfernen",
+      "close": "Schließen"
+    }
+  },
   "gender": {
     "female": "Weiblich",
     "male": "Männlich",
