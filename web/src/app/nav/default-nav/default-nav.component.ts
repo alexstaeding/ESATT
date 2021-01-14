@@ -18,6 +18,7 @@ export class DefaultNavComponent implements OnInit {
     private router: Router,
     public translateService: TranslateService,
   ) {
+    this.translateService.setDefaultLang("de")
   }
 
   ngOnInit(): void {

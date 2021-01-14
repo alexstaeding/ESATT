@@ -38,6 +38,14 @@ html, body {
   border-color: mat-color($accent-palette) !important;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-pointer:hover {
+  background-color: #eee;
+}
+
 #loader {
   width: 150px;
   height: 150px;
@@ -63,4 +71,13 @@ html, body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

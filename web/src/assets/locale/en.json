@@ -1,2 +1,26 @@
 {
+  "thesis": {
+    "pageTitle": "Thesis - Overview",
+    "studFirstName": "Student Firstname",
+    "studLastName": "Student Lastname",
+    "studID": "Matriculation Number",
+    "supervisorFirstName": "Supervisor Firstname",
+    "supervisorLastName": "Supervisor Lastname",
+    "thesisType": "Thesis-Type",
+    "department": {
+      "departmentId": "Department Number",
+      "departmentName": "Department Name"
+    },
+    "subject": "Subject",
+    "title": "Title",
+    "status": {
+      "signUpUtc": "Thesis Signup Date",
+      "dueDate": "Due Date",
+      "extendedDueDate": "Extended",
+      "presented": "Presented",
+      "submitted": "Submitted",
+      "graded": "Graded"
+    },
+    "course": "Course"
+  }
 }

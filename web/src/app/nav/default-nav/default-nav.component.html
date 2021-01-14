@@ -10,6 +10,11 @@
       Dashboard
     </button>
     <button
+      [color]="isActive('/thesis') ? 'primary' : null"
+      mat-button routerLink="/thesis">
+      Thesis Übersicht
+    </button>
+    <button
       type="button"
       aria-label="Select Language"
       mat-icon-button
