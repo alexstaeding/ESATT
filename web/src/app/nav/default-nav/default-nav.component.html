@@ -6,5 +6,10 @@
       mat-button routerLink="/dashboard">
       Dashboard
     </button>
+    <button
+      [color]="isActive('/thesis') ? 'primary' : null"
+      mat-button routerLink="/thesis">
+      Thesis Übersicht
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>

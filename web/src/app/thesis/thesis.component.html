@@ -1,0 +1,50 @@
+<mat-card>
+  <h1>Thesis - Übersicht</h1>
+</mat-card>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="studentFirstName">
+    <th mat-header-cell *matHeaderCellDef> Student Vorname</th>
+    <td mat-cell *matCellDef="let element"> {{element.studentFirstName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="studentLastName">
+    <th mat-header-cell *matHeaderCellDef> Student Nachname</th>
+    <td mat-cell *matCellDef="let element"> {{element.studentLastName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="thesisTopic">
+    <th mat-header-cell *matHeaderCellDef> Thesis Thema</th>
+    <td mat-cell *matCellDef="let element"> {{element.thesisTopic}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="profFirstName">
+    <th mat-header-cell *matHeaderCellDef> Betreuer Vorname</th>
+    <td mat-cell *matCellDef="let element"> {{element.profFirstName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="profLastName">
+    <th mat-header-cell *matHeaderCellDef> Betreuer Nachname</th>
+    <td mat-cell *matCellDef="let element"> {{element.profLastName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status</th>
+    <td mat-cell *matCellDef="let element"> {{element.status}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-card>
+  <button mat-fab color="primary" class="mx-3">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-fab color="primary" class="mx-3">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-fab color="warn" class="mx-3">
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-card>
