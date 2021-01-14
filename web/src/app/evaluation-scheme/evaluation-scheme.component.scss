@@ -1,0 +1,39 @@
+
+caption{
+  caption-side: top;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: normal;
+  flex-wrap: wrap;
+}
+
+.button-row {
+  display: table-cell;
+  width: 300px;
+}
+
+.mat-add {
+  background-color: limegreen;
+  color: #fff;
+}
+
+.mat-edit {
+  background-color: gray;
+  color: #fff;
+}
+
+.mat-del {
+  background-color: red;
+  color: #fff;
+}
+
+.icon-pos {
+  position: center;
+}
