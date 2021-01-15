@@ -61,6 +61,28 @@
     },
     "course": "Course"
   },
+  "profile": {
+    "nav-title": "Profile",
+    "title": "My Profile",
+    "firstname": "First name",
+    "surname": "Last name",
+    "email": "E-Mail",
+    "role": "Role",
+    "subtitle": "My Theses",
+    "table-title": "Title",
+    "table-prof": "Professor",
+    "table-date": "Created on",
+    "table-assigned": "Assigned to",
+    "table-state": "Status",
+    "no-theses-found": "No theses found!",
+    "my-data": "My Data",
+    "username": "User name",
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit"
+    }
+  },
   "thesis-detail": {
     "english-title": "English Title",
     "supervisor": "Supervisor",
