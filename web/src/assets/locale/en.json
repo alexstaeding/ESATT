@@ -23,5 +23,75 @@
       "reportCreated": "Report Created"
     },
     "course": "Course"
+  },
+  "thesis-detail": {
+    "title": "Title",
+    "english-title": "English Title",
+    "supervisor": "Supervisor",
+    "evaluator-firstname": "Evaluator (First Name)",
+    "evaluator-lastname": "Evaluator (Last Name)",
+    "type": "Type",
+    "status": {
+      "signedUp": "Signed Up",
+      "extended": "Extended",
+      "presentation": "Presentation given",
+      "report": "Report available",
+      "graded": "Graded"
+    },
+    "duedate": "Due Date",
+    "extended-duedate": "Extended Due Date",
+    "signUpDate": "Sign Up Date",
+    "assignmentDate": "Assignment Date",
+    "presentationDate": "Date of Presentation",
+    "submissionDate": "Submission Date",
+    "gradingDate": "Date of Rating",
+    "reportDate": "Date of report creation",
+    "department": "Department",
+    "subject": "Subject",
+    "student": {
+      "firstname": "Student (First Name)",
+      "lastname": "Student (Last Name)",
+      "matriculation-number": "Matriculation Number",
+      "sex": "Sex",
+      "email": "E-Mail"
+    },
+    "header": {
+      "thesis-detail": "Thesis-Details",
+      "information-on-thesis": "Information on Thesis",
+      "information-on-student": "Information on Student",
+      "status": "Status",
+      "notes": "Notes"
+    },
+    "date": "Date",
+    "notes": "Notes",
+    "no-notes": "No notes available",
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "add-note": "Add new note",
+      "create": "Create new thesis",
+      "close": "Close",
+      "confirm-evalScheme": "Use this Evaluation scheme",
+      "other-evalScheme": "Choose different Evaluation scheme",
+      "calc-grade": "Calculate grade"
+    },
+    "grading": {
+      "title": "Grading",
+      "choose-evalScheme": "Choose Evaluation Scheme",
+      "evalScheme-name": "Name",
+      "evalScheme-description": "Description",
+      "evalScheme-created": "Created on",
+      "evalScheme-updated": "Last edited",
+      "selected": {
+        "description": "Description",
+        "criterion": "Criterion",
+        "weight": "Weight",
+        "calculated-grade": "Calculated Grade",
+        "overwrite-grade": "Overwrite Grade"
+      },
+      "total-gradeError": "Entered grade wrong!",
+      "gradeError": "Not a grade!"
+    }
   }
 }

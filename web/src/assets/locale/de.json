@@ -23,5 +23,77 @@
       "reportCreated": "Gutachten erstellt"
     },
     "course": "Fachbereich"
+  },
+  "thesis-detail": {
+    "title": "Titel",
+    "english-title": "Englischer Titel",
+    "supervisor": "Betreuer/in",
+    "evaluator-firstname": "Gutachter (Vorname)",
+    "evaluator-lastname": "Gutachter (Nachname)",
+    "type": "Art der Arbeit",
+    "status": {
+      "signedUp": "Angemeldet",
+      "extended": "Verlängert",
+      "presentation": "Vortrag gehalten",
+      "report": "Gutachten erstellt",
+      "graded": "Bewertet",
+      "submitted": "Abgegeben"
+    },
+    "duedate": "Abgabefrist",
+    "extended-duedate": "Verlängerte Abgabefrist",
+    "signUpDate": "Anmeldedatum",
+    "assignmentDate": "Vergabedatum",
+    "presentationDate": "Datum des Vortrags",
+    "submissionDate": "Abgabedatum",
+    "gradingDate": "Datum der Bewertung",
+    "reportDate": "Datum der Gutachtenerstellung",
+    "department": "Fachbereich",
+    "subject": "Studiengang",
+    "student": {
+      "firstname": "Student (Vorname)",
+      "lastname": "Student (Nachname)",
+      "matriculation-number": "Matrikelnummer",
+      "sex": "Geschlecht",
+      "email": "E-Mail"
+    },
+    "header": {
+      "thesis-detail": "Thesis-Details",
+      "information-on-thesis": "Informationen zur Thesis",
+      "information-on-student": "Informationen zum Studenten",
+      "status": "Status",
+      "notes": "Notizen"
+    },
+    "date": "Datum",
+    "notes": "Notizen",
+    "no-notes": "Bisher keine Notizen erstellt",
+    "buttons": {
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten",
+      "add-note": "Neue Notiz hinzufügen",
+      "create": "Neue Thesis erstellen",
+      "close": "Schließen",
+      "confirm-evalScheme": "Dieses Bewertungschema nutzen",
+      "other-evalScheme": "Anderes Bewertungschema wählen",
+      "calc-grade": "Note berechnen"
+    },
+    "grading": {
+      "title": "Bewertung",
+      "choose-evalScheme": "Bewertungsschema wählen",
+      "evalScheme-name": "Name",
+      "evalScheme-description": "Beschreibung",
+      "evalScheme-created": "Erstellt am",
+      "evalScheme-updated": "Zuletzt bearbeitet",
+      "selected": {
+        "description": "Beschreibung",
+        "criterion": "Kriterium",
+        "weight": "Gewichtung",
+        "grade": "Note",
+        "calculated-grade": "Berechnete Note",
+        "overwrite-grade": "Überschriebene Note"
+      },
+      "total-gradeError": "Note falsch eingetragen!",
+      "gradeError": "Keine Note!"
+    }
   }
 }

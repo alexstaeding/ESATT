@@ -6,6 +6,10 @@ html, body {
   margin: 0;
 }
 
+mat-icon {
+  vertical-align: middle;
+}
+
 .flex-spacer {
   flex: 1 1 auto;
 }
@@ -71,4 +75,9 @@ html, body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.red-snackbar {
+  background: red;
+  color: white;
 }

@@ -2,7 +2,7 @@
   <h2>{{'thesis.pageTitle' | translate}}</h2>
   <hr>
 
-  <div class="table-overflow mat-elevation-z1">
+  <div class="table-overflow mat-elevation-z0">
     <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0">
       <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.studentFirstName' | translate }}</th>
@@ -35,12 +35,14 @@
       </ng-container>
 
       <ng-container matColumnDef="departmentId">
-        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.department.departmentId' | translate }}</th>
+        <th mat-header-cell *matHeaderCellDef
+            class="text-center">{{ 'thesis.department.departmentId' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.departmentId }}</td>
       </ng-container>
 
       <ng-container matColumnDef="departmentName">
-        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.department.departmentName' | translate }}</th>
+        <th mat-header-cell *matHeaderCellDef
+            class="text-center">{{ 'thesis.department.departmentName' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.departmentName }}</td>
       </ng-container>
 
@@ -56,25 +58,19 @@
 
       <ng-container matColumnDef="signUpUtc">
         <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.signUp' | translate }}</th>
-          <td mat-cell *matCellDef="let element">
-            <ng-template *ngIf="element.signUpUtc != null, else showCheckbox">
-              {{ element.status?.signUpUtc }}
-            </ng-template>
-            <ng-template #showCheckbox>
-              <mat-checkbox [disabled]="true" [checked]="false"></mat-checkbox>
-            </ng-template>
-          </td>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="element.status?.signUpUtc != null">
+            {{ calcDate(element.status?.signUpUtc) }}
+          </div>
+          <mat-checkbox *ngIf="element.status?.signUpUtc == null" [disabled]="true" [checked]="false"></mat-checkbox>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="dueDateUtc">
         <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.dueDate' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          <ng-template *ngIf="element.dueDateUtc != null, else showCheckbox">
-            {{ element.status?.dueDateUtc }}
-          </ng-template>
-          <ng-template #showCheckbox>
-            <mat-checkbox [disabled]="true" [checked]="false"></mat-checkbox>
-          </ng-template>
+          <div *ngIf="element.status?.dueDateUtc != null"> {{ calcDate(element.status?.dueDateUtc) }} </div>
+          <mat-checkbox *ngIf="element.status?.dueDateUtc == null" [disabled]="true" [checked]="false"></mat-checkbox>
         </td>
       </ng-container>
 
@@ -88,38 +84,43 @@
       <ng-container matColumnDef="submittedUtc">
         <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.submitted' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          <mat-checkbox [disabled]="true" [checked]="element.status?.submittedUtc < currentDate"></mat-checkbox>
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.submittedUtc) < normalizeDate(currentDate)"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="presentationUtc">
         <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.presented' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          <mat-checkbox [disabled]="true" [checked]="element.status?.presentationUtc < currentDate"></mat-checkbox>
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.presentationUtc) < normalizeDate(currentDate)"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="gradedUtc">
         <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.graded' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          <mat-checkbox [disabled]="true" [checked]="element.status?.gradedUtc < currentDate"></mat-checkbox>
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.gradedUtc) < normalizeDate(currentDate)"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="reportCreatedUtc">
         <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.reportCreated' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          <mat-checkbox [disabled]="true" [checked]="element.status?.reportCreatedUtc < currentDate"></mat-checkbox>
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.reportCreatedUtc) < normalizeDate(currentDate)"></mat-checkbox>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row class="cursor-pointer"
-          *matRowDef="let row; columns: displayedColumns;"></tr>
+          *matRowDef="let row; columns: displayedColumns;"
+          (click)="openDialog(row.id)"></tr>
     </table>
   </div>
   <br>
-  <button mat-mini-fab color="add" class="mx-3">
+  <button mat-mini-fab color="add" class="mx-3" (click)="openDialog()">
     <mat-icon>add</mat-icon>
   </button>
   <hr>

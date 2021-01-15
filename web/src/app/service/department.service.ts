@@ -20,7 +20,7 @@ export class DepartmentService {
   }
 
   public async get(id: string): Promise<Department> {
-    return this.http.get<Department>("http://localhost:8008/api/v1/departents/" + id).toPromise()
+    return this.http.get<Department>("http://localhost:8008/api/v1/departments/" + id).toPromise()
   }
 
   public async create(department: Department): Promise<Department> {
