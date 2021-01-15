@@ -1,0 +1,38 @@
+input {
+    display: initial !important;
+    margin: 0 5px 0 5px !important;
+}
+
+.mat-form-field{
+    margin-left: 10px;
+}  
+
+.space-left{
+    margin-left: 20px;
+}
+
+.mat-select:disabled,
+.mat-input-element:disabled  {
+    color: black
+}
+
+::ng-deep.mat-form-field-disabled .mat-form-field-underline {
+    display: none;
+}
+td {
+    padding-right: 8px;
+  }
+
+.full-width{
+    width: 100%;
+}
+
+.notes{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 50px 0;
+}
+  
+button {
+    margin: 16px 8px;
+  }
