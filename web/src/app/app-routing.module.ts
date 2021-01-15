@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'thesis',
     loadChildren: './thesis/thesis.module#ThesisModule'
+  },
+  {
+    path: 'thesis/:id',
+    loadChildren: './thesis-detail/thesis-detail.module#ThesisDetailModule'
   }
 ];
 

@@ -1,14 +1,16 @@
 <div class="container mt-4">
-   <h2>Neues Bewertungsschema erstellen</h2>
- <hr>
+  <h2>Neues Bewertungsschema erstellen</h2>
+  <hr>
+  <mat-card>
 
-  <form class="form-layout">
-    <mat-form-field class="fb-width">
-      <mat-label>Fachbereich</mat-label>
-      <input matInput>
-    </mat-form-field>
 
-    <div class="inline-criteria " *ngFor="let criterion of criteria; let i = index">
+    <form class="form-layout">
+      <mat-form-field class="fb-width">
+        <mat-label>Fachbereich</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <div class="inline-criteria " *ngFor="let criterion of criteria; let i = index">
         <mat-form-field class="inline-criterion">
           <mat-label>Kriterium</mat-label>
           <input matInput>
@@ -20,24 +22,27 @@
         </mat-form-field>
 
         <button class="inline-del"
-          mat-mini-fab color="warn" (click)="removecriterion(i)"><mat-icon>delete</mat-icon></button>
-    </div>
-  </form>
-  <button mat-flat-button color="primary" (click)="addcriterion()">Kriterium hinzufügen</button>
+                mat-mini-fab color="warn" (click)="removecriterion(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </form>
+    <button mat-flat-button color="primary" (click)="addcriterion()">Kriterium hinzufügen</button>
 
-  <div class="button-row">
-    <div class="flex-container">
-      <div class="button-container">
-        <button mat-flat-button color="accent">
-          Speichern
-        </button>
-      </div>
-      <div class="button-container">
-        <button mat-flat-button color="warn"
-                routerLink="/evaluation-scheme">
-          Abbrechen
-        </button>
+    <div class="button-row">
+      <div class="flex-container">
+        <div class="button-container">
+          <button mat-flat-button color="accent">
+            Speichern
+          </button>
+        </div>
+        <div class="button-container">
+          <button mat-flat-button color="warn"
+                  routerLink="/evaluation-scheme">
+            Abbrechen
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </mat-card>
 </div>
