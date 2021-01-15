@@ -6,5 +6,11 @@
       mat-button routerLink="/dashboard">
       Dashboard
     </button>
+    <span class="flexExpand"></span>
+    <button
+    [color] = "isActive('/profile') ? 'primary' : null"
+    mat-button routerLink="/profile">
+      Profil
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -1,0 +1,59 @@
+
+<div class="container mt-4">
+  <div class="row">
+
+    <div class="col-sm-6 col-md-8">
+      <h1> {{title}} </h1>
+      <mat-divider> </mat-divider> <br>
+      <dl> <dt> Name: </dt> <dd><i class="material-icons">person</i> {{name}} </dd></dl> <! user.userID
+      <br>
+      <dl> <dt> E-Mail: </dt> <dd><i class="material-icons">email</i> {{mail}} </dd></dl> <! user.mailAdr
+      <br>
+      <dl> <dt> Rolle: </dt> <dd><i class="material-icons">person_pin</i> {{role}} </dd></dl> <! user.role
+    </div>
+    </div>
+
+
+
+<mat-divider></mat-divider>
+
+<table class="table table-striped table-bordered">
+  <caption>
+    <mat-card>
+      <h3>Meine Thesen</h3></mat-card>
+  </caption> <br>
+
+  <thead >
+  <tr>
+    <th class="table_header" mat-sort-header="title"><i class="material-icons">title</i>Titel</th>
+    <th class="table_header" ><i class="material-icons">person</i>Professor</th>
+    <th class="table_header" mat-sort-header="created"><i class="material-icons">date_range</i>Erstellt am</th>
+    <th class="table_header" mat-sort-header="assigned">Zugewiesen an</th>
+    <th class="table_header" >Status</th>
+  </tr>
+  </thead>
+  <tbody *ngIf="count>0">
+  <tr *ngFor="let thesis of sortedData">
+    <td>{{thesis.created_time
+      | date}}</td>
+    <td> <a [routerLink]="['/thesis_details' ,thesis._id]"> {{thesis.title}} </a> </td>
+    <td><a [routerLink]="['/thesis_professor',thesis.professor._id]">{{thesis.professor.name}} {{thesis.professor.lastname}} </a> </td>
+    <td>{{thesis.prerequisites}}</td>
+    <td *ngIf="thesis.assigned"><i class="material-icons assigned">done</i></td>
+    <td *ngIf="!thesis.assigned"><i class="material-icons not_assigned">clear</i></td>
+    <td>
+      <a [routerLink]="['/professor/thesis_edit',thesis._id]">
+        <button class="btn btn-default edit">  <i class="material-icons ">edit</i> Edit Thesis</button>
+      </a>
+    </td>
+    <td *ngIf="!thesis.assigned"><button class="btn btn-default  " (click)="deleteThesis(thesis)"><i class="material-icons">delete_forever</i></button></td>
+    <td *ngIf="thesis.assigned"></td>
+  </tr>
+  </tbody>
+</table>
+
+ <h4 *ngIf="count==0 && loading ==false">
+Keine Thesen vorhanden!</h4>
+
+
+</div>
