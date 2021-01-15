@@ -11,5 +11,11 @@
       mat-button routerLink="/thesis">
       Thesis Übersicht
     </button>
+    <span class="flexExpand"></span>
+    <button
+      [color]="(isActive('/evaluation-scheme') || isActive('/evaluation-scheme-generator')) ? 'primary' : null"
+      mat-button routerLink="/evaluation-scheme">
+      Bewertungsschemata
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
