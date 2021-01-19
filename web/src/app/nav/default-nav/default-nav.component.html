@@ -6,5 +6,19 @@
       mat-button routerLink="/dashboard">
       Dashboard
     </button>
+    <button
+      type="button"
+      aria-label="Select Language"
+      mat-icon-button
+      [matMenuTriggerFor]="langSelect"
+      *ngIf="!(isHandset$ | async)">
+      <i class="material-icons">
+        language
+      </i>
+    </button>
+    <mat-menu #langSelect="matMenu" xPosition="before">
+      <button mat-menu-item (click)="translateService.use('en')">English</button>
+      <button mat-menu-item (click)="translateService.use('de')">Deutsch</button>
+    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

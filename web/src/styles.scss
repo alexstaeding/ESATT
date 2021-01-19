@@ -6,6 +6,10 @@ html, body {
   margin: 0;
 }
 
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
 .background-primary-50 {
   background-color: mat-color($primary-palette) !important;
 }
