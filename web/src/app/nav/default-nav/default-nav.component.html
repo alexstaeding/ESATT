@@ -5,8 +5,8 @@
     </a>
     <span class="flex-spacer"></span>
     <button *ngIf="!(isHandset$ | async)"
-      [color]="isActive('/dashboard') ? 'primary' : null"
-      mat-button routerLink="/dashboard">
+            [color]="isActive('/dashboard') ? 'primary' : null"
+            mat-button routerLink="/dashboard">
       Dashboard
     </button>
     <button
