@@ -4,7 +4,7 @@
       <img src="/assets/images/esa-logo10.png" style="height: 50px;" alt="home">
     </a>
     <span class="flex-spacer"></span>
-    <button
+    <button *ngIf="!(isHandset$ | async)"
       [color]="isActive('/dashboard') ? 'primary' : null"
       mat-button routerLink="/dashboard">
       Dashboard
@@ -22,6 +22,28 @@
     <mat-menu #langSelect="matMenu" xPosition="before">
       <button mat-menu-item (click)="translateService.use('en')">English</button>
       <button mat-menu-item (click)="translateService.use('de')">Deutsch</button>
+    </mat-menu>
+    <button
+      type="button"
+      aria-label="Toggle nav"
+      mat-icon-button
+      [matMenuTriggerFor]="rootDropdown"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Nav toggle icon">menu</mat-icon>
+    </button>
+    <mat-menu #rootDropdown="matMenu">
+      <button mat-menu-item routerLink="/dashboard">
+        Dashboard
+      </button>
+      <button
+        type="button"
+        aria-label="Select Language"
+        mat-menu-item
+        [matMenuTriggerFor]="langSelect">
+        <i class="material-icons">
+          language
+        </i>
+      </button>
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

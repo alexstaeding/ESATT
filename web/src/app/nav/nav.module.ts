@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {DefaultNavComponent} from './default-nav/default-nav.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {RouterModule} from "@angular/router";
 
@@ -14,6 +15,7 @@ import {RouterModule} from "@angular/router";
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
+    MatIconModule,
     MatMenuModule,
     RouterModule,
   ],
