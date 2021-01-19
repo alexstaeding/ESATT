@@ -10,6 +10,14 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },
+  {
+    path: 'evaluation-scheme',
+    loadChildren: './evaluation-scheme/evaluation-scheme.module#EvaluationSchemeModule'
+  },
+  {
+    path: 'thesis',
+    loadChildren: './thesis/thesis.module#ThesisModule'
   }
 ];
 
