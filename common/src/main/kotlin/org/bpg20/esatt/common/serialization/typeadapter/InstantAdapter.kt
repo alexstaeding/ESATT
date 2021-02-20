@@ -8,20 +8,9 @@ import java.time.Instant
 import java.time.OffsetDateTime
 
 object InstantAdapter : TypeAdapter<Instant>() {
-  override fun write(writer: JsonWriter, value: Instant?) {
-    if (value == null) {
-      writer.nullValue()
-    } else {
-      writer.value(value.toString())
-    }
+  override fun write(writer: JsonWriter, value: Instant) {
+    writer.value(value.toString())
   }
 
-  override fun read(reader: JsonReader): Instant? {
-    return if (reader.peek() == JsonToken.NULL) {
-      reader.nextNull()
-      null
-    } else {
-      OffsetDateTime.parse(reader.nextString()).toInstant()
-    }
-  }
+  override fun read(reader: JsonReader): Instant = OffsetDateTime.parse(reader.nextString()).toInstant()
 }

@@ -55,8 +55,8 @@ class SerializationService {
      * The base Gson serializer that excludes nothing
      */
     val baseGson: Gson = GsonBuilder()
-      .registerTypeAdapter(Instant::class.java, InstantAdapter)
-      .registerTypeAdapter(ObjectId::class.java, ObjectIdAdapter)
+      .registerTypeAdapter(Instant::class.java, InstantAdapter.nullSafe())
+      .registerTypeAdapter(ObjectId::class.java, ObjectIdAdapter.nullSafe())
       .create()
 
     fun createChildGson(exclusionStrategy: ExclusionStrategy): Gson {
