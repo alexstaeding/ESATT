@@ -1,16 +1,16 @@
-﻿import {TestBed} from '@angular/core/testing';
+﻿import {TestBed} from "@angular/core/testing"
 
-import {BreakpointObserverService} from './breakpoint-observer.service';
+import {BreakpointObserverService} from "./breakpoint-observer.service"
 
-describe('BreakpointObserverService', () => {
-  let service: BreakpointObserverService;
+describe("BreakpointObserverService", () => {
+  let service: BreakpointObserverService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(BreakpointObserverService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(BreakpointObserverService)
+  })
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+  it("should be created", () => {
+    expect(service).toBeTruthy()
+  })
+})

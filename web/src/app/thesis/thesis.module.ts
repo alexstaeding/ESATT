@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {NgModule} from "@angular/core"
+import {CommonModule} from "@angular/common"
 
-import {ThesisRoutingModule} from './thesis-routing.module';
-import {ThesisComponent} from './thesis.component';
-import {ThesisDetailComponent} from './thesis-detail/thesis-detail.component';
+import {ThesisRoutingModule} from "./thesis-routing.module"
+import {ThesisComponent} from "./thesis.component"
+import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
 
 
 @NgModule({
@@ -13,4 +13,5 @@ import {ThesisDetailComponent} from './thesis-detail/thesis-detail.component';
     ThesisRoutingModule
   ]
 })
-export class ThesisModule { }
+export class ThesisModule {
+}

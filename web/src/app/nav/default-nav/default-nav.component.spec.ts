@@ -1,25 +1,24 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing"
 
-import {DefaultNavComponent} from './default-nav.component';
+import {DefaultNavComponent} from "./default-nav.component"
 
-describe('DefaultNavComponent', () => {
-  let component: DefaultNavComponent;
-  let fixture: ComponentFixture<DefaultNavComponent>;
+describe("DefaultNavComponent", () => {
+  let component: DefaultNavComponent
+  let fixture: ComponentFixture<DefaultNavComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DefaultNavComponent]
-    })
-      .compileComponents();
-  });
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefaultNavComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(DefaultNavComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  it("should create", () => {
+    expect(component).toBeTruthy()
+  })
+})

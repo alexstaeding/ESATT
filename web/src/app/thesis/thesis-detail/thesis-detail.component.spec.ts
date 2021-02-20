@@ -1,25 +1,24 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing"
 
-import {ThesisDetailComponent} from './thesis-detail.component';
+import {ThesisDetailComponent} from "./thesis-detail.component"
 
-describe('ThesisDetailComponent', () => {
-  let component: ThesisDetailComponent;
-  let fixture: ComponentFixture<ThesisDetailComponent>;
+describe("ThesisDetailComponent", () => {
+  let component: ThesisDetailComponent
+  let fixture: ComponentFixture<ThesisDetailComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ThesisDetailComponent ]
-    })
-    .compileComponents();
-  });
+      declarations: [ThesisDetailComponent]
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThesisDetailComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ThesisDetailComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  it("should create", () => {
+    expect(component).toBeTruthy()
+  })
+})
