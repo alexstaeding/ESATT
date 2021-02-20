@@ -6,6 +6,6 @@ import dev.morphia.annotations.Embedded
 class Criterion {
   var name: String? = null
   var description: String? = null
-  var weight: Double = 1.0
+  var weight: Double = 0.0
   var criteria: List<Criterion>? = null
 }

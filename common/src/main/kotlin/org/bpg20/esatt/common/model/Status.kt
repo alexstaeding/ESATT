@@ -8,7 +8,6 @@ class Status {
   var allocationDateUtc: Instant? = null
   var signUpUtc: Instant? = null
   var presentationUtc: Instant? = null
-  var presented: Boolean? = null
   var dueDateUtc: Instant? = null
   var extendedDueDateUtc: Instant? = null
   var submittedUtc: Instant? = null

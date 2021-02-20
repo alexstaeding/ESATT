@@ -23,7 +23,7 @@ export class ThesisService {
     return this.http.get<Thesis>("http://localhost:8008/api/v1/theses/" + id).toPromise()
   }
 
-  public async create(thesis: ThesisCreator): Promise<Thesis> {
+  public async create(thesis: Thesis): Promise<Thesis> {
     return this.http.post<Thesis>("http://localhost:8008/api/v1/theses",
       thesis,
       {
@@ -65,18 +65,6 @@ export class Thesis {
   public grade: number
   public calculatedGrade: number
   public grading: Grading
-}
-
-export class ThesisCreator {
-  public firstName: string
-  public lastName: string
-  public studentId: string
-  public supervisorId: string
-  public email: string
-  public thesisType: string
-  public subject: string
-  public departmentId: number
-  public title: string
 }
 
 export class ThesisPreview {

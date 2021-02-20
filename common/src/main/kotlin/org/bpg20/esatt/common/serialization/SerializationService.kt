@@ -30,7 +30,7 @@ class SerializationService {
   }
 
   /**
-   * Functions that decide whether a give fieldName should be excluded in the "preview" version of the object
+   * Functions that decide whether a given fieldName should be excluded in the "preview" version of the object
    */
   private object PreviewExclusions {
     fun evaluationScheme(fieldName: String): Boolean = when (fieldName) {

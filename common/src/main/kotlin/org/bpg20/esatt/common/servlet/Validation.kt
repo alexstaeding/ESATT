@@ -89,7 +89,6 @@ object Validation {
       return when (value) {
         null -> empty
         "name",
-        "departmentId",
         "description",
         -> value.success()
         else -> {

@@ -15,7 +15,6 @@ abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
   @Inject
   protected lateinit var context: MongoContext
 
-  // thanks type erasure
   abstract val tClass: Class<T>
   abstract val tKeyClass: Class<TKey>
 

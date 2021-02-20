@@ -23,7 +23,7 @@ export class EvaluationSchemeService {
     return this.http.get<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes/" + id).toPromise()
   }
 
-  public async create(evaluationScheme: EvaluationSchemeCreator): Promise<EvaluationScheme> {
+  public async create(evaluationScheme: EvaluationScheme): Promise<EvaluationScheme> {
     return this.http.post<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes",
       evaluationScheme,
       {
@@ -47,14 +47,7 @@ export class EvaluationScheme {
   public lastUpdatedUtc: Date
   public name: string
   public description: string
-  public departmentId: number
   public criteria: Criterion[]
-}
-
-export class EvaluationSchemeCreator {
-  public name: string
-  public description: string
-  public departmentId: number
 }
 
 export class EvaluationSchemePreview {
@@ -62,7 +55,6 @@ export class EvaluationSchemePreview {
   public lastUpdatedUtc: Date
   public name: string
   public description: string
-  public departmentId: number
 }
 
 export class Criterion {
