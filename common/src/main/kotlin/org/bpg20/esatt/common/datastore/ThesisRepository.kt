@@ -5,7 +5,7 @@ import org.bpg20.esatt.common.model.Thesis
 import org.bson.types.ObjectId
 import java.util.concurrent.CompletableFuture
 
-class ThesisRepository : Repository<ObjectId, Thesis>() {
+class ThesisRepository : ObjectIdRepository<Thesis>() {
 
   @Inject
   private lateinit var departmentRepository: DepartmentRepository
@@ -14,7 +14,6 @@ class ThesisRepository : Repository<ObjectId, Thesis>() {
   private lateinit var userRepository: UserRepository
 
   override val tClass: Class<Thesis> = Thesis::class.java
-  override val tKeyClass: Class<ObjectId> = ObjectId::class.java
 
   private fun Thesis.injectDepartment(): Thesis {
     val department = departmentRepository.getOne(departmentId ?: return this).join()

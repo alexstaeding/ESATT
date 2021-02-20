@@ -7,7 +7,6 @@ import dev.morphia.query.Sort
 import dev.morphia.query.UpdateException
 import dev.morphia.query.experimental.filters.Filters
 import org.bpg20.esatt.common.model.ObjectWithId
-import org.bson.types.ObjectId
 import java.util.concurrent.CompletableFuture
 
 abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
@@ -27,20 +26,11 @@ abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
     }
   }
 
+  /**
+   * @param id The id of the object to get. May be of type TKey or String.
+   */
+  abstract fun getOne(id: Any): CompletableFuture<T>
   fun getOne(query: Query<T>) = CompletableFuture.supplyAsync { query.first() }
-  open fun getOne(id: Any): CompletableFuture<T> {
-    // this is a temporary solution
-    // TODO(Alex) extract this logic to subtypes
-    val actualId = when {
-      tKeyClass.isInstance(id) -> id
-      else -> when (tKeyClass) {
-        Int::class.java -> id.toString().toInt()
-        ObjectId::class.java -> ObjectId(id.toString())
-        else -> throw IllegalArgumentException("Invalid tKeyClass")
-      }
-    }
-    return getOne(asQuery(actualId as TKey))
-  }
 
   @Throws(IllegalArgumentException::class)
   open fun getAll(
