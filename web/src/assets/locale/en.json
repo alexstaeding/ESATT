@@ -1,12 +1,12 @@
 {
   "thesis": {
-    "pageTitle": "Thesis - Overview",
-    "studFirstName": "Student Firstname",
-    "studLastName": "Student Lastname",
-    "studID": "Matriculation Number",
-    "supervisorFirstName": "Supervisor Firstname",
-    "supervisorLastName": "Supervisor Lastname",
-    "thesisType": "Thesis-Type",
+    "pageTitle": "Theses - Overview",
+    "studFirstName": "Student First Name",
+    "studLastName": "Student Last Name",
+    "studentId": "Matriculation Number",
+    "supervisorFirstName": "Supervisor First Name",
+    "supervisorLastName": "Supervisor Last Name",
+    "thesisType": "Type Of Work",
     "department": {
       "departmentId": "Department Number",
       "departmentName": "Department Name"
@@ -14,12 +14,13 @@
     "subject": "Subject",
     "title": "Title",
     "status": {
-      "signUpUtc": "Thesis Signup Date",
+      "signUp": "Registration Date",
       "dueDate": "Due Date",
       "extendedDueDate": "Extended",
       "presented": "Presented",
       "submitted": "Submitted",
-      "graded": "Graded"
+      "graded": "Graded",
+      "reportCreated": "Report Created"
     },
     "course": "Course"
   }

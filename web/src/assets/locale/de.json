@@ -1,25 +1,26 @@
 {
   "thesis": {
-    "pageTitle": "Thesis - Übersicht",
+    "pageTitle": "Thesen - Übersicht",
     "studFirstName": "Student Vorname",
     "studLastName": "Student Nachname",
-    "studID": "Matrikelnummer",
+    "studentId": "Matrikelnummer",
     "supervisorFirstName": "Betreuer Vorname",
     "supervisorLastName": "Betreuer Nachname",
-    "thesisType": "Thesis-Typ",
+    "thesisType": "Art der Arbeit",
     "department": {
-      "departmentId": "Nummer des Fachbereich",
-      "departmentName": "Name des Fachbereichs"
+      "departmentId": "Fachbereichsnummer",
+      "departmentName": "Fachbereichsname"
     },
     "subject": "Studiengang",
     "title": "Titel",
     "status": {
-      "signUpUtc": "Thesis Anmeldedatum",
-      "dueDate": "Fälligkeitsdatum",
+      "signUp": "Anmeldedatum",
+      "dueDate": "Abgabefrist",
       "extendedDueDate": "Verlängert",
       "presented": "Präsentiert",
       "submitted": "Abgegeben",
-      "graded": "Benotet"
+      "graded": "Benotet",
+      "reportCreated": "Gutachten erstellt"
     },
     "course": "Fachbereich"
   }

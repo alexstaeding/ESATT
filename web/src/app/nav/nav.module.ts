@@ -6,6 +6,7 @@ import {MatButtonModule} from "@angular/material/button"
 import {MatIconModule} from "@angular/material/icon"
 import {MatMenuModule} from "@angular/material/menu"
 import {RouterModule} from "@angular/router"
+import {TranslateModule} from "@ngx-translate/core"
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {RouterModule} from "@angular/router"
     MatIconModule,
     MatMenuModule,
     RouterModule,
+    TranslateModule,
   ],
   exports: [
     DefaultNavComponent

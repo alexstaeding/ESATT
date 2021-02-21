@@ -12,7 +12,7 @@ export class ThesisComponent implements OnInit {
   displayedColumns: string[] = [
     "firstName",
     "lastName",
-    "studentID",
+    "studentId",
     "supervisorFirstName",
     "supervisorLastName",
     "thesisType",
@@ -23,15 +23,13 @@ export class ThesisComponent implements OnInit {
     "signUpUtc",
     "dueDateUtc",
     "extendedDueDateUtc",
-    "presentationUtc",
     "submittedUtc",
+    "presentationUtc",
     "gradedUtc",
+    "reportCreatedUtc",
   ]
   data: Observable<ThesisPreview[]>
-
-  getRecord(row) {
-    console.log(row.thesisTopic + " row clicked")
-  }
+  currentDate: Date = new Date()
 
   constructor(public thesisService: ThesisService) {
   }
