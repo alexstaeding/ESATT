@@ -5,12 +5,12 @@
   <div class="table-overflow mat-elevation-z1">
     <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0">
       <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.studFirstName' | translate }}</th>
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.studentFirstName' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.studLastName' | translate }}</th>
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.studentLastName' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
       </ng-container>
 

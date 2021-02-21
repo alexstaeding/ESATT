@@ -1,8 +1,8 @@
 {
   "thesis": {
     "pageTitle": "Theses - Overview",
-    "studFirstName": "Student First Name",
-    "studLastName": "Student Last Name",
+    "studentFirstName": "Student First Name",
+    "studentLastName": "Student Last Name",
     "studentId": "Matriculation Number",
     "supervisorFirstName": "Supervisor First Name",
     "supervisorLastName": "Supervisor Last Name",
