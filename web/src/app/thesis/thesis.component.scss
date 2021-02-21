@@ -1,0 +1,13 @@
+.mat-add {
+  background-color: limegreen;
+  color: #fff;
+}
+
+.table-overflow {
+  height: calc(100vh - 255px);
+  overflow: auto;
+}
+
+mat-header-cell, mat-cell{
+  justify-content: center;
+}

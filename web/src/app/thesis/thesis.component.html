@@ -1,0 +1,126 @@
+<div class="my-4 mx-5">
+  <h2>{{'thesis.pageTitle' | translate}}</h2>
+  <hr>
+
+  <div class="table-overflow mat-elevation-z1">
+    <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0">
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.studentFirstName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.studentLastName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="studentId">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.studentId' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.studentId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="supervisorFirstName">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.supervisorFirstName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.supervisorFirstName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="supervisorLastName">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.supervisorLastName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.supervisorLastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="thesisType">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.thesisType' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.thesisType }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="departmentId">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.department.departmentId' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.departmentId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="departmentName">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.department.departmentName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.departmentName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.subject' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.subject }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.title' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="signUpUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.signUp' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-template *ngIf="element.signUpUtc != null, else showCheckbox">
+              {{ element.status?.signUpUtc }}
+            </ng-template>
+            <ng-template #showCheckbox>
+              <mat-checkbox [disabled]="true" [checked]="false"></mat-checkbox>
+            </ng-template>
+          </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dueDateUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.dueDate' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <ng-template *ngIf="element.dueDateUtc != null, else showCheckbox">
+            {{ element.status?.dueDateUtc }}
+          </ng-template>
+          <ng-template #showCheckbox>
+            <mat-checkbox [disabled]="true" [checked]="false"></mat-checkbox>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="extendedDueDateUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.extendedDueDate' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true" [checked]="element.status?.extendedDueDateUtc != null"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="submittedUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.submitted' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true" [checked]="element.status?.submittedUtc < currentDate"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="presentationUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.presented' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true" [checked]="element.status?.presentationUtc < currentDate"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="gradedUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.graded' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true" [checked]="element.status?.gradedUtc < currentDate"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reportCreatedUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.reportCreated' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true" [checked]="element.status?.reportCreatedUtc < currentDate"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row class="cursor-pointer"
+          *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <br>
+  <button mat-mini-fab color="add" class="mx-3">
+    <mat-icon>add</mat-icon>
+  </button>
+  <hr>
+</div>
