@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core"
 import {from, Observable} from "rxjs"
 import {MatDialog} from "@angular/material/dialog"
-import {ThesisPreview, ThesisService} from "../service/thesis.service"
 import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
+import {ThesisPreview, ThesisService} from "../service/thesis.service"
 
 
 @Component({
