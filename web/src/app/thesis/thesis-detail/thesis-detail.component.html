@@ -44,7 +44,7 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>{{ "thesis-detail.supervisor" | translate }}</mat-label>
           <mat-select [(value)]="thesis.supervisorId" [disabled]="mode === refMode.NORMAL">
-            <mat-option *ngFor="let g of this.users" value={{g.id}}>
+            <mat-option *ngFor="let g of this.users" [value]="g.id">
               {{ g.firstName + " " + g.lastName }}
             </mat-option>
           </mat-select>
