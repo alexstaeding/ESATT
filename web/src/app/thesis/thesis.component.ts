@@ -1,9 +1,8 @@
-import {ThesisPreview, ThesisService} from "../service/thesis.service"
-import {from, Observable} from "rxjs"
-import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
 import {Component, OnInit} from "@angular/core"
-
+import {from, Observable} from "rxjs"
 import {MatDialog} from "@angular/material/dialog"
+import {ThesisPreview, ThesisService} from "../service/thesis.service"
+import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
 
 
 @Component({
@@ -37,7 +36,7 @@ export class ThesisComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public thesisService: ThesisService
+    public thesisService: ThesisService,
   ) {
   }
 
@@ -57,7 +56,7 @@ export class ThesisComponent implements OnInit {
     this.dialog.open(ThesisDetailComponent, {
       width: "100%",
       data: {
-        id: id
+        id: id,
       }
     })
   }

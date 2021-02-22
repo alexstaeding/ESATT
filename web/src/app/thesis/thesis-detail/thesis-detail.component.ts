@@ -1,17 +1,17 @@
 import {Component, Inject, OnInit} from "@angular/core"
 import {Department, DepartmentService} from "../../service/department.service"
-import {MatTableDataSource} from "@angular/material/table"
-import {MAT_DIALOG_DATA} from "@angular/material/dialog"
-import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service/thesis.service"
-import {User, UserService} from "../../service/user.service"
 import {EvaluationSchemePreview, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
-import {SelectionModel} from "@angular/cdk/collections"
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
 import {from, Observable} from "rxjs"
-import {NestedTreeControl} from "@angular/cdk/tree"
-import {MatTreeNestedDataSource} from "@angular/material/tree"
+import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service/thesis.service"
 import {MatSnackBar} from "@angular/material/snack-bar"
+import {MatTableDataSource} from "@angular/material/table"
+import {MatTreeNestedDataSource} from "@angular/material/tree"
+import {MAT_DIALOG_DATA} from "@angular/material/dialog"
+import {NestedTreeControl} from "@angular/cdk/tree"
+import {SelectionModel} from "@angular/cdk/collections"
 import {TranslateService} from "@ngx-translate/core"
+import {User, UserService} from "../../service/user.service"
 
 
 @Component({
@@ -25,19 +25,18 @@ export class ThesisDetailComponent implements OnInit {
   selectedTab = 0
   dialog: HTMLElement
   originalThesis: Thesis
-  thesis: Thesis = new Thesis
+  thesis: Thesis = new Thesis()
   thesisWithChanges: Thesis
   datasource: MatTableDataSource<Note>
   refMode = Mode
   genders = Object.values(Gender)
   users: User[] = []
   departments: Department[] = []
-  supervisors: string[] = []
   selection = new SelectionModel<Note>(true, [])
   mode: Mode = Mode.NORMAL
-  currentDate: Date = new Date
+  currentDate: Date = new Date()
 
-  grading: Grading = new Grading
+  grading: Grading = new Grading()
 
   firstFormGroup: FormGroup
   secondFormGroup: FormGroup
@@ -50,17 +49,17 @@ export class ThesisDetailComponent implements OnInit {
     private evaluationSchemeService: EvaluationSchemeService,
     private userService: UserService,
     private departmentService: DepartmentService,
-    private _formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
-    this.firstFormGroup = this._formBuilder.group({
+    this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ["", Validators.required]
     })
-    this.secondFormGroup = this._formBuilder.group({
+    this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ["", Validators.required]
     })
-    this.gradeGroup = _formBuilder.group({})
+    this.gradeGroup = formBuilder.group({})
   }
 
   ngOnInit(): void {
@@ -71,15 +70,15 @@ export class ThesisDetailComponent implements OnInit {
       this.departments = result
     })
     if (this.data.id == null) {
-      this.thesis = new Thesis
-      this.thesis.status = new Status
+      this.thesis = new Thesis()
+      this.thesis.status = new Status()
       this.thesis.notes = new Array<Note>()
       this.mode = Mode.NEW
-      let data: Note[] = this.thesis.notes
+      const data: Note[] = this.thesis.notes
       this.datasource = new MatTableDataSource<Note>(data)
       this.grading = null
     } else {
-      this.thesis.status = new Status
+      this.thesis.status = new Status()
       this.thesisService.get(this.data.id).then(result => {
         this.originalThesis = this.deepCopyThesis(result)
         if (this.originalThesis.grading != null) {
@@ -105,7 +104,7 @@ export class ThesisDetailComponent implements OnInit {
     let data: Note[] = this.thesis.notes
     this.datasource = new MatTableDataSource<Note>(data)
     this.mode = Mode.NORMAL
-    if (this.mode == this.refMode.NORMAL && this.thesis.grading == null) {
+    if (this.mode === this.refMode.NORMAL && this.thesis.grading == null) {
       this.selectedTab = 0
     }
   }
@@ -123,55 +122,55 @@ export class ThesisDetailComponent implements OnInit {
 
   save(): void {
     this.calcGrade()
-    if (this.thesis.calculatedGrade != null && this.thesis.calculatedGrade.toString() == "NaN") {
+    if (this.thesis.calculatedGrade != null && this.thesis.calculatedGrade.toString() === "NaN") {
       this.showGradeError()
     } else {
       this.thesis.grading = this.deepCopyGrading(this.grading)
-      this.thesisWithChanges = new Thesis
+      this.thesisWithChanges = new Thesis()
       this.thesisWithChanges.id = this.thesis.id
-      if (this.thesis.firstName != this.originalThesis.firstName) {
+      if (this.thesis.firstName !== this.originalThesis.firstName) {
         this.thesisWithChanges.firstName = this.thesis.firstName
       }
-      if (this.thesis.lastName != this.originalThesis.lastName) {
+      if (this.thesis.lastName !== this.originalThesis.lastName) {
         this.thesisWithChanges.lastName = this.thesis.lastName
       }
-      if (this.thesis.gender != this.originalThesis.gender) {
+      if (this.thesis.gender !== this.originalThesis.gender) {
         this.thesisWithChanges.gender = this.thesis.gender
       }
-      if (this.thesis.email != this.originalThesis.email) {
+      if (this.thesis.email !== this.originalThesis.email) {
         this.thesisWithChanges.email = this.thesis.email
       }
-      if (this.thesis.studentId != this.originalThesis.studentId) {
+      if (this.thesis.studentId !== this.originalThesis.studentId) {
         this.thesisWithChanges.studentId = this.thesis.studentId
       }
-      if (this.thesis.supervisorId != this.originalThesis.supervisorId) {
+      if (this.thesis.supervisorId !== this.originalThesis.supervisorId) {
         this.thesisWithChanges.supervisorId = this.thesis.supervisorId
       }
-      if (this.thesis.supervisorFirstName != this.originalThesis.supervisorFirstName) {
+      if (this.thesis.supervisorFirstName !== this.originalThesis.supervisorFirstName) {
         this.thesisWithChanges.supervisorFirstName = this.thesis.supervisorFirstName
       }
-      if (this.thesis.supervisorLastName != this.originalThesis.supervisorLastName) {
+      if (this.thesis.supervisorLastName !== this.originalThesis.supervisorLastName) {
         this.thesisWithChanges.supervisorLastName = this.thesis.supervisorLastName
       }
-      if (this.thesis.evaluatorFirstName != this.originalThesis.evaluatorFirstName) {
+      if (this.thesis.evaluatorFirstName !== this.originalThesis.evaluatorFirstName) {
         this.thesisWithChanges.evaluatorFirstName = this.thesis.evaluatorFirstName
       }
-      if (this.thesis.evaluatorLastName != this.originalThesis.evaluatorLastName) {
+      if (this.thesis.evaluatorLastName !== this.originalThesis.evaluatorLastName) {
         this.thesisWithChanges.evaluatorLastName = this.thesis.evaluatorLastName
       }
-      if (this.thesis.thesisType != this.originalThesis.thesisType) {
+      if (this.thesis.thesisType !== this.originalThesis.thesisType) {
         this.thesisWithChanges.thesisType = this.thesis.thesisType
       }
-      if (this.thesis.departmentId != this.originalThesis.departmentId) {
+      if (this.thesis.departmentId !== this.originalThesis.departmentId) {
         this.thesisWithChanges.departmentId = this.thesis.departmentId
       }
-      if (this.thesis.departmentName != this.originalThesis.departmentName) {
+      if (this.thesis.departmentName !== this.originalThesis.departmentName) {
         this.thesisWithChanges.departmentName = this.thesis.departmentName
       }
-      if (this.thesis.subject != this.originalThesis.subject) {
+      if (this.thesis.subject !== this.originalThesis.subject) {
         this.thesisWithChanges.subject = this.thesis.subject
       }
-      if (this.thesis.title != this.originalThesis.title) {
+      if (this.thesis.title !== this.originalThesis.title) {
         this.thesisWithChanges.title = this.thesis.title
       }
       if (!this.equalStatus(this.thesis.status, this.originalThesis.status)) {
@@ -180,10 +179,10 @@ export class ThesisDetailComponent implements OnInit {
       if (!this.equalNotes(this.thesis.notes, this.originalThesis.notes)) {
         this.thesisWithChanges.notes = this.thesis.notes
       }
-      if (this.thesis.grade != this.originalThesis.grade) {
+      if (this.thesis.grade !== this.originalThesis.grade) {
         this.thesisWithChanges.grade = this.thesis.grade
       }
-      if (this.thesis.calculatedGrade != this.originalThesis.calculatedGrade) {
+      if (this.thesis.calculatedGrade !== this.originalThesis.calculatedGrade) {
         this.thesisWithChanges.calculatedGrade = this.thesis.calculatedGrade
       }
       if (!this.equalGrading(this.thesis.grading, this.originalThesis.grading)) {
@@ -207,19 +206,19 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   equalStatus(first: Status, second: Status): boolean {
-    return !(first.allocationDateUtc != second.allocationDateUtc || first.signUpUtc != second.signUpUtc ||
-      first.presentationUtc != second.presentationUtc || first.dueDateUtc != second.dueDateUtc ||
-      first.extendedDueDateUtc != second.extendedDueDateUtc || first.submittedUtc != second.submittedUtc ||
-      first.gradedUtc != second.gradedUtc || first.reportCreatedUtc != second.reportCreatedUtc)
+    return !(first.allocationDateUtc !== second.allocationDateUtc || first.signUpUtc !== second.signUpUtc ||
+      first.presentationUtc !== second.presentationUtc || first.dueDateUtc !== second.dueDateUtc ||
+      first.extendedDueDateUtc !== second.extendedDueDateUtc || first.submittedUtc !== second.submittedUtc ||
+      first.gradedUtc !== second.gradedUtc || first.reportCreatedUtc !== second.reportCreatedUtc)
   }
 
   equalNotes(first: Note[], second: Note[]): boolean {
-    if (first.length != second.length) {
+    if (first.length !== second.length) {
       return false
     }
-    for (let _i = 0; _i < first.length; _i++) {
-      if (first[_i].creatorId != second[_i].creatorId || first[_i].createdUtc != second[_i].createdUtc
-        || first[_i].content != second[_i].content) {
+    for (let i = 0; i < first.length; i++) {
+      if (first[i].creatorId !== second[i].creatorId || first[i].createdUtc !== second[i].createdUtc
+        || first[i].content !== second[i].content) {
         return false
       }
     }
@@ -237,14 +236,14 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   equalGrades(first: Grade[], second: Grade[]): boolean {
-    if (first.length != second.length) {
+    if (first.length !== second.length) {
       return false
     }
-    for (let _i = 0; _i < first.length; _i++) {
-      if (first[_i].grade != second[_i].grade) {
+    for (let i = 0; i < first.length; i++) {
+      if (first[i].grade !== second[i].grade) {
         return false
       }
-      if (!this.equalGrades(first[_i].grades, second[_i].grades)) {
+      if (!this.equalGrades(first[i].grades, second[i].grades)) {
         return false
       }
     }
@@ -303,7 +302,7 @@ export class ThesisDetailComponent implements OnInit {
   descriptionPreview(description): string {
     if (description != null) {
       let preview = description.substring(0, 50)
-      if (preview != description) {
+      if (preview !== description) {
         preview = preview + " ..."
       }
       return preview
@@ -325,7 +324,7 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   setAllCounters(grades: Grade[], parent: Grade = null, preCounter: string = "") {
-    if (grades == null || grades.length == 0) {
+    if (grades == null || grades.length === 0) {
       return
     }
     grades.forEach((grade, index) => {
@@ -337,7 +336,7 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   copyEvalSchemeToGrading(evaluationScheme) {
-    this.grading = new Grading
+    this.grading = new Grading()
     this.grading.name = evaluationScheme.name
     this.grading.description = evaluationScheme.description
     this.grading.grades = []
@@ -345,7 +344,7 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   copyCriteria(criteria, grades) {
-    if (criteria == null || criteria.length == 0) {
+    if (criteria == null || criteria.length === 0) {
       return
     }
     criteria.forEach((criterion, index) => {
@@ -360,18 +359,18 @@ export class ThesisDetailComponent implements OnInit {
     if (this.grading != null) {
       this.clearAllGrades(this.grading.grades)
       this.thesis.calculatedGrade = this.calcSubgrades(this.grading.grades)
-      if (this.thesis.calculatedGrade != null && this.thesis.calculatedGrade.toString() == "NaN") {
+      if (this.thesis.calculatedGrade != null && this.thesis.calculatedGrade.toString() === "NaN") {
         this.showGradeError()
       }
     }
   }
 
   clearAllGrades(grades) {
-    if (grades == null || grades.length == 0) {
+    if (grades == null || grades.length === 0) {
       return
     }
     for (let grade of grades) {
-      if (grade.grades == null || grade.grades.length == 0) {
+      if (grade.grades == null || grade.grades.length === 0) {
         return
       }
       grade.grade = null
@@ -380,20 +379,20 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   calcSubgrades(grades): number {
-    if (grades == null || grades.length == 0) {
+    if (grades == null || grades.length === 0) {
       return null
     }
     let subgrade: number = 0
     for (let grade of grades) {
-      if (grade.grade == null || grade.grade == "") {
+      if (grade.grade == null || grade.grade === "") {
         grade.grade = this.calcSubgrades(grade.grades)
       }
-      if (grade.grade == null || grade.grade == "") {
+      if (grade.grade == null || grade.grade === "") {
         return null
       }
       subgrade = (Math.round((grade.weight * grade.grade + subgrade) * 10000000000) / 10000000000)
     }
-    if (subgrade == 0) {
+    if (subgrade === 0) {
       return null
     }
     return subgrade
@@ -421,7 +420,7 @@ export class ThesisDetailComponent implements OnInit {
     copy.notes = []
     if (thesis.notes != null) {
       for (let note of thesis.notes) {
-        const newNote = new Note
+        const newNote = new Note()
         newNote.creatorId = note.creatorId
         newNote.createdUtc = note.createdUtc
         newNote.content = note.content
@@ -439,7 +438,6 @@ export class ThesisDetailComponent implements OnInit {
     newStatus.allocationDateUtc = status.allocationDateUtc
     newStatus.signUpUtc = status.signUpUtc
     newStatus.presentationUtc = status.presentationUtc
-    newStatus.presented = status.presented
     newStatus.dueDateUtc = status.dueDateUtc
     newStatus.extendedDueDateUtc = status.extendedDueDateUtc
     newStatus.submittedUtc = status.submittedUtc
@@ -452,7 +450,7 @@ export class ThesisDetailComponent implements OnInit {
     if (grading == null) {
       return null
     }
-    const copy = new Grading
+    const copy = new Grading()
     copy.name = grading.name
     copy.description = grading.description
     copy.grades = this.copyGrades(grading.grades)
@@ -460,12 +458,12 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   copyGrades(grades: Grade[]): Grade[] {
-    if (grades == null || grades.length == 0) {
+    if (grades == null || grades.length === 0) {
       return []
     }
     const copy: Grade[] = []
     for (let grade of grades) {
-      const newGrade = new Grade
+      const newGrade = new Grade()
       newGrade.counter = grade.counter
       newGrade.name = grade.name
       newGrade.description = grade.description
@@ -487,5 +485,5 @@ export enum Mode {
 export enum Gender {
   FEMALE = "Weiblich",
   MALE = "Männlich",
-  OTHER = "Divers"
+  OTHER = "Divers",
 }
