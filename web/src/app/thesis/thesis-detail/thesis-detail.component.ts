@@ -357,11 +357,12 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   calcGrade() {
-    if (this.gradeGroup.hasError("pattern")) {
-      this.showGradeError()
-    } else if (this.grading != null) {
+    if (this.grading != null) {
       this.clearAllGrades(this.grading.grades)
       this.thesis.calculatedGrade = this.calcSubgrades(this.grading.grades)
+      if (this.thesis.calculatedGrade != null && this.thesis.calculatedGrade.toString() == "NaN") {
+        this.showGradeError()
+      }
     }
   }
 

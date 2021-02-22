@@ -1,11 +1,11 @@
 {
   "thesis": {
     "pageTitle": "Theses - Overview",
-    "studentFirstName": "Student First Name",
-    "studentLastName": "Student Last Name",
+    "studentFirstName": "Student (First Name)",
+    "studentLastName": "Student (Last Name)",
     "studentId": "Matriculation Number",
-    "supervisorFirstName": "Supervisor First Name",
-    "supervisorLastName": "Supervisor Last Name",
+    "supervisorFirstName": "Supervisor (First Name)",
+    "supervisorLastName": "Supervisor (Last Name)",
     "thesisType": "Type Of Work",
     "department": {
       "departmentId": "Department Number",
@@ -14,7 +14,8 @@
     "subject": "Subject",
     "title": "Title",
     "status": {
-      "signUp": "Registration Date",
+      "signUpDate": "Registration Date",
+      "signedUp": "Registered",
       "dueDate": "Due Date",
       "extendedDueDate": "Extended",
       "presented": "Presented",
@@ -25,33 +26,19 @@
     "course": "Course"
   },
   "thesis-detail": {
-    "title": "Title",
     "english-title": "English Title",
     "supervisor": "Supervisor",
     "evaluator-firstname": "Evaluator (First Name)",
     "evaluator-lastname": "Evaluator (Last Name)",
-    "type": "Type",
-    "status": {
-      "signedUp": "Signed Up",
-      "extended": "Extended",
-      "presentation": "Presentation given",
-      "report": "Report available",
-      "graded": "Graded"
-    },
-    "duedate": "Due Date",
     "extended-duedate": "Extended Due Date",
-    "signUpDate": "Sign Up Date",
     "assignmentDate": "Assignment Date",
     "presentationDate": "Date of Presentation",
     "submissionDate": "Submission Date",
     "gradingDate": "Date of Rating",
-    "reportDate": "Date of report creation",
+    "reportDate": "Date of Report Creation",
     "department": "Department",
-    "subject": "Subject",
+    "note-placeholder": "Insert note here",
     "student": {
-      "firstname": "Student (First Name)",
-      "lastname": "Student (Last Name)",
-      "matriculation-number": "Matriculation Number",
       "sex": "Sex",
       "email": "E-Mail"
     },
@@ -64,12 +51,12 @@
     },
     "date": "Date",
     "notes": "Notes",
-    "no-notes": "No notes available",
     "buttons": {
       "save": "Save",
       "cancel": "Cancel",
       "edit": "Edit",
-      "add-note": "Add new note",
+      "add-note": "Add note",
+      "delete-note": "Delete note",
       "create": "Create new thesis",
       "close": "Close",
       "confirm-evalScheme": "Use this Evaluation scheme",
@@ -87,6 +74,7 @@
         "description": "Description",
         "criterion": "Criterion",
         "weight": "Weight",
+        "grade": "Grade",
         "calculated-grade": "Calculated Grade",
         "overwrite-grade": "Overwrite Grade"
       },

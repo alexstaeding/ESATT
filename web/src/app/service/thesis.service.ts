@@ -40,8 +40,6 @@ export class ThesisService {
         withCredentials: true
       }).toPromise()
   }
-
-
 }
 
 export class Thesis {
@@ -89,7 +87,6 @@ export class Status {
   public allocationDateUtc: Date
   public signUpUtc: Date
   public presentationUtc: Date
-  public presented: boolean
   public dueDateUtc: Date
   public extendedDueDateUtc: Date
   public submittedUtc: Date

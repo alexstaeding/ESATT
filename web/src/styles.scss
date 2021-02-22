@@ -50,6 +50,11 @@ mat-icon {
   background-color: #eee;
 }
 
+.red-snackbar {
+  background: red;
+  color: white;
+}
+
 #loader {
   width: 150px;
   height: 150px;
@@ -75,9 +80,4 @@ mat-icon {
   100% {
     transform: rotate(360deg);
   }
-}
-
-.red-snackbar {
-  background: red;
-  color: white;
 }

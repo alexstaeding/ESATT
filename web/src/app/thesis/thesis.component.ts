@@ -54,15 +54,11 @@ export class ThesisComponent implements OnInit {
   }
 
   openDialog(id: string = null) {
-    const dialogRef = this.dialog.open(ThesisDetailComponent, {
+    this.dialog.open(ThesisDetailComponent, {
       width: "100%",
       data: {
         id: id
       }
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`)
     })
   }
 }

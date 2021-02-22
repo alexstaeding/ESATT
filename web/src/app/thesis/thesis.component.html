@@ -57,7 +57,7 @@
       </ng-container>
 
       <ng-container matColumnDef="signUpUtc">
-        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.signUp' | translate }}</th>
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.signUpDate' | translate }}</th>
         <td mat-cell *matCellDef="let element">
           <div *ngIf="element.status?.signUpUtc != null">
             {{ calcDate(element.status?.signUpUtc) }}

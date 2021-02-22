@@ -1,20 +1,21 @@
 {
   "thesis": {
     "pageTitle": "Thesen - Übersicht",
-    "studentFirstName": "Student Vorname",
-    "studentLastName": "Student Nachname",
+    "studentFirstName": "Student (Vorname)",
+    "studentLastName": "Student (Nachname)",
     "studentId": "Matrikelnummer",
-    "supervisorFirstName": "Betreuer Vorname",
-    "supervisorLastName": "Betreuer Nachname",
+    "supervisorFirstName": "Betreuer (Vorname)",
+    "supervisorLastName": "Betreuer (Nachname)",
     "thesisType": "Art der Arbeit",
     "department": {
-      "departmentId": "Fachbereichsnummer",
-      "departmentName": "Fachbereichsname"
+      "departmentId": "Nummer des Fachbereichs",
+      "departmentName": "Name des Fachbereichs"
     },
     "subject": "Studiengang",
     "title": "Titel",
     "status": {
-      "signUp": "Anmeldedatum",
+      "signUpDate": "Anmeldedatum",
+      "signedUp": "Angemeldet",
       "dueDate": "Abgabefrist",
       "extendedDueDate": "Verlängert",
       "presented": "Präsentiert",
@@ -25,34 +26,19 @@
     "course": "Fachbereich"
   },
   "thesis-detail": {
-    "title": "Titel",
     "english-title": "Englischer Titel",
     "supervisor": "Betreuer/in",
     "evaluator-firstname": "Gutachter (Vorname)",
     "evaluator-lastname": "Gutachter (Nachname)",
-    "type": "Art der Arbeit",
-    "status": {
-      "signedUp": "Angemeldet",
-      "extended": "Verlängert",
-      "presentation": "Vortrag gehalten",
-      "report": "Gutachten erstellt",
-      "graded": "Bewertet",
-      "submitted": "Abgegeben"
-    },
-    "duedate": "Abgabefrist",
     "extended-duedate": "Verlängerte Abgabefrist",
-    "signUpDate": "Anmeldedatum",
     "assignmentDate": "Vergabedatum",
     "presentationDate": "Datum des Vortrags",
     "submissionDate": "Abgabedatum",
     "gradingDate": "Datum der Bewertung",
     "reportDate": "Datum der Gutachtenerstellung",
     "department": "Fachbereich",
-    "subject": "Studiengang",
+    "note-placeholder": "Notiz hier einfügen",
     "student": {
-      "firstname": "Student (Vorname)",
-      "lastname": "Student (Nachname)",
-      "matriculation-number": "Matrikelnummer",
       "sex": "Geschlecht",
       "email": "E-Mail"
     },
@@ -65,12 +51,12 @@
     },
     "date": "Datum",
     "notes": "Notizen",
-    "no-notes": "Bisher keine Notizen erstellt",
     "buttons": {
       "save": "Speichern",
       "cancel": "Abbrechen",
       "edit": "Bearbeiten",
-      "add-note": "Neue Notiz hinzufügen",
+      "add-note": "Notiz hinzufügen",
+      "delete-note": "Notiz löschen",
       "create": "Neue Thesis erstellen",
       "close": "Schließen",
       "confirm-evalScheme": "Dieses Bewertungschema nutzen",

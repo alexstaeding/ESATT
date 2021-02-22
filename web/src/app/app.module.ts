@@ -8,7 +8,6 @@ import {NavModule} from "./nav/nav.module"
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core"
 import {TranslateHttpLoader} from "@ngx-translate/http-loader"
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -23,7 +22,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader"
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }),
+    })
   ],
   bootstrap: [AppComponent]
 })
