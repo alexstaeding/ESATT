@@ -44,7 +44,7 @@
     "department": "Department",
     "note-placeholder": "Insert note here",
     "student": {
-      "sex": "Sex",
+      "gender": "gender",
       "email": "E-Mail"
     },
     "header": {

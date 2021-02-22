@@ -44,7 +44,7 @@
     "department": "Fachbereich",
     "note-placeholder": "Notiz hier einfügen",
     "student": {
-      "sex": "Geschlecht",
+      "gender": "Geschlecht",
       "email": "E-Mail"
     },
     "header": {

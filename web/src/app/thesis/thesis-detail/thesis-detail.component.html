@@ -232,7 +232,7 @@
         </table>
 
         <mat-form-field appearance="outline" class="w-50 pr-2 adjustingMargin">
-          <mat-label>{{ "thesis-detail.student.sex" | translate }}</mat-label>
+          <mat-label>{{ "thesis-detail.student.gender" | translate }}</mat-label>
           <mat-select [(ngModel)]="thesis.gender" name="geschlecht" [disabled]="currentMode === mode.NORMAL">
             <mat-option *ngFor="let gender of genderType | keyvalue" [value]="gender.key">
               {{ gender.value | translate }}
@@ -461,7 +461,7 @@
                       <div class="col-2">
                         <button mat-icon-button matTreeNodeToggle>
                           <mat-icon class="mat-icon-rtl-mirror">
-                            {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                            {{ treeControl.igenderpanded(node) ? 'expand_more' : 'chevron_right' }}
                           </mat-icon>
                         </button>
                       </div>
@@ -476,7 +476,7 @@
                       </div>
                     </div>
                   </mat-card>
-                  <ul [class.evalSchemeTree-invisible]="!treeControl.isExpanded(node)">
+                  <ul [class.evalSchemeTree-invisible]="!treeControl.igenderpanded(node)">
                     <ng-container matTreeNodeOutlet></ng-container>
                   </ul>
                 </div>
