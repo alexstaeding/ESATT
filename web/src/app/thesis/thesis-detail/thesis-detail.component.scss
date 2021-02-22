@@ -39,7 +39,7 @@ mat-header-cell, mat-cell {
 }
 
 .table-scroll {
-  height: calc(100vh - 355px);
+  height: 41vh;
   overflow: auto;
 }
 
@@ -47,7 +47,6 @@ mat-header-cell, mat-cell {
   height: 25vh;
   overflow: auto;
 }
-
 
 .evalSchemeTree-invisible {
   display: none;
@@ -80,4 +79,8 @@ li {
   border: dashed black;
   border-width: 0 0 0 1px;
   padding-top: 10px;
+}
+
+.warn-tooltip {
+  background: red;
 }

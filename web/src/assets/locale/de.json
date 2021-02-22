@@ -97,7 +97,9 @@
       "close": "Schließen",
       "confirm-evalScheme": "Dieses Bewertungschema nutzen",
       "other-evalScheme": "Anderes Bewertungschema wählen",
-      "calc-grade": "Note berechnen"
+      "calc-grade": "Note berechnen",
+      "manage-evaluationScheme": "Bewertungsschemata verwalten",
+      "manage-evaluationScheme-Tooltip": "Ungespeicherten Änderungen gehen verloren!"
     },
     "grading": {
       "title": "Bewertung",

@@ -25,7 +25,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   parentMap = new Map<Criterion, Criterion>()
 
   originalEvaluationScheme: EvaluationScheme
-  evaluationScheme: EvaluationScheme = new EvaluationScheme
+  evaluationScheme: EvaluationScheme = new EvaluationScheme()
   evaluationSchemeWithChanges: EvaluationScheme
 
   refMode = Mode
@@ -82,7 +82,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     }
     const copy: Criterion[] = []
     for (let criterion of criteria) {
-      const newCriterion = new Criterion
+      const newCriterion = new Criterion()
       newCriterion.counter = criterion.counter
       newCriterion.name = criterion.name
       newCriterion.description = criterion.description
@@ -112,7 +112,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   save() {
-    this.evaluationSchemeWithChanges = new EvaluationScheme
+    this.evaluationSchemeWithChanges = new EvaluationScheme()
     this.evaluationSchemeWithChanges.id = this.evaluationScheme.id
     if (this.evaluationScheme.name != this.originalEvaluationScheme.name) {
       this.evaluationSchemeWithChanges.name = this.evaluationScheme.name
@@ -131,12 +131,12 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     if (first.length != second.length) {
       return false
     }
-    for (var _i = 0; _i < first.length; _i++) {
-      if (first[_i].name != second[_i].name || first[_i].weight != second[_i].weight
-        || first[_i].description != second[_i].description) {
+    for (var i = 0; i < first.length; i++) {
+      if (first[i].name != second[i].name || first[i].weight != second[i].weight
+        || first[i].description != second[i].description) {
         return false
       }
-      if (!this.equalCriteriaList(first[_i].criteria, second[_i].criteria)) {
+      if (!this.equalCriteriaList(first[i].criteria, second[i].criteria)) {
         return false
       }
     }

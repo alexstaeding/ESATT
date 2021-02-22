@@ -1,8 +1,9 @@
 <h1 mat-dialog-title *ngIf="thesis.title != null; else defaultTitle">{{ thesis.title }}</h1>
-<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1></ng-template>
+<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1>
+</ng-template>
 
 <mat-dialog-content class="mat-typography">
-  <mat-tab-group [(selectedIndex)]="selectedTab" mat-align-tabs="start" #tabs>
+  <mat-tab-group [(selectedIndex)]="selectedTab" mat-align-tabs="start">
     <mat-tab label="Details">
       <div class="my-4 mx-5">
         <h3>{{ "thesis-detail.header.information-on-thesis" | translate }}</h3>
@@ -106,7 +107,8 @@
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.extended-duedate" | translate }}</mat-label>
-                <input [(ngModel)]="thesis.status.extendedDueDateUtc" matInput [matDatepicker]="pickerExtendedDueDateUtc"
+                <input [(ngModel)]="thesis.status.extendedDueDateUtc" matInput
+                       [matDatepicker]="pickerExtendedDueDateUtc"
                        [disabled]="currentMode === mode.NORMAL">
                 <mat-datepicker-toggle matSuffix [for]="pickerExtendedDueDateUtc"></mat-datepicker-toggle>
                 <mat-datepicker #pickerExtendedDueDateUtc></mat-datepicker>
@@ -295,7 +297,16 @@
     <mat-tab label="{{ 'thesis-detail.grading.title' | translate }}"
              [disabled]="currentMode === mode.NORMAL && this.thesis.grading == null">
       <div class="my-4 mx-5" *ngIf="grading == null">
-        <h3>{{ 'thesis-detail.grading.choose-evalScheme' | translate }}</h3>
+        <h3>
+          {{ 'thesis-detail.grading.choose-evalScheme' | translate }}
+          <button mat-raised-button color="accent" class="float-right"
+                  matTooltip="{{ 'thesis-detail.buttons.manage-evaluationScheme-Tooltip' | translate }}"
+                  matTooltipPosition="left" matTooltipClass="warn-tooltip" routerLink="/evaluation-scheme"
+                  mat-dialog-close>
+            {{ 'thesis-detail.buttons.manage-evaluationScheme' | translate }}
+          </button>
+        </h3>
+        <br>
         <div class="table-scroll">
           <table mat-table class="w-100 mat-elevation-z0 text-center" [dataSource]="evaluationSchemeData">
             <ng-container matColumnDef="name">
@@ -362,7 +373,7 @@
 
           <hr>
 
-          <mat-tree #evaluationSchemeTree [dataSource]="dataSource" [treeControl]="treeControl" class="evalSchemeTree">
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="evalSchemeTree">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
               <li>
                 <div class="mat-tree-node">
