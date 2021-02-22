@@ -10,13 +10,13 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>{{ "thesis.title" | translate }}</mat-label>
           <input matInput type="text" name="title" [(ngModel)]="thesis.title" value="originalThesis.title"
-                 [disabled]="mode === refMode.NORMAL">
+                 [disabled]="currentMode === mode.NORMAL">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>{{ "thesis.thesisType" | translate }}</mat-label>
           <input matInput type="text" name="title-english" [(ngModel)]="thesis.thesisType"
-                 [disabled]="mode === refMode.NORMAL">
+                 [disabled]="currentMode === mode.NORMAL">
         </mat-form-field>
 
         <table cellspacing="0" class="w-100">
@@ -24,9 +24,9 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.department" | translate }}</mat-label>
-                <mat-select [(value)]="thesis.departmentId" [disabled]="mode === refMode.NORMAL">
-                  <mat-option *ngFor="let g of this.departments" [value]="g.id">
-                    {{ g.name + " (" + g.id + ")" }}
+                <mat-select [(value)]="thesis.departmentId" [disabled]="currentMode === mode.NORMAL">
+                  <mat-option *ngFor="let department of this.departments" [value]="department.id">
+                    {{ department.name + " (" + department.id + ")" }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -35,7 +35,7 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.subject" | translate }}</mat-label>
                 <input matInput type="text" name="subject" [(ngModel)]="thesis.subject"
-                       [disabled]="mode === refMode.NORMAL">
+                       [disabled]="currentMode === mode.NORMAL">
               </mat-form-field>
             </td>
           </tr>
@@ -43,9 +43,9 @@
 
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>{{ "thesis-detail.supervisor" | translate }}</mat-label>
-          <mat-select [(value)]="thesis.supervisorId" [disabled]="mode === refMode.NORMAL">
-            <mat-option *ngFor="let g of this.users" [value]="g.id">
-              {{ g.firstName + " " + g.lastName }}
+          <mat-select [(value)]="thesis.supervisorId" [disabled]="currentMode === mode.NORMAL">
+            <mat-option *ngFor="let user of this.users" [value]="user.id">
+              {{ user.firstName + " " + user.lastName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -56,14 +56,14 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.evaluator-firstname" | translate }}</mat-label>
                 <input matInput type="text" name="gutachter_first" [(ngModel)]="thesis.evaluatorFirstName"
-                       [disabled]="mode === refMode.NORMAL">
+                       [disabled]="currentMode === mode.NORMAL">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.evaluator-lastname" | translate }}</mat-label>
                 <input matInput type="text" name="gutachter_last" [(ngModel)]="thesis.evaluatorLastName"
-                       [disabled]="mode === refMode.NORMAL">
+                       [disabled]="currentMode === mode.NORMAL">
               </mat-form-field>
             </td>
           </tr>
@@ -74,19 +74,19 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.status.signUpDate" | translate }}</mat-label>
-                <input name="signUp" [(ngModel)]="thesis.status.signUpUtc" matInput [matDatepicker]="picker"
-                       [disabled]="mode === refMode.NORMAL">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input name="signUp" [(ngModel)]="thesis.status.signUpUtc" matInput [matDatepicker]="pickerSignUpUtc"
+                       [disabled]="currentMode === mode.NORMAL">
+                <mat-datepicker-toggle matSuffix [for]="pickerSignUpUtc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerSignUpUtc></mat-datepicker>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.status.dueDate" | translate }}</mat-label>
-                <input [(ngModel)]="thesis.status.dueDateUtc" matInput [matDatepicker]="picker2"
-                       [disabled]="mode === refMode.NORMAL">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
+                <input [(ngModel)]="thesis.status.dueDateUtc" matInput [matDatepicker]="pickerDueDateUtc"
+                       [disabled]="currentMode === mode.NORMAL">
+                <mat-datepicker-toggle matSuffix [for]="pickerDueDateUtc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDueDateUtc></mat-datepicker>
               </mat-form-field>
             </td>
           </tr>
@@ -97,19 +97,19 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.assignmentDate" | translate }}</mat-label>
-                <input [(ngModel)]="thesis.status.allocationDateUtc" matInput [matDatepicker]="picker3"
-                       [disabled]="mode === refMode.NORMAL">
-                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                <mat-datepicker #picker3></mat-datepicker>
+                <input [(ngModel)]="thesis.status.allocationDateUtc" matInput [matDatepicker]="pickerAllocationDateUtc"
+                       [disabled]="currentMode === mode.NORMAL">
+                <mat-datepicker-toggle matSuffix [for]="pickerAllocationDateUtc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerAllocationDateUtc></mat-datepicker>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.extended-duedate" | translate }}</mat-label>
-                <input [(ngModel)]="thesis.status.extendedDueDateUtc" matInput [matDatepicker]="picker4"
-                       [disabled]="mode === refMode.NORMAL">
-                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                <mat-datepicker #picker4></mat-datepicker>
+                <input [(ngModel)]="thesis.status.extendedDueDateUtc" matInput [matDatepicker]="pickerExtendedDueDateUtc"
+                       [disabled]="currentMode === mode.NORMAL">
+                <mat-datepicker-toggle matSuffix [for]="pickerExtendedDueDateUtc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerExtendedDueDateUtc></mat-datepicker>
               </mat-form-field>
             </td>
           </tr>
@@ -120,19 +120,19 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.presentationDate" | translate }}</mat-label>
-                <input [(ngModel)]="thesis.status.presentationUtc" matInput [matDatepicker]="picker5"
-                       [disabled]="mode === refMode.NORMAL">
-                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
-                <mat-datepicker #picker5></mat-datepicker>
+                <input [(ngModel)]="thesis.status.presentationUtc" matInput [matDatepicker]="pickerPresentationUtc"
+                       [disabled]="currentMode === mode.NORMAL">
+                <mat-datepicker-toggle matSuffix [for]="pickerPresentationUtc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerPresentationUtc></mat-datepicker>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.submissionDate" | translate }}</mat-label>
-                <input [(ngModel)]="thesis.status.submittedUtc" matInput [matDatepicker]="picker6"
-                       [disabled]="mode === refMode.NORMAL">
-                <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
-                <mat-datepicker #picker6></mat-datepicker>
+                <input [(ngModel)]="thesis.status.submittedUtc" matInput [matDatepicker]="pickerSubmissionUtc"
+                       [disabled]="currentMode === mode.NORMAL">
+                <mat-datepicker-toggle matSuffix [for]="pickerSubmissionUtc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerSubmissionUtc></mat-datepicker>
               </mat-form-field>
             </td>
           </tr>
@@ -143,19 +143,19 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.gradingDate" | translate }}</mat-label>
-                <input [(ngModel)]="thesis.status.gradedUtc" matInput [matDatepicker]="picker7"
-                       [disabled]="mode === refMode.NORMAL">
-                <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
-                <mat-datepicker #picker7></mat-datepicker>
+                <input [(ngModel)]="thesis.status.gradedUtc" matInput [matDatepicker]="pickerGradingUtc"
+                       [disabled]="currentMode === mode.NORMAL">
+                <mat-datepicker-toggle matSuffix [for]="pickerGradingUtc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerGradingUtc></mat-datepicker>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.reportDate" | translate }}</mat-label>
-                <input [(ngModel)]="thesis.status.reportCreatedUtc" matInput [matDatepicker]="picker8"
-                       [disabled]="mode === refMode.NORMAL">
-                <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
-                <mat-datepicker #picker8></mat-datepicker>
+                <input [(ngModel)]="thesis.status.reportCreatedUtc" matInput [matDatepicker]="pickerReportUtc"
+                       [disabled]="currentMode === mode.NORMAL">
+                <mat-datepicker-toggle matSuffix [for]="pickerReportUtc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerReportUtc></mat-datepicker>
               </mat-form-field>
             </td>
           </tr>
@@ -199,14 +199,14 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.studentFirstName" | translate }}</mat-label>
                 <input matInput type="text" name="studentFirstName" [(ngModel)]="thesis.firstName"
-                       [disabled]="mode === refMode.NORMAL">
+                       [disabled]="currentMode === mode.NORMAL">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.studentLastName" | translate }}</mat-label>
                 <input matInput type="text" name="studentLastName" [(ngModel)]="thesis.lastName"
-                       [disabled]="mode === refMode.NORMAL">
+                       [disabled]="currentMode === mode.NORMAL">
               </mat-form-field>
             </td>
           </tr>
@@ -218,14 +218,14 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.student.email" | translate }}</mat-label>
                 <input matInput type="email" name="email" email [(ngModel)]="thesis.email"
-                       [disabled]="mode === refMode.NORMAL">
+                       [disabled]="currentMode === mode.NORMAL">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.studentId" | translate }}</mat-label>
                 <input matInput type="text" name="matrikel" [(ngModel)]="thesis.studentId"
-                       [disabled]="mode === refMode.NORMAL">
+                       [disabled]="currentMode === mode.NORMAL">
               </mat-form-field>
             </td>
           </tr>
@@ -233,9 +233,9 @@
 
         <mat-form-field appearance="outline" class="w-50 pr-2 adjustingMargin">
           <mat-label>{{ "thesis-detail.student.sex" | translate }}</mat-label>
-          <mat-select [(ngModel)]="thesis.gender" name="geschlecht" [disabled]="mode === refMode.NORMAL">
-            <mat-option *ngFor="let enum of Gender | keyvalue" value={{enum.key}}>
-              {{ enum.value }}
+          <mat-select [(ngModel)]="thesis.gender" name="geschlecht" [disabled]="currentMode === mode.NORMAL">
+            <mat-option *ngFor="let gender of genderType | keyvalue" [value]="gender.key">
+              {{ gender.value | translate }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -267,7 +267,7 @@
             </th>
             <td mat-cell *matCellDef="let element">
               <mat-form-field floatLabel="never" class="w-100">
-              <textarea [disabled]="mode === refMode.NORMAL"
+              <textarea [disabled]="currentMode === mode.NORMAL"
                         matInput placeholder="{{ 'thesis-detail.note-placeholder' | translate }}" rows="5"
                         [(ngModel)]="element['content']"></textarea>
               </mat-form-field>
@@ -277,12 +277,12 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-        <button [hidden]="mode === refMode.NORMAL" class="mt-2 mb-3 ml-2 mx-3" mat-mini-fab color="accent"
+        <button [hidden]="currentMode === mode.NORMAL" class="mt-2 mb-3 ml-2 mx-3" mat-mini-fab color="accent"
                 (click)="addColumn()" #tooltip="matTooltip"
                 matTooltip="{{ 'thesis-detail.buttons.add-note' | translate }}" [matTooltipShowDelay]="500">
           <mat-icon>add</mat-icon>
         </button>
-        <button [hidden]="mode === refMode.NORMAL || selection.isEmpty()" class="mt-2 mb-3 ml-2 mx-3" mat-mini-fab
+        <button [hidden]="currentMode === mode.NORMAL || selection.isEmpty()" class="mt-2 mb-3 ml-2 mx-3" mat-mini-fab
                 color="warn"
                 (click)="removeSelectedRows()" #tooltip="matTooltip"
                 matTooltip="{{ 'thesis-detail.buttons.delete-note' | translate }}" [matTooltipShowDelay]="500">
@@ -293,7 +293,7 @@
 
 
     <mat-tab label="{{ 'thesis-detail.grading.title' | translate }}"
-             [disabled]="mode === refMode.NORMAL && this.thesis.grading == null">
+             [disabled]="currentMode === mode.NORMAL && this.thesis.grading == null">
       <div class="my-4 mx-5" *ngIf="grading == null">
         <h3>{{ 'thesis-detail.grading.choose-evalScheme' | translate }}</h3>
         <div class="table-scroll">
@@ -396,7 +396,7 @@
                           <mat-label>
                             {{ 'thesis-detail.grading.selected.grade' | translate }}
                           </mat-label>
-                          <input matInput [readonly]="mode === refMode.NORMAL || this.thesis.grading == null"
+                          <input matInput [readonly]="currentMode === mode.NORMAL || this.thesis.grading == null"
                                  [name]="'criterionGrade' + node.counter" [(ngModel)]="node.grade"
                                  [formControl]="gradeGroup.controls['grade' + node.counter]">
                           <mat-error>{{ 'thesis-detail.grading.gradeError' | translate }}</mat-error>
@@ -505,10 +505,10 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ 'thesis-detail.grading.selected.overwrite-grade' | translate }}</mat-label>
                 <input matInput [name]="'grade'" [(ngModel)]="thesis.grade"
-                       [disabled]="mode === refMode.NORMAL">
+                       [disabled]="currentMode === mode.NORMAL">
               </mat-form-field>
             </div>
-            <button mat-flat-button color="accent" (click)="calcGrade()" [disabled]="mode === refMode.NORMAL">
+            <button mat-flat-button color="accent" (click)="calcGrade()" [disabled]="currentMode === mode.NORMAL">
               {{ 'thesis-detail.buttons.calc-grade' | translate }}
             </button>
           </div>
@@ -519,20 +519,20 @@
 </mat-dialog-content>
 
 <div mat-dialog-actions>
-  <button [hidden]="mode !== refMode.NORMAL" mat-raised-button color="primary" (click)="changeToEdit()">
+  <button [hidden]="currentMode !== mode.NORMAL" mat-raised-button color="primary" (click)="changeToEdit()">
     {{ "thesis-detail.buttons.edit" | translate }}
   </button>
-  <button [hidden]="mode !== refMode.NEW" mat-raised-button color="add" (click)="create()">
+  <button [hidden]="currentMode !== mode.NEW" mat-raised-button color="add" (click)="create()">
     {{ "thesis-detail.buttons.create" | translate }}
   </button>
-  <button [hidden]="mode !== refMode.EDIT" mat-raised-button color="primary" (click)="save()">
+  <button [hidden]="currentMode !== mode.EDIT" mat-raised-button color="primary" (click)="save()">
     {{ "thesis-detail.buttons.save" | translate }}
   </button>
-  <button [hidden]="mode !== refMode.EDIT" mat-raised-button color="warn" (click)="resetThesis()">
+  <button [hidden]="currentMode !== mode.EDIT" mat-raised-button color="warn" (click)="resetThesis()">
     {{ "thesis-detail.buttons.cancel" | translate }}
   </button>
   <span class="flex-spacer"></span>
-  <button mat-raised-button color="warn" mat-dialog-close [disabled]="mode === refMode.EDIT">
+  <button mat-raised-button color="warn" mat-dialog-close [disabled]="currentMode === mode.EDIT">
     {{ "thesis-detail.buttons.close" | translate }}
   </button>
 </div>

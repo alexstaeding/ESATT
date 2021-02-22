@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from "@angular/core"
 import {Department, DepartmentService} from "../../service/department.service"
-import {EvaluationSchemePreview, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
+import {EvaluationScheme, EvaluationSchemePreview, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
 import {from, Observable} from "rxjs"
 import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service/thesis.service"
@@ -21,27 +21,32 @@ import {User, UserService} from "../../service/user.service"
 })
 export class ThesisDetailComponent implements OnInit {
 
-  public Gender = Gender
+  genderType = Gender
   selectedTab = 0
   dialog: HTMLElement
   originalThesis: Thesis
   thesis: Thesis = new Thesis()
   thesisWithChanges: Thesis
   datasource: MatTableDataSource<Note>
-  refMode = Mode
+  mode = Mode
   genders = Object.values(Gender)
   users: User[] = []
   departments: Department[] = []
   selection = new SelectionModel<Note>(true, [])
-  mode: Mode = Mode.NORMAL
+  currentMode: Mode = Mode.NORMAL
   currentDate: Date = new Date()
-
   grading: Grading = new Grading()
-
   firstFormGroup: FormGroup
   secondFormGroup: FormGroup
-
   gradeGroup: FormGroup
+  second: Grading = new Grading()
+  first: Grading = new Grading()
+  displayedColumns: string[] = ["checked", "Datum", "Notiz"]
+  evaluationSchemeColumnsScheme: string[] = ["name", "description", "createdUtc", "lastUpdatedUtc"]
+  evaluationSchemeData: Observable<EvaluationSchemePreview[]>
+  selectedEvaluationScheme: EvaluationScheme = null
+  treeControl = new NestedTreeControl<Grade>(node => node.grades)
+  dataSource = new MatTreeNestedDataSource<Grade>()
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -54,10 +59,10 @@ export class ThesisDetailComponent implements OnInit {
     private translate: TranslateService,
   ) {
     this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ["", Validators.required]
+      firstCtrl: ["", Validators.required],
     })
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ["", Validators.required]
+      secondCtrl: ["", Validators.required],
     })
     this.gradeGroup = formBuilder.group({})
   }
@@ -73,7 +78,7 @@ export class ThesisDetailComponent implements OnInit {
       this.thesis = new Thesis()
       this.thesis.status = new Status()
       this.thesis.notes = new Array<Note>()
-      this.mode = Mode.NEW
+      this.currentMode = Mode.NEW
       const data: Note[] = this.thesis.notes
       this.datasource = new MatTableDataSource<Note>(data)
       this.grading = null
@@ -101,24 +106,18 @@ export class ThesisDetailComponent implements OnInit {
       this.thesis.notes = []
       this.originalThesis.notes = []
     }
-    let data: Note[] = this.thesis.notes
+    const data: Note[] = this.thesis.notes
     this.datasource = new MatTableDataSource<Note>(data)
-    this.mode = Mode.NORMAL
-    if (this.mode === this.refMode.NORMAL && this.thesis.grading == null) {
+    this.currentMode = Mode.NORMAL
+    if (this.currentMode === this.mode.NORMAL && this.thesis.grading == null) {
       this.selectedTab = 0
     }
   }
 
-  displayedColumns: string[] = ["checked", "Datum", "Notiz"]
-
-
   changeToEdit(): void {
     this.originalThesis = this.deepCopyThesis(this.thesis)
-    this.mode = Mode.EDIT
+    this.currentMode = Mode.EDIT
   }
-
-  second: Grading = new Grading
-  first: Grading = new Grading
 
   save(): void {
     this.calcGrade()
@@ -192,7 +191,7 @@ export class ThesisDetailComponent implements OnInit {
       this.first = this.thesisWithChanges.grading
       this.second = this.first
       this.thesisService.update(this.thesisWithChanges)
-      this.mode = Mode.NORMAL
+      this.currentMode = Mode.NORMAL
       this.refresh()
     }
   }
@@ -255,7 +254,7 @@ export class ThesisDetailComponent implements OnInit {
     this.calcGrade()
     this.thesis.grading = this.deepCopyGrading(this.grading)
     this.thesisService.create(this.thesis)
-    this.mode = Mode.NORMAL
+    this.currentMode = Mode.NORMAL
     this.refresh()
   }
 
@@ -264,7 +263,7 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   addColumn(): void {
-    let note = new Note()
+    const note = new Note()
     note.content = ""
     note.createdUtc = new Date()
     this.thesis.notes.push(note)
@@ -273,18 +272,12 @@ export class ThesisDetailComponent implements OnInit {
 
   removeSelectedRows() {
     this.selection.selected.forEach(item => {
-      let index: number = this.thesis.notes.findIndex(d => d === item)
+      const index: number = this.thesis.notes.findIndex(d => d === item)
       this.thesis.notes.splice(index, 1)
       this.datasource = new MatTableDataSource<Note>(this.thesis.notes)
     })
     this.selection = new SelectionModel<Note>(true, [])
   }
-
-
-  evaluationSchemeColumnsScheme = ["name", "description", "createdUtc", "lastUpdatedUtc"]
-  evaluationSchemeData: Observable<EvaluationSchemePreview[]>
-
-  selectedEvaluationScheme = null
 
   showDate(evalSchemeId): string {
     const date = new Date(parseInt(evalSchemeId.substring(0, 8), 16) * 1000)
@@ -310,8 +303,6 @@ export class ThesisDetailComponent implements OnInit {
     return description
   }
 
-  treeControl = new NestedTreeControl<Grade>(node => node.grades)
-  dataSource = new MatTreeNestedDataSource<Grade>()
   hasChild = (_: number, node: Grade) => !!node.grades && node.grades.length > 0
 
   openEvalSchemeDetail(id) {
@@ -369,7 +360,7 @@ export class ThesisDetailComponent implements OnInit {
     if (grades == null || grades.length === 0) {
       return
     }
-    for (let grade of grades) {
+    for (const grade of grades) {
       if (grade.grades == null || grade.grades.length === 0) {
         return
       }
@@ -382,8 +373,8 @@ export class ThesisDetailComponent implements OnInit {
     if (grades == null || grades.length === 0) {
       return null
     }
-    let subgrade: number = 0
-    for (let grade of grades) {
+    let subgrade = 0
+    for (const grade of grades) {
       if (grade.grade == null || grade.grade === "") {
         grade.grade = this.calcSubgrades(grade.grades)
       }
@@ -419,7 +410,7 @@ export class ThesisDetailComponent implements OnInit {
     copy.status = this.deepCopyStatus(thesis.status)
     copy.notes = []
     if (thesis.notes != null) {
-      for (let note of thesis.notes) {
+      for (const note of thesis.notes) {
         const newNote = new Note()
         newNote.creatorId = note.creatorId
         newNote.createdUtc = note.createdUtc
@@ -434,7 +425,7 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   deepCopyStatus(status): Status {
-    const newStatus = new Status
+    const newStatus = new Status()
     newStatus.allocationDateUtc = status.allocationDateUtc
     newStatus.signUpUtc = status.signUpUtc
     newStatus.presentationUtc = status.presentationUtc
@@ -462,7 +453,7 @@ export class ThesisDetailComponent implements OnInit {
       return []
     }
     const copy: Grade[] = []
-    for (let grade of grades) {
+    for (const grade of grades) {
       const newGrade = new Grade()
       newGrade.counter = grade.counter
       newGrade.name = grade.name
@@ -482,8 +473,9 @@ export enum Mode {
   NORMAL,
 }
 
+// values used by translate module
 export enum Gender {
-  FEMALE = "Weiblich",
-  MALE = "Männlich",
-  OTHER = "Divers",
+  FEMALE = "gender.female",
+  MALE = "gender.male",
+  OTHER = "gender.other",
 }

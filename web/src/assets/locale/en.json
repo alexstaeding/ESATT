@@ -1,4 +1,9 @@
 {
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
+  },
   "thesis": {
     "pageTitle": "Theses - Overview",
     "studentFirstName": "Student (First Name)",

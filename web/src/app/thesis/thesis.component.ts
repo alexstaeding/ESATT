@@ -55,9 +55,7 @@ export class ThesisComponent implements OnInit {
   openDialog(id: string = null) {
     this.dialog.open(ThesisDetailComponent, {
       width: "100%",
-      data: {
-        id: id,
-      }
+      data: {id},
     })
   }
 }
