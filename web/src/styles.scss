@@ -6,6 +6,10 @@ html, body {
   margin: 0;
 }
 
+mat-icon {
+  vertical-align: middle;
+}
+
 .flex-spacer {
   flex: 1 1 auto;
 }
@@ -44,6 +48,11 @@ html, body {
 
 .cursor-pointer:hover {
   background-color: #eee;
+}
+
+.red-snackbar {
+  background: red;
+  color: white;
 }
 
 #loader {

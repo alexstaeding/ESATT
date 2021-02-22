@@ -1,6 +1,9 @@
 import {Component, OnInit} from "@angular/core"
-import {ThesisPreview, ThesisService} from "../service/thesis.service"
 import {from, Observable} from "rxjs"
+import {MatDialog} from "@angular/material/dialog"
+import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
+import {ThesisPreview, ThesisService} from "../service/thesis.service"
+
 
 @Component({
   selector: "app-thesis",
@@ -31,10 +34,28 @@ export class ThesisComponent implements OnInit {
   data: Observable<ThesisPreview[]>
   currentDate: Date = new Date()
 
-  constructor(public thesisService: ThesisService) {
+  constructor(
+    public dialog: MatDialog,
+    public thesisService: ThesisService,
+  ) {
   }
 
   ngOnInit(): void {
     this.data = from(this.thesisService.getAll())
+  }
+
+  calcDate(lastUpdated: Date): string {
+    return (new Date(new Date(lastUpdated.toString()))).toLocaleDateString()
+  }
+
+  normalizeDate(date: Date): Date {
+    return new Date(date)
+  }
+
+  openDialog(id: string = null) {
+    this.dialog.open(ThesisDetailComponent, {
+      width: "100%",
+      data: {id},
+    })
   }
 }

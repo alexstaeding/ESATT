@@ -1,20 +1,26 @@
 {
+  "gender": {
+    "female": "Weiblich",
+    "male": "Männlich",
+    "other": "Divers"
+  },
   "thesis": {
     "pageTitle": "Thesen - Übersicht",
-    "studentFirstName": "Student Vorname",
-    "studentLastName": "Student Nachname",
+    "studentFirstName": "Student (Vorname)",
+    "studentLastName": "Student (Nachname)",
     "studentId": "Matrikelnummer",
-    "supervisorFirstName": "Betreuer Vorname",
-    "supervisorLastName": "Betreuer Nachname",
+    "supervisorFirstName": "Betreuer (Vorname)",
+    "supervisorLastName": "Betreuer (Nachname)",
     "thesisType": "Art der Arbeit",
     "department": {
-      "departmentId": "Fachbereichsnummer",
-      "departmentName": "Fachbereichsname"
+      "departmentId": "Nummer des Fachbereichs",
+      "departmentName": "Name des Fachbereichs"
     },
     "subject": "Studiengang",
     "title": "Titel",
     "status": {
-      "signUp": "Anmeldedatum",
+      "signUpDate": "Anmeldedatum",
+      "signedUp": "Angemeldet",
       "dueDate": "Abgabefrist",
       "extendedDueDate": "Verlängert",
       "presented": "Präsentiert",
@@ -23,5 +29,62 @@
       "reportCreated": "Gutachten erstellt"
     },
     "course": "Fachbereich"
+  },
+  "thesis-detail": {
+    "english-title": "Englischer Titel",
+    "supervisor": "Betreuer/in",
+    "evaluator-firstname": "Gutachter (Vorname)",
+    "evaluator-lastname": "Gutachter (Nachname)",
+    "extended-duedate": "Verlängerte Abgabefrist",
+    "assignmentDate": "Vergabedatum",
+    "presentationDate": "Datum des Vortrags",
+    "submissionDate": "Abgabedatum",
+    "gradingDate": "Datum der Bewertung",
+    "reportDate": "Datum der Gutachtenerstellung",
+    "department": "Fachbereich",
+    "note-placeholder": "Notiz hier einfügen",
+    "student": {
+      "gender": "Geschlecht",
+      "email": "E-Mail"
+    },
+    "header": {
+      "thesis-detail": "Thesis-Details",
+      "information-on-thesis": "Informationen zur Thesis",
+      "information-on-student": "Informationen zum Studenten",
+      "status": "Status",
+      "notes": "Notizen"
+    },
+    "date": "Datum",
+    "notes": "Notizen",
+    "buttons": {
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten",
+      "add-note": "Notiz hinzufügen",
+      "delete-note": "Notiz löschen",
+      "create": "Neue Thesis erstellen",
+      "close": "Schließen",
+      "confirm-evalScheme": "Dieses Bewertungschema nutzen",
+      "other-evalScheme": "Anderes Bewertungschema wählen",
+      "calc-grade": "Note berechnen"
+    },
+    "grading": {
+      "title": "Bewertung",
+      "choose-evalScheme": "Bewertungsschema wählen",
+      "evalScheme-name": "Name",
+      "evalScheme-description": "Beschreibung",
+      "evalScheme-created": "Erstellt am",
+      "evalScheme-updated": "Zuletzt bearbeitet",
+      "selected": {
+        "description": "Beschreibung",
+        "criterion": "Kriterium",
+        "weight": "Gewichtung",
+        "grade": "Note",
+        "calculated-grade": "Berechnete Note",
+        "overwrite-grade": "Überschriebene Note"
+      },
+      "total-gradeError": "Note falsch eingetragen!",
+      "gradeError": "Keine Note!"
+    }
   }
 }

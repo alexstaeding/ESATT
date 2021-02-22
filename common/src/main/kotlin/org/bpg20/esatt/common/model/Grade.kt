@@ -6,7 +6,7 @@ import dev.morphia.annotations.Embedded
 class Grade {
   var name: String? = null
   var description: String? = null
-  var weight: Double = 1.0
+  var weight: Double = 0.0
   var grades: List<Grade>? = null
-  var grade: Int? = null
+  var grade: Double? = null
 }
