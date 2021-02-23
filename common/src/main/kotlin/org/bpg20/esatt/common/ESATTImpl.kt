@@ -38,17 +38,7 @@ class ESATTImpl : ESATT {
     logger.info("Starting jetty")
     server.start()
     server.stopAtShutdown = true
-    val scanner = Scanner(System.`in`)
     logger.info("Server started: listening at ${server.uri}")
     server.join()
-    /*
-    logger.info("Awaiting input...")
-    while (server.isRunning) {
-      when (scanner.nextLine()) {
-        "exit", "quit" -> server.stop()
-        else -> logger.error("Invalid input. Options: exit, quit")
-      }
-    }
-    */
   }
 }
