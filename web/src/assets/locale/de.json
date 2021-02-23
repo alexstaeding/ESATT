@@ -35,6 +35,21 @@
     "male": "Männlich",
     "other": "Divers"
   },
+  "profile": {
+    "pageTitle": "Profil",
+    "header": "Mein Profil",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "role": "Rolle",
+    "my-data": "Meine Angaben",
+    "userName": "Benutzername",
+    "buttons": {
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten"
+    }
+  },
   "thesis": {
     "pageTitle": "Thesen - Übersicht",
     "studentFirstName": "Student (Vorname)",

@@ -35,6 +35,21 @@
     "male": "Male",
     "other": "Other"
   },
+  "profile": {
+    "pageTitle": "Profile",
+    "header": "My Profile",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "E-Mail",
+    "role": "Role",
+    "my-data": "My Data",
+    "userName": "User name",
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit"
+    }
+  },
   "thesis": {
     "pageTitle": "Theses - Overview",
     "studentFirstName": "Student (First Name)",

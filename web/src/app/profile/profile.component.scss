@@ -1,0 +1,14 @@
+.column {
+  float: left;
+  width: 50%;
+}
+
+mat-form-field-label:disabled,
+mat-input-element:disabled {
+  color: black;
+  outline: none;
+}
+
+input:disabled {
+  color: black;
+}
