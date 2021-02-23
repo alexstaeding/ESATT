@@ -12,26 +12,25 @@ export class ProfileComponent implements OnInit {
   editableUser: User
   userWithChanges: User
   originalUser: User
+  editorEnabled: Boolean = false
 
   constructor(private userService: UserService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.userService.get("601037d1be6ad412f1e29d12").then(result => {
       this.user = result
     })
     this.editableUser = {...this.user}
   }
 
-  editorEnabled: Boolean = false
-
-  enableEditor(): void {
+  enableEditor() {
     this.originalUser = {...this.user}
     this.editorEnabled = true
   }
 
-  save(): void {
-    this.userWithChanges = new User
+  save() {
+    this.userWithChanges = new User()
     this.userWithChanges.id = this.user.id
     for (let key in this.user) {
       if (this.originalUser[key] != this.user[key]) {
@@ -42,12 +41,12 @@ export class ProfileComponent implements OnInit {
     this.editorEnabled = false
   }
 
-  disableEditor(): void {
+  disableEditor() {
     this.user = {...this.originalUser}
     this.editorEnabled = false
   }
 
-  getFromUser(prop: string): any {
+  getFromUser(prop: string): string {
     if (this.user == null) {
       return "Loading..."
     } else {
