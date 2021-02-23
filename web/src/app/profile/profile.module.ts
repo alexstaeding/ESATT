@@ -12,6 +12,7 @@ import {MatTooltipModule} from "@angular/material/tooltip"
 import {ProfileComponent} from "./profile.component"
 import {ProfileRoutingModule} from "./profile-routing.module"
 import {TranslateModule} from "@ngx-translate/core"
+import {MatDialogModule} from "@angular/material/dialog"
 
 @NgModule({
   declarations: [ProfileComponent],
@@ -28,6 +29,7 @@ import {TranslateModule} from "@ngx-translate/core"
     MatTooltipModule,
     ProfileRoutingModule,
     TranslateModule,
+    MatDialogModule,
   ]
 })
 export class ProfileModule {

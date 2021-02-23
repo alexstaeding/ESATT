@@ -40,6 +40,16 @@ export class UserService {
         withCredentials: true
       }).toPromise()
   }
+  //for temporary login
+  register(user: User): Promise<User> {
+    return this.http.post<User>("http://localhost:8008/api/v1/users",
+      user,
+      {
+        headers: this.headers,
+        withCredentials: true
+      }).toPromise()
+  }
+
 }
 
 export class User {

@@ -9,19 +9,40 @@ import {User, UserService} from "../service/user.service"
 export class ProfileComponent implements OnInit {
 
   user: User = new User()
-  editableUser: User
   userWithChanges: User
   originalUser: User
   editorEnabled: Boolean = false
+  allUsers: User[] = []
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit() {
-    this.userService.get("601037d1be6ad412f1e29d12").then(result => {
-      this.user = result
-      this.editableUser = {...result}
+    this.userService.getAll().then(result => {
+      this.allUsers = result
+      if(this.allUsers.length === 0){
+        this.user = new User()
+      }else{
+        this.user = this.getLatestUser()
+      }
     })
+  }
+
+  getLatestUser(): User {
+    if (this.allUsers.length === 0) {
+      return null
+    }
+    let latestUser = this.allUsers[0]
+    for (let i = 0; i < this.allUsers.length; i++) {
+      if (this.getCheckInDate(latestUser.id) < this.getCheckInDate(this.allUsers[i].id)) {
+        latestUser = this.allUsers[i]
+      }
+    }
+    return latestUser
+  }
+
+  getCheckInDate(id: string): Date {
+    return new Date(parseInt(id.substring(0, 8), 16) * 1000)
   }
 
   enableEditor() {

@@ -5,8 +5,7 @@
     <div class="col-12 col-md-6 col-xl-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>{{ "profile.firstName" | translate }}</mat-label>
-        <input [disabled]="!editorEnabled" matInput type="text" name="firstName" [(ngModel)]="user.firstName"
-               value="user.firstName">
+        <input [disabled]="!editorEnabled" matInput type="text" name="firstName" [(ngModel)]="user.firstName">
       </mat-form-field>
     </div>
     <div class="col-12 col-md-6 col-xl-3">
@@ -31,7 +30,8 @@
     </div>
   </div>
   <div mat-dialog-actions align="left">
-    <button [hidden]="editorEnabled" mat-raised-button color="primary" (click)="enableEditor()">
+    <button [hidden]="editorEnabled" [disabled]="allUsers.length === 0" mat-raised-button color="primary"
+            (click)="enableEditor()">
       {{ "profile.buttons.edit" | translate }}
     </button>
     <button [hidden]="!editorEnabled" mat-raised-button color="accent" (click)="save()">

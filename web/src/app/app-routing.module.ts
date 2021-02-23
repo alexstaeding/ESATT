@@ -8,6 +8,10 @@ const routes: Routes = [
     redirectTo: "dashboard"
   },
   {
+    path: "check-in-user",
+    loadChildren: "./check-in-user/check-in-user.module#CheckInUserModule"
+  },
+  {
     path: "dashboard",
     loadChildren: "./dashboard/dashboard.module#DashboardModule"
   },
