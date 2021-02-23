@@ -8,6 +8,7 @@ import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.handler.ResourceHandler
 import org.eclipse.jetty.servlet.DefaultServlet
 import org.eclipse.jetty.servlet.ServletContextHandler
+import org.eclipse.jetty.util.resource.Resource
 import org.slf4j.Logger
 import java.util.EnumSet
 import java.util.Scanner
@@ -27,7 +28,9 @@ class ESATTImpl : ESATT {
     servletContextHandler.addServlet(DefaultServlet::class.java, "/*")
 
     val resourceHandler = ResourceHandler()
-    resourceHandler.resourceBase = "C:\\Users\\alexa\\IdeaProjects\\ESATT\\web\\dist\\ESAThesisTool"
+    val staticFiles = javaClass.classLoader.getResource("static/ESATT")
+    logger.info("Loading static files from $staticFiles")
+    resourceHandler.baseResource = Resource.newResource(staticFiles)
     resourceHandler.isDirAllowed = true
     servletContextHandler.insertHandler(resourceHandler)
 
