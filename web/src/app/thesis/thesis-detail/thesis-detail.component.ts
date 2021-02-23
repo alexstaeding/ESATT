@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from "@angular/core"
+import {Component, Inject, OnInit, ViewEncapsulation} from "@angular/core"
 import {Department, DepartmentService} from "../../service/department.service"
 import {EvaluationScheme, EvaluationSchemePreview, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
@@ -17,7 +17,8 @@ import {User, UserService} from "../../service/user.service"
 @Component({
   selector: "app-thesis-detail",
   templateUrl: "./thesis-detail.component.html",
-  styleUrls: ["./thesis-detail.component.scss"]
+  styleUrls: ["./thesis-detail.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ThesisDetailComponent implements OnInit {
 

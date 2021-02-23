@@ -10,6 +10,11 @@
       Dashboard
     </button>
     <button
+      [color]="isActive('/evaluation-scheme') ? 'primary' : null"
+      mat-button routerLink="/evaluation-scheme">
+      {{ 'evaluation-scheme.title' | translate }}
+    </button>
+    <button
       [color]="isActive('/thesis') ? 'primary' : null"
       mat-button routerLink="/thesis">
       {{ 'thesis.pageTitle' | translate }}

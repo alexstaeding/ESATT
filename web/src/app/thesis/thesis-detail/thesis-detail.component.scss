@@ -48,7 +48,6 @@ mat-header-cell, mat-cell {
   overflow: auto;
 }
 
-
 .evalSchemeTree-invisible {
   display: none;
 }
@@ -80,4 +79,8 @@ li {
   border: dashed black;
   border-width: 0 0 0 1px;
   padding-top: 10px;
+}
+
+.warn-tooltip {
+  background: red;
 }

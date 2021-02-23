@@ -1,4 +1,35 @@
 {
+  "evaluation-scheme": {
+    "title": "Evaluation Schemes",
+    "name": "Name",
+    "description": "Description",
+    "created": "Created on",
+    "updated": "Last edited",
+    "add-button": "Create new Evaluation Scheme",
+    "detail": {
+      "title-new": "Create new Evaluation Scheme",
+      "title-edit": "Edit Evaluation Scheme",
+      "title-detail": "Evaluation Scheme Details",
+      "name": "Criterion",
+      "description": "Description",
+      "weight": "Weight",
+      "left": "left",
+      "name-error": "Please enter a name!",
+      "name-missing-error": "Please enter a name for the Evaluation Scheme!",
+      "weight-error": "Not a number between 0 and 1!",
+      "total-weight-error": "The weights do not tally!",
+      "eg": "e.g.",
+      "add": "Add Criterion",
+      "add-subcriterion": "Add Sub-criterion",
+      "remove-criterion": "Remove Criterion",
+      "create": "Create new Evaluation Scheme",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete-button": "Delete Criterion",
+      "close": "Close"
+    }
+  },
   "gender": {
     "female": "Female",
     "male": "Male",
@@ -66,6 +97,8 @@
       "close": "Close",
       "confirm-evalScheme": "Use this Evaluation scheme",
       "other-evalScheme": "Choose different Evaluation scheme",
+      "manage-evaluationScheme": "Manage Evaluation Schemes",
+      "manage-evaluationScheme-Tooltip": "Unsaved Changes will be lost!",
       "calc-grade": "Calculate grade"
     },
     "grading": {
@@ -88,3 +121,4 @@
     }
   }
 }
+

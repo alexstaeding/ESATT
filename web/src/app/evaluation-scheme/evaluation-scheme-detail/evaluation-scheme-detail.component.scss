@@ -1,0 +1,44 @@
+.evalSchemeTree ul,
+.evalSchemeTree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+mat-form-field {
+  display: block;
+}
+
+mat-card {
+  margin-left: 20px;
+}
+
+li {
+  border: dashed black;
+  border-width: 0 0 0 1px;
+  padding-top: 10px;
+}
+
+.mat-add {
+  background-color: limegreen;
+  color: #fff;
+}
+
+input[readonly] + .mat-hint {
+  display: none;
+}
+
+.custom-hint-error {
+  color: red;
+}
+
+.custom-outline-error {
+  ::ng-deep.mat-form-field-label {
+    color: red !important;
+  }
+
+  ::ng-deep.mat-form-field-outline {
+    color: red !important;
+    opacity: 1 !important;
+  }
+}

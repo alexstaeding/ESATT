@@ -1,0 +1,52 @@
+<div class="my-4 mx-5">
+  <h2>{{ 'evaluation-scheme.title' | translate }}</h2>
+  <hr>
+
+  <div class="table-scroll">
+    <table mat-table class="w-100 mat-elevation-z0 text-center" [dataSource]="data">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell class="text-center" *matHeaderCellDef>
+          <mat-icon>title</mat-icon>
+          {{ 'evaluation-scheme.name' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let scheme">{{scheme?.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell class="text-center" *matHeaderCellDef>
+          <mat-icon>description</mat-icon>
+          {{ 'evaluation-scheme.description' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let scheme">{{descriptionPreview(scheme?.description)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdUtc">
+        <th mat-header-cell class="text-center" *matHeaderCellDef>
+          <mat-icon>date_range</mat-icon>
+          {{ 'evaluation-scheme.created' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let scheme">{{showDate(scheme?.id)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastUpdatedUtc">
+        <th mat-header-cell class="text-center" *matHeaderCellDef>
+          <mat-icon>update</mat-icon>
+          {{ 'evaluation-scheme.updated' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let scheme">{{calcDate(scheme?.lastUpdatedUtc)}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsScheme ; sticky: true"></tr>
+      <tr mat-row class="cursor-pointer"
+          *matRowDef="let scheme; columns: columnsScheme;"
+          (click)="openDetail(scheme.id)"></tr>
+    </table>
+  </div>
+  <br>
+  <button mat-mini-fab matTooltip="{{ 'evaluation-scheme.add-button' | translate }}"
+          [matTooltipHideDelay]="500" [matTooltipShowDelay]="500" class="mx-3" color="add"
+          (click)="openDetail()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <hr>
+</div>

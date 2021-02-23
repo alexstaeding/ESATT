@@ -1,0 +1,23 @@
+mat-header-cell, mat-cell {
+  justify-content: center;
+}
+
+.mat-add {
+  background-color: limegreen;
+  color: #fff;
+}
+
+.mat-del {
+  background-color: red;
+  color: #fff;
+}
+
+.table-scroll {
+  height: calc(100vh - 255px);
+  overflow: auto;
+}
+
+.mini-table-scroll {
+  height: 25vh;
+  overflow: auto;
+}
