@@ -1,26 +1,4 @@
 {
-  "profile": {
-    "nav-title": "Profil",
-    "title": "Mein Profil",
-    "firstname": "Vorname",
-    "surname": "Nachname",
-    "email": "E-Mail",
-    "role": "Rolle",
-    "subtitle": "Meine Thesen",
-    "table-title": "Titel",
-    "table-prof": "Professor",
-    "table-date": "Erstellt am",
-    "table-assigned": "Zugewiesen an",
-    "table-state": "Status",
-    "no-theses-found": "Keine Thesen gefunden",
-    "my-data": "Meine Angaben",
-    "username": "Benutzername",
-    "buttons": {
-      "save": "Speichern",
-      "cancel": "Abbrechen",
-      "edit": "Bearbeiten"
-    }
-  },
   "evaluation-scheme": {
     "title": "Bewertungsschemata",
     "name": "Name",
@@ -56,6 +34,21 @@
     "female": "Weiblich",
     "male": "Männlich",
     "other": "Divers"
+  },
+  "profile": {
+    "nav-title": "Profil",
+    "title": "Mein Profil",
+    "firstname": "Vorname",
+    "surname": "Nachname",
+    "email": "E-Mail",
+    "role": "Rolle",
+    "my-data": "Meine Angaben",
+    "username": "Benutzername",
+    "buttons": {
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten"
+    }
   },
   "thesis": {
     "pageTitle": "Thesen - Übersicht",

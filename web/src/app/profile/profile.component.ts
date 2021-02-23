@@ -1,7 +1,5 @@
 import {Component, OnInit} from "@angular/core"
-import {MatTableDataSource} from "@angular/material/table"
 import {User, UserService} from "../service/user.service"
-
 
 @Component({
   selector: "app-profile",
@@ -10,16 +8,12 @@ import {User, UserService} from "../service/user.service"
 })
 export class ProfileComponent implements OnInit {
 
-  columnScheme = ["ttitle", "tprof", "tcreated", "tassigned", "tstatus"]
-  dataScheme = new MatTableDataSource(DATA)
-  emptyUser: User = new User()
-  user: User = this.emptyUser
+  user: User = new User()
   editableUser: User
   userWithChanges: User
   originalUser: User
 
   constructor(private userService: UserService) {
-
   }
 
   ngOnInit(): void {
@@ -29,21 +23,7 @@ export class ProfileComponent implements OnInit {
     this.editableUser = {...this.user}
   }
 
-
   editorEnabled: Boolean = false
-
-
-  loading = false
-  count = DATA.length
-
-  editable = {
-    userName: "maja123",
-    email: "maja@mail.com",
-    firstName: "Maja",
-    lastName: "Musterfrau"
-
-  }
-  editableNew = {...this.editable}
 
   enableEditor(): void {
     this.originalUser = {...this.user}
@@ -53,12 +33,12 @@ export class ProfileComponent implements OnInit {
   save(): void {
     this.userWithChanges = new User
     this.userWithChanges.id = this.user.id
-    for (let key in this.user){
-      if (this.originalUser[key] != this.user[key]){
+    for (let key in this.user) {
+      if (this.originalUser[key] != this.user[key]) {
         this.userWithChanges[key] = this.user[key]
       }
     }
-   this.userService.update(this.userWithChanges)
+    this.userService.update(this.userWithChanges)
     this.editorEnabled = false
   }
 
@@ -67,30 +47,11 @@ export class ProfileComponent implements OnInit {
     this.editorEnabled = false
   }
 
-  getFromUser(prop: string):any{
-    if(this.user == this.emptyUser){
+  getFromUser(prop: string): any {
+    if (this.user == null) {
       return "Loading..."
-    }else{
+    } else {
       return this.user[prop]
     }
   }
-
-
 }
-
-export interface Thesis {
-  ttitle: string
-  tprof: string
-  tcreated: Date
-  tassigned: string
-  tstatus: string
-}
-
-const DATA: Thesis[] = [
-  {ttitle: "Insekten", tprof: "Biene Maja", tcreated: new Date(2021, 1, 25), tassigned: "Willi", tstatus: "abgegeben"},
-  {ttitle: "Insekten", tprof: "Biene Maja", tcreated: new Date(2021, 1, 25), tassigned: "Willi", tstatus: "abgegeben"},
-  {ttitle: "Insekten", tprof: "Biene Maja", tcreated: new Date(2021, 1, 25), tassigned: "Willi", tstatus: "abgegeben"},
-  {ttitle: "Insekten", tprof: "Biene Maja", tcreated: new Date(2021, 1, 25), tassigned: "Willi", tstatus: "abgegeben"},
-  {ttitle: "Insekten", tprof: "Biene Maja", tcreated: new Date(2021, 1, 25), tassigned: "Willi", tstatus: "abgegeben"},
-  {ttitle: "Insekten", tprof: "Biene Maja", tcreated: new Date(2021, 1, 25), tassigned: "Willi", tstatus: "abgegeben"}
-]
