@@ -1,6 +1,6 @@
 {
-  "name": "esathesis-tool",
-  "version": "0.0.0",
+  "name": "esatt",
+  "version": "0.1.0-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

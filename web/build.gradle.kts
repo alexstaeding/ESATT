@@ -1,16 +1,21 @@
+import com.github.gradle.node.npm.task.NpxTask
+
 plugins {
-  java
-  id("com.github.johnrengelman.shadow").version("6.1.0")
-  id("com.github.node-gradle.node") version "2.2.4"
+  application
+  id("com.github.node-gradle.node").version("3.0.1")
 }
 
-node {
-  version = "15.2.1"
-  npmVersion = "6.14.4"
-  download = true
+tasks.register<NpxTask>("buildAngularApp") {
+  dependsOn("npmInstall")
+  command.set("ng")
+  args.set(listOf("build", "--prod"))
+  inputs.files("package.json", "package-lock.json", "angular.json", "tsconfig.json", "tsconfig.app.json")
+  inputs.dir("src")
+  inputs.dir(fileTree("node_modules").exclude(".cache"))
+  outputs.dir("dist")
 }
 
 tasks.withType<Jar> {
-  dependsOn("npm_run_build")
+  dependsOn("buildAngularApp")
   from("dist").into("static")
 }

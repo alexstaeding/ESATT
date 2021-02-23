@@ -7,7 +7,7 @@ import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {MatTableDataSource} from "@angular/material/table"
 import {MatTreeNestedDataSource} from "@angular/material/tree"
-import {MAT_DIALOG_DATA} from "@angular/material/dialog"
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog"
 import {NestedTreeControl} from "@angular/cdk/tree"
 import {SelectionModel} from "@angular/cdk/collections"
 import {TranslateService} from "@ngx-translate/core"
@@ -84,16 +84,20 @@ export class ThesisDetailComponent implements OnInit {
       this.datasource = new MatTableDataSource<Note>(data)
       this.grading = null
     } else {
-      this.thesis.status = new Status()
-      this.thesisService.get(this.data.id).then(result => {
-        this.originalThesis = this.deepCopyThesis(result)
-        if (this.originalThesis.grading != null) {
-          this.setAllCounters(this.originalThesis.grading.grades)
-        }
-        this.resetThesis()
-      })
+      this.initData()
     }
     this.evaluationSchemeData = from(this.evaluationSchemeService.getAll())
+  }
+
+  async initData() {
+    this.thesis.status = new Status()
+    await this.thesisService.get(this.data.id).then(result => {
+      this.originalThesis = this.deepCopyThesis(result)
+      if (this.originalThesis.grading != null) {
+        this.setAllCounters(this.originalThesis.grading.grades)
+      }
+      this.resetThesis()
+    })
   }
 
   resetThesis() {
@@ -120,7 +124,7 @@ export class ThesisDetailComponent implements OnInit {
     this.currentMode = Mode.EDIT
   }
 
-  save(): void {
+  async save() {
     this.calcGrade()
     if (this.thesis.calculatedGrade != null && this.thesis.calculatedGrade.toString() === "NaN") {
       this.showGradeError()
@@ -191,9 +195,9 @@ export class ThesisDetailComponent implements OnInit {
       }
       this.first = this.thesisWithChanges.grading
       this.second = this.first
-      this.thesisService.update(this.thesisWithChanges)
+      await this.thesisService.update(this.thesisWithChanges)
       this.currentMode = Mode.NORMAL
-      this.refresh()
+      await this.data.component.initData()
     }
   }
 
@@ -229,7 +233,7 @@ export class ThesisDetailComponent implements OnInit {
     if (first == null && second == null) {
       return true
     }
-    if (first == null && second != null || second == null && first != null) {
+    if (first == null || second == null) {
       return false
     }
     return this.equalGrades(first.grades, second.grades)
@@ -250,17 +254,13 @@ export class ThesisDetailComponent implements OnInit {
     return true
   }
 
-  create(): void {
+  async create() {
     this.originalThesis = this.deepCopyThesis(this.thesis)
     this.calcGrade()
     this.thesis.grading = this.deepCopyGrading(this.grading)
-    this.thesisService.create(this.thesis)
+    await this.thesisService.create(this.thesis)
     this.currentMode = Mode.NORMAL
-    this.refresh()
-  }
-
-  refresh() {
-    window.location.reload()
+    await this.data.component.initData()
   }
 
   addColumn(): void {

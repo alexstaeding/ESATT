@@ -3,7 +3,7 @@ import {Criterion, EvaluationScheme, EvaluationSchemeService} from "../../servic
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {MatTree, MatTreeNestedDataSource} from "@angular/material/tree"
-import {MAT_DIALOG_DATA} from "@angular/material/dialog"
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog"
 import {NestedTreeControl} from "@angular/cdk/tree"
 import {TranslateService} from "@ngx-translate/core"
 
@@ -43,12 +43,16 @@ export class EvaluationSchemeDetailComponent implements OnInit {
       this.dataSource.data = this.evaluationScheme.criteria
       this.mode = Mode.NEW
     } else {
-      this.evaluationSchemeService.get(this.data.id).then(result => {
-        this.originalEvaluationScheme = this.deepCopy(result)
-        this.setAllCounters(this.originalEvaluationScheme.criteria)
-        this.resetEvaluationScheme()
-      })
+      this.initData()
     }
+  }
+
+  async initData() {
+    await this.evaluationSchemeService.get(this.data.id).then(result => {
+      this.originalEvaluationScheme = this.deepCopy(result)
+      this.setAllCounters(this.originalEvaluationScheme.criteria)
+      this.resetEvaluationScheme()
+    })
   }
 
   resetEvaluationScheme() {
@@ -103,7 +107,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     this.mode = Mode.EDIT
   }
 
-  save() {
+  async save() {
     this.evaluationSchemeWithChanges = new EvaluationScheme()
     this.evaluationSchemeWithChanges.id = this.evaluationScheme.id
     if (this.evaluationScheme.name !== this.originalEvaluationScheme.name) {
@@ -115,7 +119,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     if (!this.equalCriteriaList(this.evaluationScheme.criteria, this.originalEvaluationScheme.criteria)) {
       this.evaluationSchemeWithChanges.criteria = this.evaluationScheme.criteria
     }
-    this.evaluationSchemeService.update(this.evaluationSchemeWithChanges)
+    await this.evaluationSchemeService.update(this.evaluationSchemeWithChanges)
     this.mode = Mode.NORMAL
   }
 
@@ -135,13 +139,13 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     return true
   }
 
-  create() {
+  async create() {
     this.originalEvaluationScheme = this.deepCopy(this.evaluationScheme)
-    this.evaluationSchemeService.create(this.evaluationScheme)
+    await this.evaluationSchemeService.create(this.evaluationScheme)
     this.mode = Mode.NORMAL
   }
 
-  addCriterion() {
+  async addCriterion() {
     const newCriterion = {
       name: null,
       description: null,
@@ -193,10 +197,6 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     this.updateTree()
   }
 
-  refresh() {
-    window.location.reload()
-  }
-
   calcRestWeight(node): number {
     const parent = this.parentMap.get(node)
     let criteria
@@ -228,23 +228,24 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     })
   }
 
-  createWithWeightControl() {
+  async createWithWeightControl() {
     if (this.evaluationScheme.name == null || this.evaluationScheme.name === "") {
       this.showNameMissingError()
     } else if (this.allWeightsCorrect(this.evaluationScheme.criteria)) {
-      this.create()
-      this.refresh()
+      await this.create()
+      await this.initData()
+      await this.data.component.initData()
     } else {
       this.showTotalWeightError()
     }
   }
 
-  saveWithWeightControl() {
+  async saveWithWeightControl() {
     if (this.evaluationScheme.name == null || this.evaluationScheme.name === "") {
       this.showNameMissingError()
     } else if (this.allWeightsCorrect(this.evaluationScheme.criteria)) {
-      this.save()
-      this.refresh()
+      await this.save()
+      await this.data.component.initData()
     } else {
       this.showTotalWeightError()
     }

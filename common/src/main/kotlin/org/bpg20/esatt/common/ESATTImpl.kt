@@ -5,6 +5,7 @@ import com.google.inject.Singleton
 import com.google.inject.servlet.GuiceFilter
 import org.bpg20.esatt.api.ESATT
 import org.eclipse.jetty.server.Server
+import org.eclipse.jetty.server.handler.ResourceHandler
 import org.eclipse.jetty.servlet.DefaultServlet
 import org.eclipse.jetty.servlet.ServletContextHandler
 import org.slf4j.Logger
@@ -20,14 +21,24 @@ class ESATTImpl : ESATT {
 
   override fun start() {
     val server = Server(8008)
-    val servletContextHandler = ServletContextHandler(server, "/")
-    servletContextHandler.addFilter(GuiceFilter::class.java, "/*", EnumSet.allOf(DispatcherType::class.java))
-    servletContextHandler.addServlet(DefaultServlet::class.java, "/")
+
+    val servletContextHandler = ServletContextHandler()
+    servletContextHandler.addFilter(GuiceFilter::class.java, "/api/*", EnumSet.allOf(DispatcherType::class.java))
+    servletContextHandler.addServlet(DefaultServlet::class.java, "/*")
+
+    val resourceHandler = ResourceHandler()
+    resourceHandler.resourceBase = "C:\\Users\\alexa\\IdeaProjects\\ESATT\\web\\dist\\ESAThesisTool"
+    resourceHandler.isDirAllowed = true
+    servletContextHandler.insertHandler(resourceHandler)
+
+    server.handler = servletContextHandler
     logger.info("Starting jetty")
     server.start()
     server.stopAtShutdown = true
     val scanner = Scanner(System.`in`)
     logger.info("Server started: listening at ${server.uri}")
+    server.join()
+    /*
     logger.info("Awaiting input...")
     while (server.isRunning) {
       when (scanner.nextLine()) {
@@ -35,5 +46,6 @@ class ESATTImpl : ESATT {
         else -> logger.error("Invalid input. Options: exit, quit")
       }
     }
+    */
   }
 }
