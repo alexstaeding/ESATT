@@ -11,7 +11,6 @@ import org.eclipse.jetty.servlet.ServletContextHandler
 import org.eclipse.jetty.util.resource.Resource
 import org.slf4j.Logger
 import java.util.EnumSet
-import java.util.Scanner
 import javax.servlet.DispatcherType
 
 @Singleton
