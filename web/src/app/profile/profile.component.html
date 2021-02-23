@@ -1,24 +1,24 @@
 <div class="my-4 mx-5">
-  <h2> {{ "profile.title" | translate }} </h2>
+  <h2> {{ "profile.header" | translate }} </h2>
   <hr>
   <div class="row">
     <div class="col-12 col-md-6 col-xl-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ "profile.firstname" | translate }}</mat-label>
+        <mat-label>{{ "profile.firstName" | translate }}</mat-label>
         <input [disabled]="!editorEnabled" matInput type="text" name="firstName" [(ngModel)]="user.firstName"
                value="user.firstName">
       </mat-form-field>
     </div>
     <div class="col-12 col-md-6 col-xl-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ "profile.surname" | translate }}</mat-label>
+        <mat-label>{{ "profile.lastName" | translate }}</mat-label>
         <input matInput type="text" name="lastName" [(ngModel)]="user.lastName"
                [disabled]="!editorEnabled">
       </mat-form-field>
     </div>
     <div class="col-12 col-md-6 col-xl-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>{{ "profile.username" | translate }}</mat-label>
+        <mat-label>{{ "profile.userName" | translate }}</mat-label>
         <input matInput type="text" name="userName" [(ngModel)]="user.userName"
                [disabled]="!editorEnabled">
       </mat-form-field>

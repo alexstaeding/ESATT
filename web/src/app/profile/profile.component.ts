@@ -20,8 +20,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.userService.get("601037d1be6ad412f1e29d12").then(result => {
       this.user = result
+      this.editableUser = {...result}
     })
-    this.editableUser = {...this.user}
   }
 
   enableEditor() {

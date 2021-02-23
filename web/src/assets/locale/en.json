@@ -36,14 +36,14 @@
     "other": "Other"
   },
   "profile": {
-    "nav-title": "Profile",
-    "title": "My Profile",
-    "firstname": "First name",
-    "surname": "Last name",
+    "pageTitle": "Profile",
+    "header": "My Profile",
+    "firstName": "First name",
+    "lastName": "Last name",
     "email": "E-Mail",
     "role": "Role",
     "my-data": "My Data",
-    "username": "User name",
+    "userName": "User name",
     "buttons": {
       "save": "Save",
       "cancel": "Cancel",

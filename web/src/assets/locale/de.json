@@ -36,14 +36,14 @@
     "other": "Divers"
   },
   "profile": {
-    "nav-title": "Profil",
-    "title": "Mein Profil",
-    "firstname": "Vorname",
-    "surname": "Nachname",
+    "pageTitle": "Profil",
+    "header": "Mein Profil",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
     "email": "E-Mail",
     "role": "Rolle",
     "my-data": "Meine Angaben",
-    "username": "Benutzername",
+    "userName": "Benutzername",
     "buttons": {
       "save": "Speichern",
       "cancel": "Abbrechen",
