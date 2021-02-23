@@ -39,7 +39,7 @@ mat-header-cell, mat-cell {
 }
 
 .table-scroll {
-  height: 41vh;
+  height: calc(100vh - 355px);
   overflow: auto;
 }
 

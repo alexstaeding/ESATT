@@ -32,17 +32,13 @@
       <mat-tree #evaluationSchemeTree [dataSource]="dataSource" [treeControl]="treeControl" class="evalSchemeTree">
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
           <li>
-            <div class="mat-tree-node">
+            <div class="d-block">
               <mat-card class="w-100">
                 <div class="row">
-                  <div class="col-2">
-                    {{ node.counter }}
-                  </div>
+                  <div class="col-2">{{ node.counter }}</div>
                   <div class="col-10 col-xl-3">
                     <mat-form-field appearance="outline">
-                      <mat-label>
-                        {{ 'evaluation-scheme.detail.name' | translate }}
-                      </mat-label>
+                      <mat-label>{{ 'evaluation-scheme.detail.name' | translate }}</mat-label>
                       <input matInput
                              [name]="'criterionName' + node.counter" [(ngModel)]="node.name"
                              [readonly]="mode != refMode.EDIT && mode != refMode.NEW"
@@ -52,9 +48,7 @@
                   <div class="col-2 d-xl-none"></div>
                   <div class="col-10 col-lg-7 col-xl-5">
                     <mat-form-field appearance="outline">
-                      <mat-label>
-                        {{ 'evaluation-scheme.detail.description' | translate }}
-                      </mat-label>
+                      <mat-label>{{ 'evaluation-scheme.detail.description' | translate }}</mat-label>
                       <input matInput
                              [name]="'criterionDescription' + node.counter" [(ngModel)]="node.description"
                              [readonly]="mode != refMode.EDIT && mode != refMode.NEW"
@@ -66,17 +60,13 @@
                     <mat-form-field appearance="outline"
                                     [formGroup]="weightGroup"
                                     [ngClass]="calcRestWeight(node) < 0 ? 'custom-outline-error' : 'none'">
-                      <mat-label>
-                        {{ 'evaluation-scheme.detail.weight' | translate }}
-                      </mat-label>
+                      <mat-label>{{ 'evaluation-scheme.detail.weight' | translate }}</mat-label>
                       <input matInput required
                              [formControl]="weightGroup.controls['weight' + node.counter]"
                              [name]="'criterionWeight' + node.counter" [(ngModel)]="node.weight"
                              [readonly]="mode != refMode.EDIT && mode != refMode.NEW"
                              placeholder="{{ 'evaluation-scheme.detail.eg' | translate }} 0.25">
-                      <mat-error>
-                        {{ 'evaluation-scheme.detail.weight-error' | translate }}
-                      </mat-error>
+                      <mat-error>{{ 'evaluation-scheme.detail.weight-error' | translate }}</mat-error>
                       <mat-hint
                         [ngClass]="calcRestWeight(node) < 0 ? 'custom-hint-error' : 'none'"
                         [hidden]="mode != refMode.EDIT && mode != refMode.NEW || calcRestWeight(node).toString() == 'NaN'">
@@ -107,7 +97,7 @@
 
         <mat-nested-tree-node *matTreeNodeDef="let node; when hasChild">
           <li>
-            <div class="mat-tree-node">
+            <div class="d-block">
               <mat-card class="w-100 py-3">
                 <div class="row">
                   <div class="col-2">
@@ -115,9 +105,7 @@
                   </div>
                   <div class="col-10 col-xl-3">
                     <mat-form-field appearance="outline">
-                      <mat-label>
-                        {{ 'evaluation-scheme.detail.name' | translate }}
-                      </mat-label>
+                      <mat-label>{{ 'evaluation-scheme.detail.name' | translate }}</mat-label>
                       <input matInput
                              [name]="'criterionName' + node.counter" [(ngModel)]="node.name"
                              [readonly]="mode != refMode.EDIT && mode != refMode.NEW"
@@ -127,9 +115,7 @@
                   <div class="col-2 d-xl-none"></div>
                   <div class="col-10 col-lg-7 col-xl-5">
                     <mat-form-field appearance="outline">
-                      <mat-label>
-                        {{ 'evaluation-scheme.detail.description' | translate }}
-                      </mat-label>
+                      <mat-label>{{ 'evaluation-scheme.detail.description' | translate }}</mat-label>
                       <input matInput
                              [name]="'criterionDescription' + node.counter" [(ngModel)]="node.description"
                              [readonly]="mode != refMode.EDIT && mode != refMode.NEW"
@@ -141,19 +127,15 @@
                     <mat-form-field appearance="outline"
                                     [formGroup]="weightGroup"
                                     [ngClass]="calcRestWeight(node) < 0 ? 'custom-outline-error' : 'none'">
-                      <mat-label>
-                        {{ 'evaluation-scheme.detail.weight' | translate }}
-                      </mat-label>
+                      <mat-label>{{ 'evaluation-scheme.detail.weight' | translate }}</mat-label>
                       <input matInput required
                              [formControl]="weightGroup.controls['weight' + node.counter]"
                              [name]="'criterionWeight' + node.counter" [(ngModel)]="node.weight"
                              [readonly]="mode != refMode.EDIT && mode != refMode.NEW"
                              placeholder="{{ 'evaluation-scheme.detail.eg' | translate }} 0.25">
-                      <mat-error>
-                        {{ 'evaluation-scheme.detail.weight-error' | translate }}
-                      </mat-error>
+                      <mat-error>{{ 'evaluation-scheme.detail.weight-error' | translate }}</mat-error>
                       <mat-hint [ngClass]="calcRestWeight(node) < 0 ? 'custom-hint-error' : 'none'"
-                        [hidden]="mode != refMode.EDIT && mode != refMode.NEW || calcRestWeight(node).toString() == 'NaN'">
+                                [hidden]="mode != refMode.EDIT && mode != refMode.NEW || calcRestWeight(node).toString() == 'NaN'">
                         {{ calcRestWeight(node).toString()}} {{ 'evaluation-scheme.detail.left' | translate }}
                       </mat-hint>
                     </mat-form-field>
@@ -179,7 +161,7 @@
                   </div>
                 </div>
               </mat-card>
-              <ul [class.evalSchemeTree-invisible]="!treeControl.isExpanded(node)">
+              <ul [class.d-none]="!treeControl.isExpanded(node)">
                 <ng-container matTreeNodeOutlet></ng-container>
               </ul>
             </div>

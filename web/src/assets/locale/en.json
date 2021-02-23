@@ -97,9 +97,9 @@
       "close": "Close",
       "confirm-evalScheme": "Use this Evaluation scheme",
       "other-evalScheme": "Choose different Evaluation scheme",
-      "calc-grade": "Calculate grade",
       "manage-evaluationScheme": "Manage Evaluation Schemes",
-      "manage-evaluationScheme-Tooltip": "Unsaved Changes will be lost!"
+      "manage-evaluationScheme-Tooltip": "Unsaved Changes will be lost!",
+      "calc-grade": "Calculate grade"
     },
     "grading": {
       "title": "Grading",

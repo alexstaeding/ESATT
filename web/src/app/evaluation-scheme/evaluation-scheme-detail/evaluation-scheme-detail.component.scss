@@ -1,7 +1,3 @@
-.evalSchemeTree-invisible {
-  display: none;
-}
-
 .evalSchemeTree ul,
 .evalSchemeTree li {
   margin-top: 0;
@@ -9,15 +5,7 @@
   list-style-type: none;
 }
 
-mat-form-field{
-  display: block;
-}
-
-.mat-tree-node {
-  display: block;
-}
-
-.mat-nested-tree-node {
+mat-form-field {
   display: block;
 }
 
@@ -48,6 +36,7 @@ input[readonly] + .mat-hint {
   ::ng-deep.mat-form-field-label {
     color: red !important;
   }
+
   ::ng-deep.mat-form-field-outline {
     color: red !important;
     opacity: 1 !important;

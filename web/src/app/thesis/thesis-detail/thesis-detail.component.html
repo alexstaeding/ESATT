@@ -1,6 +1,5 @@
 <h1 mat-dialog-title *ngIf="thesis.title != null; else defaultTitle">{{ thesis.title }}</h1>
-<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1>
-</ng-template>
+<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1></ng-template>
 
 <mat-dialog-content class="mat-typography">
   <mat-tab-group [(selectedIndex)]="selectedTab" mat-align-tabs="start">
