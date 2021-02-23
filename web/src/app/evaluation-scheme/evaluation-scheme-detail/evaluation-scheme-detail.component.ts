@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit, ViewChild} from "@angular/core"
-import {MAT_DIALOG_DATA} from "@angular/material/dialog"
 import {Criterion, EvaluationScheme, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
-import {NestedTreeControl} from "@angular/cdk/tree"
-import {MatTree, MatTreeNestedDataSource} from "@angular/material/tree"
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
 import {MatSnackBar} from "@angular/material/snack-bar"
+import {MatTree, MatTreeNestedDataSource} from "@angular/material/tree"
+import {MAT_DIALOG_DATA} from "@angular/material/dialog"
+import {NestedTreeControl} from "@angular/cdk/tree"
 import {TranslateService} from "@ngx-translate/core"
 
 @Component({
@@ -15,26 +15,22 @@ import {TranslateService} from "@ngx-translate/core"
 export class EvaluationSchemeDetailComponent implements OnInit {
   treeControl = new NestedTreeControl<Criterion>(node => node.criteria)
   dataSource = new MatTreeNestedDataSource<Criterion>()
-  hasChild = (_: number, node: Criterion) => !!node.criteria && node.criteria.length > 0
-  @ViewChild("evaluationSchemeTree") tree: MatTree<Criterion>
-
   parentMap = new Map<Criterion, Criterion>()
-
   originalEvaluationScheme: EvaluationScheme
   evaluationScheme: EvaluationScheme = new EvaluationScheme()
   evaluationSchemeWithChanges: EvaluationScheme
-
   refMode = Mode
   mode: Mode
-
   weightGroup: FormGroup
+  @ViewChild("evaluationSchemeTree") tree: MatTree<Criterion>
+  hasChild = (_: number, node: Criterion) => !!node.criteria && node.criteria.length > 0
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     private evaluationSchemeService: EvaluationSchemeService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     this.weightGroup = formBuilder.group({})
   }
@@ -90,7 +86,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   setAllCounters(criteria: Criterion[], parent: Criterion = null, preCounter: string = "") {
-    if (criteria == null || criteria.length == 0) {
+    if (criteria == null || criteria.length === 0) {
       return
     }
     criteria.forEach((criterion, index) => {
@@ -127,9 +123,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     if (first.length !== second.length) {
       return false
     }
-    for (var i = 0; i < first.length; i++) {
-      if (first[i].name != second[i].name || first[i].weight != second[i].weight
-        || first[i].description != second[i].description) {
+    for (let i = 0; i < first.length; i++) {
+      if (first[i].name !== second[i].name || first[i].weight !== second[i].weight
+        || first[i].description !== second[i].description) {
         return false
       }
       if (!this.equalCriteriaList(first[i].criteria, second[i].criteria)) {
@@ -202,7 +198,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   calcRestWeight(node): number {
-    let parent = this.parentMap.get(node)
+    const parent = this.parentMap.get(node)
     let criteria
     if (parent == null) {
       criteria = this.evaluationScheme.criteria
@@ -210,7 +206,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
       criteria = parent.criteria
     }
     let weight = 1
-    for (let criterion of criteria) {
+    for (const criterion of criteria) {
       weight = weight - criterion.weight
     }
     return (Math.round(weight * 10000000000) / 10000000000)
@@ -233,7 +229,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   createWithWeightControl() {
-    if (this.evaluationScheme.name == null || this.evaluationScheme.name == "") {
+    if (this.evaluationScheme.name == null || this.evaluationScheme.name === "") {
       this.showNameMissingError()
     } else if (this.allWeightsCorrect(this.evaluationScheme.criteria)) {
       this.create()
@@ -244,7 +240,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   saveWithWeightControl() {
-    if (this.evaluationScheme.name == null || this.evaluationScheme.name == "") {
+    if (this.evaluationScheme.name == null || this.evaluationScheme.name === "") {
       this.showNameMissingError()
     } else if (this.allWeightsCorrect(this.evaluationScheme.criteria)) {
       this.save()
@@ -255,20 +251,20 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   private allWeightsCorrect(criteria): boolean {
-    if (criteria == null || criteria.length == 0) {
+    if (criteria == null || criteria.length === 0) {
       return true
     }
     let weight = 1
-    for (let criterion of criteria) {
+    for (const criterion of criteria) {
       if (criterion.weight == null) {
         return false
       }
       weight = weight - criterion.weight
     }
-    if ((Math.round(weight * 10000000000) / 10000000000) != 0) {
+    if ((Math.round(weight * 10000000000) / 10000000000) !== 0) {
       return false
     }
-    for (let criterion of criteria) {
+    for (const criterion of criteria) {
       if (!this.allWeightsCorrect(criterion.criteria)) {
         return false
       }
