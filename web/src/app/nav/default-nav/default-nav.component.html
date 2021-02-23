@@ -10,7 +10,7 @@
       Dashboard
     </button>
     <button
-      [color] = "isActive('/profile') ? 'primary' : null"
+      [color]="isActive('/profile') ? 'primary' : null"
       mat-button routerLink="/profile">
       {{ 'profile.nav-title' | translate }}
     </button>
