@@ -16,7 +16,7 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/ESAThesisTool'),
+      dir: require('path').join(__dirname, './coverage/ESATT'),
       subdir: '.',
       reporters: [
         {type: 'html'},
