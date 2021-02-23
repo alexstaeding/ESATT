@@ -43,16 +43,12 @@ export class EvaluationSchemeDetailComponent implements OnInit {
       this.dataSource.data = this.evaluationScheme.criteria
       this.mode = Mode.NEW
     } else {
-      this.initData()
+      this.evaluationSchemeService.get(this.data.id).then(result => {
+        this.originalEvaluationScheme = this.deepCopy(result)
+        this.setAllCounters(this.originalEvaluationScheme.criteria)
+        this.resetEvaluationScheme()
+      })
     }
-  }
-
-  async initData() {
-    await this.evaluationSchemeService.get(this.data.id).then(result => {
-      this.originalEvaluationScheme = this.deepCopy(result)
-      this.setAllCounters(this.originalEvaluationScheme.criteria)
-      this.resetEvaluationScheme()
-    })
   }
 
   resetEvaluationScheme() {
@@ -233,7 +229,6 @@ export class EvaluationSchemeDetailComponent implements OnInit {
       this.showNameMissingError()
     } else if (this.allWeightsCorrect(this.evaluationScheme.criteria)) {
       await this.create()
-      await this.initData()
       await this.data.component.initData()
     } else {
       this.showTotalWeightError()

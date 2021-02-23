@@ -84,20 +84,16 @@ export class ThesisDetailComponent implements OnInit {
       this.datasource = new MatTableDataSource<Note>(data)
       this.grading = null
     } else {
-      this.initData()
+      this.thesis.status = new Status()
+      this.thesisService.get(this.data.id).then(result => {
+        this.originalThesis = this.deepCopyThesis(result)
+        if (this.originalThesis.grading != null) {
+          this.setAllCounters(this.originalThesis.grading.grades)
+        }
+        this.resetThesis()
+      })
     }
     this.evaluationSchemeData = from(this.evaluationSchemeService.getAll())
-  }
-
-  async initData() {
-    this.thesis.status = new Status()
-    await this.thesisService.get(this.data.id).then(result => {
-      this.originalThesis = this.deepCopyThesis(result)
-      if (this.originalThesis.grading != null) {
-        this.setAllCounters(this.originalThesis.grading.grades)
-      }
-      this.resetThesis()
-    })
   }
 
   resetThesis() {
