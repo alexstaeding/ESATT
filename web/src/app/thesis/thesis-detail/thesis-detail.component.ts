@@ -18,7 +18,6 @@ import {User, UserService} from "../../service/user.service"
   selector: "app-thesis-detail",
   templateUrl: "./thesis-detail.component.html",
   styleUrls: ["./thesis-detail.component.scss"],
-  encapsulation: ViewEncapsulation.None,
 })
 export class ThesisDetailComponent implements OnInit {
 

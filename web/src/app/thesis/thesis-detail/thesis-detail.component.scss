@@ -81,6 +81,6 @@ li {
   padding-top: 10px;
 }
 
-.warn-tooltip {
+::ng-deep .warn-tooltip {
   background: red;
 }

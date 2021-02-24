@@ -471,7 +471,7 @@
                       <div class="col-2">
                         <button mat-icon-button matTreeNodeToggle>
                           <mat-icon class="mat-icon-rtl-mirror">
-                            {{ treeControl.igenderpanded(node) ? 'expand_more' : 'chevron_right' }}
+                            {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
                           </mat-icon>
                         </button>
                       </div>
@@ -486,7 +486,7 @@
                       </div>
                     </div>
                   </mat-card>
-                  <ul [class.evalSchemeTree-invisible]="!treeControl.igenderpanded(node)">
+                  <ul [class.evalSchemeTree-invisible]="!treeControl.isExpanded(node)">
                     <ng-container matTreeNodeOutlet></ng-container>
                   </ul>
                 </div>
