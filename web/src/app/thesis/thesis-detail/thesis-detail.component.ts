@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewEncapsulation} from "@angular/core"
+import {Component, Inject, OnInit, TemplateRef, ViewChild} from "@angular/core"
 import {Department, DepartmentService} from "../../service/department.service"
 import {EvaluationScheme, EvaluationSchemePreview, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
@@ -7,7 +7,7 @@ import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {MatTableDataSource} from "@angular/material/table"
 import {MatTreeNestedDataSource} from "@angular/material/tree"
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog"
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog"
 import {NestedTreeControl} from "@angular/cdk/tree"
 import {SelectionModel} from "@angular/cdk/collections"
 import {TranslateService} from "@ngx-translate/core"
@@ -47,6 +47,9 @@ export class ThesisDetailComponent implements OnInit {
   selectedEvaluationScheme: EvaluationScheme = null
   treeControl = new NestedTreeControl<Grade>(node => node.grades)
   dataSource = new MatTreeNestedDataSource<Grade>()
+  departmentName: string
+  departmentId: number
+  departmentDialogRef: MatDialogRef<any>
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -57,6 +60,7 @@ export class ThesisDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
+    private departmentMatDialog: MatDialog,
   ) {
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ["", Validators.required],
@@ -461,6 +465,22 @@ export class ThesisDetailComponent implements OnInit {
     }
     return copy
   }
+
+  @ViewChild('departmentDialog', { static: true }) departmentDialog: TemplateRef<any>;
+  openDepartmentDialog() {
+    this.departmentDialogRef = this.departmentMatDialog.open(this.departmentDialog)
+  }
+
+  addDepartment() {
+    let department = new Department()
+    department.name = this.departmentName
+    department.id = this.departmentId
+    department.lastUpdatedUtc = new Date
+    this.departments.push(department)
+    this.departmentService.create(department)
+    this.departmentDialogRef.close()
+  }
+
 }
 
 export enum Mode {

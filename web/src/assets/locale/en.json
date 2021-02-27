@@ -114,7 +114,8 @@
       "other-evalScheme": "Choose different Evaluation scheme",
       "manage-evaluationScheme": "Manage Evaluation Schemes",
       "manage-evaluationScheme-Tooltip": "Unsaved Changes will be lost!",
-      "calc-grade": "Calculate grade"
+      "calc-grade": "Calculate grade",
+      "add-department": "Add new department"
     },
     "grading": {
       "title": "Grading",
@@ -133,6 +134,10 @@
       },
       "total-gradeError": "Entered grade wrong!",
       "gradeError": "Not a grade!"
+    },
+    "departmentDialog": {
+      "name": "Name of Department",
+      "id": "Id of Department"
     }
   }
 }

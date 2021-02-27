@@ -114,7 +114,8 @@
       "other-evalScheme": "Anderes Bewertungschema wählen",
       "manage-evaluationScheme": "Bewertungsschemata verwalten",
       "manage-evaluationScheme-Tooltip": "Ungespeicherten Änderungen gehen verloren!",
-      "calc-grade": "Note berechnen"
+      "calc-grade": "Note berechnen",
+      "add-department": "Neuen Fachbereich hinzufügen"
     },
     "grading": {
       "title": "Bewertung",
@@ -133,6 +134,10 @@
       },
       "total-gradeError": "Note falsch eingetragen!",
       "gradeError": "Keine Note!"
+    },
+    "departmentDialog": {
+      "name": "Name des Fachbereichs",
+      "id": "Nummer des Fachbereichs"
     }
   }
 }
