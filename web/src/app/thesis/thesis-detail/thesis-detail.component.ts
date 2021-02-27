@@ -187,7 +187,7 @@ export class ThesisDetailComponent implements OnInit {
           this.thesisWithChanges.grade = 0.0
         }
         const numberValidator = new RegExp(/^[0-9]+(\.[0-9]+)?$/)
-        if(!numberValidator.test(this.thesisWithChanges.grade.toString())){
+        if (!numberValidator.test(this.thesisWithChanges.grade.toString())) {
           this.showGradeError()
           return
         }
@@ -477,13 +477,13 @@ export class ThesisDetailComponent implements OnInit {
     this.departmentDialogRef = this.departmentMatDialog.open(this.departmentDialog)
   }
 
-  addDepartment() {
-    let department = new Department()
+  async addDepartment() {
+    const department = new Department()
     department.name = this.departmentName
     department.id = this.departmentId
-    department.lastUpdatedUtc = new Date
+    department.lastUpdatedUtc = new Date()
     this.departments.push(department)
-    this.departmentService.create(department)
+    await this.departmentService.create(department)
     this.departmentDialogRef.close()
   }
 }
