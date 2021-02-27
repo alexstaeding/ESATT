@@ -1,5 +1,6 @@
 <h1 mat-dialog-title *ngIf="thesis.title != null; else defaultTitle">{{ thesis.title }}</h1>
-<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1></ng-template>
+<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1>
+</ng-template>
 
 <mat-dialog-content class="mat-typography">
   <mat-tab-group [(selectedIndex)]="selectedTab" mat-align-tabs="start">
@@ -385,7 +386,7 @@
                             class="col-12 col-md-10 col-lg-8 col-xl-6">
               <mat-label>{{ 'thesis-detail.grading.evalScheme-name' | translate }}</mat-label>
               <input matInput disabled
-                     [name]="'name'" [(ngModel)]="this.grading.name">
+                     [name]="'name'" [ngModel]="this.grading.name">
             </mat-form-field>
           </div>
           <div class="row">
@@ -393,7 +394,7 @@
                             class="col-12 col-md-10 col-lg-8 col-xl-6">
               <mat-label>{{ 'thesis-detail.grading.evalScheme-description' | translate }}</mat-label>
               <textarea matInput disabled
-                        [name]="'description'" [(ngModel)]="this.grading.description">
+                        [name]="'description'" [ngModel]="this.grading.description">
               </textarea>
             </mat-form-field>
           </div>
@@ -415,7 +416,7 @@
                             {{ 'thesis-detail.grading.selected.criterion' | translate }}
                           </mat-label>
                           <input matInput disabled
-                                 [name]="'criterionName' + node.counter" [(ngModel)]="node.name">
+                                 [name]="'criterionName' + node.counter" [ngModel]="node.name">
                         </mat-form-field>
                       </div>
                       <div class="col-2 d-xl-none"></div>
@@ -425,7 +426,7 @@
                             {{ 'thesis-detail.grading.selected.weight' | translate }}
                           </mat-label>
                           <input matInput disabled
-                                 [name]="'criterionWeight' + node.counter" [(ngModel)]="node.weight">
+                                 [name]="'criterionWeight' + node.counter" [ngModel]="node.weight">
                         </mat-form-field>
                       </div>
                       <div class="col-2 d-lg-none d-xl-none"></div>
@@ -435,7 +436,8 @@
                             {{ 'thesis-detail.grading.selected.grade' | translate }}
                           </mat-label>
                           <input matInput [readonly]="currentMode === mode.NORMAL || this.thesis.grading == null"
-                                 [name]="'criterionGrade' + node.counter" [(ngModel)]="node.grade"
+                                 [name]="'criterionGrade' + node.counter" [ngModel]="node.grade === 0 ? null : node.grade"
+                                 (ngModelChange)="node.grade = $event"
                                  [formControl]="gradeGroup.controls['grade' + node.counter]">
                           <mat-error>{{ 'thesis-detail.grading.gradeError' | translate }}</mat-error>
                         </mat-form-field>
@@ -449,7 +451,7 @@
                             {{ 'thesis-detail.grading.selected.description' | translate }}
                           </mat-label>
                           <input matInput disabled
-                                 [name]="'criterionDescription' + node.counter" [(ngModel)]="node.description">
+                                 [name]="'criterionDescription' + node.counter" [ngModel]="node.description">
                         </mat-form-field>
                       </div>
                     </div>
@@ -472,7 +474,7 @@
                             {{ 'thesis-detail.grading.selected.criterion' | translate }}
                           </mat-label>
                           <input matInput disabled
-                                 [name]="'criterionName' + node.counter" [(ngModel)]="node.name">
+                                 [name]="'criterionName' + node.counter" [ngModel]="node.name">
                         </mat-form-field>
                       </div>
                       <div class="col-2 d-xl-none"></div>
@@ -482,7 +484,7 @@
                             {{ 'thesis-detail.grading.selected.weight' | translate }}
                           </mat-label>
                           <input matInput disabled
-                                 [name]="'criterionWeight' + node.counter" [(ngModel)]="node.weight">
+                                 [name]="'criterionWeight' + node.counter" [ngModel]="node.weight">
                         </mat-form-field>
                       </div>
                       <div class="col-2 d-lg-none d-xl-none"></div>
@@ -493,7 +495,8 @@
                           </mat-label>
                           <input matInput disabled
                                  [name]="'criterionGrade' + node.counter"
-                                 [(ngModel)]="node.grade != null && node.grade.toString() === 'NaN'? null : node.grade">
+                                 [ngModel]="node.grade != null && node.grade.toString() === 'NaN' || node.grade === 0
+                                 ? null : node.grade">
                         </mat-form-field>
                       </div>
                       <div class="col-2">
@@ -509,7 +512,7 @@
                             {{ 'thesis-detail.grading.selected.description' | translate }}
                           </mat-label>
                           <input matInput disabled
-                                 [name]="'criterionDescription' + node.counter" [(ngModel)]="node.description">
+                                 [name]="'criterionDescription' + node.counter" [ngModel]="node.description">
                         </mat-form-field>
                       </div>
                     </div>
@@ -536,14 +539,17 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ 'thesis-detail.grading.selected.calculated-grade' | translate }}</mat-label>
                 <input matInput disabled [name]="'calcuatedGrade'"
-                       [(ngModel)]="thesis.calculatedGrade != null && thesis.calculatedGrade.toString() === 'NaN' ? null : thesis.calculatedGrade">
+                       [ngModel]="thesis.calculatedGrade != null && thesis.calculatedGrade.toString() === 'NaN' ||
+                       thesis.calculatedGrade === 0 ? null : thesis.calculatedGrade">
               </mat-form-field>
             </div>
             <div class="col-12 col-lg-6 col-xl-6">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ 'thesis-detail.grading.selected.overwrite-grade' | translate }}</mat-label>
-                <input matInput [name]="'grade'" [(ngModel)]="thesis.grade"
-                       [disabled]="currentMode === mode.NORMAL">
+                <input matInput [name]="'grade'" [ngModel]="thesis.grade === 0 ? null : thesis.grade"
+                       (ngModelChange)="thesis.grade = $event" [formControl]="gradeControl"
+                       [readonly]="currentMode === mode.NORMAL">
+                <mat-error>{{ 'thesis-detail.grading.gradeError' | translate }}</mat-error>
               </mat-form-field>
             </div>
             <button mat-flat-button color="accent" (click)="calcGrade()" [disabled]="currentMode === mode.NORMAL">

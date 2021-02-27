@@ -39,8 +39,6 @@ export class ThesisDetailComponent implements OnInit {
   firstFormGroup: FormGroup
   secondFormGroup: FormGroup
   gradeGroup: FormGroup
-  second: Grading = new Grading()
-  first: Grading = new Grading()
   displayedColumns: string[] = ["checked", "Datum", "Notiz"]
   evaluationSchemeColumnsScheme: string[] = ["name", "description", "createdUtc", "lastUpdatedUtc"]
   evaluationSchemeData: Observable<EvaluationSchemePreview[]>
@@ -50,6 +48,7 @@ export class ThesisDetailComponent implements OnInit {
   departmentName: string
   departmentId: number
   departmentDialogRef: MatDialogRef<any>
+  gradeControl = new FormControl(null, Validators.pattern(/^[0-9]+(\.[0-9]+)?$/))
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -184,16 +183,22 @@ export class ThesisDetailComponent implements OnInit {
       }
       if (this.thesis.grade !== this.originalThesis.grade) {
         this.thesisWithChanges.grade = this.thesis.grade
+        if (this.thesisWithChanges.grade.toString() === "") {
+          this.thesisWithChanges.grade = 0.0
+        }
+        const numberValidator = new RegExp(/^[0-9]+(\.[0-9]+)?$/)
+        if(!numberValidator.test(this.thesisWithChanges.grade.toString())){
+          this.showGradeError()
+          return
+        }
       }
       if (this.thesis.calculatedGrade !== this.originalThesis.calculatedGrade) {
         this.thesisWithChanges.calculatedGrade = this.thesis.calculatedGrade
       }
       if (!this.equalGrading(this.thesis.grading, this.originalThesis.grading)) {
         this.thesisWithChanges.grading = new Grading()
-        this.thesisWithChanges.grading = this.thesis.grading
+        this.thesisWithChanges.grading = this.deepCopyGrading(this.thesis.grading)
       }
-      this.first = this.thesisWithChanges.grading
-      this.second = this.first
       await this.thesisService.update(this.thesisWithChanges)
       this.currentMode = Mode.NORMAL
       await this.data.component.initData()
@@ -364,27 +369,24 @@ export class ThesisDetailComponent implements OnInit {
       if (grade.grades == null || grade.grades.length === 0) {
         return
       }
-      grade.grade = null
+      grade.grade = 0.0
       this.clearAllGrades(grade.grades)
     }
   }
 
   calcSubgrades(grades): number {
     if (grades == null || grades.length === 0) {
-      return null
+      return 0.0
     }
     let subgrade = 0
     for (const grade of grades) {
-      if (grade.grade == null || grade.grade === "") {
+      if (grade.grade == null || grade.grade === 0 || grade.grade === "") {
         grade.grade = this.calcSubgrades(grade.grades)
       }
-      if (grade.grade == null || grade.grade === "") {
-        return null
+      if (grade.grade == null || grade.grade === 0 || grade.grade === "") {
+        return 0.0
       }
       subgrade = (Math.round((grade.weight * grade.grade + subgrade) * 10000000000) / 10000000000)
-    }
-    if (subgrade === 0) {
-      return null
     }
     return subgrade
   }
@@ -460,13 +462,17 @@ export class ThesisDetailComponent implements OnInit {
       newGrade.description = grade.description
       newGrade.weight = grade.weight
       newGrade.grade = grade.grade
+      if (newGrade.grade == null || newGrade.grade.toString() === "") {
+        newGrade.grade = 0.0
+      }
       newGrade.grades = this.copyGrades(grade.grades)
       copy.push(newGrade)
     }
     return copy
   }
 
-  @ViewChild('departmentDialog', { static: true }) departmentDialog: TemplateRef<any>;
+  @ViewChild("departmentDialog", {static: true}) departmentDialog: TemplateRef<any>
+
   openDepartmentDialog() {
     this.departmentDialogRef = this.departmentMatDialog.open(this.departmentDialog)
   }
@@ -480,7 +486,6 @@ export class ThesisDetailComponent implements OnInit {
     this.departmentService.create(department)
     this.departmentDialogRef.close()
   }
-
 }
 
 export enum Mode {

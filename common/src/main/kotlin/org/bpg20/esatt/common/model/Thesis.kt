@@ -40,7 +40,7 @@ class Thesis : ObjectWithId<ObjectId>() {
   var status: Status? = null
   var notes: List<Note>? = null
 
-  var grade: Double? = null
-  var calculatedGrade: Double? = null
+  var grade: Double = 0.0
+  var calculatedGrade: Double = 0.0
   var grading: Grading? = null
 }
