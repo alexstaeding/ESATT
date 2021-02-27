@@ -134,10 +134,6 @@
       },
       "total-gradeError": "Note falsch eingetragen!",
       "gradeError": "Keine Note!"
-    },
-    "departmentDialog": {
-      "name": "Name des Fachbereichs",
-      "id": "Nummer des Fachbereichs"
     }
   }
 }

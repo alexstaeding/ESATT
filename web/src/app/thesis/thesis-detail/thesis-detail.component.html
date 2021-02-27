@@ -1,6 +1,5 @@
 <h1 mat-dialog-title *ngIf="thesis.title != null; else defaultTitle">{{ thesis.title }}</h1>
-<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1>
-</ng-template>
+<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1></ng-template>
 
 <mat-dialog-content class="mat-typography">
   <mat-tab-group [(selectedIndex)]="selectedTab" mat-align-tabs="start">
@@ -51,11 +50,11 @@
           <h2 mat-dialog-title>{{ "thesis-detail.buttons.add-department" | translate }}</h2>
           <mat-dialog-content class="mr-1">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>{{ "thesis-detail.departmentDialog.name" | translate }}</mat-label>
+              <mat-label>{{ "thesis.department.departmentName" | translate }}</mat-label>
               <input name="departmentName" [(ngModel)]="departmentName" matInput>
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>{{ "thesis-detail.departmentDialog.id" | translate }}</mat-label>
+              <mat-label>{{ "thesis.department.departmentId" | translate }}</mat-label>
               <input name="departmentId" [(ngModel)]="departmentId" matInput>
             </mat-form-field>
           </mat-dialog-content>

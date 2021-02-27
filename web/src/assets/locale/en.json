@@ -134,10 +134,6 @@
       },
       "total-gradeError": "Entered grade wrong!",
       "gradeError": "Not a grade!"
-    },
-    "departmentDialog": {
-      "name": "Name of Department",
-      "id": "Id of Department"
     }
   }
 }
