@@ -28,11 +28,11 @@
                   <mat-option *ngFor="let department of this.departments" [value]="department.id">
                     {{ department.name + " (" + department.id + ")" }}
                   </mat-option>
-                  <div class="pr-2 ml-2 my-2">
+                  <mat-option class="pr-2 ml-2 my-2 bg-white">
                     <button mat-raised-button color="accent" (click)="openDepartmentDialog()">
                       {{ "thesis-detail.buttons.add-department" | translate }}
                     </button>
-                  </div>
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
             </td>
