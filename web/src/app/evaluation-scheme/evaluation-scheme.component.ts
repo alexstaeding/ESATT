@@ -20,13 +20,17 @@ export class EvaluationSchemeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initData()
+  }
+
+  public initData() {
     this.data = from(this.evaluationSchemeService.getAll())
   }
 
   openDetail(id: string = null) {
     this.dialog.open(EvaluationSchemeDetailComponent, {
       width: "100%",
-      data: {id}
+      data: {id, component: this}
     })
   }
 

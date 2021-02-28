@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ESAThesisTool": {
+    "ESATT": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -12,7 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ESAThesisTool",
+            "outputPath": "dist/ESATT",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ESAThesisTool:build"
+            "browserTarget": "ESATT:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ESAThesisTool:build:production"
+              "browserTarget": "ESATT:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ESAThesisTool:build"
+            "browserTarget": "ESATT:build"
           }
         },
         "test": {
@@ -114,18 +114,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ESAThesisTool:serve"
+            "devServerTarget": "ESATT:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ESAThesisTool:serve:production"
+              "devServerTarget": "ESATT:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ESAThesisTool",
+  "defaultProject": "ESATT",
   "schematics": {
     "@schematics/angular:component": {
       "style": "scss"

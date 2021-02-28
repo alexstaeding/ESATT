@@ -41,6 +41,10 @@ export class ThesisComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initData()
+  }
+
+  public initData() {
     this.data = from(this.thesisService.getAll())
   }
 
@@ -55,7 +59,7 @@ export class ThesisComponent implements OnInit {
   openDialog(id: string = null) {
     this.dialog.open(ThesisDetailComponent, {
       width: "100%",
-      data: {id},
+      data: {id, component: this},
     })
   }
 }

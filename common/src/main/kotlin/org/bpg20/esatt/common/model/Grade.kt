@@ -8,5 +8,5 @@ class Grade {
   var description: String? = null
   var weight: Double = 0.0
   var grades: List<Grade>? = null
-  var grade: Double? = null
+  var grade: Double = 0.0
 }
