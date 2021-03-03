@@ -38,8 +38,13 @@ mat-header-cell, mat-cell {
   justify-content: center;
 }
 
+::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
 .table-scroll {
-  height: calc(100vh - 355px);
+  height: calc(100vh - 456px);
   overflow: auto;
 }
 

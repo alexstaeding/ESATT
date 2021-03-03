@@ -2,9 +2,9 @@ import {Component, Inject, OnInit, TemplateRef, ViewChild} from "@angular/core"
 import {Department, DepartmentService} from "../../service/department.service"
 import {EvaluationScheme, EvaluationSchemePreview, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
-import {from, Observable} from "rxjs"
 import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service/thesis.service"
 import {MatSnackBar} from "@angular/material/snack-bar"
+import {MatSort} from "@angular/material/sort"
 import {MatTableDataSource} from "@angular/material/table"
 import {MatTreeNestedDataSource} from "@angular/material/tree"
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog"
@@ -40,8 +40,8 @@ export class ThesisDetailComponent implements OnInit {
   secondFormGroup: FormGroup
   gradeGroup: FormGroup
   displayedColumns: string[] = ["checked", "Datum", "Notiz"]
-  evaluationSchemeColumnsScheme: string[] = ["name", "description", "createdUtc", "lastUpdatedUtc"]
-  evaluationSchemeData: Observable<EvaluationSchemePreview[]>
+  evaluationSchemeColumnsScheme: string[] = ["name", "description", "id", "lastUpdatedUtc"]
+  evaluationSchemeData: MatTableDataSource<EvaluationSchemePreview>
   selectedEvaluationScheme: EvaluationScheme = null
   treeControl = new NestedTreeControl<Grade>(node => node.grades)
   dataSource = new MatTreeNestedDataSource<Grade>()
@@ -49,6 +49,8 @@ export class ThesisDetailComponent implements OnInit {
   departmentId: number
   departmentDialogRef: MatDialogRef<any>
   gradeControl = new FormControl(null, Validators.pattern(/^[0-9]+(\.[0-9]+)?$/))
+
+  @ViewChild(MatSort) sort: MatSort
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -95,7 +97,10 @@ export class ThesisDetailComponent implements OnInit {
         this.resetThesis()
       })
     }
-    this.evaluationSchemeData = from(this.evaluationSchemeService.getAll())
+    this.evaluationSchemeService.getAll().then(result => {
+      this.evaluationSchemeData = new MatTableDataSource(result)
+      this.evaluationSchemeData.sort = this.sort
+    })
   }
 
   resetThesis() {
@@ -485,6 +490,11 @@ export class ThesisDetailComponent implements OnInit {
     this.departments.push(department)
     await this.departmentService.create(department)
     this.departmentDialogRef.close()
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.evaluationSchemeData.filter = filterValue.trim().toLowerCase();
   }
 }
 

@@ -13,6 +13,7 @@ import {MatInputModule} from "@angular/material/input"
 import {MatListModule} from "@angular/material/list"
 import {MatSelectModule} from "@angular/material/select"
 import {MatSnackBarModule} from "@angular/material/snack-bar"
+import {MatSortModule} from "@angular/material/sort"
 import {MatStepperModule} from "@angular/material/stepper"
 import {MatTableModule} from "@angular/material/table"
 import {MatTabsModule} from "@angular/material/tabs"
@@ -45,6 +46,7 @@ import {TranslateModule} from "@ngx-translate/core"
     MatNativeDateModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatSortModule,
     MatStepperModule,
     MatTableModule,
     MatTabsModule,

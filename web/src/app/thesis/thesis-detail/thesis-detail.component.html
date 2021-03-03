@@ -333,11 +333,16 @@
             {{ 'thesis-detail.buttons.manage-evaluationScheme' | translate }}
           </button>
         </h3>
-        <br>
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-12 col-md-10 col-lg-8 col-xl-6">
+            <mat-label><mat-icon>search</mat-icon> {{ 'evaluation-scheme.search' | translate }}</mat-label>
+            <input matInput (keyup)="applyFilter($event)" #search>
+          </mat-form-field>
+        </div>
         <div class="table-scroll">
-          <table mat-table class="w-100 mat-elevation-z0 text-center" [dataSource]="evaluationSchemeData">
+          <table mat-table class="w-100 mat-elevation-z0 text-center" [dataSource]="evaluationSchemeData" matSort>
             <ng-container matColumnDef="name">
-              <th mat-header-cell class="text-center" *matHeaderCellDef>
+              <th mat-header-cell class="text-center" *matHeaderCellDef mat-sort-header>
                 <mat-icon>title</mat-icon>
                 {{ 'thesis-detail.grading.evalScheme-name' | translate }}
               </th>
@@ -345,15 +350,15 @@
             </ng-container>
 
             <ng-container matColumnDef="description">
-              <th mat-header-cell class="text-center" *matHeaderCellDef>
+              <th mat-header-cell class="text-center" *matHeaderCellDef mat-sort-header>
                 <mat-icon>description</mat-icon>
                 {{ 'thesis-detail.grading.evalScheme-description' | translate }}
               </th>
               <td mat-cell *matCellDef="let scheme">{{ descriptionPreview(scheme?.description) }}</td>
             </ng-container>
 
-            <ng-container matColumnDef="createdUtc">
-              <th mat-header-cell class="text-center" *matHeaderCellDef>
+            <ng-container matColumnDef="id">
+              <th mat-header-cell class="text-center" *matHeaderCellDef mat-sort-header>
                 <mat-icon>date_range</mat-icon>
                 {{ 'thesis-detail.grading.evalScheme-created' | translate }}
               </th>
@@ -361,7 +366,7 @@
             </ng-container>
 
             <ng-container matColumnDef="lastUpdatedUtc">
-              <th mat-header-cell class="text-center" *matHeaderCellDef>
+              <th mat-header-cell class="text-center" *matHeaderCellDef mat-sort-header>
                 <mat-icon>update</mat-icon>
                 {{ 'thesis-detail.grading.evalScheme-updated' | translate }}
               </th>
@@ -372,6 +377,15 @@
             <tr mat-row class="cursor-pointer"
                 *matRowDef="let scheme; columns: evaluationSchemeColumnsScheme;"
                 (click)="openEvalSchemeDetail(scheme.id)"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4" *ngIf="!(evaluationSchemeData == null || evaluationSchemeData.data.length === 0)">
+                {{ 'evaluation-scheme.empty-filter' | translate }} "{{search.value}}"
+              </td>
+              <td class="mat-cell" colspan="4" *ngIf="evaluationSchemeData == null || evaluationSchemeData.data.length === 0">
+                {{ 'evaluation-scheme.empty-table' | translate }}
+              </td>
+            </tr>
           </table>
         </div>
       </div>

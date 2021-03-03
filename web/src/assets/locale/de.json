@@ -6,6 +6,9 @@
     "created": "Erstellt am",
     "updated": "Zuletzt bearbeitet",
     "add-button": "Neues Bewertungsschema erstellen",
+    "empty-table": "Es existieren noch keine Bewertungsschemata.",
+    "empty-filter": "Kein Bewertungsschema mit",
+    "search": "Suche",
     "detail": {
       "title-new": "Neues Bewertungsschema erstellen",
       "title-edit": "Bewertungsschema bearbeiten",
@@ -74,7 +77,10 @@
       "graded": "Benotet",
       "reportCreated": "Gutachten erstellt"
     },
-    "course": "Fachbereich"
+    "course": "Fachbereich",
+    "search": "Suche",
+    "empty-table": "Es existieren noch keine Thesen.",
+    "empty-filter": "Keine Thesis mit"
   },
   "thesis-detail": {
     "english-title": "Englischer Titel",

@@ -1,8 +1,9 @@
-import {Component, OnInit} from "@angular/core"
+import {Component, OnInit, ViewChild} from "@angular/core"
 import {MatDialog} from "@angular/material/dialog"
 import {EvaluationSchemeDetailComponent} from "./evaluation-scheme-detail/evaluation-scheme-detail.component"
 import {EvaluationSchemePreview, EvaluationSchemeService} from "../service/evaluation-scheme.service"
-import {from, Observable} from "rxjs"
+import {MatSort} from "@angular/material/sort"
+import {MatTableDataSource} from "@angular/material/table"
 
 @Component({
   selector: "app-evaluation-scheme",
@@ -10,8 +11,10 @@ import {from, Observable} from "rxjs"
   styleUrls: ["./evaluation-scheme.component.scss"]
 })
 export class EvaluationSchemeComponent implements OnInit {
-  columnsScheme = ["name", "description", "createdUtc", "lastUpdatedUtc"]
-  data: Observable<EvaluationSchemePreview[]>
+  columnsScheme = ["name", "description", "id", "lastUpdatedUtc"]
+  data: MatTableDataSource<EvaluationSchemePreview>
+
+  @ViewChild(MatSort) sort: MatSort
 
   constructor(
     private evaluationSchemeService: EvaluationSchemeService,
@@ -24,7 +27,10 @@ export class EvaluationSchemeComponent implements OnInit {
   }
 
   public initData() {
-    this.data = from(this.evaluationSchemeService.getAll())
+    this.evaluationSchemeService.getAll().then(result => {
+      this.data = new MatTableDataSource(result)
+      this.data.sort = this.sort
+    })
   }
 
   openDetail(id: string = null) {
@@ -52,5 +58,10 @@ export class EvaluationSchemeComponent implements OnInit {
       return preview
     }
     return description
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.data.filter = filterValue.trim().toLowerCase();
   }
 }

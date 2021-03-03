@@ -6,6 +6,9 @@
     "created": "Created on",
     "updated": "Last edited",
     "add-button": "Create new Evaluation Scheme",
+    "empty-table": "There are no Evaluation Schemes.",
+    "empty-filter": "No Evaluation Scheme with",
+    "search": "Search",
     "detail": {
       "title-new": "Create new Evaluation Scheme",
       "title-edit": "Edit Evaluation Scheme",
@@ -74,7 +77,10 @@
       "graded": "Graded",
       "reportCreated": "Report Created"
     },
-    "course": "Course"
+    "course": "Course",
+    "search": "Search",
+    "empty-table": "There are no Theses.",
+    "empty-filter": "No Thesis with"
   },
   "thesis-detail": {
     "english-title": "English Title",
