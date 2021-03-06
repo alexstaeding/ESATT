@@ -15,6 +15,10 @@ export class ThesisService {
     })
   }
 
+  public async getAllThesis(): Promise<Thesis[]> {
+    return this.http.get<Thesis[]>("http://localhost:8008/api/v1/theses").toPromise()
+  }
+
   public async getAll(): Promise<ThesisPreview[]> {
     return this.http.get<ThesisPreview[]>("http://localhost:8008/api/v1/theses").toPromise()
   }

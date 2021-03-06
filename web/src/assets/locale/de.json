@@ -38,12 +38,14 @@
   "profile": {
     "pageTitle": "Profil",
     "header": "Mein Profil",
+    "secondHeader": "Meine Thesen",
     "firstName": "Vorname",
     "lastName": "Nachname",
     "email": "E-Mail",
     "role": "Rolle",
     "my-data": "Meine Angaben",
     "userName": "Benutzername",
+    "empty-table": "Sie betreuen aktuell keine Thesen.",
     "buttons": {
       "save": "Speichern",
       "cancel": "Abbrechen",
@@ -74,7 +76,9 @@
       "graded": "Benotet",
       "reportCreated": "Gutachten erstellt"
     },
-    "course": "Fachbereich"
+    "course": "Fachbereich",
+    "search": "Suche",
+    "empty-filter": "Keine Thesis mit"
   },
   "thesis-detail": {
     "english-title": "Englischer Titel",
