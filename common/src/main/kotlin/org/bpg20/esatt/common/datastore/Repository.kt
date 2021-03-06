@@ -26,10 +26,13 @@ abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
     }
   }
 
+  fun deleteOne(id: Any): CompletableFuture<Boolean> = deleteOne(asQuery(id))
+  fun deleteOne(query: Query<T>): CompletableFuture<Boolean> = CompletableFuture.supplyAsync { query.delete().deletedCount > 0 }
+
   /**
    * @param id The id of the object to get. May be of type TKey or String.
    */
-  abstract fun getOne(id: Any): CompletableFuture<T>
+  fun getOne(id: Any): CompletableFuture<T> = getOne(asQuery(id))
   fun getOne(query: Query<T>) = CompletableFuture.supplyAsync { query.first() }
 
   @Throws(IllegalArgumentException::class)
@@ -59,6 +62,7 @@ abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
     return asQuery().iterator(fop).asSequence()
   }
 
+  abstract fun asQuery(id: Any): Query<T>
   fun asQuery(): Query<T> = context.dataStore.find(tClass)
   fun asQuery(id: TKey): Query<T> = asQuery().filter(Filters.eq("_id", id))
 }
