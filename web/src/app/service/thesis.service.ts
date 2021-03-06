@@ -15,6 +15,7 @@ export class ThesisService {
     })
   }
 
+<<<<<<< HEAD
   public async getAll(
     ascending: boolean = null,
     field: string = null,
@@ -38,6 +39,14 @@ export class ThesisService {
     {
       headers: header
     }).toPromise()
+=======
+  public async getAllThesis(): Promise<Thesis[]> {
+    return this.http.get<Thesis[]>("http://localhost:8008/api/v1/theses").toPromise()
+  }
+
+  public async getAll(): Promise<ThesisPreview[]> {
+    return this.http.get<ThesisPreview[]>("http://localhost:8008/api/v1/theses").toPromise()
+>>>>>>> bd694d9... Finished Dashboard
   }
 
   public async get(id: string): Promise<Thesis> {

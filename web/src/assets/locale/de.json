@@ -41,12 +41,14 @@
   "profile": {
     "pageTitle": "Profil",
     "header": "Mein Profil",
+    "secondHeader": "Meine Thesen",
     "firstName": "Vorname",
     "lastName": "Nachname",
     "email": "E-Mail",
     "role": "Rolle",
     "my-data": "Meine Angaben",
     "userName": "Benutzername",
+    "empty-table": "Sie betreuen aktuell keine Thesen.",
     "buttons": {
       "save": "Speichern",
       "cancel": "Abbrechen",
@@ -80,7 +82,10 @@
     },
     "course": "Fachbereich",
     "search": "Suche",
+<<<<<<< HEAD
     "empty-table": "Es existieren noch keine Thesen.",
+=======
+>>>>>>> bd694d9... Finished Dashboard
     "empty-filter": "Keine Thesis mit"
   },
   "thesis-detail": {

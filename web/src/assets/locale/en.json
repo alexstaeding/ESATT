@@ -41,12 +41,14 @@
   "profile": {
     "pageTitle": "Profile",
     "header": "My Profile",
+    "secondHeader": "My Theses",
     "firstName": "First name",
     "lastName": "Last name",
     "email": "E-Mail",
     "role": "Role",
     "my-data": "My Data",
     "userName": "User name",
+    "empty-table": "You are currently not supervising any theses.",
     "buttons": {
       "save": "Save",
       "cancel": "Cancel",
@@ -80,7 +82,10 @@
     },
     "course": "Course",
     "search": "Search",
+<<<<<<< HEAD
     "empty-table": "There are no Theses.",
+=======
+>>>>>>> bd694d9... Finished Dashboard
     "empty-filter": "No Thesis with"
   },
   "thesis-detail": {

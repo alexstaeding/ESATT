@@ -1,1 +1,181 @@
-<p>dashboard works!</p>
+<div class="my-4 mx-5">
+  <h2> {{ "profile.header" | translate }} </h2>
+  <hr>
+  <div class="row">
+    <div class="col-12 col-md-6 col-xl-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ "profile.firstName" | translate }}</mat-label>
+        <input [disabled]="!editorEnabled" matInput type="text" name="firstName" [(ngModel)]="user.firstName">
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ "profile.lastName" | translate }}</mat-label>
+        <input matInput type="text" name="lastName" [(ngModel)]="user.lastName"
+               [disabled]="!editorEnabled">
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ "profile.userName" | translate }}</mat-label>
+        <input matInput type="text" name="userName" [(ngModel)]="user.userName"
+               [disabled]="!editorEnabled">
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{ "profile.email" | translate }}</mat-label>
+        <input matInput type="text" name="email" [(ngModel)]="user.email" [disabled]="!editorEnabled">
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <button [hidden]="editorEnabled" [disabled]="allUsers.length === 0" mat-raised-button color="primary"
+            (click)="enableEditor()">
+      {{ "profile.buttons.edit" | translate }}
+    </button>
+    <button [hidden]="!editorEnabled" mat-raised-button color="accent" (click)="save()">
+      {{ "profile.buttons.save" | translate }}
+    </button>
+    <span class="p-1"></span>
+    <button [hidden]="!editorEnabled" mat-raised-button color="warn" (click)="disableEditor()">
+      {{ "profile.buttons.cancel" | translate }}
+    </button>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-8">
+      <h2> {{ "profile.secondHeader" | translate }} </h2>
+      <hr>
+    </div>
+    <mat-form-field appearance="outline" class="col-4">
+      <mat-label>
+        <mat-icon>search</mat-icon>
+        {{ 'thesis.search' | translate }}</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #search>
+    </mat-form-field>
+  </div>
+
+  <div class="table-overflow mat-elevation-z0">
+    <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0" matSort>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header>{{ 'thesis.title' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ titlePreview(element.title) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef class="text-center"
+            mat-sort-header>{{ 'thesis.studentFirstName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef class="text-center"
+            mat-sort-header>{{ 'thesis.studentLastName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="studentId">
+        <th mat-header-cell *matHeaderCellDef class="text-center"
+            mat-sort-header>{{ 'thesis.studentId' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.studentId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="supervisorFirstName">
+        <th mat-header-cell *matHeaderCellDef class="text-center"
+            mat-sort-header>{{ 'thesis.supervisorFirstName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.supervisorFirstName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="supervisorLastName">
+        <th mat-header-cell *matHeaderCellDef class="text-center"
+            mat-sort-header>{{ 'thesis.supervisorLastName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.supervisorLastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="thesisType">
+        <th mat-header-cell *matHeaderCellDef class="text-center"
+            mat-sort-header>{{ 'thesis.thesisType' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.thesisType }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef class="text-center"
+            mat-sort-header>{{ 'thesis.subject' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.subject }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="signUpUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.signUpDate' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="element.status?.signUpUtc != null">
+            {{ calcDate(element.status?.signUpUtc) }}
+          </div>
+          <mat-checkbox *ngIf="element.status?.signUpUtc == null" [disabled]="true" [checked]="false"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dueDateUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.dueDate' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="element.status?.dueDateUtc != null"> {{ calcDate(element.status?.dueDateUtc) }} </div>
+          <mat-checkbox *ngIf="element.status?.dueDateUtc == null" [disabled]="true" [checked]="false"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="extendedDueDateUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.extendedDueDate' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true" [checked]="element.status?.extendedDueDateUtc != null"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="submittedUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.submitted' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.submittedUtc) < normalizeDate(currentDate)"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="presentationUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.presented' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.presentationUtc) < normalizeDate(currentDate)"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="gradedUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.graded' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.gradedUtc) < normalizeDate(currentDate)"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reportCreatedUtc">
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.status.reportCreated' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.reportCreatedUtc) < normalizeDate(currentDate)"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row class="cursor-pointer"
+          *matRowDef="let row; columns: displayedColumns;"
+          (click)="openDialog(row.id)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="17" *ngIf="!(data == null || data.data.length === 0)">
+          {{ 'thesis.empty-filter' | translate }} "{{search.value}}"
+        </td>
+        <td class="mat-cell" colspan="17" *ngIf="data == null || data.data.length === 0">
+          {{ 'profile.empty-table' | translate }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
