@@ -1,5 +1,5 @@
 <mat-toolbar class="mat-elevation-z16">
-  <mat-toolbar-row class="container">
+  <mat-toolbar-row class="container" *ngIf="isLoggedIn$ | async as isLoggedIn">
     <a mat-button color="primary" href="https://www.esa.informatik.tu-darmstadt.de/">
       <img src="/assets/images/esa-logo10.png" style="height: 50px;" alt="home">
     </a>
@@ -60,5 +60,7 @@
         </i>
       </button>
     </mat-menu>
+    <button
+      type="button"mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>

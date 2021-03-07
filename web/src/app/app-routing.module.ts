@@ -1,11 +1,15 @@
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router"
 import {NgModule} from "@angular/core"
+import {DashboardComponent} from "./dashboard/dashboard.component"
+import {AuthGuard} from "./service/auth.guard"
+import {LoginComponent} from "./login/login.component"
+import {DefaultNavComponent} from "./nav/default-nav/default-nav.component"
 
 const routes: Routes = [
   {
     path: "",
-    pathMatch: "full",
-    redirectTo: "dashboard"
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "dashboard",
@@ -16,12 +20,20 @@ const routes: Routes = [
     loadChildren: "./evaluation-scheme/evaluation-scheme.module#EvaluationSchemeModule"
   },
   {
-    path: 'profile',
-    loadChildren: './profile/profile.module#ProfileModule'
+    path: "profile",
+    loadChildren: "./profile/profile.module#ProfileModule"
   },
   {
     path: "thesis",
     loadChildren: "./thesis/thesis.module#ThesisModule"
+  },
+  {
+    path: "login",
+    component: LoginComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ]
 

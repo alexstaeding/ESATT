@@ -6,10 +6,18 @@ import {BrowserModule} from "@angular/platform-browser"
 import {HttpClient, HttpClientModule} from "@angular/common/http"
 import {NavModule} from "./nav/nav.module"
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core"
-import {TranslateHttpLoader} from "@ngx-translate/http-loader"
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {MatCardModule} from "@angular/material/card"
+import {ReactiveFormsModule} from "@angular/forms"
+import {MatFormFieldModule} from "@angular/material/form-field"
+import {MatInputModule} from "@angular/material/input"
+import {MatButtonModule} from "@angular/material/button"
+import {AuthService} from "./service/auth.service"
+import {LoginComponent} from "./login/login.component"
+import {AuthGuard} from "./service/auth.guard"
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -22,9 +30,18 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader"
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers:[
+    AuthService,
+    AuthGuard
+  ]
 })
 export class AppModule {
 }
