@@ -532,6 +532,9 @@
   <button [hidden]="currentMode !== mode.NORMAL" mat-raised-button color="primary" (click)="changeToEdit()">
     {{ "thesis-detail.buttons.edit" | translate }}
   </button>
+  <button [hidden]="currentMode !== mode.NORMAL" mat-raised-button color="warn" (click)="deleteThesis()">
+    {{ "thesis-detail.buttons.delete-thesis" | translate }}
+  </button>
   <button [hidden]="currentMode !== mode.NEW" mat-raised-button color="add" (click)="create()">
     {{ "thesis-detail.buttons.create" | translate }}
   </button>

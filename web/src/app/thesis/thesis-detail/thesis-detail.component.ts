@@ -7,11 +7,12 @@ import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {MatTableDataSource} from "@angular/material/table"
 import {MatTreeNestedDataSource} from "@angular/material/tree"
-import {MAT_DIALOG_DATA} from "@angular/material/dialog"
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog"
 import {NestedTreeControl} from "@angular/cdk/tree"
 import {SelectionModel} from "@angular/cdk/collections"
 import {TranslateService} from "@ngx-translate/core"
 import {User, UserService} from "../../service/user.service"
+import {ConfirmationComponent} from "../../confirmation/confirmation.component"
 
 
 @Component({
@@ -58,6 +59,7 @@ export class ThesisDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
+    private confirmationDialog: MatDialog,
   ) {
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ["", Validators.required],
@@ -465,6 +467,20 @@ export class ThesisDetailComponent implements OnInit {
       copy.push(newGrade)
     }
     return copy
+  }
+
+  deleteThesis() {
+    const confDialogRef = this.confirmationDialog.open(ConfirmationComponent, {
+      data: this.translate.instant("confirmation.messageEvaluationScheme")
+    })
+
+    confDialogRef.afterClosed().subscribe(resp => {
+      if(resp === "confirm") {
+        this.thesisService.delete(this.data.id)
+        this.currentMode = Mode.NORMAL
+        this.refresh()
+      }
+    })
   }
 }
 

@@ -85,10 +85,12 @@ abstract class RepositoryServlet<T : ObjectWithId<*>>(
   }
 
   override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
+    print("insert thesis")
     request.parseObjectAndThen(response, repository::insertOne, modelValidation::validateCreate)
   }
 
   override fun doPut(request: HttpServletRequest, response: HttpServletResponse) {
+    print("update thesis")
     request.parseObjectAndThen(response, repository::updateOne, modelValidation::validateUpdate)
   }
 }

@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core"
 import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {Thesis} from "./thesis.service";
 
 @Injectable({
   providedIn: "root"
@@ -39,6 +40,13 @@ export class EvaluationSchemeService {
         headers: this.headers,
         withCredentials: true
       }).toPromise()
+  }
+
+  public async delete(id: string): Promise<EvaluationScheme> {
+    return this.http.delete<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes/" + id, {
+      headers: this.headers,
+      withCredentials: true
+    }).toPromise()
   }
 }
 

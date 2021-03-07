@@ -3,9 +3,10 @@ import {Criterion, EvaluationScheme, EvaluationSchemeService} from "../../servic
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {MatTree, MatTreeNestedDataSource} from "@angular/material/tree"
-import {MAT_DIALOG_DATA} from "@angular/material/dialog"
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog"
 import {NestedTreeControl} from "@angular/cdk/tree"
 import {TranslateService} from "@ngx-translate/core"
+import {ConfirmationComponent} from "../../confirmation/confirmation.component"
 
 @Component({
   selector: "app-evaluation-scheme-detail",
@@ -31,6 +32,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
+    private confirmationDialog: MatDialog,
   ) {
     this.weightGroup = formBuilder.group({})
   }
@@ -270,6 +272,20 @@ export class EvaluationSchemeDetailComponent implements OnInit {
       }
     }
     return true
+  }
+
+  deleteScheme() {
+    const confDialogRef = this.confirmationDialog.open(ConfirmationComponent, {
+      data: this.translate.instant("confirmation.messageEvaluationScheme")
+    })
+
+    confDialogRef.afterClosed().subscribe(resp => {
+      if(resp === "confirm") {
+        this.evaluationSchemeService.delete(this.data.id)
+        this.mode = Mode.NORMAL
+        this.refresh()
+      }
+    })
   }
 }
 

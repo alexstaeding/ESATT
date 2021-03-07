@@ -181,6 +181,9 @@
     <button [hidden]="mode != refMode.NORMAL" mat-raised-button color="primary" (click)="changeToEdit()">
       {{ 'evaluation-scheme.detail.edit' | translate }}
     </button>
+    <button [hidden]="mode != refMode.NORMAL" mat-raised-button color="warn" (click)="deleteScheme()">
+      {{ 'evaluation-scheme.detail.delete' | translate }}
+    </button>
     <button [hidden]="mode != refMode.NEW" mat-raised-button color="add" (click)="createWithWeightControl()">
       {{"evaluation-scheme.detail.create" | translate}}
     </button>

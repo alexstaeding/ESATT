@@ -40,6 +40,13 @@ export class ThesisService {
         withCredentials: true
       }).toPromise()
   }
+
+  public async delete(id: string): Promise<Thesis> {
+    return this.http.delete<Thesis>("http://localhost:8008/api/v1/theses/" + id, {
+      headers: this.headers,
+      withCredentials: true
+    }).toPromise()
+  }
 }
 
 export class Thesis {

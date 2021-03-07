@@ -27,7 +27,8 @@
       "save": "Speichern",
       "cancel": "Abbrechen",
       "delete-button": "Kriterium entfernen",
-      "close": "Schließen"
+      "close": "Schließen",
+      "delete": "Löschen"
     }
   },
   "gender": {
@@ -114,7 +115,8 @@
       "other-evalScheme": "Anderes Bewertungschema wählen",
       "manage-evaluationScheme": "Bewertungsschemata verwalten",
       "manage-evaluationScheme-Tooltip": "Ungespeicherten Änderungen gehen verloren!",
-      "calc-grade": "Note berechnen"
+      "calc-grade": "Note berechnen",
+      "delete-thesis": "Löschen"
     },
     "grading": {
       "title": "Bewertung",
@@ -134,5 +136,12 @@
       "total-gradeError": "Note falsch eingetragen!",
       "gradeError": "Keine Note!"
     }
+  },
+  "confirmation": {
+    "messageThesis": "Soll die Thesis und alle damit verbundenen Daten wirklich gelöscht werden?",
+    "messageEvaluationScheme": "Soll das Bewertungsschema und alle damit verbundenen Daten wirklich gelöscht werden?",
+    "title": "Bestätigung",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen"
   }
 }

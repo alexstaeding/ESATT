@@ -27,7 +27,8 @@
       "save": "Save",
       "cancel": "Cancel",
       "delete-button": "Delete Criterion",
-      "close": "Close"
+      "close": "Close",
+      "delete": "Delete"
     }
   },
   "gender": {
@@ -114,7 +115,8 @@
       "other-evalScheme": "Choose different Evaluation scheme",
       "manage-evaluationScheme": "Manage Evaluation Schemes",
       "manage-evaluationScheme-Tooltip": "Unsaved Changes will be lost!",
-      "calc-grade": "Calculate grade"
+      "calc-grade": "Calculate grade",
+      "delete-thesis": "Delete"
     },
     "grading": {
       "title": "Grading",
@@ -134,6 +136,13 @@
       "total-gradeError": "Entered grade wrong!",
       "gradeError": "Not a grade!"
     }
+  },
+  "confirmation": {
+    "messageThesis": "Do you confirm the deletion of this thesis?",
+    "messageEvaluationScheme": "Do you confirm the deletion of this evaluation scheme?",
+    "title": "Confirmation",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
 }
 

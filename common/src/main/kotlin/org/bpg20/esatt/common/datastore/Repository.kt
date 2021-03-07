@@ -32,7 +32,7 @@ abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
   /**
    * @param id The id of the object to get. May be of type TKey or String.
    */
-  fun getOne(id: Any): CompletableFuture<T> = getOne(asQuery(id))
+  open fun getOne(id: Any): CompletableFuture<T> = getOne(asQuery(id))
   fun getOne(query: Query<T>) = CompletableFuture.supplyAsync { query.first() }
 
   @Throws(IllegalArgumentException::class)
