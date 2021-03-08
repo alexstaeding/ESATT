@@ -35,6 +35,13 @@
     "male": "Male",
     "other": "Other"
   },
+  "login": {
+    "typeUsername": "Please inform username!",
+    "typePassword": "Please inform password!",
+    "user": "User name",
+    "password": "password",
+    "login": "Log in"
+  },
   "profile": {
     "pageTitle": "Profile",
     "header": "My Profile",

@@ -1,25 +1,25 @@
 <mat-toolbar class="mat-elevation-z16">
-  <mat-toolbar-row class="container" *ngIf="isLoggedIn$ | async as isLoggedIn">
+  <mat-toolbar-row class="container" >
     <a mat-button color="primary" href="https://www.esa.informatik.tu-darmstadt.de/">
       <img src="/assets/images/esa-logo10.png" style="height: 50px;" alt="home">
     </a>
     <span class="flex-spacer"></span>
-    <button *ngIf="!(isHandset$ | async)"
+    <button *ngIf="!(isHandset$ | async) && (isLoggedIn$ | async)"
             [color]="isActive('/dashboard') ? 'primary' : null"
             mat-button routerLink="/dashboard">
       Dashboard
     </button>
-    <button
+    <button *ngIf="isLoggedIn$ | async as isLoggedIn"
       [color]="isActive('/profile') ? 'primary' : null"
       mat-button routerLink="/profile">
       {{ 'profile.pageTitle' | translate }}
     </button>
-    <button
+    <button *ngIf="isLoggedIn$ | async as isLoggedIn"
       [color]="isActive('/evaluation-scheme') ? 'primary' : null"
       mat-button routerLink="/evaluation-scheme">
       {{ 'evaluation-scheme.title' | translate }}
     </button>
-    <button
+    <button *ngIf="isLoggedIn$ | async as isLoggedIn"
       [color]="isActive('/thesis') ? 'primary' : null"
       mat-button routerLink="/thesis">
       {{ 'thesis.pageTitle' | translate }}
@@ -61,6 +61,6 @@
       </button>
     </mat-menu>
     <button
-      type="button"mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
+      type="button"mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>

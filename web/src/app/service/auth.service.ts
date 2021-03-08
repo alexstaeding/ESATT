@@ -19,7 +19,7 @@ export class AuthService {
     if (user.userName !== '' && user.password !== '' ) {
       this.loggedIn.next(true);
       localStorage.setItem('token', 'true');
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     }
   }
 

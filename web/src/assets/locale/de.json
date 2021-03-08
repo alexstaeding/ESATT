@@ -35,6 +35,13 @@
     "male": "Männlich",
     "other": "Divers"
   },
+  "login": {
+    "typeUsername": "Bitte Name eingeben!",
+    "typePassword": "Bitte Passwort eingeben!",
+    "user": "Benutzername",
+    "password": "Passwort",
+    "login": "Anmelden"
+  },
   "profile": {
     "pageTitle": "Profil",
     "header": "Mein Profil",
