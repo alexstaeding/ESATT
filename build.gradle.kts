@@ -14,6 +14,7 @@ allprojects {
     mavenCentral()
     jcenter()
     maven("https://kotlin.bintray.com/kotlinx")
+    maven("https://repo.spongepowered.org/repository/maven-public/")
   }
 }
 
