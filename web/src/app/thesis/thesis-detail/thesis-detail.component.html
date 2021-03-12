@@ -324,21 +324,24 @@
     <mat-tab label="{{ 'thesis-detail.grading.title' | translate }}"
              [disabled]="currentMode === mode.NORMAL && this.thesis.grading == null">
       <div class="my-4 mx-5" *ngIf="grading == null">
-        <h3>
-          {{ 'thesis-detail.grading.choose-evalScheme' | translate }}
-          <button mat-raised-button color="accent" class="float-right"
-                  matTooltip="{{ 'thesis-detail.buttons.manage-evaluationScheme-Tooltip' | translate }}"
-                  matTooltipPosition="left" matTooltipClass="warn-tooltip" routerLink="/evaluation-scheme"
-                  mat-dialog-close>
-            {{ 'thesis-detail.buttons.manage-evaluationScheme' | translate }}
-          </button>
-        </h3>
         <div class="row">
-          <mat-form-field appearance="outline" class="col-12 col-md-10 col-lg-8 col-xl-6">
+          <div class="col-6">
+            <h3>{{ 'thesis-detail.grading.choose-evalScheme' | translate }}</h3>
+            <button mat-raised-button color="accent"
+                    matTooltip="{{ 'thesis-detail.buttons.manage-evaluationScheme-Tooltip' | translate }}"
+                    matTooltipPosition="left" matTooltipClass="warn-tooltip" routerLink="/evaluation-scheme"
+                    mat-dialog-close>
+              {{ 'thesis-detail.buttons.manage-evaluationScheme' | translate }}
+            </button>
+          </div>
+          <mat-form-field appearance="outline" class="col-5">
             <mat-label><mat-icon>search</mat-icon> {{ 'evaluation-scheme.search' | translate }}</mat-label>
             <input matInput (keyup)="applyFilter($event)" #search>
           </mat-form-field>
         </div>
+
+        <br>
+
         <div class="table-scroll">
           <table mat-table class="w-100 mat-elevation-z0 text-center" [dataSource]="evaluationSchemeData" matSort>
             <ng-container matColumnDef="name">
