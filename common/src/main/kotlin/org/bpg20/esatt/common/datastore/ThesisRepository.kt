@@ -32,13 +32,22 @@ class ThesisRepository : ObjectIdRepository<Thesis>() {
     return this
   }
 
+  private fun Thesis.injectSecondSupervisor(): Thesis {
+    val secondSupervisor = userRepository.getOne(supervisorId ?: return this).join()
+    if (secondSupervisor != null) {
+      secondSupervisorFirstName = secondSupervisor.firstName
+      secondSupervisorLastName = secondSupervisor.lastName
+    }
+    return this
+  }
+
   override fun getOne(id: Any): CompletableFuture<Thesis> {
-    return super.getOne(id).thenApply { it.injectDepartment().injectSupervisor() }
+    return super.getOne(id).thenApply { it.injectDepartment().injectSupervisor().injectSecondSupervisor() }
   }
 
   override fun getAll(ascending: Boolean?, field: String?, limit: Int?): Sequence<Thesis> {
     return super.getAll(ascending, field, limit)
       // inject department and supervisor data
-      .map { it.injectDepartment().injectSupervisor() }
+      .map { it.injectDepartment().injectSupervisor().injectSecondSupervisor() }
   }
 }

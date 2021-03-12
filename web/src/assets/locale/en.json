@@ -57,6 +57,12 @@
     "studentId": "Matriculation Number",
     "supervisorFirstName": "Supervisor (First Name)",
     "supervisorLastName": "Supervisor (Last Name)",
+    "supervisor": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "E-Mail",
+      "userName": "User name"
+    },
     "thesisType": "Type Of Work",
     "department": {
       "departmentId": "Department Number",
@@ -78,7 +84,8 @@
   },
   "thesis-detail": {
     "english-title": "English Title",
-    "supervisor": "Supervisor",
+    "supervisor": "1st Supervisor",
+    "secondSupervisor": "2nd Supervisor",
     "evaluator-firstname": "Evaluator (First Name)",
     "evaluator-lastname": "Evaluator (Last Name)",
     "extended-duedate": "Extended Due Date",
@@ -115,7 +122,8 @@
       "manage-evaluationScheme": "Manage Evaluation Schemes",
       "manage-evaluationScheme-Tooltip": "Unsaved Changes will be lost!",
       "calc-grade": "Calculate grade",
-      "add-department": "Add new department"
+      "add-department": "Add new department",
+      "add-supervisor": "Add new Supervisor"
     },
     "grading": {
       "title": "Grading",
