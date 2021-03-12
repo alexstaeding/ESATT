@@ -1,8 +1,10 @@
 <div class="my-4 mx-5">
-  <h2>{{ 'evaluation-scheme.title' | translate }}</h2>
-  <hr>
   <div class="row">
-    <mat-form-field appearance="outline" class="col-12 col-md-10 col-lg-8 col-xl-6">
+    <div class="col-8">
+      <h2>{{ 'evaluation-scheme.title' | translate }}</h2>
+      <hr>
+    </div>
+    <mat-form-field appearance="outline" class="col-4">
       <mat-label><mat-icon>search</mat-icon> {{ 'evaluation-scheme.search' | translate }}</mat-label>
       <input matInput (keyup)="applyFilter($event)" #search>
     </mat-form-field>

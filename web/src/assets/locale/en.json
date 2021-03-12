@@ -62,6 +62,7 @@
     "supervisorLastName": "Supervisor (Last Name)",
     "thesisType": "Type Of Work",
     "department": {
+      "department": "Department",
       "departmentId": "Department Number",
       "departmentName": "Department Name"
     },

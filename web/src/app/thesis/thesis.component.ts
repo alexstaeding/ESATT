@@ -14,16 +14,14 @@ import {MatTableDataSource} from "@angular/material/table"
 export class ThesisComponent implements OnInit {
 
   displayedColumns: string[] = [
+    "title",
     "firstName",
     "lastName",
     "studentId",
     "supervisorFirstName",
     "supervisorLastName",
     "thesisType",
-    "departmentId",
     "departmentName",
-    "subject",
-    "title",
     "signUpUtc",
     "dueDateUtc",
     "extendedDueDateUtc",
@@ -72,5 +70,16 @@ export class ThesisComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.data.filter = filterValue.trim().toLowerCase();
+  }
+
+  titlePreview(title): string {
+    if (title != null) {
+      let preview = title.substring(0, 25)
+      if (preview != title) {
+        preview = preview + " ..."
+      }
+      return preview
+    }
+    return title
   }
 }

@@ -1,14 +1,21 @@
 <div class="my-4 mx-5">
-  <h2>{{'thesis.pageTitle' | translate}}</h2>
-  <hr>
   <div class="row">
-    <mat-form-field appearance="outline" class="col-12 col-md-10 col-lg-8 col-xl-6">
+    <div class="col-8">
+      <h2>{{'thesis.pageTitle' | translate}}</h2>
+      <hr>
+    </div>
+    <mat-form-field appearance="outline" class="col-4">
       <mat-label><mat-icon>search</mat-icon> {{ 'thesis.search' | translate }}</mat-label>
       <input matInput (keyup)="applyFilter($event)" #search>
     </mat-form-field>
   </div>
   <div class="table-overflow mat-elevation-z0">
     <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0" matSort>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header>{{ 'thesis.title' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ titlePreview(element.title) }}</td>
+      </ng-container>
+
       <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef class="text-center"
             mat-sort-header>{{ 'thesis.studentFirstName' | translate }}</th>
@@ -45,27 +52,12 @@
         <td mat-cell *matCellDef="let element">{{ element.thesisType }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="departmentId">
-        <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.department.departmentId' | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.departmentId }}</td>
-      </ng-container>
-
       <ng-container matColumnDef="departmentName">
         <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.department.departmentName' | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.departmentName }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="subject">
-        <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.subject' | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.subject }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header>{{ 'thesis.title' | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+            mat-sort-header>{{ 'thesis.department.department' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.departmentId == null? null : element.departmentName + " (" + element.departmentId + ")" }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="signUpUtc">

@@ -62,6 +62,7 @@
     "supervisorLastName": "Betreuer (Nachname)",
     "thesisType": "Art der Arbeit",
     "department": {
+      "department": "Fachbereich",
       "departmentId": "Nummer des Fachbereichs",
       "departmentName": "Name des Fachbereichs"
     },
