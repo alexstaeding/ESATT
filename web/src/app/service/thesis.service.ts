@@ -21,14 +21,22 @@ export class ThesisService {
     limit: number = null,
     search: string = null,
   ): Promise<ThesisPreview[]> {
+    var header = new HttpHeaders()
+    if (ascending != null) {
+      header = header.set("ascending", ascending.toString())
+    }
+    if (field != null) {
+      header = header.set("field", field)
+    }
+    if (limit != null) {
+      header = header.set("limit", limit.toString())
+    }
+    if (search != null && search != "") {
+      header = header.set("search", search)
+    }
     return this.http.get<ThesisPreview[]>("http://localhost:8008/api/v1/theses",
     {
-      headers: {
-        ascending: ascending.toString(),
-        field,
-        limit: limit.toString(),
-        search
-      }
+      headers: header
     }).toPromise()
   }
 

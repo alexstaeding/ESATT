@@ -60,7 +60,6 @@ abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
       }
     }
     val fop = FindOptions()
-      .sort(sort)
       .limit(limit)
       .apply { if (preview) projection().preview() }
     return asQuery()

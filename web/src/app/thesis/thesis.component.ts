@@ -4,6 +4,7 @@ import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
 import {ThesisPreview, ThesisService} from "../service/thesis.service"
 import {MatSort} from "@angular/material/sort"
 import {MatTableDataSource} from "@angular/material/table"
+import {filter} from "rxjs/operators"
 
 
 @Component({
@@ -32,8 +33,9 @@ export class ThesisComponent implements OnInit {
   ]
   data: MatTableDataSource<ThesisPreview>
   currentDate: Date = new Date()
-
-  @ViewChild(MatSort) sort: MatSort;
+  sorting = Sorting.NOT
+  sortMode = Sorting
+  currentField: string = null
 
   constructor(
     public dialog: MatDialog,
@@ -45,10 +47,14 @@ export class ThesisComponent implements OnInit {
     this.initData()
   }
 
-  public initData() {
-    this.thesisService.getAll().then(result => {
+  public initData(
+    ascending: boolean = null,
+    field: string = null,
+    limit: number = null,
+    search: string = null,
+  ) {
+    this.thesisService.getAll(ascending, field, limit, search).then(result => {
       this.data = new MatTableDataSource(result)
-      this.data.sort = this.sort
     })
   }
 
@@ -67,11 +73,6 @@ export class ThesisComponent implements OnInit {
     })
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.data.filter = filterValue.trim().toLowerCase();
-  }
-
   titlePreview(title): string {
     if (title != null) {
       let preview = title.substring(0, 25)
@@ -82,4 +83,20 @@ export class ThesisComponent implements OnInit {
     }
     return title
   }
+
+  sort(field : string){
+    if (this.sorting === Sorting.NOT){
+      this.sorting = Sorting.DESCENDING
+    } else if (this.sorting === Sorting.DESCENDING){
+      this.sorting = Sorting.ASCENDING
+    } else if (this.sorting === Sorting.ASCENDING){
+      this.sorting = Sorting.NOT
+    }
+  }
+}
+
+export enum Sorting {
+  NOT,
+  DESCENDING,
+  ASCENDING,
 }

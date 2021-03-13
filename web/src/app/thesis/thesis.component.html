@@ -1,60 +1,67 @@
 <div class="my-4 mx-5">
   <div class="row">
-    <div class="col-8">
+    <div class="col-7">
       <h2>{{'thesis.pageTitle' | translate}}</h2>
       <hr>
     </div>
     <mat-form-field appearance="outline" class="col-4">
       <mat-label><mat-icon>search</mat-icon> {{ 'thesis.search' | translate }}</mat-label>
-      <input matInput (keyup)="applyFilter($event)" #search>
+      <input matInput (keyup.enter)="initData(null, null, null, search.value)" #search>
     </mat-form-field>
+    <div class="col-1">
+      <button mat-mini-fab color="accent" class="search-button"  (click)="initData(null, null, null, search.value)"><mat-icon>search</mat-icon></button>
+    </div>
   </div>
   <div class="table-overflow mat-elevation-z0">
-    <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0" matSort>
+    <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0">
       <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header>{{ 'thesis.title' | translate }}</th>
+        <th mat-header-cell *matHeaderCellDef class="text-center" (click)="sort('title')">
+          {{ 'thesis.title' | translate }}
+          <mat-icon *ngIf="sorting == sortMode.DESCENDING">arrow_downward</mat-icon>
+          <mat-icon *ngIf="sorting == sortMode.ASCENDING">arrow_upward</mat-icon>
+        </th>
         <td mat-cell *matCellDef="let element">{{ titlePreview(element.title) }}</td>
       </ng-container>
 
       <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.studentFirstName' | translate }}</th>
+            >{{ 'thesis.studentFirstName' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastName">
         <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.studentLastName' | translate }}</th>
+            >{{ 'thesis.studentLastName' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="studentId">
         <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.studentId' | translate }}</th>
+            >{{ 'thesis.studentId' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.studentId }}</td>
       </ng-container>
 
       <ng-container matColumnDef="supervisorFirstName">
         <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.supervisorFirstName' | translate }}</th>
+            >{{ 'thesis.supervisorFirstName' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.supervisorFirstName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="supervisorLastName">
         <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.supervisorLastName' | translate }}</th>
+            >{{ 'thesis.supervisorLastName' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.supervisorLastName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="thesisType">
         <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.thesisType' | translate }}</th>
+            >{{ 'thesis.thesisType' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.thesisType }}</td>
       </ng-container>
 
       <ng-container matColumnDef="departmentName">
         <th mat-header-cell *matHeaderCellDef class="text-center"
-            mat-sort-header>{{ 'thesis.department.department' | translate }}</th>
+            >{{ 'thesis.department.department' | translate }}</th>
         <td mat-cell *matCellDef="let element">
           {{ element.departmentId == null? null : element.departmentName + " (" + element.departmentId + ")" }}
         </td>
