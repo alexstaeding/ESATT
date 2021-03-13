@@ -16,12 +16,12 @@ class MongoContext {
 
   init {
     dataStore = Morphia.createDatastore(MongoClients.create("mongodb://localhost:27017"), "esatt")
-    dataStore.ensureIndexes()
     dataStore.mapper.map(
       Department::class.java,
       EvaluationScheme::class.java,
       Thesis::class.java,
       User::class.java,
     )
+    dataStore.ensureIndexes()
   }
 }
