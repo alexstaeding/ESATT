@@ -15,8 +15,21 @@ export class ThesisService {
     })
   }
 
-  public async getAll(): Promise<ThesisPreview[]> {
-    return this.http.get<ThesisPreview[]>("http://localhost:8008/api/v1/theses").toPromise()
+  public async getAll(
+    ascending: boolean = null,
+    field: string = null,
+    limit: number = null,
+    search: string = null,
+  ): Promise<ThesisPreview[]> {
+    return this.http.get<ThesisPreview[]>("http://localhost:8008/api/v1/theses",
+    {
+      headers: {
+        ascending: ascending.toString(),
+        field,
+        limit: limit.toString(),
+        search
+      }
+    }).toPromise()
   }
 
   public async get(id: string): Promise<Thesis> {
