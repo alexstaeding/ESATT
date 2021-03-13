@@ -9,6 +9,8 @@ import dev.morphia.query.experimental.filters.Filters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.bpg20.esatt.common.model.ObjectWithId
+import java.io.File
+import java.util.concurrent.CompletableFuture
 
 abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
 
@@ -39,6 +41,7 @@ abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
     field: String? = null,
     limit: Int? = null,
     preview: Boolean? = null,
+    search: String? = null,
   ): Sequence<T> {
     val ascending = ascending ?: true
     val limit = limit ?: 0
@@ -60,7 +63,9 @@ abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
       .sort(sort)
       .limit(limit)
       .apply { if (preview) projection().preview() }
-    return asQuery().iterator(fop).asSequence()
+    return asQuery()
+      .filter(*search?.let { arrayOf(Filters.text(it)) } ?: arrayOf())
+      .iterator(fop).asSequence()
   }
 
   fun asQuery(): Query<T> = context.dataStore.find(tClass)
