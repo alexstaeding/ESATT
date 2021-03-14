@@ -1,6 +1,8 @@
 plugins {
   application
-  kotlin("jvm").version("1.4.30")
+  val kotlinVersion = "1.4.31"
+  kotlin("jvm").version(kotlinVersion)
+  kotlin("plugin.serialization").version(kotlinVersion)
   id("com.github.johnrengelman.shadow").version("6.1.0")
 }
 
@@ -14,7 +16,6 @@ allprojects {
 }
 
 dependencies {
-  implementation(project(":api"))
   implementation(project(":common"))
   implementation(project(":web"))
 }
