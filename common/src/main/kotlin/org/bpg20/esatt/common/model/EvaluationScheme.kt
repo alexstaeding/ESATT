@@ -6,7 +6,7 @@ import org.bson.types.ObjectId
 
 @Entity("evaluationSchemes")
 @Serializable
-class EvaluationScheme : ObjectWithId<ObjectId>() {
+class EvaluationScheme : ObjectWithId.ObjectWithObjectId() {
   var name: String? = null
   var description: String? = null
   var criteria: List<Criterion>? = null

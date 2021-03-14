@@ -12,7 +12,7 @@ import org.bson.types.ObjectId
 
 @Entity("theses")
 @Serializable
-class Thesis : ObjectWithId<ObjectId>() {
+class Thesis : ObjectWithId.ObjectWithObjectId() {
   var firstName: String? = null
   var lastName: String? = null
   var gender: Gender? = null

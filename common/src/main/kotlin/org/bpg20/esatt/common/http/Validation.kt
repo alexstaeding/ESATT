@@ -22,7 +22,7 @@ object Validation {
   }
 
   fun requireId(obj: ObjectWithId<*>, writer: Appendable? = null): Boolean {
-    if (obj.id == null) {
+    if (obj.getId() == null) {
       writer?.appendLine("ID is required")
       return false
     }

@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Entity("departments")
 @Serializable
-class Department : ObjectWithId<Int>() {
+class Department : ObjectWithId.ObjectWithIntId() {
   var name: String? = null
 }

@@ -1,11 +1,13 @@
 package org.bpg20.esatt.common.http
 
 import com.google.inject.Inject
+import dev.morphia.query.UpdateException
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import io.ktor.util.pipeline.*
 import org.bpg20.esatt.common.datastore.DepartmentRepository
 import org.bpg20.esatt.common.datastore.EvaluationSchemeRepository
 import org.bpg20.esatt.common.datastore.Repository
@@ -75,25 +77,58 @@ inline fun <reified T : ObjectWithId<*>> Route.configureRepository(
     call.respond(document)
   }
   post {
-    val received = try {
-      call.receive<T>()
-    } catch (e: Throwable) {
-      return@post call.respondText(e.message ?: "An error occurred", status = HttpStatusCode.BadRequest)
+    receiveAndRun(repository::insertOne) {
+      call.respondText(
+        "Failed to insert document: ${throwable?.message}",
+        status = HttpStatusCode.InternalServerError,
+      )
     }
-    val document = repository.insertOne(received)
-      ?: return@post call.respondText("Failed to insert document", status = HttpStatusCode.InternalServerError)
-    call.respond(document)
   }
   put {
-    val received = try {
-      call.receive<T>()
-    } catch (e: Throwable) {
-      return@put call.respondText(e.message ?: "An error occurred", status = HttpStatusCode.BadRequest)
+    receiveAndRun(repository::updateOne) {
+      when {
+        original.getId() == null -> call.respondText(
+          "Id is required to update document",
+          status = HttpStatusCode.BadRequest,
+        )
+        throwable is UpdateException -> call.respondText(
+          "No document with id ${original.getId()}: ${throwable.message}",
+          status = HttpStatusCode.BadRequest,
+        )
+        else -> call.respondText(
+          "Failed to update document: ${throwable?.message}",
+          status = HttpStatusCode.InternalServerError,
+        )
+      }
     }
-    val document = repository.updateOne(received)
-      ?: return@put call.respondText("Failed to update document", status = HttpStatusCode.InternalServerError)
-    call.respond(document)
   }
 }
+
+suspend inline fun <reified T : ObjectWithId<*>> PipelineContext<Unit, ApplicationCall>.receiveAndRun(
+  dbFun: (T) -> T?,
+  ifFailed: (FailedResult<T>).() -> Unit = {},
+) {
+  val received = try {
+    call.receive<T>()
+  } catch (e: Throwable) {
+    return call.respondText(e.message ?: "An error occurred", status = HttpStatusCode.BadRequest)
+  }
+  val result: Pair<T?, Throwable?> = try {
+    dbFun(received) to null
+  } catch (e: Throwable) {
+    null to e
+  }
+  if (result.first == null) {
+    ifFailed(FailedResult(received, result.second))
+  } else {
+    call.respond(result.first!!)
+  }
+}
+
+data class FailedResult<T : ObjectWithId<*>>(
+  val original: T,
+  val throwable: Throwable?,
+)
+
 
 

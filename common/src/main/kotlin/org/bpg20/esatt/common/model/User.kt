@@ -6,7 +6,7 @@ import org.bson.types.ObjectId
 
 @Entity("users")
 @Serializable
-class User : ObjectWithId<ObjectId>() {
+class User : ObjectWithId.ObjectWithObjectId() {
   var userName: String? = null
   var email: String? = null
   var firstName: String? = null
