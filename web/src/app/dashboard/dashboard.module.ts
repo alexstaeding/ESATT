@@ -12,7 +12,6 @@ import {MatFormFieldModule} from "@angular/material/form-field"
 import {MatGridListModule} from "@angular/material/grid-list"
 import {MatIconModule} from "@angular/material/icon"
 import {MatInputModule} from "@angular/material/input"
-import {MatSortModule} from "@angular/material/sort"
 import {MatTableModule} from "@angular/material/table"
 import {MatTooltipModule} from "@angular/material/tooltip"
 import {TranslateModule} from "@ngx-translate/core"
@@ -39,7 +38,6 @@ import {MatNativeDateModule} from "@angular/material/core"
     MatInputModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatSortModule,
     MatSnackBarModule,
     MatTableModule,
     MatTooltipModule,

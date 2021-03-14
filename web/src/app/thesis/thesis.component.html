@@ -173,7 +173,7 @@
 
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="17" *ngIf="search.value !== ''">
-          {{ 'thesis.empty-filter' | translate }} "{{search.value}}"
+          {{ 'thesis.empty-filter' | translate }} "{{ search.value }}"
         </td>
         <td class="mat-cell" colspan="17" *ngIf="search.value === ''">
           {{ 'thesis.empty-table' | translate }}

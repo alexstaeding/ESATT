@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewChild} from "@angular/core"
+import {Component, OnInit} from "@angular/core"
 import {MatDialog} from "@angular/material/dialog"
-import {MatSort} from "@angular/material/sort"
 import {MatTableDataSource} from "@angular/material/table"
 import {ThesisDetailComponent} from "../thesis/thesis-detail/thesis-detail.component"
 import {ThesisPreview, ThesisService} from "../service/thesis.service"
@@ -23,19 +22,21 @@ export class DashboardComponent implements OnInit {
     "lastName",
     "studentId",
     "thesisType",
-    "subject",
-    "signUpUtc",
-    "dueDateUtc",
-    "extendedDueDateUtc",
-    "submittedUtc",
-    "presentationUtc",
-    "gradedUtc",
-    "reportCreatedUtc",
+    "departmentId",
+    "status.signUpUtc",
+    "status.dueDateUtc",
+    "status.extendedDueDateUtc",
+    "status.submittedUtc",
+    "status.presentationUtc",
+    "status.gradedUtc",
+    "status.reportCreatedUtc",
   ]
   data: MatTableDataSource<ThesisPreview>
   currentDate: Date = new Date()
-
-  @ViewChild(MatSort) sort: MatSort
+  sorting = Sorting.NOT
+  sortMode = Sorting
+  currentField: string = null
+  searchValue: string = ""
 
   constructor(
     public dialog: MatDialog,
@@ -48,7 +49,12 @@ export class DashboardComponent implements OnInit {
     this.initData()
   }
 
-  public async initData() {
+  public async initData(
+    ascending: boolean = null,
+    field: string = null,
+    limit: number = null,
+    search: string = null,
+  ) {
     await this.userService.getAll().then(result => {
       this.allUsers = result
       if (this.allUsers.length === 0) {
@@ -58,7 +64,8 @@ export class DashboardComponent implements OnInit {
       }
     })
     const myTheses = []
-    await this.thesisService.getAllThesis().then(result => {
+    this.searchValue = search
+    await this.thesisService.getAllThesis(ascending, field, limit, search).then(result => {
       for (const thesis of result) {
         if (thesis.supervisorId === this.user.id && thesis.status.reportCreatedUtc == null) {
           myTheses.push(thesis)
@@ -66,7 +73,6 @@ export class DashboardComponent implements OnInit {
       }
     })
     this.data = new MatTableDataSource(myTheses)
-    this.data.sort = this.sort
   }
 
   calcDate(lastUpdated: Date): string {
@@ -82,11 +88,6 @@ export class DashboardComponent implements OnInit {
       width: "100%",
       data: {id, component: this},
     })
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value
-      this.data.filter = filterValue.trim().toLowerCase()
   }
 
   getLatestUser(): User {
@@ -146,4 +147,28 @@ export class DashboardComponent implements OnInit {
     }
     return title
   }
+
+  sort(field : string){
+    if (this.currentField !== field){
+      this.sorting = Sorting.NOT
+    }
+    this.currentField = field
+    if (this.sorting === Sorting.NOT){
+      this.sorting = Sorting.ASCENDING
+      this.initData(true, field, null, this.searchValue)
+    } else if (this.sorting === Sorting.ASCENDING){
+      this.sorting = Sorting.DESCENDING
+      this.initData(false, field, null, this.searchValue)
+    } else if (this.sorting === Sorting.DESCENDING){
+      this.sorting = Sorting.NOT
+      this.initData(null, null, null, this.searchValue)
+      this.currentField = null
+    }
+  }
+}
+
+export enum Sorting {
+  NOT,
+  DESCENDING,
+  ASCENDING,
 }
