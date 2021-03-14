@@ -44,7 +44,7 @@ mat-header-cell, mat-cell {
 }
 
 .table-scroll {
-  height: calc(100vh - 434px);
+  height: calc(100vh - 456px);
   overflow: auto;
 }
 
@@ -88,4 +88,8 @@ li {
 
 ::ng-deep .warn-tooltip {
   background: red;
+}
+
+.search-button {
+  margin-top: 8px;
 }

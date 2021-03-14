@@ -1,10 +1,8 @@
-import {Component, OnInit, ViewChild} from "@angular/core"
+import {Component, OnInit} from "@angular/core"
 import {MatDialog} from "@angular/material/dialog"
 import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
 import {ThesisPreview, ThesisService} from "../service/thesis.service"
-import {MatSort} from "@angular/material/sort"
 import {MatTableDataSource} from "@angular/material/table"
-import {filter} from "rxjs/operators"
 
 
 @Component({
@@ -22,20 +20,21 @@ export class ThesisComponent implements OnInit {
     "supervisorFirstName",
     "supervisorLastName",
     "thesisType",
-    "departmentName",
-    "signUpUtc",
-    "dueDateUtc",
-    "extendedDueDateUtc",
-    "submittedUtc",
-    "presentationUtc",
-    "gradedUtc",
-    "reportCreatedUtc",
+    "departmentId",
+    "status.signUpUtc",
+    "status.dueDateUtc",
+    "status.extendedDueDateUtc",
+    "status.submittedUtc",
+    "status.presentationUtc",
+    "status.gradedUtc",
+    "status.reportCreatedUtc",
   ]
   data: MatTableDataSource<ThesisPreview>
   currentDate: Date = new Date()
   sorting = Sorting.NOT
   sortMode = Sorting
   currentField: string = null
+  searchValue: string = ""
 
   constructor(
     public dialog: MatDialog,
@@ -53,6 +52,7 @@ export class ThesisComponent implements OnInit {
     limit: number = null,
     search: string = null,
   ) {
+    this.searchValue = search
     this.thesisService.getAll(ascending, field, limit, search).then(result => {
       this.data = new MatTableDataSource(result)
     })
@@ -85,12 +85,20 @@ export class ThesisComponent implements OnInit {
   }
 
   sort(field : string){
-    if (this.sorting === Sorting.NOT){
-      this.sorting = Sorting.DESCENDING
-    } else if (this.sorting === Sorting.DESCENDING){
-      this.sorting = Sorting.ASCENDING
-    } else if (this.sorting === Sorting.ASCENDING){
+    if (this.currentField !== field){
       this.sorting = Sorting.NOT
+    }
+    this.currentField = field
+    if (this.sorting === Sorting.NOT){
+      this.sorting = Sorting.ASCENDING
+      this.initData(true, field, null, this.searchValue)
+    } else if (this.sorting === Sorting.ASCENDING){
+      this.sorting = Sorting.DESCENDING
+      this.initData(false, field, null, this.searchValue)
+    } else if (this.sorting === Sorting.DESCENDING){
+      this.sorting = Sorting.NOT
+      this.initData(null, null, null, this.searchValue)
+      this.currentField = null
     }
   }
 }

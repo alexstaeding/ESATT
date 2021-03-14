@@ -15,8 +15,29 @@ export class EvaluationSchemeService {
     })
   }
 
-  public async getAll(): Promise<EvaluationSchemePreview[]> {
-    return this.http.get<EvaluationSchemePreview[]>("http://localhost:8008/api/v1/evaluation-schemes").toPromise()
+  public async getAll(
+    ascending: boolean = null,
+    field: string = null,
+    limit: number = null,
+    search: string = null,
+  ): Promise<EvaluationSchemePreview[]> {
+    var header = new HttpHeaders()
+    if (ascending != null) {
+      header = header.set("ascending", ascending.toString())
+    }
+    if (field != null) {
+      header = header.set("field", field)
+    }
+    if (limit != null) {
+      header = header.set("limit", limit.toString())
+    }
+    if (search != null && search != "") {
+      header = header.set("search", search)
+    }
+    return this.http.get<EvaluationSchemePreview[]>("http://localhost:8008/api/v1/evaluation-schemes",
+      {
+        headers: header
+      }).toPromise()
   }
 
   public async get(id: string): Promise<EvaluationScheme> {

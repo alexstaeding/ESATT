@@ -46,7 +46,6 @@ import {TranslateModule} from "@ngx-translate/core"
     MatNativeDateModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatSortModule,
     MatStepperModule,
     MatTableModule,
     MatTabsModule,

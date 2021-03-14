@@ -32,7 +32,6 @@ import {TranslateModule} from "@ngx-translate/core"
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
-    MatSortModule,
     MatTableModule,
     MatTooltipModule,
     MatTreeModule,

@@ -4,7 +4,6 @@ import {EvaluationScheme, EvaluationSchemePreview, EvaluationSchemeService} from
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
 import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service/thesis.service"
 import {MatSnackBar} from "@angular/material/snack-bar"
-import {MatSort} from "@angular/material/sort"
 import {MatTableDataSource} from "@angular/material/table"
 import {MatTreeNestedDataSource} from "@angular/material/tree"
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog"
@@ -40,7 +39,7 @@ export class ThesisDetailComponent implements OnInit {
   secondFormGroup: FormGroup
   gradeGroup: FormGroup
   displayedColumns: string[] = ["checked", "Datum", "Notiz"]
-  evaluationSchemeColumnsScheme: string[] = ["name", "description", "id", "lastUpdatedUtc"]
+  evaluationSchemeColumnsScheme: string[] = ["name", "description", "createdOnUtc", "lastUpdatedUtc"]
   evaluationSchemeData: MatTableDataSource<EvaluationSchemePreview>
   selectedEvaluationScheme: EvaluationScheme = null
   treeControl = new NestedTreeControl<Grade>(node => node.grades)
@@ -49,8 +48,10 @@ export class ThesisDetailComponent implements OnInit {
   departmentId: number
   departmentDialogRef: MatDialogRef<any>
   gradeControl = new FormControl(null, Validators.pattern(/^[0-9]+(\.[0-9]+)?$/))
-
-  @ViewChild(MatSort) sort: MatSort
+  sorting = Sorting.NOT
+  sortMode = Sorting
+  currentField: string = null
+  searchValue: string = ""
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -72,7 +73,7 @@ export class ThesisDetailComponent implements OnInit {
     this.gradeGroup = formBuilder.group({})
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.userService.getAll().then(result => {
       this.users = result
     })
@@ -97,10 +98,7 @@ export class ThesisDetailComponent implements OnInit {
         this.resetThesis()
       })
     }
-    this.evaluationSchemeService.getAll().then(result => {
-      this.evaluationSchemeData = new MatTableDataSource(result)
-      this.evaluationSchemeData.sort = this.sort
-    })
+    this.initData()
   }
 
   resetThesis() {
@@ -122,7 +120,7 @@ export class ThesisDetailComponent implements OnInit {
     }
   }
 
-  changeToEdit(): void {
+  changeToEdit() {
     this.originalThesis = this.deepCopyThesis(this.thesis)
     this.currentMode = Mode.EDIT
   }
@@ -272,7 +270,7 @@ export class ThesisDetailComponent implements OnInit {
     await this.data.component.initData()
   }
 
-  addColumn(): void {
+  addColumn() {
     const note = new Note()
     note.content = ""
     note.createdUtc = new Date()
@@ -492,9 +490,42 @@ export class ThesisDetailComponent implements OnInit {
     this.departmentDialogRef.close()
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.evaluationSchemeData.filter = filterValue.trim().toLowerCase();
+  public initData(
+    ascending: boolean = null,
+    field: string = null,
+    limit: number = null,
+    search: string = null,
+  ) {
+    this.searchValue = search
+    this.evaluationSchemeService.getAll(ascending, field, limit, search).then(result => {
+      this.evaluationSchemeData = new MatTableDataSource(result)
+    })
+  }
+
+  sort(field : string){
+    if (this.currentField !== field){
+      this.sorting = Sorting.NOT
+    }
+    this.currentField = field
+    if (this.sorting === Sorting.NOT){
+      this.sorting = Sorting.ASCENDING
+      if(field === "createdOnUtc") {
+        this.initData(true, null, null, this.searchValue)
+        return
+      }
+      this.initData(true, field, null, this.searchValue)
+    } else if (this.sorting === Sorting.ASCENDING){
+      this.sorting = Sorting.DESCENDING
+      if(field === "createdOnUtc") {
+        this.initData(false, null, null, this.searchValue)
+        return
+      }
+      this.initData(false, field, null, this.searchValue)
+    } else if (this.sorting === Sorting.DESCENDING){
+      this.sorting = Sorting.NOT
+      this.initData(null, null, null, this.searchValue)
+      this.currentField = null
+    }
   }
 }
 
@@ -509,4 +540,10 @@ export enum Gender {
   FEMALE = "gender.female",
   MALE = "gender.male",
   OTHER = "gender.other",
+}
+
+export enum Sorting {
+  NOT,
+  DESCENDING,
+  ASCENDING,
 }
