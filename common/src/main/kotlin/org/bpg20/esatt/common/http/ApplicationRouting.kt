@@ -54,14 +54,18 @@ inline fun <reified T : ObjectWithId<*>> Route.configureRepository(
     ) {
       return@get call.respondText(errors.toString(), status = HttpStatusCode.BadRequest)
     }
-    call.respond(
+    getAndRun({
       repository.getAll(
         ascending.first,
         field.first,
         limit.first,
         preview.first,
       ).toList()
-    )
+    }) {
+      if (it != null) {
+        call.respondText("Failed to get documents: ${it.message}", status = HttpStatusCode.InternalServerError)
+      }
+    }
   }
   get("{id}") {
     val errors = StringBuilder(Validation.errorMessage)
@@ -72,9 +76,13 @@ inline fun <reified T : ObjectWithId<*>> Route.configureRepository(
     } catch (e: IllegalArgumentException) {
       return@get call.respondText("Invalid id: ${e.message}", status = HttpStatusCode.BadRequest)
     }
-    val document = repository.getOne(parsedId)
-      ?: return@get call.respondText("No document with id $id", status = HttpStatusCode.NotFound)
-    call.respond(document)
+    getAndRun({ repository.getOne(parsedId) }) {
+      if (it == null) {
+        call.respondText("No document with id $id", status = HttpStatusCode.NotFound)
+      } else {
+        call.respondText("Failed to get document with id $id: ${it.message}", status = HttpStatusCode.InternalServerError)
+      }
+    }
   }
   post {
     receiveAndRun(repository::insertOne) {
@@ -104,9 +112,25 @@ inline fun <reified T : ObjectWithId<*>> Route.configureRepository(
   }
 }
 
+suspend inline fun <reified T> PipelineContext<Unit, ApplicationCall>.getAndRun(
+  dbFun: () -> T,
+  ifFailed: (Throwable?) -> Unit,
+) {
+  val result: Pair<T?, Throwable?> = try {
+    dbFun() to null
+  } catch (e: Throwable) {
+    null to e
+  }
+  if (result.first == null) {
+    ifFailed(result.second)
+  } else {
+    call.respond(result.first!!)
+  }
+}
+
 suspend inline fun <reified T : ObjectWithId<*>> PipelineContext<Unit, ApplicationCall>.receiveAndRun(
   dbFun: (T) -> T?,
-  ifFailed: (FailedResult<T>).() -> Unit = {},
+  ifFailed: (FailedResult<T>).() -> Unit,
 ) {
   val received = try {
     call.receive<T>()
@@ -125,10 +149,7 @@ suspend inline fun <reified T : ObjectWithId<*>> PipelineContext<Unit, Applicati
   }
 }
 
-data class FailedResult<T : ObjectWithId<*>>(
+data class FailedResult<T>(
   val original: T,
   val throwable: Throwable?,
 )
-
-
-
