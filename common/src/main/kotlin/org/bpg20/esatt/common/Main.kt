@@ -1,9 +1,9 @@
 package org.bpg20.esatt.common
 
+import com.github.lamba92.ktor.features.SinglePageApplication
 import com.google.inject.Guice
 import io.ktor.application.*
 import io.ktor.features.*
-import io.ktor.http.content.*
 import io.ktor.routing.*
 import io.ktor.serialization.*
 import io.ktor.server.netty.*
@@ -22,17 +22,14 @@ fun Application.module() {
       }
     )
   }
+  install(SinglePageApplication) {
+    folderPath = "static/ESATT"
+    ignoreIfContains = Regex("^/api.*$")
+  }
   val logger = LoggerFactory.getLogger("ESATT")
   logger.info("Starting initialization")
   val injector = Guice.createInjector(ESATTModule(logger))
   routing {
-    /*
-    static("/") {
-      preCompressed {
-        files("static/ESATT")
-      }
-    }
-    */
     with(injector.getInstance(ApplicationRouting::class.java)) {
       configure()
     }
