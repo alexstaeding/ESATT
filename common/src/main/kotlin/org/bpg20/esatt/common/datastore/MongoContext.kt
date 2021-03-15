@@ -1,21 +1,24 @@
 package org.bpg20.esatt.common.datastore
 
+import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.mongodb.client.MongoClients
 import dev.morphia.Datastore
 import dev.morphia.Morphia
+import org.bpg20.esatt.common.Config
 import org.bpg20.esatt.common.model.Department
 import org.bpg20.esatt.common.model.EvaluationScheme
 import org.bpg20.esatt.common.model.Thesis
 import org.bpg20.esatt.common.model.User
 
 @Singleton
-class MongoContext {
+class MongoContext @Inject constructor(
+  config: Config,
+) {
 
-  val dataStore: Datastore
+  val dataStore: Datastore = Morphia.createDatastore(MongoClients.create(config.mongodbConnection!!), "esatt")
 
   init {
-    dataStore = Morphia.createDatastore(MongoClients.create("mongodb://localhost:27017"), "esatt")
     dataStore.mapper.map(
       Department::class.java,
       EvaluationScheme::class.java,

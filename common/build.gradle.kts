@@ -19,6 +19,7 @@ dependencies {
   api("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:$kotlinxSerializationVersion")
   api("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
   implementation("com.github.lamba92:ktor-spa:1.2.1")
+  implementation("org.spongepowered:configurate-hocon:4.0.0")
 
   // logging
   api("org.slf4j:slf4j-api:1.7.30")
