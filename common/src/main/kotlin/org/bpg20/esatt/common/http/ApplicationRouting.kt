@@ -3,6 +3,7 @@ package org.bpg20.esatt.common.http
 import com.google.inject.Inject
 import dev.morphia.query.UpdateException
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
@@ -20,8 +21,8 @@ class ApplicationRouting @Inject constructor(
   private val evaluationSchemeRepository: EvaluationSchemeRepository,
   private val thesisRepository: ThesisRepository,
   private val userRepository: UserRepository,
-) {
-  fun Route.configure() {
+) : Configurable<Route> {
+  override fun Route.configure() {
     route("/api/v1/departments") {
       configureRepository(departmentRepository, Validation.DepartmentValidation)
     }
