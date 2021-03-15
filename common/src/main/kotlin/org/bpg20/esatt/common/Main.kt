@@ -30,14 +30,16 @@ fun Application.module() {
   val logger = LoggerFactory.getLogger("ESATT")
   logger.info("Starting initialization")
   val injector = Guice.createInjector(ESATTModule(logger))
+  val config = injector.getInstance(Config::class.java)
+  val authenticationOptional = config.authentication != "ldap"
   configure<Application, ApplicationAuthentication>(injector)
   install(SinglePageApplication) {
     folderPath = "static/ESATT"
     ignoreIfContains = Regex("^/api.*$")
-    authConfiguration = SinglePageApplication.AuthConfiguration()
+    authConfiguration = SinglePageApplication.AuthConfiguration(optional = authenticationOptional)
   }
   routing {
-    authenticate {
+    authenticate(optional = authenticationOptional) {
       configure<Route, ApplicationRouting>(injector)
       configure<Route, AuthenticationRouting>(injector)
     }

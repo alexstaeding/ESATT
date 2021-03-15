@@ -6,6 +6,9 @@ import org.spongepowered.configurate.objectmapping.meta.Comment
 @ConfigSerializable
 class Config {
 
+  @Comment("Authentication to use. Options: [none, ldap]")
+  var authentication: String? = "none"
+
   @Comment("The LDAP connection string")
   var ldapConnection: String? = "ldap://localhost:389"
 
