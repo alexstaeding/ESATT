@@ -42,7 +42,7 @@ class ThesisRepository : ObjectIdRepository<Thesis>() {
     return super.getOne(id)?.apply { injectAll() }
   }
 
-  override fun getAll(ascending: Boolean?, field: String?, limit: Int?, preview: Boolean?): Sequence<Thesis> {
-    return super.getAll(ascending, field, limit, preview).map { it.apply { injectAll() } }
+  override fun getAll(ascending: Boolean?, field: String?, limit: Int?, preview: Boolean?, search: String?): Sequence<Thesis> {
+    return super.getAll(ascending, field, limit, preview, search).map { it.apply { injectAll() } }
   }
 }

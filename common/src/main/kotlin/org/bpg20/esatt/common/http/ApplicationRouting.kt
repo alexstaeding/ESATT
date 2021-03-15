@@ -47,6 +47,7 @@ inline fun <reified T : ObjectWithId<*>> Route.configureRepository(
     val field = modelValidation.validateSortByField(call.request.header("field"), errors)
     val limit = Validation.validateLimit(call.request.header("limit"), errors)
     val preview = Validation.validatePreview(call.request.header("preview"), errors)
+    val search = call.request.header("search")
     if (ascending.second
       || field.second
       || limit.second
@@ -60,6 +61,7 @@ inline fun <reified T : ObjectWithId<*>> Route.configureRepository(
         field.first,
         limit.first,
         preview.first,
+        search,
       ).toList()
     }) {
       if (it != null) {

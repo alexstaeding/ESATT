@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core"
 import {MatDialog} from "@angular/material/dialog"
 import {EvaluationSchemeDetailComponent} from "./evaluation-scheme-detail/evaluation-scheme-detail.component"
 import {EvaluationSchemePreview, EvaluationSchemeService} from "../service/evaluation-scheme.service"
-import {from, Observable} from "rxjs"
+import {MatTableDataSource} from "@angular/material/table"
 
 @Component({
   selector: "app-evaluation-scheme",
@@ -11,7 +11,11 @@ import {from, Observable} from "rxjs"
 })
 export class EvaluationSchemeComponent implements OnInit {
   columnsScheme = ["name", "description", "createdUtc", "lastUpdatedUtc"]
-  data: Observable<EvaluationSchemePreview[]>
+  data: MatTableDataSource<EvaluationSchemePreview>
+  sorting = Sorting.NOT
+  sortMode = Sorting
+  currentField: string = null
+  searchValue: string = ""
 
   constructor(
     private evaluationSchemeService: EvaluationSchemeService,
@@ -23,8 +27,17 @@ export class EvaluationSchemeComponent implements OnInit {
     this.initData()
   }
 
-  public initData() {
-    this.data = from(this.evaluationSchemeService.getAll())
+  public initData(
+    ascending: boolean = null,
+    field: string = null,
+    limit: number = null,
+    preview: boolean = null,
+    search: string = null,
+  ) {
+    this.searchValue = search
+    this.evaluationSchemeService.getAll(ascending, field, limit, preview, search).then(result => {
+      this.data = new MatTableDataSource(result)
+    })
   }
 
   openDetail(id: string = null) {
@@ -53,4 +66,36 @@ export class EvaluationSchemeComponent implements OnInit {
     }
     return description
   }
+
+  sort(field : string){
+    if (this.currentField !== field){
+      this.sorting = Sorting.NOT
+    }
+    this.currentField = field
+    if (this.sorting === Sorting.NOT){
+      this.sorting = Sorting.ASCENDING
+      if(field === "createdUtc") {
+        this.initData(true, null, null, true, this.searchValue)
+        return
+      }
+      this.initData(true, field, null, true, this.searchValue)
+    } else if (this.sorting === Sorting.ASCENDING){
+      this.sorting = Sorting.DESCENDING
+      if(field === "createdUtc") {
+        this.initData(false, null, null, true, this.searchValue)
+        return
+      }
+      this.initData(false, field, null, true, this.searchValue)
+    } else if (this.sorting === Sorting.DESCENDING){
+      this.sorting = Sorting.NOT
+      this.initData(null, null, null, true, this.searchValue)
+      this.currentField = null
+    }
+  }
+}
+
+export enum Sorting {
+  NOT,
+  DESCENDING,
+  ASCENDING,
 }

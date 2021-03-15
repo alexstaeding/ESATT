@@ -6,6 +6,9 @@
     "created": "Created on",
     "updated": "Last edited",
     "add-button": "Create new Evaluation Scheme",
+    "empty-table": "There are no Evaluation Schemes.",
+    "empty-filter": "No Evaluation Scheme with",
+    "search": "Search",
     "detail": {
       "title-new": "Create new Evaluation Scheme",
       "title-edit": "Edit Evaluation Scheme",
@@ -38,12 +41,14 @@
   "profile": {
     "pageTitle": "Profile",
     "header": "My Profile",
+    "secondHeader": "My Theses",
     "firstName": "First name",
     "lastName": "Last name",
     "email": "E-Mail",
     "role": "Role",
     "my-data": "My Data",
     "userName": "User name",
+    "empty-table": "You are currently not supervising any theses.",
     "buttons": {
       "save": "Save",
       "cancel": "Cancel",
@@ -59,6 +64,7 @@
     "supervisorLastName": "Supervisor (Last Name)",
     "thesisType": "Type Of Work",
     "department": {
+      "department": "Department",
       "departmentId": "Department Number",
       "departmentName": "Department Name"
     },
@@ -74,7 +80,10 @@
       "graded": "Graded",
       "reportCreated": "Report Created"
     },
-    "course": "Course"
+    "course": "Course",
+    "search": "Search",
+    "empty-table": "There are no Theses.",
+    "empty-filter": "No Thesis with"
   },
   "thesis-detail": {
     "english-title": "English Title",

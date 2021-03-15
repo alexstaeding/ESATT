@@ -90,6 +90,7 @@ object Validation {
         null -> empty
         "name",
         "description",
+        "lastUpdatedUtc"
         -> value.success()
         else -> {
           writer?.appendLine("Could not sort evaluation schemes by field $value")
@@ -108,10 +109,18 @@ object Validation {
         "studentId",
         "supervisorId",
         "email",
-        "type",
+        "thesisType",
+        "departmentId",
         "subject",
         "course",
         "title",
+        "status.signUpUtc",
+        "status.dueDateUtc",
+        "status.extendedDueDateUtc",
+        "status.submittedUtc",
+        "status.presentationUtc",
+        "status.gradedUtc",
+        "status.reportCreatedUtc",
         -> value.success()
         else -> {
           writer?.appendLine("Could not sort theses by field $value")

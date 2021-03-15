@@ -2,6 +2,11 @@ mat-header-cell, mat-cell {
   justify-content: center;
 }
 
+::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
 .mat-add {
   background-color: limegreen;
   color: #fff;
@@ -13,7 +18,7 @@ mat-header-cell, mat-cell {
 }
 
 .table-scroll {
-  height: calc(100vh - 255px);
+  height: calc(100vh - 250px);
   overflow: auto;
 }
 

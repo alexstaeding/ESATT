@@ -4,8 +4,13 @@
 }
 
 .table-overflow {
-  height: calc(100vh - 255px);
+  height: calc(100vh - 250px);
   overflow: auto;
+}
+
+::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
 }
 
 mat-header-cell, mat-cell {

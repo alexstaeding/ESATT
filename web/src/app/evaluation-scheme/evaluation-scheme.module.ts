@@ -4,18 +4,18 @@ import {CommonModule} from "@angular/common"
 import {EvaluationSchemeRoutingModule} from "./evaluation-scheme-routing.module"
 import {EvaluationSchemeComponent} from "./evaluation-scheme.component"
 import {EvaluationSchemeDetailComponent} from "./evaluation-scheme-detail/evaluation-scheme-detail.component"
-import {MatIconModule} from "@angular/material/icon"
-import {MatTableModule} from "@angular/material/table"
-import {MatFormFieldModule} from "@angular/material/form-field"
-import {MatButtonModule} from "@angular/material/button"
-import {MatInputModule} from "@angular/material/input"
-import {TranslateModule} from "@ngx-translate/core"
-import {MatDialogModule} from "@angular/material/dialog"
-import {MatTooltipModule} from "@angular/material/tooltip"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms"
-import {MatTreeModule} from "@angular/material/tree"
+import {MatButtonModule} from "@angular/material/button"
 import {MatCardModule} from "@angular/material/card"
+import {MatDialogModule} from "@angular/material/dialog"
+import {MatFormFieldModule} from "@angular/material/form-field"
+import {MatIconModule} from "@angular/material/icon"
+import {MatInputModule} from "@angular/material/input"
 import {MatSnackBarModule} from "@angular/material/snack-bar"
+import {MatTableModule} from "@angular/material/table"
+import {MatTreeModule} from "@angular/material/tree"
+import {MatTooltipModule} from "@angular/material/tooltip"
+import {TranslateModule} from "@ngx-translate/core"
 
 
 @NgModule({
@@ -23,19 +23,19 @@ import {MatSnackBarModule} from "@angular/material/snack-bar"
   imports: [
     CommonModule,
     EvaluationSchemeRoutingModule,
-    MatIconModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    TranslateModule,
-    MatDialogModule,
-    MatTooltipModule,
     FormsModule,
-    MatTreeModule,
+    MatButtonModule,
     MatCardModule,
-    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatTreeModule,
+    ReactiveFormsModule,
+    TranslateModule,
   ]
 })
 export class EvaluationSchemeModule {
