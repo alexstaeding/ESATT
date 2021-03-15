@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
   userWithChanges: User
   originalUser: User
   editorEnabled: Boolean = false
-  allUsers: User[] = []
   displayedColumns: string[] = [
     "title",
     "firstName",
@@ -84,23 +83,6 @@ export class DashboardComponent implements OnInit {
       width: "100%",
       data: {id, component: this},
     })
-  }
-
-  getLatestUser(): User {
-    if (this.allUsers.length === 0) {
-      return null
-    }
-    let latestUser = this.allUsers[0]
-    for (let i = 0; i < this.allUsers.length; i++) {
-      if (this.getCheckInDate(latestUser.id) < this.getCheckInDate(this.allUsers[i].id)) {
-        latestUser = this.allUsers[i]
-      }
-    }
-    return latestUser
-  }
-
-  getCheckInDate(id: string): Date {
-    return new Date(parseInt(id.substring(0, 8), 16) * 1000)
   }
 
   enableEditor() {
