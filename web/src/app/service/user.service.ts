@@ -23,6 +23,10 @@ export class UserService {
     return this.http.get<User>("http://localhost:8008/api/v1/users/" + id).toPromise()
   }
 
+  public async getUser(): Promise<User> {
+    return this.http.get<User>("http://localhost:8008/api/v1/currentUser").toPromise()
+  }
+
   public async create(user: User): Promise<User> {
     return this.http.post<User>("http://localhost:8008/api/v1/users",
       user,

@@ -10,7 +10,10 @@ class Config {
   var authentication: String? = "none"
 
   @Comment("The LDAP connection string")
-  var ldapConnection: String? = "ldap://localhost:389"
+  var ldapConnection: String? = "ldap://ldap.forumsys.com:389"
+
+  @Comment("The LDAP userDNFormat")
+  var ldapUserDNFormat: String? = "uid=%s,dc=example,dc=com"
 
   @Comment("The MongoDB connection string")
   var mongodbConnection: String? = "mongodb://localhost:27017"
