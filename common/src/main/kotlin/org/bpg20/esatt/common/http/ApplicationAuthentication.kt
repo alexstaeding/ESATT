@@ -16,7 +16,7 @@ class ApplicationAuthentication @Inject constructor(
           ldapAuthenticate(
             credential,
             config.ldapConnection!!,
-            "uid=%s,ou=system"
+            config.ldapUserDNFormat!!
           ) {
             UserIdPrincipal(it.name)
           }

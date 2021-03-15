@@ -12,6 +12,9 @@ class Config {
   @Comment("The LDAP connection string")
   var ldapConnection: String? = "ldap://localhost:389"
 
+  @Comment("The LDAP userDNFormat")
+  var ldapUserDNFormat: String? = "uid=%s,dc=example,dc=com"
+
   @Comment("The MongoDB connection string")
   var mongodbConnection: String? = "mongodb://localhost:27017"
 }

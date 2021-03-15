@@ -56,13 +56,8 @@ export class DashboardComponent implements OnInit {
     preview: boolean = null,
     search: string = null,
   ) {
-    await this.userService.getAll().then(result => {
-      this.allUsers = result
-      if (this.allUsers.length === 0) {
-        this.user = new User()
-      } else {
-        this.user = this.getLatestUser()
-      }
+    await this.userService.getUser().then(result => {
+      this.user = result
     })
     const myTheses = []
     this.searchValue = search
