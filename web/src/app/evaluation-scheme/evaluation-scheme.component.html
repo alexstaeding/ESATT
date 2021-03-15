@@ -16,7 +16,7 @@
   <div class="table-scroll">
     <table mat-table class="w-100 mat-elevation-z0 text-center" [dataSource]="data">
       <ng-container matColumnDef="name">
-        <th mat-header-cell class="text-center" *matHeaderCellDef (click)="sort('name')">
+        <th mat-header-cell class="text-center cursor-pointer" *matHeaderCellDef (click)="sort('name')">
           <mat-icon>title</mat-icon>
           {{ 'evaluation-scheme.name' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'name'">arrow_downward</mat-icon>
@@ -26,7 +26,7 @@
       </ng-container>
 
       <ng-container matColumnDef="description">
-        <th mat-header-cell class="text-center" *matHeaderCellDef (click)="sort('description')">
+        <th mat-header-cell class="text-center cursor-pointer" *matHeaderCellDef (click)="sort('description')">
           <mat-icon>description</mat-icon>
           {{ 'evaluation-scheme.description' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'description'">arrow_downward</mat-icon>
@@ -36,7 +36,7 @@
       </ng-container>
 
       <ng-container matColumnDef="createdUtc">
-        <th mat-header-cell class="text-center" *matHeaderCellDef (click)="sort('createdUtc')">
+        <th mat-header-cell class="text-center cursor-pointer" *matHeaderCellDef (click)="sort('createdUtc')">
           <mat-icon>date_range</mat-icon>
           {{ 'evaluation-scheme.created' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'createdUtc'">arrow_downward</mat-icon>
@@ -46,7 +46,7 @@
       </ng-container>
 
       <ng-container matColumnDef="lastUpdatedUtc">
-        <th mat-header-cell class="text-center" *matHeaderCellDef (click)="sort('lastUpdatedUtc')">
+        <th mat-header-cell class="text-center cursor-pointer" *matHeaderCellDef (click)="sort('lastUpdatedUtc')">
           <mat-icon>update</mat-icon>
           {{ 'evaluation-scheme.updated' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'lastUpdatedUtc'">arrow_downward</mat-icon>
@@ -56,7 +56,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnsScheme ; sticky: true"></tr>
-      <tr mat-row class="cursor-pointer"
+      <tr mat-row class="cursor-pointer grey-on-hover"
           *matRowDef="let scheme; columns: columnsScheme;"
           (click)="openDetail(scheme.id)"></tr>
 
