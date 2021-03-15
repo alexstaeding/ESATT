@@ -1,9 +1,15 @@
+@file:UseSerializers(serializerClasses = [InstantSerializer::class])
+
 package org.bpg20.esatt.common.model
 
 import dev.morphia.annotations.Embedded
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
+import org.bpg20.esatt.common.serializer.InstantSerializer
 import java.time.Instant
 
 @Embedded
+@Serializable
 class Status {
   var allocationDateUtc: Instant? = null
   var signUpUtc: Instant? = null

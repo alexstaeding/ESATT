@@ -1,4 +1,4 @@
-package org.bpg20.esatt.common.servlet
+package org.bpg20.esatt.common.http
 
 import org.bpg20.esatt.common.model.Department
 import org.bpg20.esatt.common.model.EvaluationScheme
@@ -22,7 +22,7 @@ object Validation {
   }
 
   fun requireId(obj: ObjectWithId<*>, writer: Appendable? = null): Boolean {
-    if (obj.id == null) {
+    if (obj.getId() == null) {
       writer?.appendLine("ID is required")
       return false
     }

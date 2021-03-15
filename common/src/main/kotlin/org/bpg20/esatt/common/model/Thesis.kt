@@ -1,11 +1,18 @@
+@file:UseSerializers(serializerClasses = [InstantSerializer::class, ObjectIdSerializer::class])
+
 package org.bpg20.esatt.common.model
 
 import dev.morphia.annotations.Entity
 import dev.morphia.annotations.Transient
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
+import org.bpg20.esatt.common.serializer.InstantSerializer
+import org.bpg20.esatt.common.serializer.ObjectIdSerializer
 import org.bson.types.ObjectId
 
 @Entity("theses")
-class Thesis : ObjectWithId<ObjectId>() {
+@Serializable
+class Thesis : ObjectWithId.ObjectWithObjectId() {
   var firstName: String? = null
   var lastName: String? = null
   var gender: Gender? = null
