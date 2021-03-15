@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core"
 import {MatDialog} from "@angular/material/dialog"
 import {MatTableDataSource} from "@angular/material/table"
 import {ThesisDetailComponent} from "../thesis/thesis-detail/thesis-detail.component"
-import {ThesisPreview, ThesisService} from "../service/thesis.service"
+import {Thesis, ThesisService} from "../service/thesis.service"
 import {User, UserService} from "../service/user.service"
 
 @Component({
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     "status.gradedUtc",
     "status.reportCreatedUtc",
   ]
-  data: MatTableDataSource<ThesisPreview>
+  data: MatTableDataSource<Thesis>
   currentDate: Date = new Date()
   sorting = Sorting.NOT
   sortMode = Sorting
@@ -144,18 +144,18 @@ export class DashboardComponent implements OnInit {
     return title
   }
 
-  sort(field : string){
-    if (this.currentField !== field){
+  sort(field: string) {
+    if (this.currentField !== field) {
       this.sorting = Sorting.NOT
     }
     this.currentField = field
-    if (this.sorting === Sorting.NOT){
+    if (this.sorting === Sorting.NOT) {
       this.sorting = Sorting.ASCENDING
       this.initData(true, field, null, false, this.searchValue)
-    } else if (this.sorting === Sorting.ASCENDING){
+    } else if (this.sorting === Sorting.ASCENDING) {
       this.sorting = Sorting.DESCENDING
       this.initData(false, field, null, false, this.searchValue)
-    } else if (this.sorting === Sorting.DESCENDING){
+    } else if (this.sorting === Sorting.DESCENDING) {
       this.sorting = Sorting.NOT
       this.initData(null, null, null, false, this.searchValue)
       this.currentField = null

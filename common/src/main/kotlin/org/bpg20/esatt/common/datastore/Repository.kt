@@ -6,10 +6,7 @@ import dev.morphia.query.Projection
 import dev.morphia.query.Query
 import dev.morphia.query.Sort
 import dev.morphia.query.experimental.filters.Filters
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import org.bpg20.esatt.common.model.ObjectWithId
-import java.util.concurrent.CompletableFuture
 
 abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
 

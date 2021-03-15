@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core"
 import {MatDialog} from "@angular/material/dialog"
 import {EvaluationSchemeDetailComponent} from "./evaluation-scheme-detail/evaluation-scheme-detail.component"
-import {EvaluationSchemePreview, EvaluationSchemeService} from "../service/evaluation-scheme.service"
+import {EvaluationScheme, EvaluationSchemeService} from "../service/evaluation-scheme.service"
 import {MatTableDataSource} from "@angular/material/table"
 
 @Component({
@@ -11,7 +11,7 @@ import {MatTableDataSource} from "@angular/material/table"
 })
 export class EvaluationSchemeComponent implements OnInit {
   columnsScheme = ["name", "description", "createdUtc", "lastUpdatedUtc"]
-  data: MatTableDataSource<EvaluationSchemePreview>
+  data: MatTableDataSource<EvaluationScheme>
   sorting = Sorting.NOT
   sortMode = Sorting
   currentField: string = null

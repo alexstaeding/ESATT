@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core"
 import {MatDialog} from "@angular/material/dialog"
 import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
-import {ThesisPreview, ThesisService} from "../service/thesis.service"
+import {Thesis, ThesisService} from "../service/thesis.service"
 import {MatTableDataSource} from "@angular/material/table"
 
 
@@ -29,7 +29,7 @@ export class ThesisComponent implements OnInit {
     "status.gradedUtc",
     "status.reportCreatedUtc",
   ]
-  data: MatTableDataSource<ThesisPreview>
+  data: MatTableDataSource<Thesis>
   currentDate: Date = new Date()
   sorting = Sorting.NOT
   sortMode = Sorting

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, TemplateRef, ViewChild} from "@angular/core"
 import {Department, DepartmentService} from "../../service/department.service"
-import {EvaluationScheme, EvaluationSchemePreview, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
+import {EvaluationScheme, EvaluationSchemeService} from "../../service/evaluation-scheme.service"
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
 import {Grade, Grading, Note, Status, Thesis, ThesisService} from "../../service/thesis.service"
 import {MatSnackBar} from "@angular/material/snack-bar"
@@ -40,7 +40,7 @@ export class ThesisDetailComponent implements OnInit {
   gradeGroup: FormGroup
   displayedColumns: string[] = ["checked", "Datum", "Notiz"]
   evaluationSchemeColumnsScheme: string[] = ["name", "description", "createdUtc", "lastUpdatedUtc"]
-  evaluationSchemeData: MatTableDataSource<EvaluationSchemePreview>
+  evaluationSchemeData: MatTableDataSource<EvaluationScheme>
   selectedEvaluationScheme: EvaluationScheme = null
   treeControl = new NestedTreeControl<Grade>(node => node.grades)
   dataSource = new MatTreeNestedDataSource<Grade>()
