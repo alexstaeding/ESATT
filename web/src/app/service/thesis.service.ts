@@ -53,6 +53,9 @@ export class Thesis {
   public supervisorId: string
   public supervisorFirstName: string
   public supervisorLastName: string
+  public coSupervisorId: string
+  public coSupervisorFirstName: string
+  public coSupervisorLastName: string
   public evaluatorFirstName: string
   public evaluatorLastName: string
   public thesisType: string

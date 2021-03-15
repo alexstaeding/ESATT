@@ -107,6 +107,7 @@ object Validation {
         "lastName",
         "studentId",
         "supervisorId",
+        "coSupervisorId",
         "email",
         "type",
         "subject",

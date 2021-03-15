@@ -57,6 +57,12 @@
     "studentId": "Matrikelnummer",
     "supervisorFirstName": "Betreuer (Vorname)",
     "supervisorLastName": "Betreuer (Nachname)",
+    "supervisor": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "userName": "Benutzername"
+    },
     "thesisType": "Art der Arbeit",
     "department": {
       "departmentId": "Nummer des Fachbereichs",
@@ -79,6 +85,7 @@
   "thesis-detail": {
     "english-title": "Englischer Titel",
     "supervisor": "Betreuer/in",
+    "coSupervisor": "Co-Betreuer/in",
     "evaluator-firstname": "Gutachter (Vorname)",
     "evaluator-lastname": "Gutachter (Nachname)",
     "extended-duedate": "Verlängerte Abgabefrist",
@@ -115,7 +122,8 @@
       "manage-evaluationScheme": "Bewertungsschemata verwalten",
       "manage-evaluationScheme-Tooltip": "Ungespeicherten Änderungen gehen verloren!",
       "calc-grade": "Note berechnen",
-      "add-department": "Neuen Fachbereich hinzufügen"
+      "add-department": "Neuen Fachbereich hinzufügen",
+      "add-supervisor": "Neue/n Betreuer/in hinzufügen"
     },
     "grading": {
       "title": "Bewertung",

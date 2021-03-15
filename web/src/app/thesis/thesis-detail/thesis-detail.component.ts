@@ -48,6 +48,11 @@ export class ThesisDetailComponent implements OnInit {
   departmentName: string
   departmentId: number
   departmentDialogRef: MatDialogRef<any>
+  newSupervisorFirstName: string
+  newSupervisorLastName: string
+  newSupervisorUserName: string
+  newSupervisorEmail: string
+  supervisorDialogRef: MatDialogRef<any>
   gradeControl = new FormControl(null, Validators.pattern(/^[0-9]+(\.[0-9]+)?$/))
 
   constructor(
@@ -60,6 +65,7 @@ export class ThesisDetailComponent implements OnInit {
     private snackBar: MatSnackBar,
     private translate: TranslateService,
     private departmentMatDialog: MatDialog,
+    private supervisorMatDialog: MatDialog
   ) {
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ["", Validators.required],
@@ -153,6 +159,15 @@ export class ThesisDetailComponent implements OnInit {
       }
       if (this.thesis.supervisorLastName !== this.originalThesis.supervisorLastName) {
         this.thesisWithChanges.supervisorLastName = this.thesis.supervisorLastName
+      }
+      if (this.thesis.coSupervisorId !== this.originalThesis.coSupervisorId) {
+        this.thesisWithChanges.coSupervisorId = this.thesis.coSupervisorId
+      }
+      if (this.thesis.coSupervisorFirstName !== this.originalThesis.coSupervisorFirstName) {
+        this.thesisWithChanges.coSupervisorFirstName = this.thesis.coSupervisorFirstName
+      }
+      if (this.thesis.coSupervisorLastName !== this.originalThesis.coSupervisorLastName) {
+        this.thesisWithChanges.coSupervisorLastName = this.thesis.coSupervisorLastName
       }
       if (this.thesis.evaluatorFirstName !== this.originalThesis.evaluatorFirstName) {
         this.thesisWithChanges.evaluatorFirstName = this.thesis.evaluatorFirstName
@@ -402,6 +417,9 @@ export class ThesisDetailComponent implements OnInit {
     copy.supervisorId = thesis.supervisorId
     copy.supervisorFirstName = thesis.supervisorFirstName
     copy.supervisorLastName = thesis.supervisorLastName
+    copy.coSupervisorId = thesis.coSupervisorId
+    copy.coSupervisorFirstName = thesis.coSupervisorFirstName
+    copy.coSupervisorLastName = thesis.coSupervisorLastName
     copy.evaluatorFirstName = thesis.evaluatorFirstName
     copy.evaluatorLastName = thesis.evaluatorLastName
     copy.thesisType = thesis.thesisType
@@ -477,6 +495,12 @@ export class ThesisDetailComponent implements OnInit {
     this.departmentDialogRef = this.departmentMatDialog.open(this.departmentDialog)
   }
 
+  @ViewChild("supervisorDialog", {static: true}) supervisorDialog: TemplateRef<any>
+
+  openSupervisorDialog() {
+    this.supervisorDialogRef = this.supervisorMatDialog.open(this.supervisorDialog)
+  }
+
   async addDepartment() {
     const department = new Department()
     department.name = this.departmentName
@@ -485,6 +509,21 @@ export class ThesisDetailComponent implements OnInit {
     this.departments.push(department)
     await this.departmentService.create(department)
     this.departmentDialogRef.close()
+  }
+
+  async addSupervisor() {
+    const supervisor = new User()
+    supervisor.firstName = this.newSupervisorFirstName
+    supervisor.lastName = this.newSupervisorLastName
+    supervisor.userName = this.newSupervisorUserName
+    supervisor.email = this.newSupervisorEmail
+    supervisor.lastUpdatedUtc = new Date()
+    this.users.push(supervisor)
+    await this.userService.create(supervisor)
+    this.userService.getAll().then(result => {
+      this.users = result
+    })
+    this.supervisorDialogRef.close()
   }
 }
 
