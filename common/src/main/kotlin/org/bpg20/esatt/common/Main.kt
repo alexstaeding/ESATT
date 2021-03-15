@@ -24,6 +24,7 @@ fun Application.module() {
     json(
       Json {
         encodeDefaults = false
+        ignoreUnknownKeys = true
       }
     )
   }

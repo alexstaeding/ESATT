@@ -92,22 +92,6 @@ export class Thesis {
   public grading: Grading
 }
 
-export class ThesisPreview {
-  public id: string
-  public lastUpdatedUtc: Date
-  public firstName: string
-  public lastName: string
-  public studentId: string
-  public supervisorFirstName: string
-  public supervisorLastName: string
-  public thesisType: string
-  public departmentId: number
-  public departmentName: string
-  public subject: string
-  public title: string
-  public status: Status
-}
-
 export class Status {
   public allocationDateUtc: Date
   public signUpUtc: Date
