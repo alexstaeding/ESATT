@@ -16,10 +16,9 @@ class MongoContext @Inject constructor(
   config: Config,
 ) {
 
-  val dataStore: Datastore
+  val dataStore: Datastore = Morphia.createDatastore(MongoClients.create(config.mongodbConnection!!), "esatt")
 
   init {
-    dataStore = Morphia.createDatastore(MongoClients.create(config.mongodbConnection!!), "esatt")
     dataStore.ensureIndexes()
     dataStore.mapper.map(
       Department::class.java,
