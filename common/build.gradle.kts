@@ -13,12 +13,13 @@ dependencies {
   api("io.ktor:ktor-server-core:$ktorVersion")
   api("io.ktor:ktor-server-netty:$ktorVersion")
   api("io.ktor:ktor-serialization:$ktorVersion")
+  api("io.ktor:ktor-auth:$ktorVersion")
+  api("io.ktor:ktor-auth-ldap:$ktorVersion")
   api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
   val kotlinxSerializationVersion = "1.1.0"
   api("org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinxSerializationVersion")
   api("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:$kotlinxSerializationVersion")
   api("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
-  implementation("com.github.lamba92:ktor-spa:1.2.1")
   implementation("org.spongepowered:configurate-hocon:4.0.0")
 
   // logging
