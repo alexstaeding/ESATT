@@ -1,4 +1,4 @@
-package org.bpg20.esatt.common.config
+package org.bpg20.esatt.common
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable
 import org.spongepowered.configurate.objectmapping.meta.Comment

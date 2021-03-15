@@ -5,7 +5,7 @@ import com.google.inject.Singleton
 import com.mongodb.client.MongoClients
 import dev.morphia.Datastore
 import dev.morphia.Morphia
-import org.bpg20.esatt.common.config.Config
+import org.bpg20.esatt.common.Config
 import org.bpg20.esatt.common.model.Department
 import org.bpg20.esatt.common.model.EvaluationScheme
 import org.bpg20.esatt.common.model.Thesis
