@@ -50,10 +50,11 @@ export class ThesisComponent implements OnInit {
     ascending: boolean = null,
     field: string = null,
     limit: number = null,
+    preview: boolean = null,
     search: string = null,
   ) {
     this.searchValue = search
-    this.thesisService.getAll(ascending, field, limit, search).then(result => {
+    this.thesisService.getAll(ascending, field, limit, preview, search).then(result => {
       this.data = new MatTableDataSource(result)
     })
   }
@@ -91,13 +92,13 @@ export class ThesisComponent implements OnInit {
     this.currentField = field
     if (this.sorting === Sorting.NOT){
       this.sorting = Sorting.ASCENDING
-      this.initData(true, field, null, this.searchValue)
+      this.initData(true, field, null, true, this.searchValue)
     } else if (this.sorting === Sorting.ASCENDING){
       this.sorting = Sorting.DESCENDING
-      this.initData(false, field, null, this.searchValue)
+      this.initData(false, field, null, true, this.searchValue)
     } else if (this.sorting === Sorting.DESCENDING){
       this.sorting = Sorting.NOT
-      this.initData(null, null, null, this.searchValue)
+      this.initData(null, null, null, true, this.searchValue)
       this.currentField = null
     }
   }

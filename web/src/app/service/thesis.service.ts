@@ -15,10 +15,11 @@ export class ThesisService {
     })
   }
 
-  public async getAllThesis(
+  public async getAll(
     ascending: boolean = null,
     field: string = null,
     limit: number = null,
+    preview: boolean = null,
     search: string = null,
   ): Promise<Thesis[]> {
     var header = new HttpHeaders()
@@ -31,35 +32,13 @@ export class ThesisService {
     if (limit != null) {
       header = header.set("limit", limit.toString())
     }
+    if (preview != null) {
+      header = header.set("preview", preview.toString())
+    }
     if (search != null && search != "") {
       header = header.set("search", search)
     }
     return this.http.get<Thesis[]>("http://localhost:8008/api/v1/theses",
-      {
-        headers: header
-      }).toPromise()
-  }
-
-  public async getAll(
-    ascending: boolean = null,
-    field: string = null,
-    limit: number = null,
-    search: string = null,
-  ): Promise<ThesisPreview[]> {
-    var header = new HttpHeaders()
-    if (ascending != null) {
-      header = header.set("ascending", ascending.toString())
-    }
-    if (field != null) {
-      header = header.set("field", field)
-    }
-    if (limit != null) {
-      header = header.set("limit", limit.toString())
-    }
-    if (search != null && search != "") {
-      header = header.set("search", search)
-    }
-    return this.http.get<ThesisPreview[]>("http://localhost:8008/api/v1/theses",
     {
       headers: header
     }).toPromise()

@@ -53,6 +53,7 @@ export class DashboardComponent implements OnInit {
     ascending: boolean = null,
     field: string = null,
     limit: number = null,
+    preview: boolean = null,
     search: string = null,
   ) {
     await this.userService.getAll().then(result => {
@@ -65,7 +66,7 @@ export class DashboardComponent implements OnInit {
     })
     const myTheses = []
     this.searchValue = search
-    await this.thesisService.getAllThesis(ascending, field, limit, search).then(result => {
+    await this.thesisService.getAll(ascending, field, limit, preview, search).then(result => {
       for (const thesis of result) {
         if (thesis.supervisorId === this.user.id && thesis.status.reportCreatedUtc == null) {
           myTheses.push(thesis)
@@ -155,13 +156,13 @@ export class DashboardComponent implements OnInit {
     this.currentField = field
     if (this.sorting === Sorting.NOT){
       this.sorting = Sorting.ASCENDING
-      this.initData(true, field, null, this.searchValue)
+      this.initData(true, field, null, false, this.searchValue)
     } else if (this.sorting === Sorting.ASCENDING){
       this.sorting = Sorting.DESCENDING
-      this.initData(false, field, null, this.searchValue)
+      this.initData(false, field, null, false, this.searchValue)
     } else if (this.sorting === Sorting.DESCENDING){
       this.sorting = Sorting.NOT
-      this.initData(null, null, null, this.searchValue)
+      this.initData(null, null, null, false, this.searchValue)
       this.currentField = null
     }
   }

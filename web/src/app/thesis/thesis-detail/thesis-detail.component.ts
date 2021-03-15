@@ -494,10 +494,11 @@ export class ThesisDetailComponent implements OnInit {
     ascending: boolean = null,
     field: string = null,
     limit: number = null,
+    preview: boolean = null,
     search: string = null,
   ) {
     this.searchValue = search
-    this.evaluationSchemeService.getAll(ascending, field, limit, search).then(result => {
+    this.evaluationSchemeService.getAll(ascending, field, limit, preview, search).then(result => {
       this.evaluationSchemeData = new MatTableDataSource(result)
     })
   }
@@ -510,20 +511,20 @@ export class ThesisDetailComponent implements OnInit {
     if (this.sorting === Sorting.NOT){
       this.sorting = Sorting.ASCENDING
       if(field === "createdOnUtc") {
-        this.initData(true, null, null, this.searchValue)
+        this.initData(true, null, null, true, this.searchValue)
         return
       }
-      this.initData(true, field, null, this.searchValue)
+      this.initData(true, field, null, true, this.searchValue)
     } else if (this.sorting === Sorting.ASCENDING){
       this.sorting = Sorting.DESCENDING
       if(field === "createdOnUtc") {
-        this.initData(false, null, null, this.searchValue)
+        this.initData(false, null, null, true, this.searchValue)
         return
       }
-      this.initData(false, field, null, this.searchValue)
+      this.initData(false, field, null, true, this.searchValue)
     } else if (this.sorting === Sorting.DESCENDING){
       this.sorting = Sorting.NOT
-      this.initData(null, null, null, this.searchValue)
+      this.initData(null, null, null, true, this.searchValue)
       this.currentField = null
     }
   }

@@ -19,8 +19,9 @@ export class EvaluationSchemeService {
     ascending: boolean = null,
     field: string = null,
     limit: number = null,
+    preview: boolean = null,
     search: string = null,
-  ): Promise<EvaluationSchemePreview[]> {
+  ): Promise<EvaluationScheme[]> {
     var header = new HttpHeaders()
     if (ascending != null) {
       header = header.set("ascending", ascending.toString())
@@ -31,10 +32,13 @@ export class EvaluationSchemeService {
     if (limit != null) {
       header = header.set("limit", limit.toString())
     }
+    if (preview != null) {
+      header = header.set("preview", preview.toString())
+    }
     if (search != null && search != "") {
       header = header.set("search", search)
     }
-    return this.http.get<EvaluationSchemePreview[]>("http://localhost:8008/api/v1/evaluation-schemes",
+    return this.http.get<EvaluationScheme[]>("http://localhost:8008/api/v1/evaluation-schemes",
       {
         headers: header
       }).toPromise()

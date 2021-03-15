@@ -336,11 +336,11 @@
           </div>
           <mat-form-field appearance="outline" class="col-4 pt-4">
             <mat-label><mat-icon>search</mat-icon> {{ 'evaluation-scheme.search' | translate }}</mat-label>
-            <input matInput (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, search.value)"
-                   (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, search.value) : {}" #search>
+            <input matInput (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value)"
+                   (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value) : {}" #search>
           </mat-form-field>
           <div class="col-1 pt-4">
-            <button mat-mini-fab color="accent" class="search-button" (click)="initData(null, null, null, search.value)"><mat-icon>search</mat-icon></button>
+            <button mat-mini-fab color="accent" class="search-button" (click)="initData(null, null, null, true, search.value)"><mat-icon>search</mat-icon></button>
           </div>
         </div>
 

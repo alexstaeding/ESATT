@@ -53,11 +53,11 @@
       <mat-label>
         <mat-icon>search</mat-icon>
         {{ 'thesis.search' | translate }}</mat-label>
-      <input matInput (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, search.value)"
-             (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, search.value) : {}" #search>
+      <input matInput (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, false, search.value)"
+             (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, false, search.value) : {}" #search>
     </mat-form-field>
     <div class="col-1 pt-2">
-      <button mat-mini-fab color="accent"  (click)="initData(null, null, null, search.value)"><mat-icon>search</mat-icon></button>
+      <button mat-mini-fab color="accent"  (click)="initData(null, null, null, false, search.value)"><mat-icon>search</mat-icon></button>
     </div>
   </div>
 
