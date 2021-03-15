@@ -10,8 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.bpg20.esatt.common.model.ObjectWithId
 
-abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> :
-  CoroutineScope by CoroutineScope(Dispatchers.Unconfined) {
+abstract class Repository<TKey : Comparable<TKey>, T : ObjectWithId<TKey>> {
 
   @Inject
   protected lateinit var context: MongoContext
