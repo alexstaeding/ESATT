@@ -82,10 +82,7 @@
     },
     "course": "Course",
     "search": "Search",
-<<<<<<< HEAD
     "empty-table": "There are no Theses.",
-=======
->>>>>>> bd694d9... Finished Dashboard
     "empty-filter": "No Thesis with"
   },
   "thesis-detail": {

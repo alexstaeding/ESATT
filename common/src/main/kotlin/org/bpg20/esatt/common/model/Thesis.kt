@@ -8,6 +8,10 @@ import dev.morphia.annotations.Index
 import dev.morphia.annotations.Indexes
 import dev.morphia.annotations.Transient
 import dev.morphia.utils.IndexType
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
+import org.bpg20.esatt.common.serializer.InstantSerializer
+import org.bpg20.esatt.common.serializer.ObjectIdSerializer
 import org.bson.types.ObjectId
 
 @Entity("theses")

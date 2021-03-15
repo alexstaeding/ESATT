@@ -5,7 +5,7 @@ import dev.morphia.annotations.Field
 import dev.morphia.annotations.Index
 import dev.morphia.annotations.Indexes
 import dev.morphia.utils.IndexType
-import org.bson.types.ObjectId
+import kotlinx.serialization.Serializable
 
 @Entity("users")
 @Indexes(

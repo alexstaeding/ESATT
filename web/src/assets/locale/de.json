@@ -82,10 +82,7 @@
     },
     "course": "Fachbereich",
     "search": "Suche",
-<<<<<<< HEAD
     "empty-table": "Es existieren noch keine Thesen.",
-=======
->>>>>>> bd694d9... Finished Dashboard
     "empty-filter": "Keine Thesis mit"
   },
   "thesis-detail": {
