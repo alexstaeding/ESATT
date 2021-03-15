@@ -8,7 +8,6 @@ import io.ktor.routing.*
 import io.ktor.serialization.*
 import io.ktor.server.netty.*
 import kotlinx.serialization.json.Json
-import org.bpg20.esatt.common.config.ConfigManager
 import org.bpg20.esatt.common.http.ApplicationRouting
 import org.slf4j.LoggerFactory
 
@@ -30,7 +29,6 @@ fun Application.module() {
   val logger = LoggerFactory.getLogger("ESATT")
   logger.info("Starting initialization")
   val injector = Guice.createInjector(ESATTModule(logger))
-  injector.getInstance(ConfigManager::class.java)
   routing {
     with(injector.getInstance(ApplicationRouting::class.java)) {
       configure()
