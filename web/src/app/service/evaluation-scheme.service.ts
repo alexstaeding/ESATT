@@ -75,13 +75,6 @@ export class EvaluationScheme {
   public criteria: Criterion[]
 }
 
-export class EvaluationSchemePreview {
-  public id: string
-  public lastUpdatedUtc: Date
-  public name: string
-  public description: string
-}
-
 export class Criterion {
   public name: string
   public description: string
