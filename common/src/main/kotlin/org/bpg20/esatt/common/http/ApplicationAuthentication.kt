@@ -8,8 +8,8 @@ import org.bpg20.esatt.common.Config
 
 class ApplicationAuthentication @Inject constructor(
   private val config: Config,
-) {
-  fun Application.configure() {
+) : Configurable<Application> {
+  override fun Application.configure() {
     install(Authentication) {
       basic {
         validate { credential ->

@@ -12,7 +12,7 @@ import kotlinx.serialization.json.Json
 import org.bpg20.esatt.common.http.ApplicationAuthentication
 import org.bpg20.esatt.common.http.ApplicationRouting
 import org.bpg20.esatt.common.http.AuthenticationRouting
-import org.bpg20.esatt.common.http.RouteConfigurable
+import org.bpg20.esatt.common.http.Configurable
 import org.bpg20.esatt.common.http.SinglePageApplication
 import org.slf4j.LoggerFactory
 
@@ -30,9 +30,7 @@ fun Application.module() {
   val logger = LoggerFactory.getLogger("ESATT")
   logger.info("Starting initialization")
   val injector = Guice.createInjector(ESATTModule(logger))
-  with(injector.getInstance(ApplicationAuthentication::class.java)) {
-    configure()
-  }
+  configure<Application, ApplicationAuthentication>(injector)
   install(SinglePageApplication) {
     folderPath = "static/ESATT"
     ignoreIfContains = Regex("^/api.*$")
@@ -40,13 +38,13 @@ fun Application.module() {
   }
   routing {
     authenticate {
-      configure<ApplicationRouting>(injector)
-      configure<AuthenticationRouting>(injector)
+      configure<Route, ApplicationRouting>(injector)
+      configure<Route, AuthenticationRouting>(injector)
     }
   }
 }
 
-inline fun <reified T : RouteConfigurable>Route.configure(injector: Injector) {
+inline fun <reified R, reified T : Configurable<R>> R.configure(injector: Injector) {
   with(injector.getInstance(T::class.java)) {
     configure()
   }

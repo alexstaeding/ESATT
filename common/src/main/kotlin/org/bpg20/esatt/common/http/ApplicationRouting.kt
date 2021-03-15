@@ -21,7 +21,7 @@ class ApplicationRouting @Inject constructor(
   private val evaluationSchemeRepository: EvaluationSchemeRepository,
   private val thesisRepository: ThesisRepository,
   private val userRepository: UserRepository,
-) : RouteConfigurable {
+) : Configurable<Route> {
   override fun Route.configure() {
     route("/api/v1/departments") {
       configureRepository(departmentRepository, Validation.DepartmentValidation)

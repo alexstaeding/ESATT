@@ -12,7 +12,7 @@ import org.bpg20.esatt.common.model.User
 
 class AuthenticationRouting @Inject constructor(
   private val userRepository: UserRepository,
-) : RouteConfigurable{
+) : Configurable<Route> {
 
   override fun Route.configure() {
     route("/api/v1/currentUser") {
