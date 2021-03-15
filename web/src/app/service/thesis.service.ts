@@ -22,25 +22,25 @@ export class ThesisService {
     preview: boolean = null,
     search: string = null,
   ): Promise<Thesis[]> {
-    var header = new HttpHeaders()
+    const headerMap = {}
     if (ascending != null) {
-      header = header.set("ascending", ascending.toString())
+      headerMap["ascending"] = ascending.toString()
     }
     if (field != null) {
-      header = header.set("field", field)
+       headerMap["field"] = field
     }
     if (limit != null) {
-      header = header.set("limit", limit.toString())
+        headerMap["limit"] =  limit.toString()
     }
     if (preview != null) {
-      header = header.set("preview", preview.toString())
+      headerMap["preview"] =  preview.toString()
     }
     if (search != null && search != "") {
-      header = header.set("search", search)
+        headerMap["search"] =  search
     }
     return this.http.get<Thesis[]>("http://localhost:8008/api/v1/theses",
     {
-      headers: header
+      headers: headerMap
     }).toPromise()
   }
 

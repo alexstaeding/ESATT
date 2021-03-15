@@ -336,8 +336,8 @@
           </div>
           <mat-form-field appearance="outline" class="col-4 pt-4">
             <mat-label><mat-icon>search</mat-icon> {{ 'evaluation-scheme.search' | translate }}</mat-label>
-            <input matInput (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value)"
-                   (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value) : {}" #search>
+            <input matInput (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField === 'createdUtc' ? null : currentField , null, true, search.value)"
+                   (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField === 'createdUtc' ? null : currentField, null, true, search.value) : {}" #search>
           </mat-form-field>
           <div class="col-1 pt-4">
             <button mat-mini-fab color="accent" class="search-button" (click)="initData(null, null, null, true, search.value)"><mat-icon>search</mat-icon></button>
@@ -368,12 +368,12 @@
               <td mat-cell *matCellDef="let scheme">{{ descriptionPreview(scheme?.description) }}</td>
             </ng-container>
 
-            <ng-container matColumnDef="createdOnUtc">
-              <th mat-header-cell class="text-center" *matHeaderCellDef (click)="sort('createdOnUtc')">
+            <ng-container matColumnDef="createdUtc">
+              <th mat-header-cell class="text-center" *matHeaderCellDef (click)="sort('createdUtc')">
                 <mat-icon>date_range</mat-icon>
                 {{ 'thesis-detail.grading.evalScheme-created' | translate }}
-                <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'createdOnUtc'">arrow_downward</mat-icon>
-                <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'createdOnUtc'">arrow_upward</mat-icon>
+                <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'createdUtc'">arrow_downward</mat-icon>
+                <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'createdUtc'">arrow_upward</mat-icon>
               </th>
               <td mat-cell *matCellDef="let scheme">{{ showDate(scheme?.id) }}</td>
             </ng-container>

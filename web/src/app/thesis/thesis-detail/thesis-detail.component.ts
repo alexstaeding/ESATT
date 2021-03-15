@@ -39,7 +39,7 @@ export class ThesisDetailComponent implements OnInit {
   secondFormGroup: FormGroup
   gradeGroup: FormGroup
   displayedColumns: string[] = ["checked", "Datum", "Notiz"]
-  evaluationSchemeColumnsScheme: string[] = ["name", "description", "createdOnUtc", "lastUpdatedUtc"]
+  evaluationSchemeColumnsScheme: string[] = ["name", "description", "createdUtc", "lastUpdatedUtc"]
   evaluationSchemeData: MatTableDataSource<EvaluationSchemePreview>
   selectedEvaluationScheme: EvaluationScheme = null
   treeControl = new NestedTreeControl<Grade>(node => node.grades)
@@ -503,26 +503,26 @@ export class ThesisDetailComponent implements OnInit {
     })
   }
 
-  sort(field : string){
-    if (this.currentField !== field){
+  sort(field: string) {
+    if (this.currentField !== field) {
       this.sorting = Sorting.NOT
     }
     this.currentField = field
-    if (this.sorting === Sorting.NOT){
+    if (this.sorting === Sorting.NOT) {
       this.sorting = Sorting.ASCENDING
-      if(field === "createdOnUtc") {
+      if (field === "createdUtc") {
         this.initData(true, null, null, true, this.searchValue)
         return
       }
       this.initData(true, field, null, true, this.searchValue)
-    } else if (this.sorting === Sorting.ASCENDING){
+    } else if (this.sorting === Sorting.ASCENDING) {
       this.sorting = Sorting.DESCENDING
-      if(field === "createdOnUtc") {
+      if (field === "createdUtc") {
         this.initData(false, null, null, true, this.searchValue)
         return
       }
       this.initData(false, field, null, true, this.searchValue)
-    } else if (this.sorting === Sorting.DESCENDING){
+    } else if (this.sorting === Sorting.DESCENDING) {
       this.sorting = Sorting.NOT
       this.initData(null, null, null, true, this.searchValue)
       this.currentField = null

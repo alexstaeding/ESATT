@@ -10,7 +10,7 @@ import {MatTableDataSource} from "@angular/material/table"
   styleUrls: ["./evaluation-scheme.component.scss"]
 })
 export class EvaluationSchemeComponent implements OnInit {
-  columnsScheme = ["name", "description", "createdOnUtc", "lastUpdatedUtc"]
+  columnsScheme = ["name", "description", "createdUtc", "lastUpdatedUtc"]
   data: MatTableDataSource<EvaluationSchemePreview>
   sorting = Sorting.NOT
   sortMode = Sorting
@@ -74,14 +74,14 @@ export class EvaluationSchemeComponent implements OnInit {
     this.currentField = field
     if (this.sorting === Sorting.NOT){
       this.sorting = Sorting.ASCENDING
-      if(field === "createdOnUtc") {
+      if(field === "createdUtc") {
         this.initData(true, null, null, true, this.searchValue)
         return
       }
       this.initData(true, field, null, true, this.searchValue)
     } else if (this.sorting === Sorting.ASCENDING){
       this.sorting = Sorting.DESCENDING
-      if(field === "createdOnUtc") {
+      if(field === "createdUtc") {
         this.initData(false, null, null, true, this.searchValue)
         return
       }
