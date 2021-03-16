@@ -15,6 +15,15 @@ export class ThesisService {
     })
   }
 
+  /**
+   * Loads theses from database.
+   *
+   * @param ascending true for ascending sorting
+   * @param field field to be used for sorting
+   * @param limit limit how many theses will be loaded
+   * @param preview true if only fields that are in the overview table are needed
+   * @param search value to search for in table
+   */
   public async getAll(
     ascending: boolean = null,
     field: string = null,
@@ -44,10 +53,20 @@ export class ThesisService {
     }).toPromise()
   }
 
+  /**
+   * Loads thesis with specified id from the database
+   *
+   * @param id id of the thesis
+   */
   public async get(id: string): Promise<Thesis> {
     return this.http.get<Thesis>("http://localhost:8008/api/v1/theses/" + id).toPromise()
   }
 
+  /**
+   * Adds a new thesis to the database
+   *
+   * @param thesis thesis to be added
+   */
   public async create(thesis: Thesis): Promise<Thesis> {
     return this.http.post<Thesis>("http://localhost:8008/api/v1/theses",
       thesis,
@@ -57,6 +76,11 @@ export class ThesisService {
       }).toPromise()
   }
 
+  /**
+   * Overwrites changed fields
+   *
+   * @param thesis thesis with the changed fields
+   */
   public async update(thesis: Thesis): Promise<Thesis> {
     return this.http.put<Thesis>("http://localhost:8008/api/v1/theses",
       thesis,

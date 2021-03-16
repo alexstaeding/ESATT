@@ -15,6 +15,15 @@ export class EvaluationSchemeService {
     })
   }
 
+  /**
+   * Loads evaluation schemes from database.
+   *
+   * @param ascending true for ascending sorting
+   * @param field field to be used for sorting
+   * @param limit limit how many evaluation schemes will be loaded
+   * @param preview true if only fields that are in the overview table are needed
+   * @param search value to search for in table
+   */
   public async getAll(
     ascending: boolean = null,
     field: string = null,
@@ -44,10 +53,20 @@ export class EvaluationSchemeService {
       }).toPromise()
   }
 
+  /**
+   * Loads evaluation scheme with specified id from the database
+   *
+   * @param id id of the evaluation scheme
+   */
   public async get(id: string): Promise<EvaluationScheme> {
     return this.http.get<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes/" + id).toPromise()
   }
 
+  /**
+   * Adds a new evaluation scheme to the database
+   *
+   * @param evaluationScheme evaluation scheme to be added
+   */
   public async create(evaluationScheme: EvaluationScheme): Promise<EvaluationScheme> {
     return this.http.post<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes",
       evaluationScheme,
@@ -57,6 +76,11 @@ export class EvaluationSchemeService {
       }).toPromise()
   }
 
+  /**
+   * Overwrites changed fields
+   *
+   * @param evaluationScheme evaluation scheme with the changed fields
+   */
   public async update(evaluationScheme: EvaluationScheme): Promise<EvaluationScheme> {
     return this.http.put<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes",
       evaluationScheme,
