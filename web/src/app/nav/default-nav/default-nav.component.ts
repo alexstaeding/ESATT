@@ -24,6 +24,11 @@ export class DefaultNavComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Returns whether the url is activated
+   *
+   * @param url url to check
+   */
   isActive(url: string) {
     return this.router.isActive(url, false)
   }

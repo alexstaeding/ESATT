@@ -51,6 +51,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Resets evaluation scheme to original evaluation scheme.
+   */
   resetEvaluationScheme() {
     const copy = this.deepCopy(this.originalEvaluationScheme)
     this.setAllCounters(copy.criteria)
@@ -59,6 +62,11 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     this.mode = Mode.NORMAL
   }
 
+  /**
+   * Returns a copy of the specified evaluation scheme.
+   *
+   * @param evaluationScheme the evaluation scheme that should be copied
+   */
   deepCopy(evaluationScheme: EvaluationScheme): EvaluationScheme {
     const copy = new EvaluationScheme()
     copy.id = evaluationScheme.id
@@ -68,6 +76,11 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     return copy
   }
 
+  /**
+   * Recursive method to copy a criteria list with all sub-criteria.
+   *
+   * @param criteria criteria list that should be copied
+   */
   copyCriteria(criteria: Criterion[]): Criterion[] {
     if (criteria == null || criteria.length === 0) {
       return []
@@ -85,6 +98,13 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     return copy
   }
 
+  /**
+   * Recursive method to set a counter for every criterion.
+   *
+   * @param criteria list of criteria that gets numbered consecutively
+   * @param parent super-criterion of the criteria list
+   * @param preCounter counter of the super-criterion
+   */
   setAllCounters(criteria: Criterion[], parent: Criterion = null, preCounter: string = "") {
     if (criteria == null || criteria.length === 0) {
       return
@@ -98,11 +118,17 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     })
   }
 
+  /**
+   * Enables edit mode.
+   */
   changeToEdit() {
     this.originalEvaluationScheme = this.deepCopy(this.evaluationScheme)
     this.mode = Mode.EDIT
   }
 
+  /**
+   * Saves changes in evaluation scheme fields.
+   */
   async save() {
     this.evaluationSchemeWithChanges = new EvaluationScheme()
     this.evaluationSchemeWithChanges.id = this.evaluationScheme.id
@@ -119,6 +145,12 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     this.mode = Mode.NORMAL
   }
 
+  /**
+   * Checks if the two specified criteria lists are identical
+   *
+   * @param first
+   * @param second
+   */
   equalCriteriaList(first: Criterion[], second: Criterion[]): boolean {
     if (first.length !== second.length) {
       return false
@@ -135,12 +167,18 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     return true
   }
 
+  /**
+   * Creates a new evaluation scheme
+   */
   async create() {
     this.originalEvaluationScheme = this.deepCopy(this.evaluationScheme)
     await this.evaluationSchemeService.create(this.evaluationScheme)
     this.mode = Mode.NORMAL
   }
 
+  /**
+   * Adds a new Criterion
+   */
   async addCriterion() {
     const newCriterion = {
       name: null,
@@ -156,7 +194,12 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     this.updateTree()
   }
 
-  addSubCriterion(node) {
+  /**
+   * Adds a new sub-criterion to the specified criterion.
+   *
+   * @param node criterion for which the sub-criterion is added
+   */
+  addSubCriterion(node : Criterion) {
     const newCriterion = {
       name: null,
       description: null,
@@ -171,13 +214,21 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     this.updateTree()
   }
 
+  /**
+   * Rebuilds the criteria tree.
+   */
   updateTree() {
     const data = this.dataSource.data
     this.dataSource.data = null
     this.dataSource.data = data
   }
 
-  removeCriterion(node) {
+  /**
+   * Removes the specified criterion.
+   *
+   * @param node criterion that should be deleted
+   */
+  removeCriterion(node : Criterion) {
     this.weightGroup.controls = {}
     const parent = this.parentMap.get(node)
     if (!!parent) {
@@ -193,7 +244,12 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     this.updateTree()
   }
 
-  calcRestWeight(node): number {
+  /**
+   * Calculates the remaining weight that can still be added for the specified criterion
+   *
+   * @param node criterion for which the remaining weight is to be calculated.
+   */
+  calcRestWeight(node : Criterion): number {
     const parent = this.parentMap.get(node)
     let criteria
     if (parent == null) {
@@ -208,6 +264,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     return (Math.round(weight * 10000000000) / 10000000000)
   }
 
+  /**
+   * Opens the error message that the weights do not tally.
+   */
   showTotalWeightError() {
     this.snackBar.open(this.translate.instant("evaluation-scheme.detail.total-weight-error"), null, {
       duration: 2000,
@@ -216,6 +275,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     })
   }
 
+  /**
+   * Opens the error message that no name for the evaluation scheme is specified.
+   */
   showNameMissingError() {
     this.snackBar.open(this.translate.instant("evaluation-scheme.detail.name-missing-error"), null, {
       duration: 3000,
@@ -224,6 +286,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     })
   }
 
+  /**
+   * Checks for errors before creating new evaluation scheme
+   */
   async createWithWeightControl() {
     if (this.evaluationScheme.name == null || this.evaluationScheme.name === "") {
       this.showNameMissingError()
@@ -235,6 +300,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks for errors before saving changes in evaluation scheme fields
+   */
   async saveWithWeightControl() {
     if (this.evaluationScheme.name == null || this.evaluationScheme.name === "") {
       this.showNameMissingError()
@@ -246,7 +314,12 @@ export class EvaluationSchemeDetailComponent implements OnInit {
     }
   }
 
-  private allWeightsCorrect(criteria): boolean {
+  /**
+   * Recursive method to check if all weights in each criteria list add up to 1.
+   *
+   * @param criteria criteria list that gets checked
+   */
+  allWeightsCorrect(criteria : Criterion[]): boolean {
     if (criteria == null || criteria.length === 0) {
       return true
     }
