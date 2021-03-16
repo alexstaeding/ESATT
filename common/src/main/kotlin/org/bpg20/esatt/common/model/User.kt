@@ -17,4 +17,5 @@ class User : ObjectWithId.ObjectWithObjectId() {
   var email: String? = null
   var firstName: String? = null
   var lastName: String? = null
+  var isLinkedLDAP: Boolean? = null
 }
