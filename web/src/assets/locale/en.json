@@ -144,6 +144,21 @@
       "total-gradeError": "Entered grade wrong!",
       "gradeError": "Not a grade!"
     }
+  },
+  "user": {
+    "pageTitle": "User",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "userName": "User name",
+    "email": "E-Mail",
+    "search": "Search",
+    "buttons": {
+      "create": "Add new User",
+      "close": "Close",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
   }
 }
 

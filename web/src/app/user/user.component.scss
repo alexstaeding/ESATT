@@ -1,0 +1,18 @@
+.mat-add {
+  background-color: limegreen;
+  color: #fff;
+}
+
+.table-overflow {
+  height: calc(100vh - 250px);
+  overflow: auto;
+}
+
+::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+mat-header-cell, mat-cell {
+  justify-content: center;
+}

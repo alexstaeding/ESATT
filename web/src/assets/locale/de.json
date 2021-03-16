@@ -144,5 +144,21 @@
       "total-gradeError": "Note falsch eingetragen!",
       "gradeError": "Keine Note!"
     }
+  },
+  "user": {
+    "pageTitle": "Nutzer",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "userName": "Nutzername",
+    "email": "E-Mail",
+    "search": "Suche",
+    "add-User": "Nutzer hinzufügen",
+    "buttons": {
+      "create": "Neuen Nutzer hinzufügen",
+      "close": "Schließen",
+      "edit": "Bearbeiten",
+      "save": "Speichern",
+      "cancel": "Abbrechen"
+    }
   }
 }

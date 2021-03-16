@@ -20,6 +20,11 @@
       {{ 'thesis.pageTitle' | translate }}
     </button>
     <button
+      [color]="isActive('/user') ? 'primary' : null"
+      mat-button routerLink="/user">
+      {{ 'user.pageTitle' | translate }}
+    </button>
+    <button
       type="button"
       aria-label="Select Language"
       mat-icon-button
