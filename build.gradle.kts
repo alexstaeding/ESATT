@@ -8,7 +8,7 @@ plugins {
 
 allprojects {
   group = "org.bpg20"
-  version = "0.1.2-SNAPSHOT"
+  version = "0.2.0-SNAPSHOT"
 
   repositories {
     mavenCentral()
