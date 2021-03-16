@@ -32,7 +32,7 @@ export class EvaluationSchemeComponent implements OnInit {
    *
    * @param ascending true for ascending sorting
    * @param field field to be used for sorting
-   * @param limit limit how many theses will be loaded
+   * @param limit limit how many evaluation schemes will be loaded
    * @param preview true if only fields that are in the overview table are needed
    * @param search value to search for in table
    */

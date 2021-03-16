@@ -77,9 +77,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   /**
-   * Recursive method to copy a criteria list with all sub-criteria.
+   * Recursive method to copy a list of criteria with all sub-criteria.
    *
-   * @param criteria criteria list that should be copied
+   * @param criteria list of criteria that should be copied
    */
   copyCriteria(criteria: Criterion[]): Criterion[] {
     if (criteria == null || criteria.length === 0) {
@@ -102,7 +102,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
    * Recursive method to set a counter for every criterion.
    *
    * @param criteria list of criteria that gets numbered consecutively
-   * @param parent super-criterion of the criteria list
+   * @param parent super-criterion of the list of criteria
    * @param preCounter counter of the super-criterion
    */
   setAllCounters(criteria: Criterion[], parent: Criterion = null, preCounter: string = "") {
@@ -146,7 +146,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   /**
-   * Checks if the two specified criteria lists are identical
+   * Checks if the two specified lists of criteria are identical
    *
    * @param first
    * @param second
@@ -265,7 +265,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   /**
-   * Opens the error message that the weights do not tally.
+   * Opens error message that the weights do not tally.
    */
   showTotalWeightError() {
     this.snackBar.open(this.translate.instant("evaluation-scheme.detail.total-weight-error"), null, {
@@ -276,7 +276,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   /**
-   * Opens the error message that no name for the evaluation scheme is specified.
+   * Opens error message that no name for the evaluation scheme is specified.
    */
   showNameMissingError() {
     this.snackBar.open(this.translate.instant("evaluation-scheme.detail.name-missing-error"), null, {
@@ -315,9 +315,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   /**
-   * Recursive method to check if all weights in each criteria list add up to 1.
+   * Recursive method to check if all weights in each list of criteria add up to 1.
    *
-   * @param criteria criteria list that gets checked
+   * @param criteria list of criteria that gets checked
    */
   allWeightsCorrect(criteria : Criterion[]): boolean {
     if (criteria == null || criteria.length === 0) {
