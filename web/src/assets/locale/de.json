@@ -153,6 +153,9 @@
     "email": "E-Mail",
     "search": "Suche",
     "add-User": "Nutzer hinzufügen",
+    "profile": "Profil",
+    "theses": "Thesen",
+    "empty-table": "Dieser Nutzer betreut aktuell keine Thesen.",
     "buttons": {
       "create": "Neuen Nutzer hinzufügen",
       "close": "Schließen",

@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>{{ "user.buttons.create" | translate }}</h2>
+<mat-dialog-content class="mr-1">
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>{{ "user.firstName" | translate }}</mat-label>
+    <input name="firstname" [(ngModel)]="this.user.firstName" matInput>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>{{ "user.lastName" | translate }}</mat-label>
+    <input name="lastname" [(ngModel)]="this.user.lastName" matInput>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>{{ "user.userName" | translate }}</mat-label>
+    <input name="userName" [(ngModel)]="this.user.userName" matInput>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>{{ "user.email" | translate }}</mat-label>
+    <input name="email" [(ngModel)]="this.user.email" matInput>
+  </mat-form-field>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="add" (click)="create()">
+    {{ "user.buttons.create" | translate }}
+  </button>
+  <span class="flex-spacer"></span>
+  <button mat-raised-button color="warn" mat-dialog-close>
+    {{ "user.buttons.close" | translate }}
+  </button>
+</div>

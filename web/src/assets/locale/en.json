@@ -152,6 +152,9 @@
     "userName": "User name",
     "email": "E-Mail",
     "search": "Search",
+    "profile": "Profile",
+    "theses": "Theses",
+    "empty-table": "This user is currently not supervising any theses.",
     "buttons": {
       "create": "Add new User",
       "close": "Close",

@@ -4,6 +4,7 @@ import {MatTableDataSource} from "@angular/material/table"
 import {Router} from "@angular/router"
 import {User, UserService} from "../service/user.service"
 import {UserDetailComponent} from "./user-detail/user-detail.component"
+import {UserNewComponent} from "./user-new/user-new.component"
 
 @Component({
   selector: "app-user",
@@ -92,8 +93,13 @@ export class UserComponent implements OnInit {
   openDialog(id: string = null) {
     if (id === this.currentUser.id) {
       this.router.navigate(["dashboard"])
-    } else {
+    } else if (id != null) {
       this.dialog.open(UserDetailComponent, {
+        width: "100%",
+        data: {id, component: this},
+      })
+    } else {
+      this.dialog.open(UserNewComponent, {
         data: {id, component: this},
       })
     }
