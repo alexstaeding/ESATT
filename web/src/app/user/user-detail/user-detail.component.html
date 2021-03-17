@@ -6,14 +6,14 @@
     <div class="col-12 col-md-6 col-xl-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>{{ "profile.firstName" | translate }}</mat-label>
-        <input [disabled]="!editorEnabled" matInput type="text" name="firstName" [(ngModel)]="user.firstName">
+        <input [disabled]="!editorEnabled || user.isLinkedLDAP" matInput type="text" name="firstName" [(ngModel)]="user.firstName">
       </mat-form-field>
     </div>
     <div class="col-12 col-md-6 col-xl-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>{{ "profile.lastName" | translate }}</mat-label>
         <input matInput type="text" name="lastName" [(ngModel)]="user.lastName"
-               [disabled]="!editorEnabled">
+               [disabled]="!editorEnabled || user.isLinkedLDAP">
       </mat-form-field>
     </div>
     <div class="col-12 col-md-6 col-xl-3">
@@ -26,13 +26,14 @@
     <div class="col-12 col-md-6 col-xl-3">
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>{{ "profile.email" | translate }}</mat-label>
-        <input matInput type="text" name="email" [(ngModel)]="user.email" [disabled]="!editorEnabled">
+        <input matInput type="text" name="email" [(ngModel)]="user.email"
+               [disabled]="!editorEnabled || user.isLinkedLDAP">
       </mat-form-field>
     </div>
   </div>
   <div>
     <button [hidden]="editorEnabled" mat-raised-button color="primary"
-            (click)="enableEditor()">
+            (click)="enableEditor()" [disabled]="user.isLinkedLDAP">
       {{ "profile.buttons.edit" | translate }}
     </button>
     <button [hidden]="!editorEnabled" mat-raised-button color="accent" (click)="save()">
