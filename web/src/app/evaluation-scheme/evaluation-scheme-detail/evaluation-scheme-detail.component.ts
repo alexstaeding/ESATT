@@ -52,7 +52,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
   }
 
   /**
-   * Resets evaluation scheme to original evaluation scheme.
+   * Resets edited evaluation scheme to original evaluation scheme.
    */
   resetEvaluationScheme() {
     const copy = this.deepCopy(this.originalEvaluationScheme)

@@ -62,7 +62,7 @@ export class EvaluationSchemeComponent implements OnInit {
   }
 
   /**
-   * calculates the creation date from the id.
+   * Calculates the creation date from the id.
    *
    * @param evalSchemeId id of the evaluation scheme
    */

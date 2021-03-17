@@ -102,7 +102,7 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   /**
-   * Resets thesis to original thesis.
+   * Resets edited thesis to original thesis.
    */
   resetThesis() {
     const copy = this.deepCopyThesis(this.originalThesis)
@@ -321,7 +321,7 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   /**
-   * deletes all checked notes
+   * Deletes all checked notes.
    */
   removeSelectedRows() {
     this.selection.selected.forEach(item => {
@@ -333,7 +333,7 @@ export class ThesisDetailComponent implements OnInit {
   }
 
   /**
-   * calculates the creation date from the id.
+   * Calculates the creation date from the id.
    *
    * @param evalSchemeId id of the evaluation scheme
    */
