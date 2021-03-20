@@ -370,7 +370,7 @@ export class ThesisDetailComponent implements OnInit {
     }
     for (const grade of grades) {
       if (grade.grades == null || grade.grades.length === 0) {
-        return
+        continue
       }
       grade.grade = 0.0
       this.clearAllGrades(grade.grades)
