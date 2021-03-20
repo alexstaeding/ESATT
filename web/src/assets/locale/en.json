@@ -1,4 +1,34 @@
 {
+  "document-template": {
+    "pageTitle": "Generate Documents",
+    "templateSelect": "Select Template:",
+    "thesisSelect": "Select Thesis:",
+    "name": "Template Name",
+    "texTemplate": "Latex Template",
+    "createNewTemplate": "Add new template",
+    "editTemplate": "Create template",
+    "name-error": "Please enter a name!",
+    "template-error": "Please insert a template",
+    "placeholder": "Placeholder",
+    "buttons": {
+      "createNewTemplate": "Add new template",
+      "saveChanges": "Save changes",
+      "create": "Create",
+      "cancel": "Cancel",
+      "thesisDetails": "Thesis Details",
+      "edit-tooltip": "Edit template",
+      "save-tooltip": "Save PDF",
+      "info-tooltip": "The placeholders will be replaced by the entered text. In the input fields, LaTeX syntax may be used.",
+      "thesis-info-tooltip": "To create a grading for a certain paper, a thesis can be selected. The evaluation criteria and grades can be accessed via: 'Thesis Details' -> 'Grading'. The placeholders (e.g. @calculatedGrade@) can be used in the LaTeX template and will be replaced by the given value."
+    },
+    "snackbar": {
+      "changed": "was updated.",
+      "created": "was created.",
+      "notAdded": "Error. Name or template is missing.",
+      "dismiss": "Dismiss",
+      "download": "Generating PDF..."
+    }
+  },
   "evaluation-scheme": {
     "title": "Evaluation Schemes",
     "name": "Name",

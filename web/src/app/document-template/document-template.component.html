@@ -1,0 +1,77 @@
+<div class="my-4 mx-5">
+  <h2>
+    {{ "document-template.pageTitle" | translate }}
+    <mat-icon matTooltip="{{ 'document-template.buttons.info-tooltip' | translate }}" matTooltipPosition="right">info</mat-icon>
+  </h2>
+  <hr>
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>{{ "document-template.templateSelect" | translate }}</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let documentTemplate of this.documentTemplates" [value]="documentTemplate.id"
+                    (click)="loadTemplate(documentTemplate.id)">
+          {{ documentTemplate.name }}
+        </mat-option>
+        <mat-option>
+          <button mat-raised-button color="add" (click)="openTemplateDetailDialog()">
+            {{ "document-template.buttons.createNewTemplate" | translate }}
+          </button>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="col-6 row">
+      <mat-form-field appearance="outline" class="col-8">
+        <mat-label>{{ "document-template.thesisSelect" | translate }}</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let thesis of this.theses" [value]="thesis.id" (click)="this.currentThesis = thesis; loadTemplate(currentTemplate.id)">
+            {{ thesis.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="col-4 pt-2">
+        <button mat-raised-button color="primary" [disabled]="currentThesis == null"
+              (click)="openThesisDetail(currentThesis)">{{ "document-template.buttons.thesisDetails" | translate}}
+        </button>
+        <mat-icon class="pl-2" matTooltip="{{ 'document-template.buttons.thesis-info-tooltip' | translate }}" matTooltipPosition="left">info</mat-icon>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <div class="row">
+    <div class="col-6 mat-elevation-z1 placeholder-height">
+      <h2 class="pt-2">{{ "document-template.placeholder" | translate }}</h2>
+      <div *ngIf="this.currentTemplate != null">
+        <mat-form-field
+          appearance="outline" class="col-12"
+          *ngFor="let placeholder of this.currentTemplate.placeholders">
+          <mat-label>{{ placeholder }}</mat-label>
+          <textarea matInput [ngModel]="placeHolderMap[placeholder]" class="placeholders"
+                    (ngModelChange)="placeHolderMap[placeholder] = $event"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-6 mat-elevation-z1">
+      <mat-form-field appearance="outline" class="col-12 pt-3 h-100">
+        <mat-label>{{ "document-template.tex-template" | translate }}</mat-label>
+        <textarea matInput readonly class="latex-template">{{ currentTemplate == null ? "" : currentTemplate.texTemplate }}</textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <br>
+
+  <button mat-mini-fab color="add" class="mx-3" (click)="openTemplateDetailDialog()"
+          matTooltip="{{ 'document-template.buttons.createNewTemplate' | translate }}">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-mini-fab [hidden]="currentTemplate == null || currentTemplate.id == null" color="primary" class="mx-3"
+          (click)="openTemplateDetailDialog(currentTemplate.id)" matTooltip="{{ 'document-template.buttons.edit-tooltip' | translate }}">
+    <mat-icon>mode_edit</mat-icon>
+  </button>
+  <button mat-mini-fab [hidden]="currentTemplate == null || currentTemplate.id == null" color="basic" [disabled]="downloadDisabled"
+          class="mx-3" (click)="generateDocs()" matTooltip="{{ 'document-template.buttons.save-tooltip' | translate }}">
+    <mat-icon>save</mat-icon>
+  </button>
+  <hr>
+</div>

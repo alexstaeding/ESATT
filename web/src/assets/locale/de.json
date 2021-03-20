@@ -1,4 +1,34 @@
 {
+  "document-template": {
+    "pageTitle": "Dokumente Generieren",
+    "templateSelect": "Vorlage wählen:",
+    "thesisSelect": "Thesis wählen:",
+    "name": "Templatename",
+    "tex-template": "Latex Template",
+    "createNewTemplate": "Vorlage hinzufügen",
+    "editTemplate": "Template bearbeiten",
+    "name-error": "Bitte geben Sie einen Namen ein!",
+    "template-error": "Bitte fügen Sie ein Template ein",
+    "placeholder": "Platzhalter",
+    "buttons": {
+      "createNewTemplate": "Vorlage hinzufügen",
+      "saveChanges": "Änderungen speichern",
+      "create": "Hinzufügen",
+      "cancel": "Abbrechen",
+      "thesisDetails": "Thesis Details",
+      "edit-tooltip": "Vorlage bearbeiten",
+      "save-tooltip": "PDF speichern",
+      "info-tooltip": "Die Platzhalter werden im LaTeX-Dokument durch den eingegebenen Text ersetzt. In den Eingabe-Feldern kann LaTeX-Syntax verwendet werden.",
+      "thesis-info-tooltip": "Um eine Bewertung für eine konkrete Arbeit zu verfassen, kann eine Thesis ausgewählt werden. Auf die Bewertungskriterien und Noten kann über 'Thesis Details' -> 'Bewertung' zugegriffen werden. Die Platzhalter (z.B. @calculatedGrade@) können in der LaTeX-Vorlage verwendet werden und werden im Dokument durch den eingetragenen Wert ersetzt."
+    },
+    "snackbar": {
+      "changed": "wurde bearbeitet.",
+      "created": "wurde erstellt.",
+      "not-added": "Fehlgeschlagen. Name oder Template fehlt.",
+      "dismiss": "Verstanden",
+      "download": "PDF wird generiert..."
+    }
+  },
   "evaluation-scheme": {
     "title": "Bewertungsschemata",
     "name": "Name",

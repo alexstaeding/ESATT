@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: "./dashboard/dashboard.module#DashboardModule"
   },
   {
+    path: 'document-template',
+    loadChildren: './document-template/document-template.module#DocumentTemplateModule'
+  },
+  {
     path: "evaluation-scheme",
     loadChildren: "./evaluation-scheme/evaluation-scheme.module#EvaluationSchemeModule"
   },

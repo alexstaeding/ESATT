@@ -1,6 +1,7 @@
 package org.bpg20.esatt.common.http
 
 import org.bpg20.esatt.common.model.Department
+import org.bpg20.esatt.common.model.DocumentTemplate
 import org.bpg20.esatt.common.model.EvaluationScheme
 import org.bpg20.esatt.common.model.ObjectWithId
 import org.bpg20.esatt.common.model.Thesis
@@ -54,6 +55,20 @@ object Validation {
     }
   }
 
+  fun validateString(property: String?, value: String?, writer: Appendable? = null): Boolean {
+    if (property != null && value != null) {
+      return false
+    }
+    if(property == null) {
+      writer?.appendLine("Placeholder $property is null")
+      return true
+    }
+    if(value == null) {
+      writer?.appendLine("Value $value of placeholder $property is null")
+    }
+    return true
+  }
+
   fun validateLimit(value: String?, writer: Appendable? = null): Pair<Int?, Boolean> {
     return validateInteger("limit", value, writer)
   }
@@ -82,6 +97,20 @@ object Validation {
     }
 
     override fun validateCreate(obj: Department, writer: Appendable?): Boolean = requireId(obj, writer)
+  }
+
+  object DocumentTemplateValidation : Model<DocumentTemplate> {
+    override fun validateSortByField(value: String?, writer: Appendable?): Pair<String?, Boolean> {
+      return when (value) {
+        null -> empty
+        "name"
+        -> value.success()
+        else -> {
+          writer?.appendLine("Could not sort document templates by field $value")
+          fail
+        }
+      }
+    }
   }
 
   object EvaluationSchemeValidation : Model<EvaluationScheme> {
