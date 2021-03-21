@@ -33,9 +33,17 @@ class ThesisRepository : ObjectIdRepository<Thesis>() {
     }
   }
 
+  private fun Thesis.injectCoSupervisor() {
+    userRepository.getOne(coSupervisorId ?: return)?.apply {
+      coSupervisorFirstName = firstName
+      coSupervisorLastName = lastName
+    }
+  }
+
   private fun Thesis.injectAll() {
     injectDepartment()
     injectSupervisor()
+    injectCoSupervisor()
   }
 
   override fun getOne(id: Any): Thesis? {

@@ -47,6 +47,7 @@ export class ThesisDetailComponent implements OnInit {
   departmentName: string
   departmentId: number
   departmentDialogRef: MatDialogRef<any>
+  supervisorDialogRef: MatDialogRef<any>
   gradeControl = new FormControl(null, Validators.pattern(/^[0-9]+(\.[0-9]+)?$/))
   sorting = Sorting.NOT
   sortMode = Sorting
@@ -63,6 +64,7 @@ export class ThesisDetailComponent implements OnInit {
     private snackBar: MatSnackBar,
     private translate: TranslateService,
     private departmentMatDialog: MatDialog,
+    private supervisorMatDialog: MatDialog
   ) {
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ["", Validators.required],
@@ -165,6 +167,15 @@ export class ThesisDetailComponent implements OnInit {
       }
       if (this.thesis.supervisorLastName !== this.originalThesis.supervisorLastName) {
         this.thesisWithChanges.supervisorLastName = this.thesis.supervisorLastName
+      }
+      if (this.thesis.coSupervisorId !== this.originalThesis.coSupervisorId) {
+        this.thesisWithChanges.coSupervisorId = this.thesis.coSupervisorId
+      }
+      if (this.thesis.coSupervisorFirstName !== this.originalThesis.coSupervisorFirstName) {
+        this.thesisWithChanges.coSupervisorFirstName = this.thesis.coSupervisorFirstName
+      }
+      if (this.thesis.coSupervisorLastName !== this.originalThesis.coSupervisorLastName) {
+        this.thesisWithChanges.coSupervisorLastName = this.thesis.coSupervisorLastName
       }
       if (this.thesis.evaluatorFirstName !== this.originalThesis.evaluatorFirstName) {
         this.thesisWithChanges.evaluatorFirstName = this.thesis.evaluatorFirstName
@@ -510,6 +521,9 @@ export class ThesisDetailComponent implements OnInit {
     copy.supervisorId = thesis.supervisorId
     copy.supervisorFirstName = thesis.supervisorFirstName
     copy.supervisorLastName = thesis.supervisorLastName
+    copy.coSupervisorId = thesis.coSupervisorId
+    copy.coSupervisorFirstName = thesis.coSupervisorFirstName
+    copy.coSupervisorLastName = thesis.coSupervisorLastName
     copy.evaluatorFirstName = thesis.evaluatorFirstName
     copy.evaluatorLastName = thesis.evaluatorLastName
     copy.thesisType = thesis.thesisType

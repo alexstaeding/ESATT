@@ -26,12 +26,19 @@ class Thesis : ObjectWithId.ObjectWithObjectId() {
   var email: String? = null
   var studentId: String? = null
   var supervisorId: ObjectId? = null
+  var coSupervisorId: ObjectId? = null
 
   @Transient
   var supervisorFirstName: String? = null
 
   @Transient
   var supervisorLastName: String? = null
+
+  @Transient
+  var coSupervisorFirstName: String? = null
+
+  @Transient
+  var coSupervisorLastName: String? = null
 
   var evaluatorFirstName: String? = null
   var evaluatorLastName: String? = null
