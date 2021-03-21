@@ -46,6 +46,15 @@ export class ThesisComponent implements OnInit {
     this.initData()
   }
 
+  /**
+   * Loads theses from database.
+   *
+   * @param ascending true for ascending sorting
+   * @param field field to be used for sorting
+   * @param limit limit how many theses will be loaded
+   * @param preview true if only fields that are in the overview table are needed
+   * @param search value to search for in table
+   */
   public initData(
     ascending: boolean = null,
     field: string = null,
@@ -59,14 +68,29 @@ export class ThesisComponent implements OnInit {
     })
   }
 
-  calcDate(lastUpdated: Date): string {
-    return (new Date(new Date(lastUpdated.toString()))).toLocaleDateString()
+  /**
+   * Returns date as a string in correct, current or specified locale.
+   *
+   * @param date date that gets normalized
+   */
+  calcDate(date: Date): string {
+    return (new Date(new Date(date.toString()))).toLocaleDateString()
   }
 
+  /**
+   * Returns a date in correct format.
+   *
+   * @param date date that gets normalized
+   */
   normalizeDate(date: Date): Date {
     return new Date(date)
   }
 
+  /**
+   * Opens a detail page for specified thesis.
+   *
+   * @param id id of the thesis
+   */
   openDialog(id: string = null) {
     this.dialog.open(ThesisDetailComponent, {
       width: "100%",
@@ -74,6 +98,11 @@ export class ThesisComponent implements OnInit {
     })
   }
 
+  /**
+   * Shortens title if it is too long.
+   *
+   * @param title title to be shortened
+   */
   titlePreview(title): string {
     if (title != null) {
       let preview = title.substring(0, 25)
@@ -85,6 +114,11 @@ export class ThesisComponent implements OnInit {
     return title
   }
 
+  /**
+   * Sorts table by specified field.
+   *
+   * @param field field to be sorted by
+   */
   sort(field : string){
     if (this.currentField !== field){
       this.sorting = Sorting.NOT
@@ -104,6 +138,9 @@ export class ThesisComponent implements OnInit {
   }
 }
 
+/**
+ * Enum for types of sort direction.
+ */
 export enum Sorting {
   NOT,
   DESCENDING,

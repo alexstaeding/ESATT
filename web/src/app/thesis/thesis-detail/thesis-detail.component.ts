@@ -101,6 +101,9 @@ export class ThesisDetailComponent implements OnInit {
     this.initData()
   }
 
+  /**
+   * Resets edited thesis to original thesis.
+   */
   resetThesis() {
     const copy = this.deepCopyThesis(this.originalThesis)
     this.thesis = copy
@@ -120,11 +123,17 @@ export class ThesisDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Enables edit mode.
+   */
   changeToEdit() {
     this.originalThesis = this.deepCopyThesis(this.thesis)
     this.currentMode = Mode.EDIT
   }
 
+  /**
+   * Saves changes in thesis fields and recalculates total grade if possible.
+   */
   async save() {
     this.calcGrade()
     if (this.thesis.calculatedGrade != null && this.thesis.calculatedGrade.toString() === "NaN") {
@@ -208,6 +217,9 @@ export class ThesisDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Opens error message that a grade is entered wrong.
+   */
   showGradeError() {
     this.snackBar.open(this.translate.instant("thesis-detail.grading.total-gradeError"), null, {
       duration: 2000,
@@ -216,6 +228,12 @@ export class ThesisDetailComponent implements OnInit {
     })
   }
 
+  /**
+   * Checks if the two specified status are identical
+   *
+   * @param first
+   * @param second
+   */
   equalStatus(first: Status, second: Status): boolean {
     return !(first.allocationDateUtc !== second.allocationDateUtc || first.signUpUtc !== second.signUpUtc ||
       first.presentationUtc !== second.presentationUtc || first.dueDateUtc !== second.dueDateUtc ||
@@ -223,6 +241,12 @@ export class ThesisDetailComponent implements OnInit {
       first.gradedUtc !== second.gradedUtc || first.reportCreatedUtc !== second.reportCreatedUtc)
   }
 
+  /**
+   * Checks if the two specified list of notes are identical
+   *
+   * @param first
+   * @param second
+   */
   equalNotes(first: Note[], second: Note[]): boolean {
     if (first.length !== second.length) {
       return false
@@ -236,6 +260,12 @@ export class ThesisDetailComponent implements OnInit {
     return true
   }
 
+  /**
+   * Checks if the two specified gradings are identical
+   *
+   * @param first
+   * @param second
+   */
   equalGrading(first: Grading, second: Grading): boolean {
     if (first == null && second == null) {
       return true
@@ -246,6 +276,12 @@ export class ThesisDetailComponent implements OnInit {
     return this.equalGrades(first.grades, second.grades)
   }
 
+  /**
+   * Checks if the two specified lists of grades are identical
+   *
+   * @param first
+   * @param second
+   */
   equalGrades(first: Grade[], second: Grade[]): boolean {
     if (first.length !== second.length) {
       return false
@@ -261,6 +297,9 @@ export class ThesisDetailComponent implements OnInit {
     return true
   }
 
+  /**
+   * Creates a new thesis
+   */
   async create() {
     this.originalThesis = this.deepCopyThesis(this.thesis)
     this.calcGrade()
@@ -270,7 +309,10 @@ export class ThesisDetailComponent implements OnInit {
     await this.data.component.initData()
   }
 
-  addColumn() {
+  /**
+   * Adds a new note
+   */
+  addNote() {
     const note = new Note()
     note.content = ""
     note.createdUtc = new Date()
@@ -278,6 +320,9 @@ export class ThesisDetailComponent implements OnInit {
     this.datasource = new MatTableDataSource(this.thesis.notes)
   }
 
+  /**
+   * Deletes all checked notes.
+   */
   removeSelectedRows() {
     this.selection.selected.forEach(item => {
       const index: number = this.thesis.notes.findIndex(d => d === item)
@@ -287,19 +332,39 @@ export class ThesisDetailComponent implements OnInit {
     this.selection = new SelectionModel<Note>(true, [])
   }
 
+  /**
+   * Calculates the creation date from the id.
+   *
+   * @param evalSchemeId id of the evaluation scheme
+   */
   showDate(evalSchemeId): string {
     const date = new Date(parseInt(evalSchemeId.substring(0, 8), 16) * 1000)
     return date.toLocaleString()
   }
 
+  /**
+   * Returns date as a string in correct, current or specified locale.
+   *
+   * @param date date that gets normalized
+   */
   calcDate(lastUpdated: Date): string {
     return (new Date(new Date(lastUpdated.toString()).getTime())).toLocaleString()
   }
 
+  /**
+   * Returns a date in correct format.
+   *
+   * @param date date that gets normalized
+   */
   normalizeDate(date: Date): Date {
     return new Date(date)
   }
 
+  /**
+   * Shortens description if it is too long.
+   *
+   * @param description description to be shortened
+   */
   descriptionPreview(description): string {
     if (description != null) {
       let preview = description.substring(0, 50)
@@ -313,6 +378,11 @@ export class ThesisDetailComponent implements OnInit {
 
   hasChild = (_: number, node: Grade) => !!node.grades && node.grades.length > 0
 
+  /**
+   * Opens a detail page for specified evaluation scheme.
+   *
+   * @param id id of the evaluation scheme
+   */
   openEvalSchemeDetail(id) {
     this.evaluationSchemeService.get(id).then(result => {
       this.selectedEvaluationScheme = result
@@ -322,6 +392,13 @@ export class ThesisDetailComponent implements OnInit {
     })
   }
 
+  /**
+   * Recursive method to set a counter for every criterion.
+   *
+   * @param grades list of grades that gets numbered consecutively
+   * @param parent super-grade of the list of grades
+   * @param preCounter counter of the super-grade
+   */
   setAllCounters(grades: Grade[], parent: Grade = null, preCounter: string = "") {
     if (grades == null || grades.length === 0) {
       return
@@ -334,6 +411,10 @@ export class ThesisDetailComponent implements OnInit {
     })
   }
 
+  /**
+   * Copies the data of the evaluation scheme into the grading.
+   * @param evaluationScheme
+   */
   copyEvalSchemeToGrading(evaluationScheme) {
     this.grading = new Grading()
     this.grading.name = evaluationScheme.name
@@ -342,6 +423,12 @@ export class ThesisDetailComponent implements OnInit {
     this.copyCriteria(evaluationScheme.criteria, this.grading.grades)
   }
 
+  /**
+   * Recursive method to copy a list of criteria with all sub-criteria in a list of grades.
+   *
+   * @param criteria list of criteria that should be copied
+   * @param grades list of grades into which the data will be copied
+   */
   copyCriteria(criteria, grades) {
     if (criteria == null || criteria.length === 0) {
       return
@@ -354,6 +441,9 @@ export class ThesisDetailComponent implements OnInit {
     })
   }
 
+  /**
+   * Calculates the total grade.
+   */
   calcGrade() {
     if (this.grading != null) {
       this.clearAllGrades(this.grading.grades)
@@ -364,7 +454,12 @@ export class ThesisDetailComponent implements OnInit {
     }
   }
 
-  clearAllGrades(grades) {
+  /**
+   * Recursive method to set all grades to 0.0.
+   *
+   * @param grades list of grades to be cleared
+   */
+  clearAllGrades(grades: Grade[]) {
     if (grades == null || grades.length === 0) {
       return
     }
@@ -377,6 +472,11 @@ export class ThesisDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Recursive method that calculates grade of a list of grades
+   *
+   * @param grades
+   */
   calcSubgrades(grades): number {
     if (grades == null || grades.length === 0) {
       return 0.0
@@ -394,6 +494,11 @@ export class ThesisDetailComponent implements OnInit {
     return subgrade
   }
 
+  /**
+   * Returns a copy of the specified thesis.
+   *
+   * @param thesis the thesis that should be copied
+   */
   deepCopyThesis(thesis: Thesis): Thesis {
     const copy = new Thesis()
     copy.id = thesis.id
@@ -429,6 +534,11 @@ export class ThesisDetailComponent implements OnInit {
     return copy
   }
 
+  /**
+   * Returns a copy of the specified status.
+   *
+   * @param status the status that should be copied
+   */
   deepCopyStatus(status): Status {
     const newStatus = new Status()
     newStatus.allocationDateUtc = status.allocationDateUtc
@@ -442,6 +552,11 @@ export class ThesisDetailComponent implements OnInit {
     return newStatus
   }
 
+  /**
+   * Returns a copy of the specified grading.
+   *
+   * @param grading the grading that should be copied
+   */
   deepCopyGrading(grading: Grading): Grading {
     if (grading == null) {
       return null
@@ -453,6 +568,11 @@ export class ThesisDetailComponent implements OnInit {
     return copy
   }
 
+  /**
+   * Returns a copy of the specified list of grades.
+   *
+   * @param grades the list of grades that should be copied
+   */
   copyGrades(grades: Grade[]): Grade[] {
     if (grades == null || grades.length === 0) {
       return []
@@ -476,10 +596,16 @@ export class ThesisDetailComponent implements OnInit {
 
   @ViewChild("departmentDialog", {static: true}) departmentDialog: TemplateRef<any>
 
+  /**
+   * Opens a dialog for adding new departments.
+   */
   openDepartmentDialog() {
     this.departmentDialogRef = this.departmentMatDialog.open(this.departmentDialog)
   }
 
+  /**
+   * Adds a new department.
+   */
   async addDepartment() {
     const department = new Department()
     department.name = this.departmentName
@@ -490,6 +616,15 @@ export class ThesisDetailComponent implements OnInit {
     this.departmentDialogRef.close()
   }
 
+  /**
+   * Loads evaluation schemes from database.
+   *
+   * @param ascending true for ascending sorting
+   * @param field field to be used for sorting
+   * @param limit limit how many evaluation schemes will be loaded
+   * @param preview true if only fields that are in the overview table are needed
+   * @param search value to search for in table
+   */
   public initData(
     ascending: boolean = null,
     field: string = null,
@@ -503,6 +638,11 @@ export class ThesisDetailComponent implements OnInit {
     })
   }
 
+  /**
+   * Sorts table by specified field.
+   *
+   * @param field field to be sorted by
+   */
   sort(field: string) {
     if (this.currentField !== field) {
       this.sorting = Sorting.NOT
@@ -543,6 +683,9 @@ export enum Gender {
   OTHER = "gender.other",
 }
 
+/**
+ * Enum for types of sort direction.
+ */
 export enum Sorting {
   NOT,
   DESCENDING,
