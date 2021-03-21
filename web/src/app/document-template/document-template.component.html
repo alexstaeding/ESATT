@@ -49,7 +49,8 @@
           *ngFor="let placeholder of this.currentTemplate.placeholders" appearance="outline"
           class="col-12">
           <mat-label>{{ placeholder }}</mat-label>
-          <textarea (ngModelChange)="placeHolderMap[placeholder] = $event" [ngModel]="placeHolderMap[placeholder]" class="placeholders"
+          <textarea (ngModelChange)="placeHolderMap[placeholder] = $event" [ngModel]="placeHolderMap[placeholder]"
+                    class="placeholders"
                     matInput></textarea>
         </mat-form-field>
       </div>
@@ -69,7 +70,8 @@
           matTooltip="{{ 'document-template.buttons.create-new-template' | translate }}">
     <mat-icon>add</mat-icon>
   </button>
-  <button (click)="openTemplateDetailDialog(currentTemplate.id)" [hidden]="currentTemplate == null || currentTemplate.id == null" class="mx-3" color="primary"
+  <button (click)="openTemplateDetailDialog(currentTemplate.id)" [hidden]="currentTemplate == null || currentTemplate.id == null"
+          class="mx-3" color="primary"
           mat-mini-fab
           matTooltip="{{ 'document-template.buttons.edit-tooltip' | translate }}">
     <mat-icon>mode_edit</mat-icon>

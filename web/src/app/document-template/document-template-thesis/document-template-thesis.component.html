@@ -213,7 +213,8 @@
             </th>
             <td *matCellDef="let element" mat-cell>
               <mat-form-field class="w-100" floatLabel="never">
-              <textarea [ngModel]="element['content']" disabled matInput placeholder="{{ 'thesis-detail.note-placeholder' | translate }}"
+              <textarea [ngModel]="element['content']" disabled matInput
+                        placeholder="{{ 'thesis-detail.note-placeholder' | translate }}"
                         rows="5"></textarea>
               </mat-form-field>
             </td>
