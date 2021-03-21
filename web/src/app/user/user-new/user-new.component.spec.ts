@@ -9,8 +9,7 @@ describe("UserNewComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserNewComponent]
-    })
-      .compileComponents()
+    }).compileComponents()
   })
 
   beforeEach(() => {
