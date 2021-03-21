@@ -18,7 +18,7 @@
       "thesis-details": "Thesis Details",
       "edit-tooltip": "Vorlage bearbeiten",
       "save-tooltip": "PDF speichern",
-      "info-tooltip": "Die Platzhalter werden im LaTeX-Dokument durch den eingegebenen Text ersetzt. In den Eingabe-Feldern kann LaTeX-Syntax verwendet werden.",
+      "info-tooltip": "Die Platzhalter werden im LaTeX-Dokument durch den eingegebenen Text ersetzt. Die Namen der Platzhalter dürfen Buchstaben ohne Umlaute, Zahlen und die Zeichen \".\", \"-\" und \"_\" enthalten. In den Eingabe-Feldern kann LaTeX-Syntax verwendet werden.",
       "thesis-info-tooltip": "Um eine Bewertung für eine konkrete Arbeit zu verfassen, kann eine Thesis ausgewählt werden. Auf die Bewertungskriterien und Noten kann über 'Thesis Details' -> 'Bewertung' zugegriffen werden. Die Platzhalter (z.B. @calculatedGrade@) können in der LaTeX-Vorlage verwendet werden und werden im Dokument durch den eingetragenen Wert ersetzt."
     },
     "snackbar": {

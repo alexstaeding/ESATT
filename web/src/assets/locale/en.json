@@ -18,7 +18,7 @@
       "thesis-details": "Thesis Details",
       "edit-tooltip": "Edit template",
       "save-tooltip": "Save PDF",
-      "info-tooltip": "The placeholders will be replaced by the entered text. In the input fields, LaTeX syntax may be used.",
+      "info-tooltip": "The placeholders will be replaced by the entered text. Placeholder names can include letters, numbers and the symbols \".\", \"-\" and \"_\". In the input fields, LaTeX syntax may be used.",
       "thesis-info-tooltip": "To create a grading for a certain paper, a thesis can be selected. The evaluation criteria and grades can be accessed via: 'Thesis Details' -> 'Grading'. The placeholders (e.g. @calculatedGrade@) can be used in the LaTeX template and will be replaced by the given value."
     },
     "snackbar": {
