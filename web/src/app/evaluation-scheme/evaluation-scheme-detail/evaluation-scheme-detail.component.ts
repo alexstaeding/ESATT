@@ -225,7 +225,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
    *
    * @param node criterion that should be deleted
    */
-  removeCriterion(node : Criterion) {
+  removeCriterion(node: Criterion) {
     this.weightGroup.controls = {}
     const parent = this.parentMap.get(node)
     if (!!parent) {
@@ -246,7 +246,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
    *
    * @param node criterion for which the remaining weight is to be calculated.
    */
-  calcRestWeight(node : Criterion): number {
+  calcRestWeight(node: Criterion): number {
     const parent = this.parentMap.get(node)
     let criteria
     if (parent == null) {
@@ -316,7 +316,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
    *
    * @param criteria list of criteria that gets checked
    */
-  allWeightsCorrect(criteria : Criterion[]): boolean {
+  allWeightsCorrect(criteria: Criterion[]): boolean {
     if (criteria == null || criteria.length === 0) {
       return true
     }

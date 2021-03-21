@@ -459,7 +459,7 @@ export class ThesisDetailComponent implements OnInit {
    *
    * @param grades list of grades to be cleared
    */
-  clearAllGrades(grades : Grade[]) {
+  clearAllGrades(grades: Grade[]) {
     if (grades == null || grades.length === 0) {
       return
     }
