@@ -1,0 +1,80 @@
+<div class="my-4 mx-5">
+  <div class="row">
+    <div class="col-7">
+      <h2>{{ "user.pageTitle" | translate }}</h2>
+      <hr>
+    </div>
+    <mat-form-field appearance="outline" class="col-4">
+      <mat-label>
+        <mat-icon>search</mat-icon>
+        {{ "user.search" | translate }}</mat-label>
+      <input matInput
+             (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value)"
+             (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value) : {}"
+             #search>
+    </mat-form-field>
+    <div class="col-1 pt-2">
+      <button mat-mini-fab color="accent" (click)="initData(null, null, null, true, search.value)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="table-overflow mat-elevation-z0">
+    <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0">
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('firstName')">
+          {{ "user.firstName" | translate }}
+          <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'firstName'">arrow_downward</mat-icon>
+          <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'firstName'">arrow_upward</mat-icon>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('lastName')">
+          {{ "user.lastName" | translate }}
+          <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'lastName'">arrow_downward</mat-icon>
+          <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'lastName'">arrow_upward</mat-icon>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('userName')">
+          {{ "user.userName" | translate }}
+          <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'userName'">arrow_downward</mat-icon>
+          <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'userName'">arrow_upward</mat-icon>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('email')">
+          {{ "user.email" | translate }}
+          <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'email'">arrow_downward</mat-icon>
+          <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'email'">arrow_upward</mat-icon>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row class="cursor-pointer grey-on-hover"
+          *matRowDef="let row; columns: displayedColumns;"
+          (click)="openDialog(row.id)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4" *ngIf="search.value !== ''">
+          {{ "user.empty-filter" | translate }} "{{ search.value }}"
+        </td>
+        <td class="mat-cell" colspan="4" *ngIf="search.value === ''">
+          {{ "user.empty-table" | translate }}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <button mat-mini-fab color="add" class="mx-3" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <hr>
+</div>

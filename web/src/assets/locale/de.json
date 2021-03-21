@@ -174,5 +174,24 @@
       "total-gradeError": "Note falsch eingetragen!",
       "gradeError": "Keine Note!"
     }
+  },
+  "user": {
+    "pageTitle": "Nutzer*innen",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "userName": "Benutzername",
+    "email": "E-Mail",
+    "search": "Suche",
+    "add-User": "Nutzer*in hinzufügen",
+    "profile": "Profil",
+    "theses": "Thesen",
+    "empty-table": "Diese*r Nutzer*in betreut aktuell keine Thesen.",
+    "buttons": {
+      "create": "Neue*n Nutzer*in hinzufügen",
+      "close": "Schließen",
+      "edit": "Bearbeiten",
+      "save": "Speichern",
+      "cancel": "Abbrechen"
+    }
   }
 }

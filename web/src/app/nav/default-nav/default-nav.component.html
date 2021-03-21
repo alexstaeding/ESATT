@@ -17,12 +17,17 @@
     <button
       [color]="isActive('/evaluation-scheme') ? 'primary' : null"
       mat-button routerLink="/evaluation-scheme">
-      {{ 'evaluation-scheme.title' | translate }}
+      {{ "evaluation-scheme.title" | translate }}
     </button>
     <button
       [color]="isActive('/thesis') ? 'primary' : null"
       mat-button routerLink="/thesis">
-      {{ 'thesis.pageTitle' | translate }}
+      {{ "thesis.pageTitle" | translate }}
+    </button>
+    <button
+      [color]="isActive('/user') ? 'primary' : null"
+      mat-button routerLink="/user">
+      {{ "user.pageTitle" | translate }}
     </button>
     <button
       type="button"

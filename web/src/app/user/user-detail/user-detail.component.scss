@@ -1,0 +1,23 @@
+.column {
+  float: left;
+  width: 50%;
+}
+
+mat-form-field-label:disabled,
+mat-input-element:disabled {
+  color: black;
+  outline: none;
+}
+
+input:disabled {
+  color: black;
+}
+
+::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+mat-header-cell, mat-cell {
+  justify-content: center;
+}
