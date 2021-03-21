@@ -75,12 +75,6 @@
             <mat-option *ngFor="let user of this.users" [value]="user.id">
               {{ user.firstName + " " + user.lastName }}
             </mat-option>
-
-            <mat-option class="pr-2 ml-2 my-2 bg-white">
-              <button mat-raised-button color="accent" (click)="openSupervisorDialog()">
-                {{ "thesis-detail.buttons.add-supervisor" | translate }}
-              </button>
-            </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-100">
@@ -89,44 +83,8 @@
             <mat-option *ngFor="let user of this.users" [value]="user.id">
               {{ user.firstName + " " + user.lastName }}
             </mat-option>
-            <mat-option class="pr-2 ml-2 my-2 bg-white">
-              <button mat-raised-button color="accent" (click)="openSupervisorDialog()">
-                {{ "thesis-detail.buttons.add-supervisor" | translate }}
-              </button>
-            </mat-option>
           </mat-select>
         </mat-form-field>
-
-        <ng-template #supervisorDialog>
-          <h2 mat-dialog-title>{{ "thesis-detail.buttons.add-supervisor" | translate }}</h2>
-          <mat-dialog-content class="mr-1">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>{{ "thesis.supervisor.firstName" | translate }}</mat-label>
-              <input name="newSupervisorFirstName" [(ngModel)]="newSupervisorFirstName" matInput>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>{{ "thesis.supervisor.lastName" | translate }}</mat-label>
-              <input name="newSupervisorLastName" [(ngModel)]="newSupervisorLastName" matInput>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>{{ "thesis.supervisor.userName" | translate }}</mat-label>
-              <input name="newSupervisorUserName" [(ngModel)]="newSupervisorUserName" matInput>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>{{ "thesis.supervisor.email" | translate }}</mat-label>
-              <input name="newSupervisorEmail" [(ngModel)]="newSupervisorEmail" matInput>
-            </mat-form-field>
-          </mat-dialog-content>
-          <div mat-dialog-actions>
-            <button mat-raised-button color="primary" (click)="addSupervisor()">
-              {{ "thesis-detail.buttons.save" | translate }}
-            </button>
-            <span class="flex-spacer"></span>
-            <button mat-raised-button color="warn" (click)="supervisorDialogRef.close()">
-              {{ "thesis-detail.buttons.cancel" | translate }}
-            </button>
-          </div>
-        </ng-template>
 
         <table cellspacing="0" class="w-100">
           <tr>
