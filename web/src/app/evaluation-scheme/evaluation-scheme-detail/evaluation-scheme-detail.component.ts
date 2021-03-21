@@ -147,9 +147,6 @@ export class EvaluationSchemeDetailComponent implements OnInit {
 
   /**
    * Checks if the two specified lists of criteria are identical
-   *
-   * @param first
-   * @param second
    */
   equalCriteriaList(first: Criterion[], second: Criterion[]): boolean {
     if (first.length !== second.length) {
