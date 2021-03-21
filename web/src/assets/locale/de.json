@@ -87,11 +87,11 @@
   },
   "thesis": {
     "pageTitle": "Thesen - Übersicht",
-    "studentFirstName": "Student (Vorname)",
-    "studentLastName": "Student (Nachname)",
+    "studentFirstName": "Student*in (Vorname)",
+    "studentLastName": "Student*in (Nachname)",
     "studentId": "Matrikelnummer",
-    "supervisorFirstName": "Betreuer (Vorname)",
-    "supervisorLastName": "Betreuer (Nachname)",
+    "supervisorFirstName": "Betreuer*in (Vorname)",
+    "supervisorLastName": "Betreuer*in (Nachname)",
     "supervisor": {
       "firstName": "Vorname",
       "lastName": "Nachname",
@@ -123,10 +123,10 @@
   },
   "thesis-detail": {
     "english-title": "Englischer Titel",
-    "supervisor": "Betreuer/in",
-    "coSupervisor": "Co-Betreuer/in",
-    "evaluator-firstname": "Gutachter (Vorname)",
-    "evaluator-lastname": "Gutachter (Nachname)",
+    "supervisor": "Betreuer*in",
+    "coSupervisor": "Co-Betreuer*in",
+    "evaluator-firstname": "Gutachter*in (Vorname)",
+    "evaluator-lastname": "Gutachter*in (Nachname)",
     "extended-duedate": "Verlängerte Abgabefrist",
     "assignmentDate": "Vergabedatum",
     "presentationDate": "Datum des Vortrags",
@@ -162,7 +162,7 @@
       "manage-evaluationScheme-Tooltip": "Ungespeicherten Änderungen gehen verloren!",
       "calc-grade": "Note berechnen",
       "add-department": "Neuen Fachbereich hinzufügen",
-      "add-supervisor": "Betreuer/in hinzufügen"
+      "add-supervisor": "Betreuer*in hinzufügen"
     },
     "grading": {
       "title": "Bewertung",
