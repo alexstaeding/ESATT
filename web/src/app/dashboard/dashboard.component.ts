@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
     this.searchValue = search
     await this.thesisService.getAll(ascending, field, limit, preview, search).then(result => {
       for (const thesis of result) {
-        if (thesis.supervisorId === this.user.id && thesis.status.reportCreatedUtc == null) {
+        if ((thesis.supervisorId === this.user.id || thesis.coSupervisorId === this.user.id) && thesis.status.reportCreatedUtc == null) {
           myTheses.push(thesis)
         }
       }

@@ -47,6 +47,15 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ "thesis-detail.coSupervisor" | translate }}</mat-label>
+          <mat-select [(value)]="thesis.coSupervisorId" disabled>
+            <mat-option *ngFor="let user of this.users" [value]="user.id">
+              {{ user.firstName + " " + user.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <table cellspacing="0" class="w-100">
           <tr>
             <td class="pr-2">
