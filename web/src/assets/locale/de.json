@@ -194,6 +194,8 @@
     "profile": "Profil",
     "theses": "Thesen",
     "empty-table": "Diese*r Nutzer*in betreut aktuell keine Thesen.",
+    "no-users": "Es existieren noch keine Nutzer*innen",
+    "empty-filter": "Kein*e Nutzer*in mit",
     "buttons": {
       "create": "Neue*n Nutzer*in hinzufügen",
       "close": "Schließen",
