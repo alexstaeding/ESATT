@@ -18,7 +18,8 @@ class DocumentTemplateRepository @Inject constructor(
   override fun updateOne(item: DocumentTemplate): DocumentTemplate? {
     item.placeholders = extractPlaceholders(item)
     val updated = super.updateOne(item)
-    // Empty Arrays will not be overwritten automatically.
+    /* Because of a bug in Morphia placeholders do not get updated when item.placeholders is an empty list.
+       therefore the following workaround is needed: */
     if (updated?.placeholders != item.placeholders) {
       val result = asQuery(item.getId()!!)
         .update(UpdateOperators.set(DocumentTemplate::placeholders.name, item.placeholders))

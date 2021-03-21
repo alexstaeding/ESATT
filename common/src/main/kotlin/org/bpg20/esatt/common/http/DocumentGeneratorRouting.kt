@@ -1,6 +1,7 @@
 package org.bpg20.esatt.common.http
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -13,6 +14,7 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 
+@Singleton
 class DocumentGeneratorRouting @Inject constructor(
   private val documentTemplateRepository: DocumentTemplateRepository
 ) : Configurable<Route> {
@@ -77,13 +79,9 @@ class DocumentGeneratorRouting @Inject constructor(
     val outputPath = "generated-documents"
     val pdfFileName = texFileName.replace(".tex", ".pdf")
     val convertLatex = Runtime.getRuntime().exec("pdflatex -output-directory $outputPath $texPath")
-    val inputSR = InputStreamReader(convertLatex.inputStream)
-    val buffReader = BufferedReader(inputSR)
-    for (l in buffReader.readLines()) {
-      println(l)
+    convertLatex.inputStream.bufferedReader().use {
+      it.readLines()
     }
-    buffReader.close()
-    inputSR.close()
     return GeneratedDocuments(pdfFileName, texFileName)
   }
 

@@ -23,7 +23,7 @@ class ApplicationRouting @Inject constructor(
     route("/api/v1/departments") {
       configureRepository(departmentRepository, Validation.DepartmentValidation)
     }
-    route("/api/v1/document-template") {
+    route("/api/v1/document-templates") {
       configureRepository(documentTemplateRepository, Validation.DocumentTemplateValidation)
     }
     route("/api/v1/evaluation-schemes") {

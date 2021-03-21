@@ -26,15 +26,15 @@ export class DocumentTemplateService {
   }
 
   public async getAll(): Promise<DocumentTemplate[]> {
-    return this.http.get<DocumentTemplate[]>("http://localhost:8008/api/v1/document-template").toPromise()
+    return this.http.get<DocumentTemplate[]>("http://localhost:8008/api/v1/document-templates").toPromise()
   }
 
   public async get(id: string): Promise<DocumentTemplate> {
-    return this.http.get<DocumentTemplate>("http://localhost:8008/api/v1/document-template/" + id).toPromise()
+    return this.http.get<DocumentTemplate>("http://localhost:8008/api/v1/document-templates/" + id).toPromise()
   }
 
   public async create(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return this.http.post<DocumentTemplate>("http://localhost:8008/api/v1/document-template",
+    return this.http.post<DocumentTemplate>("http://localhost:8008/api/v1/document-templates",
       documentTemplate,
       {
         headers: this.headers,
@@ -43,7 +43,7 @@ export class DocumentTemplateService {
   }
 
   public async update(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return this.http.put<DocumentTemplate>("http://localhost:8008/api/v1/document-template",
+    return this.http.put<DocumentTemplate>("http://localhost:8008/api/v1/document-templates",
       documentTemplate,
       {
         headers: this.headers,

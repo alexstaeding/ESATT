@@ -1,7 +1,6 @@
 package org.bpg20.esatt.common.model
 
 import kotlinx.serialization.Serializable
-import java.nio.file.Path
 
 @Serializable
 data class GeneratedDocuments (

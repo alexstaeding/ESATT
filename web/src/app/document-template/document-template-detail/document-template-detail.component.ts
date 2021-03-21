@@ -81,14 +81,6 @@ export class DocumentTemplateDetailComponent implements OnInit {
   }
 
   async saveChanges() {
-    const changedTemplate = new DocumentTemplate()
-    changedTemplate.id = this.originalTemplate.id
-    if (this.originalTemplate.name !== this.currentTemplate.name) {
-      changedTemplate.name = this.currentTemplate.name
-    }
-    if (this.originalTemplate.texTemplate !== this.currentTemplate.texTemplate) {
-      changedTemplate.texTemplate = this.currentTemplate.texTemplate
-    }
     if (this.currentTemplate.name == null
       || this.currentTemplate.name.trim() == ""
       || this.currentTemplate.texTemplate == null
@@ -100,14 +92,14 @@ export class DocumentTemplateDetailComponent implements OnInit {
       })
       return
     }
-    await this.documentTemplateService.update(changedTemplate)
+    await this.documentTemplateService.update(this.currentTemplate)
     this.snackBar.open(this.currentTemplate.name + " " + this.translate.instant("document-template.snackbar.changed"), null, {
       duration: 2000,
       verticalPosition: "bottom"
     })
     this.dialogRef.close()
     await this.passedData.component.initData()
-    await this.passedData.component.loadTemplate(changedTemplate.id)
+    await this.passedData.component.loadTemplate(this.currentTemplate.id)
   }
 }
 
