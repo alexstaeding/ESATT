@@ -5,190 +5,184 @@
       <hr>
     </div>
     <mat-form-field appearance="outline" class="col-4">
-      <mat-label>
-        <mat-icon>search</mat-icon>
-        {{ 'thesis.search' | translate }}</mat-label>
-      <input #search
-             (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value) : {}"
-             (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value)"
-             matInput>
+      <mat-label><mat-icon>search</mat-icon> {{ 'thesis.search' | translate }}</mat-label>
+      <input matInput (keyup.enter)="initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value)"
+             (keyup)="search.value == '' ? initData(sorting === sortMode.NOT ? null : sorting === sortMode.ASCENDING, currentField, null, true, search.value) : {}" #search>
     </mat-form-field>
     <div class="col-1 pt-2">
-      <button (click)="initData(null, null, null, true, search.value)" color="accent" mat-mini-fab>
-        <mat-icon>search</mat-icon>
-      </button>
+      <button mat-mini-fab color="accent"  (click)="initData(null, null, null, true, search.value)"><mat-icon>search</mat-icon></button>
     </div>
   </div>
   <div class="table-overflow mat-elevation-z0">
-    <table [dataSource]="data" class="text-center w-100 mat-elevation-z0" mat-table>
+    <table mat-table [dataSource]="data" class="text-center w-100 mat-elevation-z0">
       <ng-container matColumnDef="title">
-        <th (click)="sort('title')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('title')">
           {{ 'thesis.title' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'title'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'title'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>{{ titlePreview(element.title) }}</td>
+        <td mat-cell *matCellDef="let element">{{ titlePreview(element.title) }}</td>
       </ng-container>
 
       <ng-container matColumnDef="firstName">
-        <th (click)="sort('firstName')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('firstName')">
           {{ 'thesis.studentFirstName' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'firstName'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'firstName'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>{{ element.firstName }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastName">
-        <th (click)="sort('lastName')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('lastName')">
           {{ 'thesis.studentLastName' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'lastName'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'lastName'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>{{ element.lastName }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="studentId">
-        <th (click)="sort('studentId')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('studentId')">
           {{ 'thesis.studentId' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'studentId'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'studentId'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>{{ element.studentId }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.studentId }}</td>
       </ng-container>
 
       <ng-container matColumnDef="supervisorFirstName">
-        <th *matHeaderCellDef class="text-center" mat-header-cell>{{ 'thesis.supervisorFirstName' | translate }}</th>
-        <td *matCellDef="let element" mat-cell>{{ element.supervisorFirstName }}</td>
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.supervisorFirstName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.supervisorFirstName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="supervisorLastName">
-        <th *matHeaderCellDef class="text-center" mat-header-cell>{{ 'thesis.supervisorLastName' | translate }}</th>
-        <td *matCellDef="let element" mat-cell>{{ element.supervisorLastName }}</td>
+        <th mat-header-cell *matHeaderCellDef class="text-center">{{ 'thesis.supervisorLastName' | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.supervisorLastName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="thesisType">
-        <th (click)="sort('thesisType')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('thesisType')">
           {{ 'thesis.thesisType' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'thesisType'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'thesisType'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>{{ element.thesisType }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.thesisType }}</td>
       </ng-container>
 
       <ng-container matColumnDef="departmentId">
-        <th (click)="sort('departmentId')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('departmentId')">
           {{ 'thesis.department.department' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'departmentId'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'departmentId'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>
-          {{ element.departmentId == null ? null : element.departmentName + " (" + element.departmentId + ")" }}
+        <td mat-cell *matCellDef="let element">
+          {{ element.departmentId == null? null : element.departmentName + " (" + element.departmentId + ")" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="status.signUpUtc">
-        <th (click)="sort('status.signUpUtc')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('status.signUpUtc')">
           {{ 'thesis.status.signUpDate' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'status.signUpUtc'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'status.signUpUtc'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>
+        <td mat-cell *matCellDef="let element">
           <div *ngIf="element.status?.signUpUtc != null">
             {{ calcDate(element.status?.signUpUtc) }}
           </div>
-          <mat-checkbox *ngIf="element.status?.signUpUtc == null" [checked]="false" [disabled]="true"></mat-checkbox>
+          <mat-checkbox *ngIf="element.status?.signUpUtc == null" [disabled]="true" [checked]="false"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="status.dueDateUtc">
-        <th (click)="sort('status.dueDateUtc')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('status.dueDateUtc')">
           {{ 'thesis.status.dueDate' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'status.dueDateUtc'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'status.dueDateUtc'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>
+        <td mat-cell *matCellDef="let element">
           <div *ngIf="element.status?.dueDateUtc != null"> {{ calcDate(element.status?.dueDateUtc) }} </div>
-          <mat-checkbox *ngIf="element.status?.dueDateUtc == null" [checked]="false" [disabled]="true"></mat-checkbox>
+          <mat-checkbox *ngIf="element.status?.dueDateUtc == null" [disabled]="true" [checked]="false"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="status.extendedDueDateUtc">
-        <th (click)="sort('status.extendedDueDateUtc')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('status.extendedDueDateUtc')">
           {{ 'thesis.status.extendedDueDate' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'status.extendedDueDateUtc'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'status.extendedDueDateUtc'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>
-          <mat-checkbox [checked]="element.status?.extendedDueDateUtc != null" [disabled]="true"></mat-checkbox>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true" [checked]="element.status?.extendedDueDateUtc != null"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="status.submittedUtc">
-        <th (click)="sort('status.submittedUtc')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('status.submittedUtc')">
           {{ 'thesis.status.submitted' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'status.submittedUtc'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'status.submittedUtc'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>
-          <mat-checkbox [checked]="normalizeDate(element.status?.submittedUtc) < normalizeDate(currentDate)"
-                        [disabled]="true"></mat-checkbox>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.submittedUtc) < normalizeDate(currentDate)"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="status.presentationUtc">
-        <th (click)="sort('status.presentationUtc')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('status.presentationUtc')">
           {{ 'thesis.status.presented' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'status.presentationUtc'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'status.presentationUtc'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>
-          <mat-checkbox [checked]="normalizeDate(element.status?.presentationUtc) < normalizeDate(currentDate)"
-                        [disabled]="true"></mat-checkbox>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.presentationUtc) < normalizeDate(currentDate)"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="status.gradedUtc">
-        <th (click)="sort('status.gradedUtc')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('status.gradedUtc')">
           {{ 'thesis.status.graded' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'status.gradedUtc'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'status.gradedUtc'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>
-          <mat-checkbox [checked]="normalizeDate(element.status?.gradedUtc) < normalizeDate(currentDate)"
-                        [disabled]="true"></mat-checkbox>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.gradedUtc) < normalizeDate(currentDate)"></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="status.reportCreatedUtc">
-        <th (click)="sort('status.reportCreatedUtc')" *matHeaderCellDef class="text-center cursor-pointer" mat-header-cell>
+        <th mat-header-cell *matHeaderCellDef class="text-center cursor-pointer" (click)="sort('status.reportCreatedUtc')">
           {{ 'thesis.status.reportCreated' | translate }}
           <mat-icon *ngIf="sorting == sortMode.ASCENDING && currentField == 'status.reportCreatedUtc'">arrow_downward</mat-icon>
           <mat-icon *ngIf="sorting == sortMode.DESCENDING && currentField == 'status.reportCreatedUtc'">arrow_upward</mat-icon>
         </th>
-        <td *matCellDef="let element" mat-cell>
-          <mat-checkbox [checked]="normalizeDate(element.status?.reportCreatedUtc) < normalizeDate(currentDate)"
-                        [disabled]="true"></mat-checkbox>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true"
+                        [checked]="normalizeDate(element.status?.reportCreatedUtc) < normalizeDate(currentDate)"></mat-checkbox>
         </td>
       </ng-container>
 
-      <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
-      <tr (click)="openDialog(row.id)" *matRowDef="let row; columns: displayedColumns;"
-          class="cursor-pointer grey-on-hover"
-          mat-row></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row class="cursor-pointer grey-on-hover"
+          *matRowDef="let row; columns: displayedColumns;"
+          (click)="openDialog(row.id)"></tr>
 
-      <tr *matNoDataRow class="mat-row">
-        <td *ngIf="search.value !== ''" class="mat-cell" colspan="17">
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="17" *ngIf="search.value !== ''">
           {{ 'thesis.empty-filter' | translate }} "{{ search.value }}"
         </td>
-        <td *ngIf="search.value === ''" class="mat-cell" colspan="17">
+        <td class="mat-cell" colspan="17" *ngIf="search.value === ''">
           {{ 'thesis.empty-table' | translate }}
         </td>
       </tr>
     </table>
   </div>
   <br>
-  <button (click)="openDialog()" class="mx-3" color="add" mat-mini-fab>
+  <button mat-mini-fab color="add" class="mx-3" (click)="openDialog()">
     <mat-icon>add</mat-icon>
   </button>
   <hr>
