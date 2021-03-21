@@ -5,15 +5,12 @@ import com.google.inject.Injector
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
+import io.ktor.http.content.*
 import io.ktor.routing.*
 import io.ktor.serialization.*
 import io.ktor.server.netty.*
 import kotlinx.serialization.json.Json
-import org.bpg20.esatt.common.http.ApplicationAuthentication
-import org.bpg20.esatt.common.http.ApplicationRouting
-import org.bpg20.esatt.common.http.AuthenticationRouting
-import org.bpg20.esatt.common.http.Configurable
-import org.bpg20.esatt.common.http.SinglePageApplication
+import org.bpg20.esatt.common.http.*
 import org.slf4j.LoggerFactory
 
 fun main(args: Array<String>) = EngineMain.main(args)
@@ -41,8 +38,12 @@ fun Application.module() {
   }
   routing {
     authenticate(optional = authenticationOptional) {
+      static("/generated-documents/") {
+        files("generated-documents")
+      }
       configure<Route, ApplicationRouting>(injector)
       configure<Route, AuthenticationRouting>(injector)
+      configure<Route, DocumentGeneratorRouting>(injector)
     }
   }
 }

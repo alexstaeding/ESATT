@@ -1,0 +1,390 @@
+<h1 *ngIf="thesis.title != null; else defaultTitle" mat-dialog-title>{{ thesis.title }}</h1>
+<ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1></ng-template>
+
+<mat-dialog-content class="mat-typography">
+  <mat-tab-group [(selectedIndex)]="selectedTab" mat-align-tabs="start">
+    <mat-tab label="Details">
+      <div class="my-4 mx-5">
+        <h3>{{ "thesis-detail.header.information-on-thesis" | translate }}</h3>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ "thesis.title" | translate }}</mat-label>
+          <input [ngModel]="thesis.title" disabled matInput name="title" type="text" value="originalThesis.title">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ "thesis.thesisType" | translate }}</mat-label>
+          <input [ngModel]="thesis.thesisType" disabled matInput name="title-english" type="text">
+        </mat-form-field>
+
+        <table cellspacing="0" class="w-100">
+          <tr>
+            <td class="pr-2">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.department" | translate }}</mat-label>
+                <mat-select [(value)]="thesis.departmentId" disabled>
+                  <mat-option *ngFor="let department of this.departments" [value]="department.id">
+                    {{ department.name + " (" + department.id + ")" }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis.subject" | translate }}</mat-label>
+                <input [ngModel]="thesis.subject" disabled matInput name="subject" type="text">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ "thesis-detail.supervisor" | translate }}</mat-label>
+          <mat-select [(value)]="thesis.supervisorId" disabled>
+            <mat-option *ngFor="let user of this.users" [value]="user.id">
+              {{ user.firstName + " " + user.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <table cellspacing="0" class="w-100">
+          <tr>
+            <td class="pr-2">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.evaluator-firstname" | translate }}</mat-label>
+                <input [ngModel]="thesis.evaluatorFirstName" disabled matInput name="gutachter_first" type="text">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.evaluator-lastname" | translate }}</mat-label>
+                <input [ngModel]="thesis.evaluatorLastName" disabled matInput name="gutachter_last" type="text">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <table cellspacing="0" class="w-100">
+          <tr>
+            <td class="pr-2">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis.status.signUpDate" | translate }}</mat-label>
+                <input [matDatepicker]="pickerSignUpUtc" [ngModel]="thesis.status.signUpUtc" disabled matInput
+                       name="signUp">
+                <mat-datepicker-toggle [for]="pickerSignUpUtc" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #pickerSignUpUtc></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis.status.dueDate" | translate }}</mat-label>
+                <input [matDatepicker]="pickerDueDateUtc" [ngModel]="thesis.status.dueDateUtc" disabled matInput>
+                <mat-datepicker-toggle [for]="pickerDueDateUtc" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #pickerDueDateUtc></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <table class="w-100">
+          <tr>
+            <td class="pr-2">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.assignmentDate" | translate }}</mat-label>
+                <input [matDatepicker]="pickerAllocationDateUtc" [ngModel]="thesis.status.allocationDateUtc" disabled
+                       matInput>
+                <mat-datepicker-toggle [for]="pickerAllocationDateUtc" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #pickerAllocationDateUtc></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.extended-duedate" | translate }}</mat-label>
+                <input [matDatepicker]="pickerExtendedDueDateUtc" [ngModel]="thesis.status.extendedDueDateUtc" disabled
+                       matInput>
+                <mat-datepicker-toggle [for]="pickerExtendedDueDateUtc" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #pickerExtendedDueDateUtc></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <table class="w-100">
+          <tr>
+            <td class="pr-2">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.presentationDate" | translate }}</mat-label>
+                <input [matDatepicker]="pickerPresentationUtc" [ngModel]="thesis.status.presentationUtc" disabled matInput>
+                <mat-datepicker-toggle [for]="pickerPresentationUtc" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #pickerPresentationUtc></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.submissionDate" | translate }}</mat-label>
+                <input [matDatepicker]="pickerSubmissionUtc" [ngModel]="thesis.status.submittedUtc" disabled matInput>
+                <mat-datepicker-toggle [for]="pickerSubmissionUtc" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #pickerSubmissionUtc></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <table class="w-100">
+          <tr>
+            <td class="pr-2">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.gradingDate" | translate }}</mat-label>
+                <input [matDatepicker]="pickerGradingUtc" [ngModel]="thesis.status.gradedUtc" disabled matInput>
+                <mat-datepicker-toggle [for]="pickerGradingUtc" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #pickerGradingUtc></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.reportDate" | translate }}</mat-label>
+                <input [matDatepicker]="pickerReportUtc" [ngModel]="thesis.status.reportCreatedUtc" disabled
+                       matInput>
+                <mat-datepicker-toggle [for]="pickerReportUtc" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #pickerReportUtc></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <br>
+
+        <h3>{{ "thesis-detail.header.information-on-student" | translate }}</h3>
+        <table cellspacing="0" class="w-100">
+          <tr>
+            <td class="pr-2">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis.studentFirstName" | translate }}</mat-label>
+                <input [ngModel]="thesis.firstName" disabled matInput name="studentFirstName" type="text">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis.studentLastName" | translate }}</mat-label>
+                <input [ngModel]="thesis.lastName" disabled matInput name="studentLastName" type="text">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <table cellspacing="0" class="w-100">
+          <tr>
+            <td class="pr-2">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.student.email" | translate }}</mat-label>
+                <input [ngModel]="thesis.email" disabled email matInput name="email" type="email">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis.studentId" | translate }}</mat-label>
+                <input [ngModel]="thesis.studentId" disabled matInput name="matrikel" type="text">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <mat-form-field appearance="outline" class="w-50 pr-2 adjustingMargin">
+          <mat-label>{{ "thesis-detail.student.gender" | translate }}</mat-label>
+          <mat-select [ngModel]="thesis.gender" disabled name="geschlecht">
+            <mat-option *ngFor="let gender of genderType | keyvalue" [value]="gender.key">
+              {{ gender.value | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <h3>{{ "thesis-detail.header.notes" | translate }}</h3>
+        <table [dataSource]="datasource" class="w-100 ml-2 pr-5 mat-elevation-z0" mat-table>
+          <ng-container class="w-50" matColumnDef="Datum">
+            <th *matHeaderCellDef mat-header-cell>
+              {{ "thesis-detail.date" | translate }}
+            </th>
+            <td *matCellDef="let element" mat-cell>{{ element['createdUtc'] | date:'dd/MM/yyyy' }}</td>
+          </ng-container>
+
+          <ng-container class="w-50" matColumnDef="Notiz">
+            <th *matHeaderCellDef mat-header-cell>
+              {{ "thesis-detail.notes" | translate }}
+            </th>
+            <td *matCellDef="let element" mat-cell>
+              <mat-form-field class="w-100" floatLabel="never">
+              <textarea [ngModel]="element['content']" disabled matInput placeholder="{{ 'thesis-detail.note-placeholder' | translate }}"
+                        rows="5"></textarea>
+              </mat-form-field>
+            </td>
+          </ng-container>
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+      </div>
+    </mat-tab>
+
+
+    <mat-tab [disabled]="this.thesis.grading == null" label="{{ 'thesis-detail.grading.title' | translate }}">
+      <div *ngIf="grading != null" class="my-4 mx-5">
+        <form>
+          <div class="row">
+            <mat-form-field appearance="outline" class="col-12 col-md-10 col-lg-8 col-xl-6">
+              <mat-label>{{ "thesis-detail.grading.evalScheme-name" | translate }}</mat-label>
+              <input [name]="'name'" [ngModel]="this.grading.name" disabled matInput>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline" class="col-12 col-md-10 col-lg-8 col-xl-6">
+              <mat-label>{{ "thesis-detail.grading.evalScheme-description" | translate }}</mat-label>
+              <textarea [name]="'description'" [ngModel]="this.grading.description" disabled matInput>
+              </textarea>
+            </mat-form-field>
+          </div>
+
+          <hr>
+
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="evalSchemeTree">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+              <li>
+                <div class="mat-tree-node">
+                  <mat-card class="w-100">
+                    <div class="row">
+                      <div class="col-2">
+                        {{ node.counter }}
+                      </div>
+                      <div class="col-10 col-xl-4">
+                        <mat-form-field appearance="outline">
+                          <mat-label>
+                            {{ "thesis-detail.grading.selected.criterion" | translate }} (@{{node.counter}}criterion@)
+                          </mat-label>
+                          <input [name]="'criterionName' + node.counter" [ngModel]="node.name" disabled matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-2 d-xl-none"></div>
+                      <div class="col-10 col-lg-5 col-xl-3">
+                        <mat-form-field appearance="outline">
+                          <mat-label>
+                            {{ "thesis-detail.grading.selected.weight" | translate }} (@{{node.counter}}weight@)
+                          </mat-label>
+                          <input [name]="'criterionWeight' + node.counter" [ngModel]="node.weight" disabled matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-2 d-lg-none d-xl-none"></div>
+                      <div class="col-10 col-lg-5 col-xl-3">
+                        <mat-form-field appearance="outline">
+                          <mat-label>
+                            {{ "thesis-detail.grading.selected.grade" | translate }} (@{{node.counter}}grade@)
+                          </mat-label>
+                          <input [name]="'criterionGrade' + node.counter" [ngModel]="node.grade === 0 ? null : node.grade"
+                                 disabled matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-2">
+                        <button disabled mat-icon-button></button>
+                      </div>
+                      <div class="col-10">
+                        <mat-form-field appearance="outline">
+                          <mat-label>
+                            {{ "thesis-detail.grading.selected.description" | translate }} (@{{node.counter}}description@)
+                          </mat-label>
+                          <input [name]="'criterionDescription' + node.counter" [ngModel]="node.description" disabled matInput>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+              </li>
+            </mat-tree-node>
+
+            <mat-nested-tree-node *matTreeNodeDef="let node; when hasChild">
+              <li>
+                <div class="mat-tree-node">
+                  <mat-card class="w-100 py-3">
+                    <div class="row">
+                      <div class="col-2">
+                        {{ node.counter }}
+                      </div>
+                      <div class="col-10 col-xl-4">
+                        <mat-form-field appearance="outline">
+                          <mat-label>
+                            {{ "thesis-detail.grading.selected.criterion" | translate }} (@{{node.counter}}criterion@)
+                          </mat-label>
+                          <input [name]="'criterionName' + node.counter" [ngModel]="node.name" disabled matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-2 d-xl-none"></div>
+                      <div class="col-10 col-lg-5 col-xl-3">
+                        <mat-form-field appearance="outline">
+                          <mat-label>
+                            {{ "thesis-detail.grading.selected.weight" | translate }} (@{{node.counter}}weight@)
+                          </mat-label>
+                          <input [name]="'criterionWeight' + node.counter" [ngModel]="node.weight" disabled matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-2 d-lg-none d-xl-none"></div>
+                      <div class="col-10 col-lg-5 col-xl-3">
+                        <mat-form-field appearance="outline">
+                          <mat-label>
+                            {{ "thesis-detail.grading.selected.grade" | translate }} (@{{node.counter}}grade@)
+                          </mat-label>
+                          <input [name]="'criterionGrade' + node.counter"
+                                 [ngModel]="node.grade != null && node.grade.toString() === 'NaN' || node.grade === 0
+                                 ? null : node.grade"
+                                 disabled
+                                 matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-2">
+                        <button mat-icon-button matTreeNodeToggle>
+                          <mat-icon class="mat-icon-rtl-mirror">
+                            {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                          </mat-icon>
+                        </button>
+                      </div>
+                      <div class="col-10">
+                        <mat-form-field appearance="outline">
+                          <mat-label>
+                            {{ "thesis-detail.grading.selected.description" | translate }} (@{{node.counter}}description@)
+                          </mat-label>
+                          <input [name]="'criterionDescription' + node.counter" [ngModel]="node.description" disabled matInput>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </mat-card>
+                  <ul [class.evalSchemeTree-invisible]="!treeControl.isExpanded(node)">
+                    <ng-container matTreeNodeOutlet></ng-container>
+                  </ul>
+                </div>
+              </li>
+            </mat-nested-tree-node>
+          </mat-tree>
+          <hr>
+          <div class="py-3 row">
+            <div class="col-12 col-lg-6 col-xl-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.grading.selected.calculated-grade" | translate }} (@calculatedGrade@)</mat-label>
+                <input [name]="'calcuatedGrade'" [ngModel]="thesis.calculatedGrade != null && thesis.calculatedGrade.toString() === 'NaN' ||
+                       thesis.calculatedGrade === 0 ? null : thesis.calculatedGrade" disabled
+                       matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "thesis-detail.grading.selected.overwrite-grade" | translate }} (@overwrittenGrade@)</mat-label>
+                <input [name]="'grade'" [ngModel]="thesis.grade === 0 ? null : thesis.grade" disabled matInput>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+  <span class="flex-spacer"></span>
+  <button color="warn" mat-dialog-close mat-raised-button>
+    {{ "thesis-detail.buttons.close" | translate }}
+  </button>
+</div>

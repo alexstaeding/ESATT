@@ -9,15 +9,12 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.util.pipeline.*
-import org.bpg20.esatt.common.datastore.DepartmentRepository
-import org.bpg20.esatt.common.datastore.EvaluationSchemeRepository
-import org.bpg20.esatt.common.datastore.Repository
-import org.bpg20.esatt.common.datastore.ThesisRepository
-import org.bpg20.esatt.common.datastore.UserRepository
+import org.bpg20.esatt.common.datastore.*
 import org.bpg20.esatt.common.model.ObjectWithId
 
 class ApplicationRouting @Inject constructor(
   private val departmentRepository: DepartmentRepository,
+  private val documentTemplateRepository: DocumentTemplateRepository,
   private val evaluationSchemeRepository: EvaluationSchemeRepository,
   private val thesisRepository: ThesisRepository,
   private val userRepository: UserRepository,
@@ -25,6 +22,9 @@ class ApplicationRouting @Inject constructor(
   override fun Route.configure() {
     route("/api/v1/departments") {
       configureRepository(departmentRepository, Validation.DepartmentValidation)
+    }
+    route("/api/v1/document-templates") {
+      configureRepository(documentTemplateRepository, Validation.DocumentTemplateValidation)
     }
     route("/api/v1/evaluation-schemes") {
       configureRepository(evaluationSchemeRepository, Validation.EvaluationSchemeValidation)

@@ -1,0 +1,57 @@
+input {
+  display: initial !important;
+  margin: 0 5px 0 0 !important;
+}
+
+.mat-form-field {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-right: 10px;
+}
+
+.mat-input-element:disabled {
+  color: black;
+  outline: none;
+}
+
+::ng-deep.mat-select-disabled .mat-select-value {
+  color: black;
+  outline: none;
+}
+
+input:disabled {
+  color: black;
+}
+
+.evalSchemeTree-invisible {
+  display: none;
+}
+
+.evalSchemeTree ul,
+.evalSchemeTree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.mat-tree-node {
+  display: block;
+}
+
+.mat-nested-tree-node {
+  display: block;
+}
+
+mat-card {
+  margin-left: 20px;
+}
+
+li {
+  border: dashed black;
+  border-width: 0 0 0 1px;
+  padding-top: 10px;
+}
