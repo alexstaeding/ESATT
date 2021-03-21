@@ -2,8 +2,8 @@ import {Component, OnInit} from "@angular/core"
 import {DataToSend, DocumentTemplate, DocumentTemplateService} from "../service/document-template.service"
 import {DocumentTemplateDetailComponent} from "./document-template-detail/document-template-detail.component"
 import {DocumentTemplateThesisComponent} from "./document-template-thesis/document-template-thesis.component"
-import {MatDialog} from "@angular/material/dialog"
 import {Grade, Thesis, ThesisService} from "../service/thesis.service"
+import {MatDialog} from "@angular/material/dialog"
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {TranslateService} from "@ngx-translate/core"
 import Timeout = NodeJS.Timeout
@@ -67,7 +67,7 @@ export class DocumentTemplateComponent implements OnInit {
       for (let placeholder of tmpTemplate.placeholders) {
         this.placeHolderMap[placeholder] = ""
       }
-      if(this.currentThesis != null && this.currentThesis.grading != null){
+      if (this.currentThesis != null && this.currentThesis.grading != null) {
         this.placeHolderMap["calculatedGrade"] = this.currentThesis.calculatedGrade == null ? "" : this.currentThesis.calculatedGrade.toString()
         this.placeHolderMap["overwrittenGrade"] = this.currentThesis.grade == null ? "" : this.currentThesis.grade.toString()
         this.setAllCounters(this.currentThesis.grading.grades)
@@ -86,7 +86,9 @@ export class DocumentTemplateComponent implements OnInit {
   async generateDocs() {
     this.downloadDisabled = true
     const self = this
-    this.downloadDisabledTimer = setTimeout(function(){ self.downloadDisabled = false },5000)
+    this.downloadDisabledTimer = setTimeout(function() {
+      self.downloadDisabled = false
+    }, 5000)
     this.snackBar.open(this.translate.instant("document-template.snackbar.download"), null, {
       duration: 5000,
       verticalPosition: "bottom"
@@ -97,30 +99,30 @@ export class DocumentTemplateComponent implements OnInit {
     const pdfFileName = generatedDocuments.pdfFileName
     const texFileName = generatedDocuments.texFileName
 
-    const pdfUrl = "/generated-documents/" +pdfFileName
-    const texUrl = "/generated-documents/" +texFileName
-    const link = document.createElement('a');
+    const pdfUrl = "/generated-documents/" + pdfFileName
+    const texUrl = "/generated-documents/" + texFileName
+    const link = document.createElement("a")
 
-    link.href = pdfUrl;
-    link.download = "GeneratedPdf.pdf";
-    link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
-    setTimeout(function () {
-      window.URL.revokeObjectURL(pdfUrl);
-      link.remove();
-    }, 100);
+    link.href = pdfUrl
+    link.download = "GeneratedPdf.pdf"
+    link.dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}))
+    setTimeout(function() {
+      window.URL.revokeObjectURL(pdfUrl)
+      link.remove()
+    }, 100)
 
-    link.href = texUrl;
-    link.download = "GeneratedLatex.tex";
-    link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
-    setTimeout(function () {
-      window.URL.revokeObjectURL(texUrl);
-      link.remove();
-    }, 100);
+    link.href = texUrl
+    link.download = "GeneratedLatex.tex"
+    link.dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}))
+    setTimeout(function() {
+      window.URL.revokeObjectURL(texUrl)
+      link.remove()
+    }, 100)
     clearTimeout(this.downloadDisabledTimer)
     this.downloadDisabled = false
   }
 
-  openThesisDetail(thesis : Thesis){
+  openThesisDetail(thesis: Thesis) {
     this.thesisDetailDialog.open(DocumentTemplateThesisComponent, {
       width: "100%",
       data: {thesis, component: this}

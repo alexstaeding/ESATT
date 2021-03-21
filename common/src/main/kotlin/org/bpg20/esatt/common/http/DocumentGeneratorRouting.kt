@@ -74,34 +74,26 @@ class DocumentGeneratorRouting @Inject constructor(
     val pathAndName = replacePlaceholders(texTemplate, mappedPlaceHolders)
     val texPath = pathAndName.first
     val texFileName = pathAndName.second
-
     val outputPath = "generated-documents"
     val pdfFileName = texFileName.replace(".tex", ".pdf")
     val convertLatex = Runtime.getRuntime().exec("pdflatex -output-directory $outputPath $texPath")
-
     val inputSR = InputStreamReader(convertLatex.inputStream)
     val buffReader = BufferedReader(inputSR)
-
-    for (l in buffReader.readLines()){
+    for (l in buffReader.readLines()) {
       println(l)
     }
-
     buffReader.close()
     inputSR.close()
-
     return GeneratedDocuments(pdfFileName, texFileName)
   }
 
   private fun replacePlaceholders(texTemplate: String, mappedPlaceHolders: MutableMap<String, String>): Pair<String, String> {
     var finalTexTemplate = texTemplate
-
     for ((placeholder, value) in mappedPlaceHolders) {
       finalTexTemplate = finalTexTemplate.replace("@$placeholder@", value)
     }
     val fileName = "LatexFile${counter++}.tex"
-
     val path = "generated-documents/$fileName"
-
     File(path).writeText(finalTexTemplate)
     return Pair(path, fileName)
   }

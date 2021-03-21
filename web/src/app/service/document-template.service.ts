@@ -16,14 +16,12 @@ export class DocumentTemplateService {
   }
 
   generateDocumentsHeaders(dataToSend: DataToSend): HttpHeaders {
-    const headerMap : any = {}
+    const headerMap: any = {}
     for (const key of Object.keys(dataToSend.placeholders)) {
-
       headerMap[key] = dataToSend.placeholders[key]
     }
     headerMap["id"] = dataToSend.id
     headerMap["Content-Type"] = "application/json"
-
     return new HttpHeaders(headerMap)
   }
 
@@ -53,12 +51,12 @@ export class DocumentTemplateService {
       }).toPromise()
   }
 
-  public async generatePdf(dataToSend: DataToSend): Promise<GeneratedDocuments>{
+  public async generatePdf(dataToSend: DataToSend): Promise<GeneratedDocuments> {
     return this.http.get<GeneratedDocuments>("http://localhost:8008/api/v1/generate-documents",
       {
         headers: this.generateDocumentsHeaders(dataToSend),
         withCredentials: true
-    }).toPromise()
+      }).toPromise()
   }
 }
 

@@ -1,33 +1,33 @@
-  <h2 mat-dialog-title [hidden]="mode != modeRef.NEW">{{ "document-template.createNewTemplate" | translate }}</h2>
-  <h2 mat-dialog-title [hidden]="mode != modeRef.EDIT">{{ "document-template.editTemplate" | translate }}</h2>
+<h2 mat-dialog-title [hidden]="mode != modeRef.NEW">{{ "document-template.create-new-template" | translate }}</h2>
+<h2 mat-dialog-title [hidden]="mode != modeRef.EDIT">{{ "document-template.edit-template" | translate }}</h2>
 
-  <mat-dialog-content class="mr-1">
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>{{ "document-template.name" | translate }}</mat-label>
-      <input required matInput [(ngModel)]="this.currentTemplate.name" value="{{ this.currentTemplate.name }}">
-      <mat-error>{{ 'document-template.name-error' | translate }}</mat-error>
-    </mat-form-field>
+<mat-dialog-content class="mr-1">
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>{{ "document-template.template-name" | translate }}</mat-label>
+    <input required matInput [(ngModel)]="this.currentTemplate.name" value="{{ this.currentTemplate.name }}">
+    <mat-error>{{ "document-template.name-error" | translate }}</mat-error>
+  </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-100 h-75">
-      <mat-label>{{ "document-template.tex-template" | translate }}</mat-label>
-      <textarea required matInput [(ngModel)]="this.currentTemplate.texTemplate" class="latex-template">
+  <mat-form-field appearance="outline" class="w-100 h-75">
+    <mat-label>{{ "document-template.latex-template" | translate }}</mat-label>
+    <textarea required matInput [(ngModel)]="this.currentTemplate.texTemplate" class="latex-template">
         {{ this.currentTemplate.texTemplate }}</textarea>
-      <mat-error>{{ 'document-template.template-error' | translate }}</mat-error>
-    </mat-form-field>
-  </mat-dialog-content>
+    <mat-error>{{ "document-template.template-error" | translate }}</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
 
-  <div mat-dialog-actions>
-    <button mat-raised-button [hidden]="mode != modeRef.NEW" color="add" (click)="addDocumentTemplate()">
-      {{ "document-template.buttons.create" | translate }}
-    </button>
+<div mat-dialog-actions>
+  <button mat-raised-button [hidden]="mode != modeRef.NEW" color="add" (click)="addDocumentTemplate()">
+    {{ "document-template.buttons.create" | translate }}
+  </button>
 
-    <button mat-raised-button [hidden]="mode != modeRef.EDIT" color="primary" (click)="saveChanges()">
-      {{ "document-template.buttons.saveChanges" | translate }}
-    </button>
+  <button mat-raised-button [hidden]="mode != modeRef.EDIT" color="primary" (click)="saveChanges()">
+    {{ "document-template.buttons.save-changes" | translate }}
+  </button>
 
-    <span class="flex-spacer"></span>
+  <span class="flex-spacer"></span>
 
-    <button mat-raised-button color="warn" mat-dialog-close>
-      {{ "document-template.buttons.cancel" | translate }}
-    </button>
-  </div>
+  <button mat-raised-button color="warn" mat-dialog-close>
+    {{ "document-template.buttons.cancel" | translate }}
+  </button>
+</div>

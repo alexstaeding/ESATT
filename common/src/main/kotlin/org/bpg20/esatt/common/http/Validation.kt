@@ -59,11 +59,11 @@ object Validation {
     if (property != null && value != null) {
       return false
     }
-    if(property == null) {
+    if (property == null) {
       writer?.appendLine("Placeholder $property is null")
       return true
     }
-    if(value == null) {
+    if (value == null) {
       writer?.appendLine("Value $value of placeholder $property is null")
     }
     return true

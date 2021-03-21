@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing"
 
-import { DocumentTemplateThesisComponent } from './document-template-thesis.component';
+import {DocumentTemplateThesisComponent} from "./document-template-thesis.component"
 
-describe('DocumentTemplateThesisComponent', () => {
-  let component: DocumentTemplateThesisComponent;
-  let fixture: ComponentFixture<DocumentTemplateThesisComponent>;
+describe("DocumentTemplateThesisComponent", () => {
+  let component: DocumentTemplateThesisComponent
+  let fixture: ComponentFixture<DocumentTemplateThesisComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DocumentTemplateThesisComponent ]
+      declarations: [DocumentTemplateThesisComponent]
     })
-    .compileComponents();
-  });
+      .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DocumentTemplateThesisComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(DocumentTemplateThesisComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  it("should create", () => {
+    expect(component).toBeTruthy()
+  })
+})

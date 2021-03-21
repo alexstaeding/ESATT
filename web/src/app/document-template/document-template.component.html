@@ -1,12 +1,12 @@
 <div class="my-4 mx-5">
   <h2>
-    {{ "document-template.pageTitle" | translate }}
+    {{ "document-template.page-title" | translate }}
     <mat-icon matTooltip="{{ 'document-template.buttons.info-tooltip' | translate }}" matTooltipPosition="right">info</mat-icon>
   </h2>
   <hr>
   <div class="row">
     <mat-form-field appearance="outline" class="col-6">
-      <mat-label>{{ "document-template.templateSelect" | translate }}</mat-label>
+      <mat-label>{{ "document-template.template-select" | translate }}</mat-label>
       <mat-select>
         <mat-option *ngFor="let documentTemplate of this.documentTemplates" [value]="documentTemplate.id"
                     (click)="loadTemplate(documentTemplate.id)">
@@ -14,14 +14,14 @@
         </mat-option>
         <mat-option>
           <button mat-raised-button color="add" (click)="openTemplateDetailDialog()">
-            {{ "document-template.buttons.createNewTemplate" | translate }}
+            {{ "document-template.buttons.create-new-template" | translate }}
           </button>
         </mat-option>
       </mat-select>
     </mat-form-field>
     <div class="col-6 row">
       <mat-form-field appearance="outline" class="col-8">
-        <mat-label>{{ "document-template.thesisSelect" | translate }}</mat-label>
+        <mat-label>{{ "document-template.thesis-select" | translate }}</mat-label>
         <mat-select>
           <mat-option *ngFor="let thesis of this.theses" [value]="thesis.id" (click)="this.currentThesis = thesis; loadTemplate(currentTemplate.id)">
             {{ thesis.title }}
@@ -30,7 +30,7 @@
       </mat-form-field>
       <div class="col-4 pt-2">
         <button mat-raised-button color="primary" [disabled]="currentThesis == null"
-              (click)="openThesisDetail(currentThesis)">{{ "document-template.buttons.thesisDetails" | translate}}
+              (click)="openThesisDetail(currentThesis)">{{ "document-template.buttons.thesis-details" | translate}}
         </button>
         <mat-icon class="pl-2" matTooltip="{{ 'document-template.buttons.thesis-info-tooltip' | translate }}" matTooltipPosition="left">info</mat-icon>
       </div>
@@ -53,7 +53,7 @@
     </div>
     <div class="col-6 mat-elevation-z1">
       <mat-form-field appearance="outline" class="col-12 pt-3 h-100">
-        <mat-label>{{ "document-template.tex-template" | translate }}</mat-label>
+        <mat-label>{{ "document-template.latex-template" | translate }}</mat-label>
         <textarea matInput readonly class="latex-template">{{ currentTemplate == null ? "" : currentTemplate.texTemplate }}</textarea>
       </mat-form-field>
     </div>
@@ -62,7 +62,7 @@
   <br>
 
   <button mat-mini-fab color="add" class="mx-3" (click)="openTemplateDetailDialog()"
-          matTooltip="{{ 'document-template.buttons.createNewTemplate' | translate }}">
+          matTooltip="{{ 'document-template.buttons.create-new-template' | translate }}">
     <mat-icon>add</mat-icon>
   </button>
   <button mat-mini-fab [hidden]="currentTemplate == null || currentTemplate.id == null" color="primary" class="mx-3"
