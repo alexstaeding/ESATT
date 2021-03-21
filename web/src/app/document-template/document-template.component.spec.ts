@@ -9,8 +9,7 @@ describe("DocumentTemplateComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DocumentTemplateComponent]
-    })
-      .compileComponents()
+    }).compileComponents()
   })
 
   beforeEach(() => {
