@@ -193,6 +193,8 @@
     "profile": "Profile",
     "theses": "Theses",
     "empty-table": "This user is currently not supervising any theses.",
+    "no-users": "There are no Users.",
+    "empty-filter": "No User with",
     "buttons": {
       "create": "Add new User",
       "close": "Close",
