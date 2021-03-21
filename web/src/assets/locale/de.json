@@ -146,18 +146,18 @@
     }
   },
   "user": {
-    "pageTitle": "Nutzer",
+    "pageTitle": "Nutzer*innen",
     "firstName": "Vorname",
     "lastName": "Nachname",
-    "userName": "Nutzername",
+    "userName": "Benutzername",
     "email": "E-Mail",
     "search": "Suche",
-    "add-User": "Nutzer hinzufügen",
+    "add-User": "Nutzer*in hinzufügen",
     "profile": "Profil",
     "theses": "Thesen",
-    "empty-table": "Dieser Nutzer betreut aktuell keine Thesen.",
+    "empty-table": "Diese*r Nutzer*in betreut aktuell keine Thesen.",
     "buttons": {
-      "create": "Neuen Nutzer hinzufügen",
+      "create": "Neue*n Nutzer*in hinzufügen",
       "close": "Schließen",
       "edit": "Bearbeiten",
       "save": "Speichern",
