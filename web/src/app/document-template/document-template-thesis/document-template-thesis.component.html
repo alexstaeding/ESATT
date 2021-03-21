@@ -328,7 +328,8 @@
                           <mat-label>
                             {{ "thesis-detail.grading.selected.grade" | translate }} (@{{node.counter}}grade@)
                           </mat-label>
-                          <input [name]="'criterionGrade' + node.counter" [ngModel]="node.grade != null && node.grade.toString() === 'NaN' || node.grade === 0
+                          <input [name]="'criterionGrade' + node.counter"
+                                 [ngModel]="node.grade != null && node.grade.toString() === 'NaN' || node.grade === 0
                                  ? null : node.grade"
                                  disabled
                                  matInput>
