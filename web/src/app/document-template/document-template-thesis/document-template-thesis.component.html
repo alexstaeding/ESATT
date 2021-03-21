@@ -1,4 +1,4 @@
-<h1 mat-dialog-title *ngIf="thesis.title != null; else defaultTitle">{{ thesis.title }}</h1>
+<h1 *ngIf="thesis.title != null; else defaultTitle" mat-dialog-title>{{ thesis.title }}</h1>
 <ng-template #defaultTitle><h1 mat-dialog-title>{{ "thesis-detail.header.thesis-detail" | translate }}</h1></ng-template>
 
 <mat-dialog-content class="mat-typography">
@@ -9,12 +9,12 @@
 
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>{{ "thesis.title" | translate }}</mat-label>
-          <input matInput type="text" name="title" [ngModel]="thesis.title" value="originalThesis.title" disabled>
+          <input [ngModel]="thesis.title" disabled matInput name="title" type="text" value="originalThesis.title">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>{{ "thesis.thesisType" | translate }}</mat-label>
-          <input matInput type="text" name="title-english" [ngModel]="thesis.thesisType" disabled>
+          <input [ngModel]="thesis.thesisType" disabled matInput name="title-english" type="text">
         </mat-form-field>
 
         <table cellspacing="0" class="w-100">
@@ -32,7 +32,7 @@
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.subject" | translate }}</mat-label>
-                <input matInput type="text" name="subject" [ngModel]="thesis.subject" disabled>
+                <input [ngModel]="thesis.subject" disabled matInput name="subject" type="text">
               </mat-form-field>
             </td>
           </tr>
@@ -52,13 +52,13 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.evaluator-firstname" | translate }}</mat-label>
-                <input matInput type="text" name="gutachter_first" [ngModel]="thesis.evaluatorFirstName" disabled>
+                <input [ngModel]="thesis.evaluatorFirstName" disabled matInput name="gutachter_first" type="text">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.evaluator-lastname" | translate }}</mat-label>
-                <input matInput type="text" name="gutachter_last" [ngModel]="thesis.evaluatorLastName" disabled>
+                <input [ngModel]="thesis.evaluatorLastName" disabled matInput name="gutachter_last" type="text">
               </mat-form-field>
             </td>
           </tr>
@@ -69,17 +69,17 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.status.signUpDate" | translate }}</mat-label>
-                <input name="signUp" [ngModel]="thesis.status.signUpUtc" matInput [matDatepicker]="pickerSignUpUtc"
-                       disabled>
-                <mat-datepicker-toggle matSuffix [for]="pickerSignUpUtc"></mat-datepicker-toggle>
+                <input [matDatepicker]="pickerSignUpUtc" [ngModel]="thesis.status.signUpUtc" disabled matInput
+                       name="signUp">
+                <mat-datepicker-toggle [for]="pickerSignUpUtc" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #pickerSignUpUtc></mat-datepicker>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.status.dueDate" | translate }}</mat-label>
-                <input [ngModel]="thesis.status.dueDateUtc" matInput [matDatepicker]="pickerDueDateUtc" disabled>
-                <mat-datepicker-toggle matSuffix [for]="pickerDueDateUtc"></mat-datepicker-toggle>
+                <input [matDatepicker]="pickerDueDateUtc" [ngModel]="thesis.status.dueDateUtc" disabled matInput>
+                <mat-datepicker-toggle [for]="pickerDueDateUtc" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #pickerDueDateUtc></mat-datepicker>
               </mat-form-field>
             </td>
@@ -91,18 +91,18 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.assignmentDate" | translate }}</mat-label>
-                <input [ngModel]="thesis.status.allocationDateUtc" matInput [matDatepicker]="pickerAllocationDateUtc"
-                       disabled>
-                <mat-datepicker-toggle matSuffix [for]="pickerAllocationDateUtc"></mat-datepicker-toggle>
+                <input [matDatepicker]="pickerAllocationDateUtc" [ngModel]="thesis.status.allocationDateUtc" disabled
+                       matInput>
+                <mat-datepicker-toggle [for]="pickerAllocationDateUtc" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #pickerAllocationDateUtc></mat-datepicker>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.extended-duedate" | translate }}</mat-label>
-                <input [ngModel]="thesis.status.extendedDueDateUtc" matInput [matDatepicker]="pickerExtendedDueDateUtc"
-                       disabled>
-                <mat-datepicker-toggle matSuffix [for]="pickerExtendedDueDateUtc"></mat-datepicker-toggle>
+                <input [matDatepicker]="pickerExtendedDueDateUtc" [ngModel]="thesis.status.extendedDueDateUtc" disabled
+                       matInput>
+                <mat-datepicker-toggle [for]="pickerExtendedDueDateUtc" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #pickerExtendedDueDateUtc></mat-datepicker>
               </mat-form-field>
             </td>
@@ -114,16 +114,16 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.presentationDate" | translate }}</mat-label>
-                <input [ngModel]="thesis.status.presentationUtc" matInput [matDatepicker]="pickerPresentationUtc" disabled>
-                <mat-datepicker-toggle matSuffix [for]="pickerPresentationUtc"></mat-datepicker-toggle>
+                <input [matDatepicker]="pickerPresentationUtc" [ngModel]="thesis.status.presentationUtc" disabled matInput>
+                <mat-datepicker-toggle [for]="pickerPresentationUtc" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #pickerPresentationUtc></mat-datepicker>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.submissionDate" | translate }}</mat-label>
-                <input [ngModel]="thesis.status.submittedUtc" matInput [matDatepicker]="pickerSubmissionUtc" disabled>
-                <mat-datepicker-toggle matSuffix [for]="pickerSubmissionUtc"></mat-datepicker-toggle>
+                <input [matDatepicker]="pickerSubmissionUtc" [ngModel]="thesis.status.submittedUtc" disabled matInput>
+                <mat-datepicker-toggle [for]="pickerSubmissionUtc" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #pickerSubmissionUtc></mat-datepicker>
               </mat-form-field>
             </td>
@@ -135,17 +135,17 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.gradingDate" | translate }}</mat-label>
-                <input [ngModel]="thesis.status.gradedUtc" matInput [matDatepicker]="pickerGradingUtc" disabled>
-                <mat-datepicker-toggle matSuffix [for]="pickerGradingUtc"></mat-datepicker-toggle>
+                <input [matDatepicker]="pickerGradingUtc" [ngModel]="thesis.status.gradedUtc" disabled matInput>
+                <mat-datepicker-toggle [for]="pickerGradingUtc" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #pickerGradingUtc></mat-datepicker>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.reportDate" | translate }}</mat-label>
-                <input [ngModel]="thesis.status.reportCreatedUtc" matInput [matDatepicker]="pickerReportUtc"
-                       disabled>
-                <mat-datepicker-toggle matSuffix [for]="pickerReportUtc"></mat-datepicker-toggle>
+                <input [matDatepicker]="pickerReportUtc" [ngModel]="thesis.status.reportCreatedUtc" disabled
+                       matInput>
+                <mat-datepicker-toggle [for]="pickerReportUtc" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #pickerReportUtc></mat-datepicker>
               </mat-form-field>
             </td>
@@ -160,13 +160,13 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.studentFirstName" | translate }}</mat-label>
-                <input matInput type="text" name="studentFirstName" [ngModel]="thesis.firstName" disabled>
+                <input [ngModel]="thesis.firstName" disabled matInput name="studentFirstName" type="text">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.studentLastName" | translate }}</mat-label>
-                <input matInput type="text" name="studentLastName" [ngModel]="thesis.lastName" disabled>
+                <input [ngModel]="thesis.lastName" disabled matInput name="studentLastName" type="text">
               </mat-form-field>
             </td>
           </tr>
@@ -177,13 +177,13 @@
             <td class="pr-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.student.email" | translate }}</mat-label>
-                <input matInput type="email" name="email" email [ngModel]="thesis.email" disabled>
+                <input [ngModel]="thesis.email" disabled email matInput name="email" type="email">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis.studentId" | translate }}</mat-label>
-                <input matInput type="text" name="matrikel" [ngModel]="thesis.studentId" disabled>
+                <input [ngModel]="thesis.studentId" disabled matInput name="matrikel" type="text">
               </mat-form-field>
             </td>
           </tr>
@@ -191,7 +191,7 @@
 
         <mat-form-field appearance="outline" class="w-50 pr-2 adjustingMargin">
           <mat-label>{{ "thesis-detail.student.gender" | translate }}</mat-label>
-          <mat-select [ngModel]="thesis.gender" name="geschlecht" disabled>
+          <mat-select [ngModel]="thesis.gender" disabled name="geschlecht">
             <mat-option *ngFor="let gender of genderType | keyvalue" [value]="gender.key">
               {{ gender.value | translate }}
             </mat-option>
@@ -199,45 +199,45 @@
         </mat-form-field>
 
         <h3>{{ "thesis-detail.header.notes" | translate }}</h3>
-        <table mat-table [dataSource]="datasource" class="w-100 ml-2 pr-5 mat-elevation-z0">
-          <ng-container matColumnDef="Datum" class="w-50">
-            <th mat-header-cell *matHeaderCellDef>
+        <table [dataSource]="datasource" class="w-100 ml-2 pr-5 mat-elevation-z0" mat-table>
+          <ng-container class="w-50" matColumnDef="Datum">
+            <th *matHeaderCellDef mat-header-cell>
               {{ "thesis-detail.date" | translate }}
             </th>
-            <td mat-cell *matCellDef="let element">{{ element['createdUtc'] | date:'dd/MM/yyyy' }}</td>
+            <td *matCellDef="let element" mat-cell>{{ element['createdUtc'] | date:'dd/MM/yyyy' }}</td>
           </ng-container>
 
-          <ng-container matColumnDef="Notiz" class="w-50">
-            <th mat-header-cell *matHeaderCellDef>
+          <ng-container class="w-50" matColumnDef="Notiz">
+            <th *matHeaderCellDef mat-header-cell>
               {{ "thesis-detail.notes" | translate }}
             </th>
-            <td mat-cell *matCellDef="let element">
-              <mat-form-field floatLabel="never" class="w-100">
-              <textarea disabled matInput placeholder="{{ 'thesis-detail.note-placeholder' | translate }}" rows="5"
-                        [ngModel]="element['content']"></textarea>
+            <td *matCellDef="let element" mat-cell>
+              <mat-form-field class="w-100" floatLabel="never">
+              <textarea [ngModel]="element['content']" disabled matInput placeholder="{{ 'thesis-detail.note-placeholder' | translate }}"
+                        rows="5"></textarea>
               </mat-form-field>
             </td>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
         </table>
       </div>
     </mat-tab>
 
 
-    <mat-tab label="{{ 'thesis-detail.grading.title' | translate }}" [disabled]="this.thesis.grading == null">
-      <div class="my-4 mx-5" *ngIf="grading != null">
+    <mat-tab [disabled]="this.thesis.grading == null" label="{{ 'thesis-detail.grading.title' | translate }}">
+      <div *ngIf="grading != null" class="my-4 mx-5">
         <form>
           <div class="row">
             <mat-form-field appearance="outline" class="col-12 col-md-10 col-lg-8 col-xl-6">
               <mat-label>{{ "thesis-detail.grading.evalScheme-name" | translate }}</mat-label>
-              <input matInput disabled [name]="'name'" [ngModel]="this.grading.name">
+              <input [name]="'name'" [ngModel]="this.grading.name" disabled matInput>
             </mat-form-field>
           </div>
           <div class="row">
             <mat-form-field appearance="outline" class="col-12 col-md-10 col-lg-8 col-xl-6">
               <mat-label>{{ "thesis-detail.grading.evalScheme-description" | translate }}</mat-label>
-              <textarea matInput disabled [name]="'description'" [ngModel]="this.grading.description">
+              <textarea [name]="'description'" [ngModel]="this.grading.description" disabled matInput>
               </textarea>
             </mat-form-field>
           </div>
@@ -258,7 +258,7 @@
                           <mat-label>
                             {{ "thesis-detail.grading.selected.criterion" | translate }} (@{{node.counter}}criterion@)
                           </mat-label>
-                          <input matInput disabled [name]="'criterionName' + node.counter" [ngModel]="node.name">
+                          <input [name]="'criterionName' + node.counter" [ngModel]="node.name" disabled matInput>
                         </mat-form-field>
                       </div>
                       <div class="col-2 d-xl-none"></div>
@@ -267,7 +267,7 @@
                           <mat-label>
                             {{ "thesis-detail.grading.selected.weight" | translate }} (@{{node.counter}}weight@)
                           </mat-label>
-                          <input matInput disabled [name]="'criterionWeight' + node.counter" [ngModel]="node.weight">
+                          <input [name]="'criterionWeight' + node.counter" [ngModel]="node.weight" disabled matInput>
                         </mat-form-field>
                       </div>
                       <div class="col-2 d-lg-none d-xl-none"></div>
@@ -276,19 +276,19 @@
                           <mat-label>
                             {{ "thesis-detail.grading.selected.grade" | translate }} (@{{node.counter}}grade@)
                           </mat-label>
-                          <input matInput [name]="'criterionGrade' + node.counter"
-                                 [ngModel]="node.grade === 0 ? null : node.grade" disabled>
+                          <input [name]="'criterionGrade' + node.counter" [ngModel]="node.grade === 0 ? null : node.grade"
+                                 disabled matInput>
                         </mat-form-field>
                       </div>
                       <div class="col-2">
-                        <button mat-icon-button disabled></button>
+                        <button disabled mat-icon-button></button>
                       </div>
                       <div class="col-10">
                         <mat-form-field appearance="outline">
                           <mat-label>
                             {{ "thesis-detail.grading.selected.description" | translate }} (@{{node.counter}}description@)
                           </mat-label>
-                          <input matInput disabled [name]="'criterionDescription' + node.counter" [ngModel]="node.description">
+                          <input [name]="'criterionDescription' + node.counter" [ngModel]="node.description" disabled matInput>
                         </mat-form-field>
                       </div>
                     </div>
@@ -310,7 +310,7 @@
                           <mat-label>
                             {{ "thesis-detail.grading.selected.criterion" | translate }} (@{{node.counter}}criterion@)
                           </mat-label>
-                          <input matInput disabled [name]="'criterionName' + node.counter" [ngModel]="node.name">
+                          <input [name]="'criterionName' + node.counter" [ngModel]="node.name" disabled matInput>
                         </mat-form-field>
                       </div>
                       <div class="col-2 d-xl-none"></div>
@@ -319,7 +319,7 @@
                           <mat-label>
                             {{ "thesis-detail.grading.selected.weight" | translate }} (@{{node.counter}}weight@)
                           </mat-label>
-                          <input matInput disabled [name]="'criterionWeight' + node.counter" [ngModel]="node.weight">
+                          <input [name]="'criterionWeight' + node.counter" [ngModel]="node.weight" disabled matInput>
                         </mat-form-field>
                       </div>
                       <div class="col-2 d-lg-none d-xl-none"></div>
@@ -328,10 +328,10 @@
                           <mat-label>
                             {{ "thesis-detail.grading.selected.grade" | translate }} (@{{node.counter}}grade@)
                           </mat-label>
-                          <input matInput disabled
-                                 [name]="'criterionGrade' + node.counter"
-                                 [ngModel]="node.grade != null && node.grade.toString() === 'NaN' || node.grade === 0
-                                 ? null : node.grade">
+                          <input [name]="'criterionGrade' + node.counter" [ngModel]="node.grade != null && node.grade.toString() === 'NaN' || node.grade === 0
+                                 ? null : node.grade"
+                                 disabled
+                                 matInput>
                         </mat-form-field>
                       </div>
                       <div class="col-2">
@@ -346,7 +346,7 @@
                           <mat-label>
                             {{ "thesis-detail.grading.selected.description" | translate }} (@{{node.counter}}description@)
                           </mat-label>
-                          <input matInput disabled [name]="'criterionDescription' + node.counter" [ngModel]="node.description">
+                          <input [name]="'criterionDescription' + node.counter" [ngModel]="node.description" disabled matInput>
                         </mat-form-field>
                       </div>
                     </div>
@@ -363,15 +363,15 @@
             <div class="col-12 col-lg-6 col-xl-6">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.grading.selected.calculated-grade" | translate }} (@calculatedGrade@)</mat-label>
-                <input matInput disabled [name]="'calcuatedGrade'"
-                       [ngModel]="thesis.calculatedGrade != null && thesis.calculatedGrade.toString() === 'NaN' ||
-                       thesis.calculatedGrade === 0 ? null : thesis.calculatedGrade">
+                <input [name]="'calcuatedGrade'" [ngModel]="thesis.calculatedGrade != null && thesis.calculatedGrade.toString() === 'NaN' ||
+                       thesis.calculatedGrade === 0 ? null : thesis.calculatedGrade" disabled
+                       matInput>
               </mat-form-field>
             </div>
             <div class="col-12 col-lg-6 col-xl-6">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>{{ "thesis-detail.grading.selected.overwrite-grade" | translate }} (@overwrittenGrade@)</mat-label>
-                <input matInput [name]="'grade'" [ngModel]="thesis.grade === 0 ? null : thesis.grade" disabled>
+                <input [name]="'grade'" [ngModel]="thesis.grade === 0 ? null : thesis.grade" disabled matInput>
               </mat-form-field>
             </div>
           </div>
@@ -383,7 +383,7 @@
 
 <div mat-dialog-actions>
   <span class="flex-spacer"></span>
-  <button mat-raised-button color="warn" mat-dialog-close>
+  <button color="warn" mat-dialog-close mat-raised-button>
     {{ "thesis-detail.buttons.close" | translate }}
   </button>
 </div>

@@ -8,29 +8,31 @@ import {NestedTreeControl} from "@angular/cdk/tree"
 import {User, UserService} from "../../service/user.service"
 
 @Component({
-  selector: 'app-document-template-thesis',
-  templateUrl: './document-template-thesis.component.html',
-  styleUrls: ['./document-template-thesis.component.scss']
+  selector: "app-document-template-thesis",
+  templateUrl: "./document-template-thesis.component.html",
+  styleUrls: ["./document-template-thesis.component.scss"]
 })
 export class DocumentTemplateThesisComponent implements OnInit {
 
-  thesis : Thesis = new Thesis()
+  thesis: Thesis = new Thesis()
   selectedTab = 0
   genderType = Gender
   datasource: MatTableDataSource<Note>
   displayedColumns: string[] = ["Datum", "Notiz"]
   grading: Grading = new Grading()
   treeControl = new NestedTreeControl<Grade>(node => node.grades)
-  hasChild = (_: number, node: Grade) => !!node.grades && node.grades.length > 0
   dataSource = new MatTreeNestedDataSource<Grade>()
-  users : User[]
-  departments : Department[]
+  users: User[]
+  departments: Department[]
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     private userService: UserService,
     private departmentService: DepartmentService,
-  ) { }
+  ) {
+  }
+
+  hasChild = (_: number, node: Grade) => !!node.grades && node.grades.length > 0
 
   ngOnInit() {
     this.userService.getAll().then(result => {

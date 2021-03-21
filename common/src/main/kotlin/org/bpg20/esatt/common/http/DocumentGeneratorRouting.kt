@@ -10,9 +10,7 @@ import io.ktor.routing.*
 import io.ktor.util.pipeline.*
 import org.bpg20.esatt.common.datastore.*
 import org.bpg20.esatt.common.model.GeneratedDocuments
-import java.io.BufferedReader
 import java.io.File
-import java.io.InputStreamReader
 
 @Singleton
 class DocumentGeneratorRouting @Inject constructor(

@@ -52,6 +52,7 @@ export class ThesisDetailComponent implements OnInit {
   sortMode = Sorting
   currentField: string = null
   searchValue: string = ""
+  @ViewChild("departmentDialog", {static: true}) departmentDialog: TemplateRef<any>
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -473,8 +474,6 @@ export class ThesisDetailComponent implements OnInit {
     }
     return copy
   }
-
-  @ViewChild("departmentDialog", {static: true}) departmentDialog: TemplateRef<any>
 
   openDepartmentDialog() {
     this.departmentDialogRef = this.departmentMatDialog.open(this.departmentDialog)
