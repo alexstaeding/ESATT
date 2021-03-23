@@ -24,6 +24,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http"
 })
 export class EvaluationSchemeService {
 
+  host = window.location.origin
+  endpointEvaluationSchemes = this.host + "/api/v1/evaluation-schemes"
+
   constructor(private http: HttpClient) {
   }
 
@@ -57,15 +60,15 @@ export class EvaluationSchemeService {
       headerMap["field"] = field
     }
     if (limit != null) {
-      headerMap["limit"] =  limit.toString()
+      headerMap["limit"] = limit.toString()
     }
     if (preview != null) {
-      headerMap["preview"] =  preview.toString()
+      headerMap["preview"] = preview.toString()
     }
     if (search != null && search != "") {
-      headerMap["search"] =  search
+      headerMap["search"] = search
     }
-    return this.http.get<EvaluationScheme[]>("http://localhost:8008/api/v1/evaluation-schemes",
+    return this.http.get<EvaluationScheme[]>(this.endpointEvaluationSchemes,
       {
         headers: headerMap
       }).toPromise()
@@ -77,7 +80,7 @@ export class EvaluationSchemeService {
    * @param id id of the evaluation scheme
    */
   public async get(id: string): Promise<EvaluationScheme> {
-    return this.http.get<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes/" + id).toPromise()
+    return this.http.get<EvaluationScheme>(this.endpointEvaluationSchemes + "/" + id).toPromise()
   }
 
   /**
@@ -86,7 +89,7 @@ export class EvaluationSchemeService {
    * @param evaluationScheme evaluation scheme to be added
    */
   public async create(evaluationScheme: EvaluationScheme): Promise<EvaluationScheme> {
-    return this.http.post<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes",
+    return this.http.post<EvaluationScheme>(this.endpointEvaluationSchemes,
       evaluationScheme,
       {
         headers: this.headers,
@@ -100,7 +103,7 @@ export class EvaluationSchemeService {
    * @param evaluationScheme evaluation scheme with the changed fields
    */
   public async update(evaluationScheme: EvaluationScheme): Promise<EvaluationScheme> {
-    return this.http.put<EvaluationScheme>("http://localhost:8008/api/v1/evaluation-schemes",
+    return this.http.put<EvaluationScheme>(this.endpointEvaluationSchemes,
       evaluationScheme,
       {
         headers: this.headers,

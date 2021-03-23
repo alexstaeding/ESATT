@@ -24,6 +24,10 @@ import {HttpClient, HttpHeaders} from "@angular/common/http"
 })
 export class DocumentTemplateService {
 
+  host = window.location.origin
+  endpointDocumentTemplates = this.host + "/api/v1/document-templates"
+  endpointGenerateDocuments = this.host + "/api/v1/generate-documents"
+
   constructor(private http: HttpClient) {
   }
 
@@ -44,15 +48,15 @@ export class DocumentTemplateService {
   }
 
   public async getAll(): Promise<DocumentTemplate[]> {
-    return this.http.get<DocumentTemplate[]>("http://localhost:8008/api/v1/document-templates").toPromise()
+    return this.http.get<DocumentTemplate[]>(this.endpointDocumentTemplates).toPromise()
   }
 
   public async get(id: string): Promise<DocumentTemplate> {
-    return this.http.get<DocumentTemplate>("http://localhost:8008/api/v1/document-templates/" + id).toPromise()
+    return this.http.get<DocumentTemplate>(this.endpointDocumentTemplates + "/" + id).toPromise()
   }
 
   public async create(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return this.http.post<DocumentTemplate>("http://localhost:8008/api/v1/document-templates",
+    return this.http.post<DocumentTemplate>(this.endpointDocumentTemplates,
       documentTemplate,
       {
         headers: this.headers,
@@ -61,7 +65,7 @@ export class DocumentTemplateService {
   }
 
   public async update(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return this.http.put<DocumentTemplate>("http://localhost:8008/api/v1/document-templates",
+    return this.http.put<DocumentTemplate>(this.endpointDocumentTemplates,
       documentTemplate,
       {
         headers: this.headers,
@@ -70,7 +74,7 @@ export class DocumentTemplateService {
   }
 
   public async generatePdf(dataToSend: DataToSend): Promise<GeneratedDocuments> {
-    return this.http.get<GeneratedDocuments>("http://localhost:8008/api/v1/generate-documents",
+    return this.http.get<GeneratedDocuments>(this.endpointGenerateDocuments,
       {
         headers: this.generateDocumentsHeaders(dataToSend),
         withCredentials: true

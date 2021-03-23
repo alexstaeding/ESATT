@@ -24,6 +24,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http"
 })
 export class DepartmentService {
 
+  host = window.location.origin
+  endpointDepartments = this.host + "/api/v1/departments"
+
   constructor(private http: HttpClient) {
   }
 
@@ -37,7 +40,7 @@ export class DepartmentService {
    * Loads all departments from the database
    */
   public async getAll(): Promise<Department[]> {
-    return this.http.get<Department[]>("http://localhost:8008/api/v1/departments").toPromise()
+    return this.http.get<Department[]>(this.endpointDepartments).toPromise()
   }
 
   /**
@@ -46,7 +49,7 @@ export class DepartmentService {
    * @param id id of the department
    */
   public async get(id: string): Promise<Department> {
-    return this.http.get<Department>("http://localhost:8008/api/v1/departments/" + id).toPromise()
+    return this.http.get<Department>(this.endpointDepartments + "/" + id).toPromise()
   }
 
   /**
@@ -55,7 +58,7 @@ export class DepartmentService {
    * @param department department to be added
    */
   public async create(department: Department): Promise<Department> {
-    return this.http.post<Department>("http://localhost:8008/api/v1/departments",
+    return this.http.post<Department>(this.endpointDepartments,
       department,
       {
         headers: this.headers,
@@ -69,7 +72,7 @@ export class DepartmentService {
    * @param department department with the changed fields
    */
   public async update(department: Department): Promise<Department> {
-    return this.http.put<Department>("http://localhost:8008/api/v1/departments",
+    return this.http.put<Department>(this.endpointDepartments,
       department,
       {
         headers: this.headers,

@@ -24,6 +24,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http"
 })
 export class ThesisService {
 
+  host = window.location.origin
+  endpointTheses = this.host + "/api/v1/theses"
+
   constructor(private http: HttpClient) {
   }
 
@@ -54,21 +57,21 @@ export class ThesisService {
       headerMap["ascending"] = ascending.toString()
     }
     if (field != null) {
-       headerMap["field"] = field
+      headerMap["field"] = field
     }
     if (limit != null) {
-        headerMap["limit"] =  limit.toString()
+      headerMap["limit"] = limit.toString()
     }
     if (preview != null) {
-      headerMap["preview"] =  preview.toString()
+      headerMap["preview"] = preview.toString()
     }
     if (search != null && search != "") {
-        headerMap["search"] =  search
+      headerMap["search"] = search
     }
-    return this.http.get<Thesis[]>("http://localhost:8008/api/v1/theses",
-    {
-      headers: headerMap
-    }).toPromise()
+    return this.http.get<Thesis[]>(this.endpointTheses,
+      {
+        headers: headerMap
+      }).toPromise()
   }
 
   /**
@@ -77,7 +80,7 @@ export class ThesisService {
    * @param id id of the thesis
    */
   public async get(id: string): Promise<Thesis> {
-    return this.http.get<Thesis>("http://localhost:8008/api/v1/theses/" + id).toPromise()
+    return this.http.get<Thesis>(this.endpointTheses + "/" + id).toPromise()
   }
 
   /**
@@ -86,7 +89,7 @@ export class ThesisService {
    * @param thesis thesis to be added
    */
   public async create(thesis: Thesis): Promise<Thesis> {
-    return this.http.post<Thesis>("http://localhost:8008/api/v1/theses",
+    return this.http.post<Thesis>(this.endpointTheses,
       thesis,
       {
         headers: this.headers,
@@ -100,7 +103,7 @@ export class ThesisService {
    * @param thesis thesis with the changed fields
    */
   public async update(thesis: Thesis): Promise<Thesis> {
-    return this.http.put<Thesis>("http://localhost:8008/api/v1/theses",
+    return this.http.put<Thesis>(this.endpointTheses,
       thesis,
       {
         headers: this.headers,

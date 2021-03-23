@@ -24,6 +24,10 @@ import {HttpClient, HttpHeaders} from "@angular/common/http"
 })
 export class UserService {
 
+  host = window.location.origin
+  endpointUsers = this.host + "/api/v1/users"
+  endpointCurrentUser = this.host + "/api/v1/currentUser"
+
   constructor(private http: HttpClient) {
   }
 
@@ -65,7 +69,7 @@ export class UserService {
     if (search != null && search != "") {
       headerMap["search"] = search
     }
-    return this.http.get<User[]>("http://localhost:8008/api/v1/users",
+    return this.http.get<User[]>(this.endpointUsers,
       {
         headers: headerMap
       }).toPromise()
@@ -77,14 +81,14 @@ export class UserService {
    * @param id id of the user
    */
   public async get(id: string): Promise<User> {
-    return this.http.get<User>("http://localhost:8008/api/v1/users/" + id).toPromise()
+    return this.http.get<User>(this.endpointUsers + "/" + id).toPromise()
   }
 
   /**
    * Loads the currently signed in user
    */
   public async getUser(): Promise<User> {
-    return this.http.get<User>("http://localhost:8008/api/v1/currentUser").toPromise()
+    return this.http.get<User>(this.endpointCurrentUser).toPromise()
   }
 
   /**
@@ -93,7 +97,7 @@ export class UserService {
    * @param user user to be added
    */
   public async create(user: User): Promise<User> {
-    return this.http.post<User>("http://localhost:8008/api/v1/users",
+    return this.http.post<User>(this.endpointUsers,
       user,
       {
         headers: this.headers,
@@ -107,7 +111,7 @@ export class UserService {
    * @param user user with the changed fields
    */
   public async update(user: User): Promise<User> {
-    return this.http.put<User>("http://localhost:8008/api/v1/users",
+    return this.http.put<User>(this.endpointUsers,
       user,
       {
         headers: this.headers,
