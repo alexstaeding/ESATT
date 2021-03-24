@@ -22,6 +22,7 @@ import com.google.inject.Inject
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.ldap.*
+import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
@@ -44,22 +45,30 @@ class SessionRouting @Inject constructor(
         val password = call.request.header("password")
 
         if (userName == null || password == null) {
-          return@post call.respondText("Username or password missing", status = HttpStatusCode.BadRequest)
+          return@post call.respond(HttpStatusCode.BadRequest, LoginStatus.MISSING)
         }
+
+        logger.info("Attempted login for $userName @ ${call.request.origin}")
 
         val principal = ldapAuthenticate(
           UserPasswordCredential(userName, password),
           config.ldapConnection!!,
           config.ldapUserDNFormat!!
         ) {
-          logger.info("User ${it.name} logged in with LDAP")
+          logger.info("Successful login for ${it.name} with LDAP")
           userRepository.getOneOrCreateFromUserName(it.name, linkLDAP = true)
           UserIdPrincipal(it.name)
-        } ?: return@post call.respondText("Invalid username/password combination")
+        } ?: return@post call.respond(HttpStatusCode.BadRequest, LoginStatus.INVALID)
 
         call.sessions.set("LOGIN_SESSION", LoginSession(principal.name))
-        call.respondText(userName, status = HttpStatusCode.OK)
+        call.respond(HttpStatusCode.OK, LoginStatus.SUCCESS)
       }
     }
+  }
+
+  private enum class LoginStatus {
+    SUCCESS,
+    MISSING,
+    INVALID,
   }
 }

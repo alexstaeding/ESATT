@@ -92,14 +92,14 @@ export class UserService {
     return this.http.get<User>(this.endpointCurrentUser).toPromise()
   }
 
-  public async signIn(userName, password): Promise<boolean> {
-    return this.http.post<void>(this.endpointSignIn, {
+  public async signIn(userName, password): Promise<LoginStatus> {
+    return this.http.post<LoginStatus>(this.endpointSignIn, {
       headers: {
         userName,
         password,
       },
       withCredentials: true,
-    }).toPromise().then(_ => true, _ => false)
+    }).toPromise()
   }
 
   /**
@@ -139,4 +139,10 @@ export class User {
   public firstName: string
   public lastName: string
   public isLinkedLDAP: boolean
+}
+
+export enum LoginStatus {
+  SUCCESS,
+  MISSING,
+  INVALID,
 }
