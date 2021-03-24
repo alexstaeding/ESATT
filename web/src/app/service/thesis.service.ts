@@ -18,6 +18,7 @@
 
 import {Injectable} from "@angular/core"
 import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {Redirect} from "./Redirect";
 
 @Injectable({
   providedIn: "root"
@@ -68,10 +69,10 @@ export class ThesisService {
     if (search != null && search != "") {
       headerMap["search"] = search
     }
-    return this.http.get<Thesis[]>(this.endpointTheses,
+    return Redirect.handle(this.http.get<Thesis[]>(this.endpointTheses,
       {
         headers: headerMap
-      }).toPromise()
+      }))
   }
 
   /**
@@ -80,7 +81,7 @@ export class ThesisService {
    * @param id id of the thesis
    */
   public async get(id: string): Promise<Thesis> {
-    return this.http.get<Thesis>(this.endpointTheses + "/" + id).toPromise()
+    return Redirect.handle(this.http.get<Thesis>(this.endpointTheses + "/" + id))
   }
 
   /**
@@ -89,12 +90,12 @@ export class ThesisService {
    * @param thesis thesis to be added
    */
   public async create(thesis: Thesis): Promise<Thesis> {
-    return this.http.post<Thesis>(this.endpointTheses,
+    return Redirect.handle(this.http.post<Thesis>(this.endpointTheses,
       thesis,
       {
         headers: this.headers,
         withCredentials: true,
-      }).toPromise()
+      }))
   }
 
   /**
@@ -103,12 +104,12 @@ export class ThesisService {
    * @param thesis thesis with the changed fields
    */
   public async update(thesis: Thesis): Promise<Thesis> {
-    return this.http.put<Thesis>(this.endpointTheses,
+    return Redirect.handle(this.http.put<Thesis>(this.endpointTheses,
       thesis,
       {
         headers: this.headers,
         withCredentials: true
-      }).toPromise()
+      }))
   }
 }
 

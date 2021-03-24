@@ -16,32 +16,20 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.bpg20.esatt.common.http
+import {Observable} from "rxjs"
+import {HttpResponse} from "@angular/common/http";
 
-import com.google.inject.Inject
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.features.*
-import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.sessions.*
-import org.bpg20.esatt.common.Config
-import org.slf4j.Logger
-
-class ApplicationAuthentication @Inject constructor(
-  private val config: Config,
-  private val logger: Logger,
-) : Configurable<Application> {
-
-  override fun Application.configure() {
-    install(Authentication) {
-      session<LoginSession> {
-        skipWhen { call -> call.sessions.get<LoginSession>() != null }
-        challenge {
-          call.respond(HttpStatusCode.Unauthorized, "/sign-in")
-        }
-        validate { null }
-      }
-    }
+export class Redirect {
+  public static handle<T>(observable: Observable<HttpResponse<T>>): Promise<T> {
+    console.log("foo")
+    return observable.toPromise().then(result => {
+      console.log("100")
+      console.log(result)
+      return result
+    }, result => {
+      console.log("200")
+      console.log(result)
+      return null
+    })
   }
 }

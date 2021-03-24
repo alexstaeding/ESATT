@@ -18,6 +18,7 @@
 
 import {Injectable} from "@angular/core"
 import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {Redirect} from "./Redirect"
 
 @Injectable({
   providedIn: "root"
@@ -71,10 +72,10 @@ export class UserService {
     if (search != null && search != "") {
       headerMap["search"] = search
     }
-    return this.http.get<User[]>(this.endpointUsers,
+    return Redirect.handle(this.http.get<User[]>(this.endpointUsers,
       {
         headers: headerMap
-      }).toPromise()
+      }))
   }
 
   /**
@@ -83,14 +84,14 @@ export class UserService {
    * @param id id of the user
    */
   public async get(id: string): Promise<User> {
-    return this.http.get<User>(this.endpointUsers + "/" + id).toPromise()
+    return Redirect.handle(this.http.get<User>(this.endpointUsers + "/" + id, {observe: "response"}))
   }
 
   /**
    * Loads the currently signed in user
    */
   public async getUser(): Promise<User> {
-    return this.http.get<User>(this.endpointCurrentUser).toPromise()
+    return Redirect.handle(this.http.get<User>(this.endpointCurrentUser, {observe: "response"}))
   }
 
   public async signIn(userName, password): Promise<LoginStatus> {
@@ -113,12 +114,12 @@ export class UserService {
    * @param user user to be added
    */
   public async create(user: User): Promise<User> {
-    return this.http.post<User>(this.endpointUsers,
+    return Redirect.handle(this.http.post<User>(this.endpointUsers,
       user,
       {
         headers: this.headers,
         withCredentials: true
-      }).toPromise()
+      }))
   }
 
   /**
@@ -127,12 +128,12 @@ export class UserService {
    * @param user user with the changed fields
    */
   public async update(user: User): Promise<User> {
-    return this.http.put<User>(this.endpointUsers,
+    return Redirect.handle(this.http.put<User>(this.endpointUsers,
       user,
       {
         headers: this.headers,
         withCredentials: true
-      }).toPromise()
+      }))
   }
 }
 

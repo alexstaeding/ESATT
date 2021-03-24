@@ -18,6 +18,7 @@
 
 import {Injectable} from "@angular/core"
 import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {Redirect} from "./Redirect"
 
 @Injectable({
   providedIn: "root"
@@ -40,7 +41,7 @@ export class DepartmentService {
    * Loads all departments from the database
    */
   public async getAll(): Promise<Department[]> {
-    return this.http.get<Department[]>(this.endpointDepartments).toPromise()
+    return Redirect.handle(this.http.get<Department[]>(this.endpointDepartments))
   }
 
   /**
@@ -49,7 +50,7 @@ export class DepartmentService {
    * @param id id of the department
    */
   public async get(id: string): Promise<Department> {
-    return this.http.get<Department>(this.endpointDepartments + "/" + id).toPromise()
+    return Redirect.handle(this.http.get<Department>(this.endpointDepartments + "/" + id))
   }
 
   /**
@@ -58,12 +59,12 @@ export class DepartmentService {
    * @param department department to be added
    */
   public async create(department: Department): Promise<Department> {
-    return this.http.post<Department>(this.endpointDepartments,
+    return Redirect.handle(this.http.post<Department>(this.endpointDepartments,
       department,
       {
         headers: this.headers,
         withCredentials: true,
-      }).toPromise()
+      }))
   }
 
   /**
@@ -72,12 +73,12 @@ export class DepartmentService {
    * @param department department with the changed fields
    */
   public async update(department: Department): Promise<Department> {
-    return this.http.put<Department>(this.endpointDepartments,
+    return Redirect.handle(this.http.put<Department>(this.endpointDepartments,
       department,
       {
         headers: this.headers,
         withCredentials: true
-      }).toPromise()
+      }))
   }
 }
 

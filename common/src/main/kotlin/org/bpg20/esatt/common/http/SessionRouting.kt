@@ -39,7 +39,7 @@ class SessionRouting @Inject constructor(
 ) : Configurable<Route> {
 
   override fun Route.configure() {
-    route("/sign-in") {
+    route("/api/v1/sign-in") {
       post {
         val userName = call.request.header("userName")
         val password = call.request.header("password")

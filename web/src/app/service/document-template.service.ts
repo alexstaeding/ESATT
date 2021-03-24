@@ -18,6 +18,7 @@
 
 import {Injectable} from "@angular/core"
 import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {Redirect} from "./Redirect";
 
 @Injectable({
   providedIn: "root"
@@ -48,37 +49,37 @@ export class DocumentTemplateService {
   }
 
   public async getAll(): Promise<DocumentTemplate[]> {
-    return this.http.get<DocumentTemplate[]>(this.endpointDocumentTemplates).toPromise()
+    return Redirect.handle(this.http.get<DocumentTemplate[]>(this.endpointDocumentTemplates))
   }
 
   public async get(id: string): Promise<DocumentTemplate> {
-    return this.http.get<DocumentTemplate>(this.endpointDocumentTemplates + "/" + id).toPromise()
+    return Redirect.handle(this.http.get<DocumentTemplate>(this.endpointDocumentTemplates + "/" + id))
   }
 
   public async create(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return this.http.post<DocumentTemplate>(this.endpointDocumentTemplates,
+    return Redirect.handle(this.http.post<DocumentTemplate>(this.endpointDocumentTemplates,
       documentTemplate,
       {
         headers: this.headers,
         withCredentials: true
-      }).toPromise()
+      }))
   }
 
   public async update(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return this.http.put<DocumentTemplate>(this.endpointDocumentTemplates,
+    return Redirect.handle(this.http.put<DocumentTemplate>(this.endpointDocumentTemplates,
       documentTemplate,
       {
         headers: this.headers,
         withCredentials: true
-      }).toPromise()
+      }))
   }
 
   public async generatePdf(dataToSend: DataToSend): Promise<GeneratedDocuments> {
-    return this.http.get<GeneratedDocuments>(this.endpointGenerateDocuments,
+    return Redirect.handle(this.http.get<GeneratedDocuments>(this.endpointGenerateDocuments,
       {
         headers: this.generateDocumentsHeaders(dataToSend),
         withCredentials: true
-      }).toPromise()
+      }))
   }
 }
 
