@@ -26,7 +26,7 @@ export class UserService {
 
   host = window.location.origin
   endpointUsers = this.host + "/api/v1/users"
-  endpointCurrentUser = this.host + "/api/v1/currentUser"
+  endpointCurrentUser = this.host + "/api/v1/current-user"
 
   constructor(private http: HttpClient) {
   }

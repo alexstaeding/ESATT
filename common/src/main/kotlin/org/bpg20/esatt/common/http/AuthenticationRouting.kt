@@ -33,7 +33,7 @@ class AuthenticationRouting @Inject constructor(
 ) : Configurable<Route> {
 
   override fun Route.configure() {
-    route("/api/v1/currentUser") {
+    route("/api/v1/current-user") {
       get {
         val user: User = try {
           interceptUser()
