@@ -209,7 +209,9 @@
       "typePassword": "Bitte Passwort eingeben!",
       "user": "Benutzername",
       "password": "Passwort",
-      "login": "Anmelden"
+      "login": "Anmelden",
+      "error": "Anmeldedaten nicht korrekt!",
+      "success": "Anmeldedaten korrekt!"
     }
   }
 }

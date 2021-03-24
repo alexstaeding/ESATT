@@ -20,6 +20,7 @@ import {Injectable} from "@angular/core"
 import {HttpClient} from "@angular/common/http"
 import {BaseRepositoryService} from "./BaseRepositoryService"
 import {Router} from "@angular/router"
+import {logging} from "protractor"
 
 @Injectable({
   providedIn: "root"
@@ -43,13 +44,23 @@ export class UserService extends BaseRepositoryService<User> {
   }
 
   public async signIn(userName, password): Promise<LoginStatus> {
-    return this.http.post<LoginStatus>(this.endpointSignIn, {},
+    return this.http.post(this.endpointSignIn, {},
       {
         headers: {
           Authorization: "Basic " + btoa(`${userName}:${password}`)
         },
+        responseType: "text",
         withCredentials: true,
-      }).toPromise()
+      }).toPromise().then(
+      result => LoginStatus[result.replace(new RegExp("\"", "g"), "")],
+      result => {
+        const status = LoginStatus[result.toString().replace(new RegExp("\"", "g"), "")]
+        if (status != null) {
+          return status
+        }
+        return LoginStatus.OTHER
+      },
+    )
   }
 
   public async signOut(): Promise<void> {
@@ -73,4 +84,5 @@ export enum LoginStatus {
   SUCCESS,
   MISSING,
   INVALID,
+  OTHER,
 }

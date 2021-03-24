@@ -90,6 +90,7 @@ export class DashboardComponent implements OnInit {
     await this.thesisService.getAll(ascending, field, limit, preview, search).then(result => {
       if (result == null) {
         console.log("Result is null")
+        return
       }
       console.log(result)
       for (const thesis of result) {
