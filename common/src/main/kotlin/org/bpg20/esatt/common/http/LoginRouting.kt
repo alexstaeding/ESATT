@@ -21,41 +21,44 @@ package org.bpg20.esatt.common.http
 import com.google.inject.Inject
 import io.ktor.application.*
 import io.ktor.auth.*
+import io.ktor.auth.ldap.*
 import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.sessions.*
-import io.ktor.util.pipeline.*
+import org.bpg20.esatt.common.Config
 import org.bpg20.esatt.common.datastore.UserRepository
-import org.bpg20.esatt.common.model.User
+import org.slf4j.Logger
 
-class AuthenticationRouting @Inject constructor(
+class LoginRouting @Inject constructor(
+  private val config: Config,
+  private val logger: Logger,
   private val userRepository: UserRepository,
-) : Configurable<Route> {
+): Configurable<Route> {
 
   override fun Route.configure() {
-    route("/api/v1/sign-out") {
+    route("/sign-in") {
       post {
-        call.sessions.clear<LoginSession>()
-      }
-    }
-    route("/api/v1/current-user") {
-      get {
-        val user: User = try {
-          interceptUser()
-        } catch (e: Throwable) {
-          return@get call.respondText(
-            "Unable to get current user: ${e.message}",
-            status = HttpStatusCode.InternalServerError,
-          )
-        }
-        call.respond(user)
-      }
-    }
-  }
+        val userName = call.request.header("userName")
+        val password = call.request.header("password")
 
-  private fun PipelineContext<Unit, ApplicationCall>.interceptUser(): User {
-    val userPrincipal: UserIdPrincipal = checkNotNull(call.authentication.principal()) { "Not authenticated" }
-    return userRepository.getOneOrCreateFromUserName(userPrincipal.name)
+        if (userName == null || password == null) {
+          return@post call.respondText("Username or password missing", status = HttpStatusCode.BadRequest)
+        }
+
+        val principal = ldapAuthenticate(
+          UserPasswordCredential(userName, password),
+          config.ldapConnection!!,
+          config.ldapUserDNFormat!!
+        ) {
+          logger.info("User ${it.name} logged in with LDAP")
+          userRepository.getOneOrCreateFromUserName(it.name, linkLDAP = true)
+          UserIdPrincipal(it.name)
+        } ?: return@post call.respondText("Invalid username/password combination")
+
+        call.sessions.set("LOGIN_SESSION", LoginSession(principal.name))
+      }
+    }
   }
 }

@@ -18,18 +18,6 @@
 
 package org.bpg20.esatt.common.http
 
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.sessions.*
-
-class ApplicationAuthentication : Configurable<Application> {
-  override fun Application.configure() {
-    install(Authentication) {
-      session<LoginSession> {
-        skipWhen { call -> call.sessions.get<LoginSession>() != null }
-        challenge("/sign-in")
-        validate { null }
-      }
-    }
-  }
-}
+data class LoginSession(
+  val userName: String,
+)

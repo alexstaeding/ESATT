@@ -16,7 +16,7 @@
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<mat-toolbar class="mat-elevation-z16">
+<mat-toolbar class="mat-elevation-z16" *ngIf="!isActive('/sign-in')">
   <mat-toolbar-row class="container">
     <a mat-button color="primary" href="https://www.esa.informatik.tu-darmstadt.de/">
       <img src="/assets/images/esa-logo10.png" style="height: 50px;" alt="home">
