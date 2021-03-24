@@ -23,12 +23,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import {BrowserModule} from "@angular/platform-browser"
 import {HttpClient, HttpClientModule} from "@angular/common/http"
 import {NavModule} from "./nav/nav.module"
-import {SignInComponent} from "./sign-in/sign-in.component"
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core"
 import {TranslateHttpLoader} from "@ngx-translate/http-loader"
 
 @NgModule({
-  declarations: [AppComponent, SignInComponent],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,

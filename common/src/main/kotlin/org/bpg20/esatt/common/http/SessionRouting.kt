@@ -31,11 +31,11 @@ import org.bpg20.esatt.common.Config
 import org.bpg20.esatt.common.datastore.UserRepository
 import org.slf4j.Logger
 
-class LoginRouting @Inject constructor(
+class SessionRouting @Inject constructor(
   private val config: Config,
   private val logger: Logger,
   private val userRepository: UserRepository,
-): Configurable<Route> {
+) : Configurable<Route> {
 
   override fun Route.configure() {
     route("/sign-in") {
@@ -58,6 +58,7 @@ class LoginRouting @Inject constructor(
         } ?: return@post call.respondText("Invalid username/password combination")
 
         call.sessions.set("LOGIN_SESSION", LoginSession(principal.name))
+        call.respondText(userName, status = HttpStatusCode.OK)
       }
     }
   }

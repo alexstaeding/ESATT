@@ -18,7 +18,6 @@
 
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router"
 import {NgModule} from "@angular/core"
-import {SignInComponent} from "./sign-in/sign-in.component";
 
 const routes: Routes = [
   {
@@ -40,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: "sign-in",
-    component: SignInComponent
+    loadChildren: "./sign-in/sign-in.module#SignInModule"
   },
   {
     path: "thesis",

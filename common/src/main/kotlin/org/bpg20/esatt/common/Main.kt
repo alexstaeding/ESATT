@@ -30,14 +30,7 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.sessions.*
 import kotlinx.serialization.json.Json
-import org.bpg20.esatt.common.http.ApplicationAuthentication
-import org.bpg20.esatt.common.http.ApplicationRouting
-import org.bpg20.esatt.common.http.AuthenticationRouting
-import org.bpg20.esatt.common.http.Configurable
-import org.bpg20.esatt.common.http.DocumentGeneratorRouting
-import org.bpg20.esatt.common.http.LoginRouting
-import org.bpg20.esatt.common.http.LoginSession
-import org.bpg20.esatt.common.http.SinglePageApplication
+import org.bpg20.esatt.common.http.*
 import org.slf4j.LoggerFactory
 import java.io.File
 
@@ -76,11 +69,10 @@ fun Application.module(injector: Injector) {
   configure<Application, ApplicationAuthentication>(injector)
   install(SinglePageApplication) {
     folderPath = "static/ESATT"
-    ignoreIfContains = Regex("^(/api.)|(/sign-in)*$")
-    authConfiguration = SinglePageApplication.AuthConfiguration(optional = authenticationOptional)
+    ignoreIfContains = Regex("^/api.*$")
   }
   routing {
-    configure<Route, LoginRouting>(injector)
+    configure<Route, SessionRouting>(injector)
     authenticate(optional = authenticationOptional) {
       static("/generated-documents/") {
         files("generated-documents")

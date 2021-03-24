@@ -27,6 +27,7 @@ export class UserService {
   host = window.location.origin
   endpointUsers = this.host + "/api/v1/users"
   endpointCurrentUser = this.host + "/api/v1/current-user"
+  endpointSignIn = this.host + "/api/v1/sign-in"
 
   constructor(private http: HttpClient) {
   }
@@ -89,6 +90,16 @@ export class UserService {
    */
   public async getUser(): Promise<User> {
     return this.http.get<User>(this.endpointCurrentUser).toPromise()
+  }
+
+  public async signIn(userName, password): Promise<void> {
+    return this.http.post<void>(this.endpointSignIn, {
+      headers: {
+        userName,
+        password,
+      },
+      withCredentials: true,
+    }).toPromise()
   }
 
   /**
