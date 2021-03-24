@@ -92,14 +92,14 @@ export class UserService {
     return this.http.get<User>(this.endpointCurrentUser).toPromise()
   }
 
-  public async signIn(userName, password): Promise<void> {
+  public async signIn(userName, password): Promise<boolean> {
     return this.http.post<void>(this.endpointSignIn, {
       headers: {
         userName,
         password,
       },
       withCredentials: true,
-    }).toPromise()
+    }).toPromise().then(_ => true, _ => false)
   }
 
   /**

@@ -84,7 +84,7 @@ fun Application.module(injector: Injector) {
   }
 }
 
-inline fun <R, reified T : Configurable<R>> R.configure(injector: Injector) {
+inline fun <reified R, reified T : Configurable<R>> R.configure(injector: Injector) {
   with(injector.getInstance(T::class.java)) {
     configure()
   }
