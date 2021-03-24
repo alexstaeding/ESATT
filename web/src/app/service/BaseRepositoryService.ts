@@ -18,7 +18,7 @@
 
 import {HttpClient, HttpResponse} from "@angular/common/http"
 import {Observable} from "rxjs"
-import {Router} from "@angular/router";
+import {Router} from "@angular/router"
 
 export abstract class BaseRepositoryService<T> {
 
@@ -30,12 +30,7 @@ export abstract class BaseRepositoryService<T> {
   }
 
   public handle<E>(observable: Observable<HttpResponse<E>>): Promise<E> {
-    console.log("foo")
-    return observable.toPromise().then(result => {
-      console.log("100")
-      console.log(result)
-      return result
-    }, result => {
+    return observable.toPromise().then(result => result.body, result => {
       if (result.status === 401) {
         this.router.navigateByUrl(result.error)
       }

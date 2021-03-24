@@ -31,6 +31,7 @@ import io.ktor.sessions.*
 import org.bpg20.esatt.common.Config
 import org.bpg20.esatt.common.datastore.UserRepository
 import org.slf4j.Logger
+import java.util.Base64
 
 class SessionRouting @Inject constructor(
   private val config: Config,
@@ -39,17 +40,32 @@ class SessionRouting @Inject constructor(
 ) : Configurable<Route> {
 
   override fun Route.configure() {
+    route("/api/v1/sign-out") {
+      post {
+        call.sessions.clear<LoginSession>()
+        call.respondText("Signed out", status = HttpStatusCode.OK)
+      }
+    }
     route("/api/v1/sign-in") {
       post {
-        val userName = call.request.header("userName")
-        val password = call.request.header("password")
-        print(userName)
-        print(password)
-        if (userName == null || password == null) {
-          return@post call.respond(HttpStatusCode.BadRequest, LoginStatus.MISSING)
+        val authorization = call.request.header("Authorization")
+          ?: return@post call.respond(HttpStatusCode.BadRequest, LoginStatus.MISSING)
+        val parts = authorization.split(" ")
+        if (parts.size != 2 || parts[0] != "Basic") {
+          return@post call.respondText("Must use Basic auth", status = HttpStatusCode.BadRequest)
+        }
+        val credentials = String(Base64.getDecoder().decode(parts[1])).split(":")
+        if (credentials.size != 2) {
+          return@post call.respondText(
+            "Credentials not in correct format Base64('username':'password')",
+            status = HttpStatusCode.BadRequest
+          )
         }
 
-        logger.info("Attempted login for $userName @ ${call.request.origin}")
+        val userName = credentials[0]
+        val password = credentials[1]
+
+        logger.info("Attempted login for $userName @ ${call.request.origin.remoteHost}")
 
         val principal = ldapAuthenticate(
           UserPasswordCredential(userName, password),
@@ -63,11 +79,6 @@ class SessionRouting @Inject constructor(
 
         call.sessions.set("LOGIN_SESSION", LoginSession(principal.name))
         call.respond(HttpStatusCode.OK, LoginStatus.SUCCESS)
-      }
-    }
-    route("/api/v1/sign-out") {
-      post {
-        call.sessions.clear<LoginSession>()
       }
     }
   }

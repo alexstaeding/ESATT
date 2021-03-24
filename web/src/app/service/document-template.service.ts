@@ -18,8 +18,8 @@
 
 import {Injectable} from "@angular/core"
 import {HttpClient, HttpHeaders} from "@angular/common/http"
-import {BaseRepositoryService} from "./BaseRepositoryService";
-import {Router} from "@angular/router";
+import {BaseRepositoryService} from "./BaseRepositoryService"
+import {Router} from "@angular/router"
 
 @Injectable({
   providedIn: "root"

@@ -8,7 +8,7 @@ plugins {
 tasks.register<NpxTask>("buildAngularApp") {
   dependsOn("npmInstall")
   command.set("ng")
-  args.set(listOf("build", "--prod"))
+  args.set(listOf("build"))
   inputs.files("package.json", "package-lock.json", "angular.json", "tsconfig.json", "tsconfig.app.json")
   inputs.dir("src")
   inputs.dir(fileTree("node_modules").exclude(".cache"))

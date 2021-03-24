@@ -43,17 +43,19 @@ export class UserService extends BaseRepositoryService<User> {
   }
 
   public async signIn(userName, password): Promise<LoginStatus> {
-    return this.http.post<LoginStatus>(this.endpointSignIn, {
-      headers: {
-        userName,
-        password,
-      },
-      withCredentials: true,
-    }).toPromise()
+    return this.http.post<LoginStatus>(this.endpointSignIn, {},
+      {
+        headers: {
+          Authorization: "Basic " + btoa(`${userName}:${password}`)
+        },
+        withCredentials: true,
+      }).toPromise()
   }
 
   public async signOut(): Promise<void> {
-    return this.http.post<void>(this.endpointSignOut, {}).toPromise()
+    return this.http.post(this.endpointSignOut, {}, {responseType: "text"}).toPromise().then(result => {
+      this.router.navigateByUrl("/sign-in")
+    })
   }
 }
 

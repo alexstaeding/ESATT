@@ -64,7 +64,7 @@ fun Application.module(injector: Injector) {
   val config = injector.getInstance(Config::class.java)
   val authenticationOptional = config.authentication != "ldap"
   install(Sessions) {
-    cookie<LoginSession>("LOGIN_SESSION", directorySessionStorage(File(".sessions")))
+    cookie<LoginSession>("LOGIN_SESSION", directorySessionStorage(File(".sessions"), cached = false))
   }
   configure<Application, ApplicationAuthentication>(injector)
   install(SinglePageApplication) {

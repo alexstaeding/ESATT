@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core"
 import {FormBuilder, FormGroup, Validators} from "@angular/forms"
 import {UserService} from "../service/user.service"
 import {ActivatedRoute, Router} from "@angular/router"
-import {Observable} from "rxjs"
 import {TranslateService} from "@ngx-translate/core"
 
 @Component({
@@ -21,8 +20,7 @@ export class SignInComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public translateService: TranslateService,
-  )
-  {
+  ) {
   }
 
   ngOnInit(): void {
@@ -49,7 +47,11 @@ export class SignInComponent implements OnInit {
       console.log(this.f.userName.value)
       this.userService.signIn(this.f.userName.value, this.f.password.value)
     }
-    this.router.navigate(["/dashboard"])
+    const self = this
+    setTimeout(() => {
+      console.log("Navigating...")
+      self.router.navigate(["/dashboard"])
+    }, 1500)
     this.formSubmitAttempt = true
   }
 

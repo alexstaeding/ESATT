@@ -21,7 +21,6 @@ package org.bpg20.esatt.common.http
 import com.google.inject.Inject
 import io.ktor.application.*
 import io.ktor.auth.*
-import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.sessions.*
@@ -36,9 +35,11 @@ class ApplicationAuthentication @Inject constructor(
   override fun Application.configure() {
     install(Authentication) {
       session<LoginSession> {
-        skipWhen { call -> call.sessions.get<LoginSession>() != null }
         challenge {
-          call.respond(HttpStatusCode.Unauthorized, "/sign-in")
+          if (call.sessions.get<LoginSession>() == null) {
+            logger.info("Challenging user")
+            call.respond(HttpStatusCode.Unauthorized, "/sign-in")
+          }
         }
         validate { null }
       }

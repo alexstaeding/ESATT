@@ -20,10 +20,10 @@ package org.bpg20.esatt.common.http
 
 import com.google.inject.Inject
 import io.ktor.application.*
-import io.ktor.auth.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import io.ktor.sessions.*
 import io.ktor.util.pipeline.*
 import org.bpg20.esatt.common.datastore.UserRepository
 import org.bpg20.esatt.common.model.User
@@ -49,7 +49,7 @@ class AuthenticationRouting @Inject constructor(
   }
 
   private fun PipelineContext<Unit, ApplicationCall>.interceptUser(): User {
-    val userPrincipal: UserIdPrincipal = checkNotNull(call.authentication.principal()) { "Not authenticated" }
-    return userRepository.getOneOrCreateFromUserName(userPrincipal.name)
+    val session: LoginSession = checkNotNull(call.sessions.get<LoginSession>()) { "Not authenticated" }
+    return userRepository.getOneOrCreateFromUserName(session.userName)
   }
 }

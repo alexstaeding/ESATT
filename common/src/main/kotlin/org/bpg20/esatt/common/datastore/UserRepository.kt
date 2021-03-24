@@ -29,7 +29,6 @@ class UserRepository @Inject constructor(
 ): ObjectIdRepository<User>() {
   override val tClass: Class<User> = User::class.java
   fun getOneOrCreateFromUserName(userName: String, linkLDAP: Boolean = false): User {
-    print(userName)
     val user = asQuery().filter(Filters.eq(User::userName.name, userName)).first()
     if (user != null) {
       if (linkLDAP && user.isLinkedLDAP != true) {
