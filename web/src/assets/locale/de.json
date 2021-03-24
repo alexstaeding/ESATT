@@ -201,7 +201,8 @@
       "close": "Schließen",
       "edit": "Bearbeiten",
       "save": "Speichern",
-      "cancel": "Abbrechen"
+      "cancel": "Abbrechen",
+      "logout": "Abmelden"
     }
   }
 }

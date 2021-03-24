@@ -57,6 +57,10 @@
         language
       </i>
     </button>
+    <span class="flex-spacer"></span>
+    <button mat-button (click)="userService.signOut()">
+      {{ "user.buttons.logout" | translate }}
+    </button>
     <mat-menu #langSelect="matMenu" xPosition="before">
       <button mat-menu-item (click)="translateService.use('en')">English</button>
       <button mat-menu-item (click)="translateService.use('de')">Deutsch</button>
