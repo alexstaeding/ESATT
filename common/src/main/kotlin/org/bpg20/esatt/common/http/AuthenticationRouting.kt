@@ -24,7 +24,6 @@ import io.ktor.auth.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import io.ktor.sessions.*
 import io.ktor.util.pipeline.*
 import org.bpg20.esatt.common.datastore.UserRepository
 import org.bpg20.esatt.common.model.User
@@ -34,11 +33,6 @@ class AuthenticationRouting @Inject constructor(
 ) : Configurable<Route> {
 
   override fun Route.configure() {
-    route("/api/v1/sign-out") {
-      post {
-        call.sessions.clear<LoginSession>()
-      }
-    }
     route("/api/v1/current-user") {
       get {
         val user: User = try {

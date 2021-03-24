@@ -28,6 +28,7 @@ export class UserService {
   endpointUsers = this.host + "/api/v1/users"
   endpointCurrentUser = this.host + "/api/v1/current-user"
   endpointSignIn = this.host + "/api/v1/sign-in"
+  endpointSignOut = this.host + "/api/v1/sign-out"
 
   constructor(private http: HttpClient) {
   }
@@ -100,6 +101,10 @@ export class UserService {
       },
       withCredentials: true,
     }).toPromise()
+  }
+
+  public async signOut(): Promise<void> {
+    return this.http.post<void>(this.endpointSignOut, {}).toPromise()
   }
 
   /**

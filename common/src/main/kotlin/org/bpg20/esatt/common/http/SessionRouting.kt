@@ -64,6 +64,11 @@ class SessionRouting @Inject constructor(
         call.respond(HttpStatusCode.OK, LoginStatus.SUCCESS)
       }
     }
+    route("/api/v1/sign-out") {
+      post {
+        call.sessions.clear<LoginSession>()
+      }
+    }
   }
 
   private enum class LoginStatus {
