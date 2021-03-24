@@ -26,15 +26,31 @@ import io.ktor.features.*
 import io.ktor.http.content.*
 import io.ktor.routing.*
 import io.ktor.serialization.*
+import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import kotlinx.serialization.json.Json
 import org.bpg20.esatt.common.http.*
 import org.slf4j.LoggerFactory
 
-fun main(args: Array<String>) = EngineMain.main(args)
+fun main(args: Array<String>) {
+  val logger = LoggerFactory.getLogger("ESATT")
+  logger.info("Starting initialization")
+  val injector = Guice.createInjector(ESATTModule(logger))
+  val config = injector.getInstance(Config::class.java)
+  val server = embeddedServer(
+    Netty,
+    port = config.webPort!!,
+    host = config.webHost!!,
+  ) {
+    module(injector)
+  }.start()
+  Runtime.getRuntime().addShutdownHook(Thread {
+    logger.info("Shutting down...")
+    server.stop(500, 1000)
+  })
+}
 
-@Suppress("unused")
-fun Application.module() {
+fun Application.module(injector: Injector) {
   install(ContentNegotiation) {
     json(
       Json {
@@ -43,9 +59,6 @@ fun Application.module() {
       }
     )
   }
-  val logger = LoggerFactory.getLogger("ESATT")
-  logger.info("Starting initialization")
-  val injector = Guice.createInjector(ESATTModule(logger))
   val config = injector.getInstance(Config::class.java)
   val authenticationOptional = config.authentication != "ldap"
   configure<Application, ApplicationAuthentication>(injector)

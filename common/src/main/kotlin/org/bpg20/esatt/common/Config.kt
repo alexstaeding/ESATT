@@ -35,4 +35,10 @@ class Config {
 
   @Comment("The MongoDB connection string")
   var mongodbConnection: String? = "mongodb://localhost:27017"
+
+  @Comment("The hostname to use for the webserver. Default 0.0.0.0 (any)")
+  var webHost: String? = "0.0.0.0"
+
+  @Comment("The port to use for the webserver. Default 80")
+  var webPort: Int? = 80
 }
