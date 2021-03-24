@@ -18,24 +18,19 @@
 
 import {Injectable} from "@angular/core"
 import {HttpClient, HttpHeaders} from "@angular/common/http"
-import {Redirect} from "./Redirect";
+import {BaseRepositoryService} from "./BaseRepositoryService";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: "root"
 })
-export class DocumentTemplateService {
+export class DocumentTemplateService extends BaseRepositoryService<DocumentTemplate> {
 
   host = window.location.origin
-  endpointDocumentTemplates = this.host + "/api/v1/document-templates"
   endpointGenerateDocuments = this.host + "/api/v1/generate-documents"
 
-  constructor(private http: HttpClient) {
-  }
-
-  get headers(): HttpHeaders {
-    return new HttpHeaders({
-      "Content-Type": "application/json",
-    })
+  constructor(http: HttpClient, router: Router) {
+    super(http, router, `${window.location.origin}/api/v1/document-templates`)
   }
 
   generateDocumentsHeaders(dataToSend: DataToSend): HttpHeaders {
@@ -48,35 +43,10 @@ export class DocumentTemplateService {
     return new HttpHeaders(headerMap)
   }
 
-  public async getAll(): Promise<DocumentTemplate[]> {
-    return Redirect.handle(this.http.get<DocumentTemplate[]>(this.endpointDocumentTemplates))
-  }
-
-  public async get(id: string): Promise<DocumentTemplate> {
-    return Redirect.handle(this.http.get<DocumentTemplate>(this.endpointDocumentTemplates + "/" + id))
-  }
-
-  public async create(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return Redirect.handle(this.http.post<DocumentTemplate>(this.endpointDocumentTemplates,
-      documentTemplate,
-      {
-        headers: this.headers,
-        withCredentials: true
-      }))
-  }
-
-  public async update(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return Redirect.handle(this.http.put<DocumentTemplate>(this.endpointDocumentTemplates,
-      documentTemplate,
-      {
-        headers: this.headers,
-        withCredentials: true
-      }))
-  }
-
   public async generatePdf(dataToSend: DataToSend): Promise<GeneratedDocuments> {
-    return Redirect.handle(this.http.get<GeneratedDocuments>(this.endpointGenerateDocuments,
+    return this.handle(this.http.get<GeneratedDocuments>(this.endpointGenerateDocuments,
       {
+        observe: "response",
         headers: this.generateDocumentsHeaders(dataToSend),
         withCredentials: true
       }))
