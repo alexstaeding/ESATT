@@ -201,7 +201,8 @@
       "edit": "Edit",
       "save": "Save",
       "cancel": "Cancel",
-      "logout": "Logout"
+      "logout": "Logout",
+      "login": "Login"
     }
   }
 }

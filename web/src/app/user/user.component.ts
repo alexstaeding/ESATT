@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUser().then(result => {
+    this.userService.getCurrentUser().then(result => {
       this.currentUser = {...result}
     })
     this.initData()

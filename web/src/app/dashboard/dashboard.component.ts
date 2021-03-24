@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit {
     preview: boolean = null,
     search: string = null,
   ) {
-    await this.userService.getUser().then(result => {
+    await this.userService.getCurrentUser().then(result => {
       this.user = result
     })
     const myTheses = []

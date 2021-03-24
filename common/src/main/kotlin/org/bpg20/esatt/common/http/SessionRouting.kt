@@ -43,7 +43,8 @@ class SessionRouting @Inject constructor(
       post {
         val userName = call.request.header("userName")
         val password = call.request.header("password")
-
+        print(userName)
+        print(password)
         if (userName == null || password == null) {
           return@post call.respond(HttpStatusCode.BadRequest, LoginStatus.MISSING)
         }
