@@ -33,7 +33,7 @@ export class EvaluationSchemeComponent implements OnInit {
   sorting = Sorting.NOT
   sortMode = Sorting
   currentField: string = null
-  searchValue: string = ""
+  searchValue = ""
 
   constructor(
     private evaluationSchemeService: EvaluationSchemeService,
@@ -63,7 +63,9 @@ export class EvaluationSchemeComponent implements OnInit {
   ) {
     this.searchValue = search
     this.evaluationSchemeService.getAll(ascending, field, limit, preview, search).then(result => {
-      this.data = new MatTableDataSource(result)
+      if (result != null){
+        this.data = new MatTableDataSource(result)
+      }
     })
   }
 
@@ -106,7 +108,7 @@ export class EvaluationSchemeComponent implements OnInit {
   descriptionPreview(description): string {
     if (description != null) {
       let preview = description.substring(0, 50)
-      if (preview != description) {
+      if (preview !== description) {
         preview = preview + " ..."
       }
       return preview
@@ -119,21 +121,21 @@ export class EvaluationSchemeComponent implements OnInit {
    *
    * @param field field to be sorted by
    */
-  sort(field : string){
+  sort(field: string){
     if (this.currentField !== field){
       this.sorting = Sorting.NOT
     }
     this.currentField = field
     if (this.sorting === Sorting.NOT){
       this.sorting = Sorting.ASCENDING
-      if(field === "createdUtc") {
+      if (field === "createdUtc") {
         this.initData(true, null, null, true, this.searchValue)
         return
       }
       this.initData(true, field, null, true, this.searchValue)
     } else if (this.sorting === Sorting.ASCENDING){
       this.sorting = Sorting.DESCENDING
-      if(field === "createdUtc") {
+      if (field === "createdUtc") {
         this.initData(false, null, null, true, this.searchValue)
         return
       }

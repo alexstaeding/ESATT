@@ -52,7 +52,7 @@ export class ThesisComponent implements OnInit {
   sorting = Sorting.NOT
   sortMode = Sorting
   currentField: string = null
-  searchValue: string = ""
+  searchValue = ""
 
   constructor(
     public dialog: MatDialog,
@@ -82,7 +82,9 @@ export class ThesisComponent implements OnInit {
   ) {
     this.searchValue = search
     this.thesisService.getAll(ascending, field, limit, preview, search).then(result => {
-      this.data = new MatTableDataSource(result)
+      if (result != null){
+        this.data = new MatTableDataSource(result)
+      }
     })
   }
 
@@ -124,7 +126,7 @@ export class ThesisComponent implements OnInit {
   titlePreview(title): string {
     if (title != null) {
       let preview = title.substring(0, 25)
-      if (preview != title) {
+      if (preview !== title) {
         preview = preview + " ..."
       }
       return preview
@@ -137,7 +139,7 @@ export class ThesisComponent implements OnInit {
    *
    * @param field field to be sorted by
    */
-  sort(field : string){
+  sort(field: string){
     if (this.currentField !== field){
       this.sorting = Sorting.NOT
     }

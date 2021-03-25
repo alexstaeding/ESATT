@@ -57,13 +57,18 @@ export class DocumentTemplateComponent implements OnInit {
   }
 
   public async initData() {
-    await this.documentTemplateService.getAll().then(
-      result => this.documentTemplates = result
-    )
+    await this.documentTemplateService.getAll().then(result => {
+      if (result != null) {
+        this.documentTemplates = result
+      }
+    })
     await this.thesesService.getAll().then(result => {
+      if (result == null) {
+        return
+      }
       const currentTheses = []
       for (const thesis of result) {
-        if (thesis.status.reportCreatedUtc == null) {
+        if (thesis.status == null || thesis.status.reportCreatedUtc == null) {
           currentTheses.push(thesis)
         }
       }

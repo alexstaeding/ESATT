@@ -62,6 +62,9 @@ export class SignInComponent implements OnInit {
   signIn() {
     if (this.form.valid) {
       this.userService.signIn(this.f.userName.value, this.f.password.value).then(result => {
+        if (result == null){
+          return
+        }
         if (result === LoginStatus.SUCCESS) {
           this.showSuccess()
           const self = this

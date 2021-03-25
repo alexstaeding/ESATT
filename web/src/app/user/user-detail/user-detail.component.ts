@@ -84,11 +84,16 @@ export class UserDetailComponent implements OnInit {
     search: string = null,
   ) {
     await this.userService.get(this.data.id).then(result => {
-      this.user = result
+      if (result != null) {
+        this.user = result
+      }
     })
     const usersTheses = []
     this.searchValue = search
     await this.thesisService.getAll(ascending, field, limit, preview, search).then(result => {
+      if (result == null){
+        return
+      }
       for (const thesis of result) {
         if (thesis.supervisorId === this.user.id && thesis.status.reportCreatedUtc == null) {
           usersTheses.push(thesis)

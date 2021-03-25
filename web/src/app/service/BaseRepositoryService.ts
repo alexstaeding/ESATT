@@ -34,7 +34,7 @@ export abstract class BaseRepositoryService<T> {
       if (result.status === 401) {
         this.router.navigateByUrl(result.error)
       }
-      return null
+      throw new Error("no user")
     })
   }
 
