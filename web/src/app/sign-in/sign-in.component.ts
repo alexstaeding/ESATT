@@ -66,7 +66,6 @@ export class SignInComponent implements OnInit {
           this.showSuccess()
           const self = this
           setTimeout(() => {
-            console.log("Navigating...")
             self.router.navigate(["/dashboard"])
           }, 1500)
           this.formSubmitAttempt = true
