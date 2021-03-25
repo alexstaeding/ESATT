@@ -95,10 +95,14 @@ export class ThesisDetailComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAll().then(result => {
-      this.users = result
+      if (result != null) {
+        this.users = result
+      }
     })
     this.departmentService.getAll().then(result => {
-      this.departments = result
+      if (result != null) {
+        this.departments = result
+      }
     })
     if (this.data.id == null) {
       this.thesis = new Thesis()
@@ -111,6 +115,9 @@ export class ThesisDetailComponent implements OnInit {
     } else {
       this.thesis.status = new Status()
       this.thesisService.get(this.data.id).then(result => {
+        if (result == null) {
+          return
+        }
         this.originalThesis = this.deepCopyThesis(result)
         if (this.originalThesis.grading != null) {
           this.setAllCounters(this.originalThesis.grading.grades)
@@ -414,6 +421,9 @@ export class ThesisDetailComponent implements OnInit {
    */
   openEvalSchemeDetail(id) {
     this.evaluationSchemeService.get(id).then(result => {
+      if (result == null) {
+        return
+      }
       this.selectedEvaluationScheme = result
       this.copyEvalSchemeToGrading(this.selectedEvaluationScheme)
       this.setAllCounters(this.grading.grades)
@@ -666,7 +676,9 @@ export class ThesisDetailComponent implements OnInit {
   ) {
     this.searchValue = search
     this.evaluationSchemeService.getAll(ascending, field, limit, preview, search).then(result => {
-      this.evaluationSchemeData = new MatTableDataSource(result)
+      if (result != null) {
+        this.evaluationSchemeData = new MatTableDataSource(result)
+      }
     })
   }
 

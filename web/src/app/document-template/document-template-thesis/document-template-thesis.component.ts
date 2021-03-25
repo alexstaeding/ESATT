@@ -54,10 +54,14 @@ export class DocumentTemplateThesisComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAll().then(result => {
-      this.users = result
+      if (result != null) {
+        this.users = result
+      }
     })
     this.departmentService.getAll().then(result => {
-      this.departments = result
+      if (result != null) {
+        this.departments = result
+      }
     })
     this.thesis = this.data.thesis
     const data: Note[] = this.thesis.notes

@@ -201,7 +201,17 @@
       "close": "Schließen",
       "edit": "Bearbeiten",
       "save": "Speichern",
-      "cancel": "Abbrechen"
+      "cancel": "Abbrechen",
+      "logout": "Abmelden"
+    },
+    "login": {
+      "typeUsername": "Bitte Name eingeben!",
+      "typePassword": "Bitte Passwort eingeben!",
+      "user": "Benutzername",
+      "password": "Passwort",
+      "login": "Anmelden",
+      "error": "Anmeldedaten nicht korrekt!",
+      "success": "Anmeldedaten korrekt!"
     }
   }
 }

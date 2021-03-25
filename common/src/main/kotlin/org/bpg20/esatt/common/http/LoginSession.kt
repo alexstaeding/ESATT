@@ -18,32 +18,6 @@
 
 package org.bpg20.esatt.common.http
 
-import com.google.inject.Inject
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.features.*
-import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.sessions.*
-import org.bpg20.esatt.common.Config
-import org.slf4j.Logger
-
-class ApplicationAuthentication @Inject constructor(
-  private val config: Config,
-  private val logger: Logger,
-) : Configurable<Application> {
-
-  override fun Application.configure() {
-    install(Authentication) {
-      session<LoginSession> {
-        challenge {
-          if (call.sessions.get<LoginSession>() == null) {
-            logger.info("Redirecting unauthenticated client ${call.request.origin.remoteHost}")
-            call.respond(HttpStatusCode.Unauthorized, "/sign-in")
-          }
-        }
-        validate { null }
-      }
-    }
-  }
-}
+data class LoginSession(
+  val userName: String,
+)

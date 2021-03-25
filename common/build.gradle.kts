@@ -12,6 +12,7 @@ dependencies {
   val ktorVersion = "1.5.2"
   api("io.ktor:ktor-server-core:$ktorVersion")
   api("io.ktor:ktor-server-netty:$ktorVersion")
+  api("io.ktor:ktor-server-sessions:$ktorVersion")
   api("io.ktor:ktor-serialization:$ktorVersion")
   api("io.ktor:ktor-auth:$ktorVersion")
   api("io.ktor:ktor-auth-ldap:$ktorVersion")

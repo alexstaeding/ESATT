@@ -21,6 +21,7 @@ import {Component, OnInit} from "@angular/core"
 import {Observable} from "rxjs"
 import {Router} from "@angular/router"
 import {TranslateService} from "@ngx-translate/core"
+import {UserService} from "../../service/user.service"
 
 @Component({
   selector: "app-default-nav",
@@ -35,6 +36,7 @@ export class DefaultNavComponent implements OnInit {
     private breakpointObserverService: BreakpointObserverService,
     private router: Router,
     public translateService: TranslateService,
+    public userService: UserService,
   ) {
     this.translateService.setDefaultLang("de")
   }

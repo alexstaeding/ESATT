@@ -41,7 +41,7 @@ export class UserComponent implements OnInit {
   sorting = Sorting.NOT
   sortMode = Sorting
   currentField: string = null
-  searchValue: string = ""
+  searchValue = ""
   currentUser: User
 
   constructor(
@@ -52,8 +52,10 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUser().then(result => {
-      this.currentUser = {...result}
+    this.userService.getCurrentUser().then(result => {
+      if (result != null) {
+        this.currentUser = result
+      }
     })
     this.initData()
   }
@@ -76,7 +78,9 @@ export class UserComponent implements OnInit {
   ) {
     this.searchValue = search
     this.userService.getAll(ascending, field, limit, preview, search).then(result => {
-      this.data = new MatTableDataSource(result)
+      if (result != null) {
+        this.data = new MatTableDataSource(result)
+      }
     })
   }
 

@@ -16,99 +16,17 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {BaseRepositoryService} from "./BaseRepositoryService"
+import {HttpClient} from "@angular/common/http"
 import {Injectable} from "@angular/core"
-import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {Router} from "@angular/router"
 
 @Injectable({
   providedIn: "root"
 })
-export class ThesisService {
-
-  host = window.location.origin
-  endpointTheses = this.host + "/api/v1/theses"
-
-  constructor(private http: HttpClient) {
-  }
-
-  get headers(): HttpHeaders {
-    return new HttpHeaders({
-      "Content-Type": "application/json",
-    })
-  }
-
-  /**
-   * Loads theses from database.
-   *
-   * @param ascending true for ascending sorting
-   * @param field field to be used for sorting
-   * @param limit limit how many theses will be loaded
-   * @param preview true if only fields that are in the overview table are needed
-   * @param search value to search for in table
-   */
-  public async getAll(
-    ascending: boolean = null,
-    field: string = null,
-    limit: number = null,
-    preview: boolean = null,
-    search: string = null,
-  ): Promise<Thesis[]> {
-    const headerMap = {}
-    if (ascending != null) {
-      headerMap["ascending"] = ascending.toString()
-    }
-    if (field != null) {
-      headerMap["field"] = field
-    }
-    if (limit != null) {
-      headerMap["limit"] = limit.toString()
-    }
-    if (preview != null) {
-      headerMap["preview"] = preview.toString()
-    }
-    if (search != null && search != "") {
-      headerMap["search"] = search
-    }
-    return this.http.get<Thesis[]>(this.endpointTheses,
-      {
-        headers: headerMap
-      }).toPromise()
-  }
-
-  /**
-   * Loads thesis with specified id from the database
-   *
-   * @param id id of the thesis
-   */
-  public async get(id: string): Promise<Thesis> {
-    return this.http.get<Thesis>(this.endpointTheses + "/" + id).toPromise()
-  }
-
-  /**
-   * Adds a new thesis to the database
-   *
-   * @param thesis thesis to be added
-   */
-  public async create(thesis: Thesis): Promise<Thesis> {
-    return this.http.post<Thesis>(this.endpointTheses,
-      thesis,
-      {
-        headers: this.headers,
-        withCredentials: true,
-      }).toPromise()
-  }
-
-  /**
-   * Overwrites changed fields
-   *
-   * @param thesis thesis with the changed fields
-   */
-  public async update(thesis: Thesis): Promise<Thesis> {
-    return this.http.put<Thesis>(this.endpointTheses,
-      thesis,
-      {
-        headers: this.headers,
-        withCredentials: true
-      }).toPromise()
+export class ThesisService extends BaseRepositoryService<Thesis> {
+  constructor(http: HttpClient, router: Router) {
+    super(http, router, `${window.location.origin}/api/v1/theses`)
   }
 }
 

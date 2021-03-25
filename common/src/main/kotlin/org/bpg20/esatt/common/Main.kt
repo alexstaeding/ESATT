@@ -28,9 +28,11 @@ import io.ktor.routing.*
 import io.ktor.serialization.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import io.ktor.sessions.*
 import kotlinx.serialization.json.Json
 import org.bpg20.esatt.common.http.*
 import org.slf4j.LoggerFactory
+import java.io.File
 
 fun main(args: Array<String>) {
   val logger = LoggerFactory.getLogger("ESATT")
@@ -61,13 +63,16 @@ fun Application.module(injector: Injector) {
   }
   val config = injector.getInstance(Config::class.java)
   val authenticationOptional = config.authentication != "ldap"
+  install(Sessions) {
+    cookie<LoginSession>("LOGIN_SESSION", directorySessionStorage(File(".sessions"), cached = false))
+  }
   configure<Application, ApplicationAuthentication>(injector)
   install(SinglePageApplication) {
     folderPath = "static/ESATT"
     ignoreIfContains = Regex("^/api.*$")
-    authConfiguration = SinglePageApplication.AuthConfiguration(optional = authenticationOptional)
   }
   routing {
+    configure<Route, SessionRouting>(injector)
     authenticate(optional = authenticationOptional) {
       static("/generated-documents/") {
         files("generated-documents")

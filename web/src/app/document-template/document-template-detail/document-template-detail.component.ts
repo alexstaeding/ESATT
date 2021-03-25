@@ -50,6 +50,9 @@ export class DocumentTemplateDetailComponent implements OnInit {
       this.mode = Mode.NEW
     } else {
       this.documentTemplateService.get(this.passedData.id).then(result => {
+        if (result == null) {
+          return
+        }
         this.originalTemplate = result
         this.currentTemplate = this.deepCopy(this.originalTemplate)
         this.mode = Mode.EDIT

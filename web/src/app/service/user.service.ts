@@ -16,107 +16,56 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {BaseRepositoryService} from "./BaseRepositoryService"
+import {HttpClient} from "@angular/common/http"
 import {Injectable} from "@angular/core"
-import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {Router} from "@angular/router"
 
 @Injectable({
   providedIn: "root"
 })
-export class UserService {
+export class UserService extends BaseRepositoryService<User> {
 
   host = window.location.origin
-  endpointUsers = this.host + "/api/v1/users"
   endpointCurrentUser = this.host + "/api/v1/current-user"
+  endpointSignIn = this.host + "/api/v1/sign-in"
+  endpointSignOut = this.host + "/api/v1/sign-out"
 
-  constructor(private http: HttpClient) {
-  }
-
-  get headers(): HttpHeaders {
-    return new HttpHeaders({
-      "Content-Type": "application/json",
-    })
-  }
-
-  /**
-   * Loads users from database.
-   *
-   * @param ascending true for ascending sorting
-   * @param field field to be used for sorting
-   * @param limit limit how many users will be loaded
-   * @param preview true if only fields that are in the overview table are needed
-   * @param search value to search for in table
-   */
-  public async getAll(
-    ascending: boolean = null,
-    field: string = null,
-    limit: number = null,
-    preview: boolean = null,
-    search: string = null,
-  ): Promise<User[]> {
-    const headerMap = {}
-    if (ascending != null) {
-      headerMap["ascending"] = ascending.toString()
-    }
-    if (field != null) {
-      headerMap["field"] = field
-    }
-    if (limit != null) {
-      headerMap["limit"] = limit.toString()
-    }
-    if (preview != null) {
-      headerMap["preview"] = preview.toString()
-    }
-    if (search != null && search != "") {
-      headerMap["search"] = search
-    }
-    return this.http.get<User[]>(this.endpointUsers,
-      {
-        headers: headerMap
-      }).toPromise()
-  }
-
-  /**
-   * Loads user with specified id from the database
-   *
-   * @param id id of the user
-   */
-  public async get(id: string): Promise<User> {
-    return this.http.get<User>(this.endpointUsers + "/" + id).toPromise()
+  constructor(http: HttpClient, router: Router) {
+    super(http, router, `${window.location.origin}/api/v1/users`)
   }
 
   /**
    * Loads the currently signed in user
    */
-  public async getUser(): Promise<User> {
-    return this.http.get<User>(this.endpointCurrentUser).toPromise()
+  public async getCurrentUser(): Promise<User> {
+    return this.handle(this.http.get<User>(this.endpointCurrentUser, {observe: "response"}))
   }
 
-  /**
-   * Adds a new user to the database
-   *
-   * @param user user to be added
-   */
-  public async create(user: User): Promise<User> {
-    return this.http.post<User>(this.endpointUsers,
-      user,
+  public async signIn(userName, password): Promise<LoginStatus> {
+    return this.http.post(this.endpointSignIn, {},
       {
-        headers: this.headers,
-        withCredentials: true
-      }).toPromise()
+        headers: {
+          Authorization: "Basic " + btoa(`${userName}:${password}`)
+        },
+        responseType: "text",
+        withCredentials: true,
+      }).toPromise().then(
+      result => LoginStatus[result.replace(new RegExp("\"", "g"), "")],
+      result => {
+        const status = LoginStatus[result.toString().replace(new RegExp("\"", "g"), "")]
+        if (status != null) {
+          return status
+        }
+        return LoginStatus.OTHER
+      },
+    )
   }
 
-  /**
-   * Overwrites changed fields
-   *
-   * @param user user with the changed fields
-   */
-  public async update(user: User): Promise<User> {
-    return this.http.put<User>(this.endpointUsers,
-      user,
-      {
-        headers: this.headers,
-        withCredentials: true
-      }).toPromise()
+  public async signOut(): Promise<void> {
+    return this.http.post(this.endpointSignOut, {}, {responseType: "text"}).toPromise().then(result => {
+      this.router.navigateByUrl("/sign-in")
+    })
   }
 }
 
@@ -128,4 +77,11 @@ export class User {
   public firstName: string
   public lastName: string
   public isLinkedLDAP: boolean
+}
+
+export enum LoginStatus {
+  SUCCESS,
+  MISSING,
+  INVALID,
+  OTHER,
 }

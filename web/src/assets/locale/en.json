@@ -200,7 +200,17 @@
       "close": "Close",
       "edit": "Edit",
       "save": "Save",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "logout": "Logout"
+    },
+    "login": {
+      "typeUsername": "Please enter name!",
+      "typePassword": "Please enter password!",
+      "user": "Username",
+      "password": "Password",
+      "login": "Login",
+      "error": "Credentials not correct!",
+      "success": "Credentials correct!"
     }
   }
 }

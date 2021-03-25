@@ -17,67 +17,16 @@
  */
 
 import {Injectable} from "@angular/core"
-import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {HttpClient} from "@angular/common/http"
+import {BaseRepositoryService} from "./BaseRepositoryService";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: "root"
 })
-export class DepartmentService {
-
-  host = window.location.origin
-  endpointDepartments = this.host + "/api/v1/departments"
-
-  constructor(private http: HttpClient) {
-  }
-
-  get headers(): HttpHeaders {
-    return new HttpHeaders({
-      "Content-Type": "application/json",
-    })
-  }
-
-  /**
-   * Loads all departments from the database
-   */
-  public async getAll(): Promise<Department[]> {
-    return this.http.get<Department[]>(this.endpointDepartments).toPromise()
-  }
-
-  /**
-   * Loads department with specified id from the database
-   *
-   * @param id id of the department
-   */
-  public async get(id: string): Promise<Department> {
-    return this.http.get<Department>(this.endpointDepartments + "/" + id).toPromise()
-  }
-
-  /**
-   * Adds a new department to the database
-   *
-   * @param department department to be added
-   */
-  public async create(department: Department): Promise<Department> {
-    return this.http.post<Department>(this.endpointDepartments,
-      department,
-      {
-        headers: this.headers,
-        withCredentials: true,
-      }).toPromise()
-  }
-
-  /**
-   * Overwrites changed fields
-   *
-   * @param department department with the changed fields
-   */
-  public async update(department: Department): Promise<Department> {
-    return this.http.put<Department>(this.endpointDepartments,
-      department,
-      {
-        headers: this.headers,
-        withCredentials: true
-      }).toPromise()
+export class DepartmentService extends BaseRepositoryService<Department> {
+  constructor(http: HttpClient, router: Router) {
+    super(http, router, `${window.location.origin}/api/v1/departments`)
   }
 }
 

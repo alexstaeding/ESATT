@@ -18,23 +18,19 @@
 
 import {Injectable} from "@angular/core"
 import {HttpClient, HttpHeaders} from "@angular/common/http"
+import {BaseRepositoryService} from "./BaseRepositoryService"
+import {Router} from "@angular/router"
 
 @Injectable({
   providedIn: "root"
 })
-export class DocumentTemplateService {
+export class DocumentTemplateService extends BaseRepositoryService<DocumentTemplate> {
 
   host = window.location.origin
-  endpointDocumentTemplates = this.host + "/api/v1/document-templates"
   endpointGenerateDocuments = this.host + "/api/v1/generate-documents"
 
-  constructor(private http: HttpClient) {
-  }
-
-  get headers(): HttpHeaders {
-    return new HttpHeaders({
-      "Content-Type": "application/json",
-    })
+  constructor(http: HttpClient, router: Router) {
+    super(http, router, `${window.location.origin}/api/v1/document-templates`)
   }
 
   generateDocumentsHeaders(dataToSend: DataToSend): HttpHeaders {
@@ -47,38 +43,13 @@ export class DocumentTemplateService {
     return new HttpHeaders(headerMap)
   }
 
-  public async getAll(): Promise<DocumentTemplate[]> {
-    return this.http.get<DocumentTemplate[]>(this.endpointDocumentTemplates).toPromise()
-  }
-
-  public async get(id: string): Promise<DocumentTemplate> {
-    return this.http.get<DocumentTemplate>(this.endpointDocumentTemplates + "/" + id).toPromise()
-  }
-
-  public async create(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return this.http.post<DocumentTemplate>(this.endpointDocumentTemplates,
-      documentTemplate,
-      {
-        headers: this.headers,
-        withCredentials: true
-      }).toPromise()
-  }
-
-  public async update(documentTemplate: DocumentTemplate): Promise<DocumentTemplate> {
-    return this.http.put<DocumentTemplate>(this.endpointDocumentTemplates,
-      documentTemplate,
-      {
-        headers: this.headers,
-        withCredentials: true
-      }).toPromise()
-  }
-
   public async generatePdf(dataToSend: DataToSend): Promise<GeneratedDocuments> {
-    return this.http.get<GeneratedDocuments>(this.endpointGenerateDocuments,
+    return this.handle(this.http.get<GeneratedDocuments>(this.endpointGenerateDocuments,
       {
+        observe: "response",
         headers: this.generateDocumentsHeaders(dataToSend),
         withCredentials: true
-      }).toPromise()
+      }))
   }
 }
 

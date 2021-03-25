@@ -1,0 +1,47 @@
+<mat-toolbar class="mat-elevation-z16">
+  <mat-toolbar-row class="container">
+    <a mat-button color="primary" href="https://www.esa.informatik.tu-darmstadt.de/">
+      <img src="/assets/images/esa-logo10.png" style="height: 50px;" alt="home">
+    </a>
+    <span class="flex-spacer"></span>
+    <button
+      type="button"
+      aria-label="Select Language"
+      mat-icon-button
+      [matMenuTriggerFor]="langSelect">
+      <i class="material-icons">
+        language
+      </i>
+    </button>
+    <mat-menu #langSelect="matMenu" xPosition="before">
+      <button mat-menu-item (click)="translateService.use('en')">English</button>
+      <button mat-menu-item (click)="translateService.use('de')">Deutsch</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="signIn-content">
+  <mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="signIn()">
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput placeholder="{{ 'user.login.user' | translate }}"
+                 formControlName="userName"
+                 required>
+          <mat-error *ngIf="isFieldInvalid('userName')">
+            {{ "user.login.typeUsername" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput type="password" placeholder="{{ 'user.login.password' | translate }}"
+                 formControlName="password"
+                 required>
+          <mat-error *ngIf="isFieldInvalid('userName')">
+            {{ "user.login.typePassword" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">{{ "user.login.login" | translate }}</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

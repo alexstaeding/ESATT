@@ -62,6 +62,9 @@ export class EvaluationSchemeDetailComponent implements OnInit {
       this.mode = Mode.NEW
     } else {
       this.evaluationSchemeService.get(this.data.id).then(result => {
+        if (result == null) {
+          return
+        }
         this.originalEvaluationScheme = this.deepCopy(result)
         this.setAllCounters(this.originalEvaluationScheme.criteria)
         this.resetEvaluationScheme()
@@ -214,7 +217,7 @@ export class EvaluationSchemeDetailComponent implements OnInit {
    *
    * @param node criterion for which the sub-criterion is added
    */
-  addSubCriterion(node : Criterion) {
+  addSubCriterion(node: Criterion) {
     const newCriterion = {
       name: null,
       description: null,

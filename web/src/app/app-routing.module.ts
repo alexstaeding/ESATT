@@ -38,12 +38,20 @@ const routes: Routes = [
     loadChildren: "./evaluation-scheme/evaluation-scheme.module#EvaluationSchemeModule"
   },
   {
+    path: "sign-in",
+    loadChildren: "./sign-in/sign-in.module#SignInModule"
+  },
+  {
     path: "thesis",
     loadChildren: "./thesis/thesis.module#ThesisModule"
   },
   {
     path: "user",
     loadChildren: "./user/user.module#UserModule"
+  },
+  {
+    path: "**",
+    redirectTo: "dashboard",
   }
 ]
 
