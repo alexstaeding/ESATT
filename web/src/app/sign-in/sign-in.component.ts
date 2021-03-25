@@ -13,7 +13,6 @@ import {MatSnackBar} from "@angular/material/snack-bar"
 export class SignInComponent implements OnInit {
   form: FormGroup
   private formSubmitAttempt: boolean
-  returnUrl: string
 
   constructor(
     private fb: FormBuilder,
@@ -23,6 +22,7 @@ export class SignInComponent implements OnInit {
     public translateService: TranslateService,
     private snackBar: MatSnackBar,
   ) {
+    this.translateService.setDefaultLang("de")
   }
 
   ngOnInit(): void {
@@ -30,7 +30,6 @@ export class SignInComponent implements OnInit {
       userName: ["", Validators.required],
       password: ["", Validators.required]
     })
-    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/"
   }
 
   get f() {
@@ -76,7 +75,5 @@ export class SignInComponent implements OnInit {
         }
       })
     }
-
   }
-
 }

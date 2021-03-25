@@ -83,7 +83,11 @@ export class DashboardComponent implements OnInit {
     search: string = null,
   ) {
     await this.userService.getCurrentUser().then(result => {
-      this.user = result
+      if (result == null) {
+        return
+      } else {
+        this.user = result
+      }
     })
     const myTheses = []
     this.searchValue = search

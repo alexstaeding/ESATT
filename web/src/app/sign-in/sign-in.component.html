@@ -21,19 +21,20 @@
 </mat-toolbar>
 <div class="signIn-content">
   <mat-card>
-    <mat-card-header>
-      <mat-card-title style="text-align: center">Login</mat-card-title>
-    </mat-card-header>
+    <mat-card-title>Login</mat-card-title>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="signIn()">
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput placeholder="{{ 'user.login.user' | translate }}" formControlName="userName" required>
+          <input matInput placeholder="{{ 'user.login.user' | translate }}"
+                 formControlName="userName"
+                 required>
           <mat-error *ngIf="isFieldInvalid('userName')">
             {{ "user.login.typeUsername" | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput type="password" placeholder="{{ 'user.login.password' | translate }}" formControlName="password"
+          <input matInput type="password" placeholder="{{ 'user.login.password' | translate }}"
+                 formControlName="password"
                  required>
           <mat-error *ngIf="isFieldInvalid('userName')">
             {{ "user.login.typePassword" | translate }}
