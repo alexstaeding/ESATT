@@ -16,9 +16,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {NgModule} from "@angular/core"
 import {DocumentTemplateComponent} from "./document-template.component"
 import {DocumentTemplateDetailComponent} from "./document-template-detail/document-template-detail.component"
-import {NgModule} from "@angular/core"
 import {RouterModule, Routes} from "@angular/router"
 
 const routes: Routes = [

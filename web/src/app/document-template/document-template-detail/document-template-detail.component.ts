@@ -17,10 +17,10 @@
  */
 
 import {Component, Inject, OnInit} from "@angular/core"
+import {DocumentTemplate, DocumentTemplateService} from "../../service/document-template.service"
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog"
 import {TranslateService} from "@ngx-translate/core"
-import {DocumentTemplate, DocumentTemplateService} from "../../service/document-template.service"
 
 @Component({
   selector: "app-evaluation-scheme-detail",
@@ -71,7 +71,7 @@ export class DocumentTemplateDetailComponent implements OnInit {
       return copy
     }
 
-    for (let placeholder of template.placeholders) {
+    for (const placeholder of template.placeholders) {
       copy.placeholders.push(placeholder)
     }
     return copy
@@ -80,8 +80,8 @@ export class DocumentTemplateDetailComponent implements OnInit {
   async addDocumentTemplate() {
     if (this.currentTemplate.name == null
       || this.currentTemplate.texTemplate == null
-      || this.currentTemplate.name.trim() == ""
-      || this.currentTemplate.texTemplate.trim() == "") {
+      || this.currentTemplate.name.trim() === ""
+      || this.currentTemplate.texTemplate.trim() === "") {
       this.snackBar.open(this.translate.instant("document-template.snackbar.not-added"), null, {
         duration: 2000,
         verticalPosition: "bottom",
@@ -103,9 +103,9 @@ export class DocumentTemplateDetailComponent implements OnInit {
 
   async saveChanges() {
     if (this.currentTemplate.name == null
-      || this.currentTemplate.name.trim() == ""
+      || this.currentTemplate.name.trim() === ""
       || this.currentTemplate.texTemplate == null
-      || this.currentTemplate.texTemplate.trim() == "") {
+      || this.currentTemplate.texTemplate.trim() === "") {
       this.snackBar.open(this.translate.instant("document-template.snackbar.not-added"), null, {
         duration: 2000,
         verticalPosition: "bottom",

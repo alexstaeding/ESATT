@@ -21,7 +21,7 @@ import {Criterion, EvaluationScheme, EvaluationSchemeService} from "../../servic
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms"
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {MatTree, MatTreeNestedDataSource} from "@angular/material/tree"
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog"
+import {MAT_DIALOG_DATA} from "@angular/material/dialog"
 import {NestedTreeControl} from "@angular/cdk/tree"
 import {TranslateService} from "@ngx-translate/core"
 

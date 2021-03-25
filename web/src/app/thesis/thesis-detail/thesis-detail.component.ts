@@ -70,7 +70,8 @@ export class ThesisDetailComponent implements OnInit {
   sorting = Sorting.NOT
   sortMode = Sorting
   currentField: string = null
-  searchValue: string = ""
+  searchValue = ""
+  @ViewChild("departmentDialog", {static: true}) departmentDialog: TemplateRef<any>
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -82,7 +83,6 @@ export class ThesisDetailComponent implements OnInit {
     private snackBar: MatSnackBar,
     private translate: TranslateService,
     private departmentMatDialog: MatDialog,
-    private supervisorMatDialog: MatDialog
   ) {
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ["", Validators.required],
@@ -266,9 +266,6 @@ export class ThesisDetailComponent implements OnInit {
 
   /**
    * Checks if the two specified status are identical
-   *
-   * @param first
-   * @param second
    */
   equalStatus(first: Status, second: Status): boolean {
     return !(first.allocationDateUtc !== second.allocationDateUtc || first.signUpUtc !== second.signUpUtc ||
@@ -279,9 +276,6 @@ export class ThesisDetailComponent implements OnInit {
 
   /**
    * Checks if the two specified list of notes are identical
-   *
-   * @param first
-   * @param second
    */
   equalNotes(first: Note[], second: Note[]): boolean {
     if (first.length !== second.length) {
@@ -298,9 +292,6 @@ export class ThesisDetailComponent implements OnInit {
 
   /**
    * Checks if the two specified gradings are identical
-   *
-   * @param first
-   * @param second
    */
   equalGrading(first: Grading, second: Grading): boolean {
     if (first == null && second == null) {
@@ -314,9 +305,6 @@ export class ThesisDetailComponent implements OnInit {
 
   /**
    * Checks if the two specified lists of grades are identical
-   *
-   * @param first
-   * @param second
    */
   equalGrades(first: Grade[], second: Grade[]): boolean {
     if (first.length !== second.length) {
@@ -383,8 +371,8 @@ export class ThesisDetailComponent implements OnInit {
    *
    * @param date date that gets normalized
    */
-  calcDate(lastUpdated: Date): string {
-    return (new Date(new Date(lastUpdated.toString()).getTime())).toLocaleString()
+  calcDate(date: Date): string {
+    return (new Date(new Date(date.toString()).getTime())).toLocaleString()
   }
 
   /**
@@ -452,7 +440,6 @@ export class ThesisDetailComponent implements OnInit {
 
   /**
    * Copies the data of the evaluation scheme into the grading.
-   * @param evaluationScheme
    */
   copyEvalSchemeToGrading(evaluationScheme) {
     this.grading = new Grading()
@@ -513,8 +500,6 @@ export class ThesisDetailComponent implements OnInit {
 
   /**
    * Recursive method that calculates grade of a list of grades
-   *
-   * @param grades
    */
   calcSubgrades(grades): number {
     if (grades == null || grades.length === 0) {
@@ -635,8 +620,6 @@ export class ThesisDetailComponent implements OnInit {
     }
     return copy
   }
-
-  @ViewChild("departmentDialog", {static: true}) departmentDialog: TemplateRef<any>
 
   /**
    * Opens a dialog for adding new departments.

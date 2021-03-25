@@ -23,15 +23,15 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import {BrowserModule} from "@angular/platform-browser"
 import {HttpClient, HttpClientModule} from "@angular/common/http"
 import {NavModule} from "./nav/nav.module"
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core"
 import {TranslateHttpLoader} from "@ngx-translate/http-loader"
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core"
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     AppRoutingModule,
-    BrowserModule,
     BrowserAnimationsModule,
+    BrowserModule,
     HttpClientModule,
     NavModule,
     TranslateModule.forRoot({

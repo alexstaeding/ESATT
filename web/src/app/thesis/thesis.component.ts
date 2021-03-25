@@ -18,9 +18,9 @@
 
 import {Component, OnInit} from "@angular/core"
 import {MatDialog} from "@angular/material/dialog"
+import {MatTableDataSource} from "@angular/material/table"
 import {ThesisDetailComponent} from "./thesis-detail/thesis-detail.component"
 import {Thesis, ThesisService} from "../service/thesis.service"
-import {MatTableDataSource} from "@angular/material/table"
 
 
 @Component({

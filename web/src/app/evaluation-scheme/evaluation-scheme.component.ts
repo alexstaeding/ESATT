@@ -17,9 +17,9 @@
  */
 
 import {Component, OnInit} from "@angular/core"
-import {MatDialog} from "@angular/material/dialog"
 import {EvaluationSchemeDetailComponent} from "./evaluation-scheme-detail/evaluation-scheme-detail.component"
 import {EvaluationScheme, EvaluationSchemeService} from "../service/evaluation-scheme.service"
+import {MatDialog} from "@angular/material/dialog"
 import {MatTableDataSource} from "@angular/material/table"
 
 @Component({
@@ -133,14 +133,14 @@ export class EvaluationSchemeComponent implements OnInit {
         return
       }
       this.initData(true, field, null, true, this.searchValue)
-    } else if (this.sorting === Sorting.ASCENDING){
+    } else if (this.sorting === Sorting.ASCENDING) {
       this.sorting = Sorting.DESCENDING
       if (field === "createdUtc") {
         this.initData(false, null, null, true, this.searchValue)
         return
       }
       this.initData(false, field, null, true, this.searchValue)
-    } else if (this.sorting === Sorting.DESCENDING){
+    } else if (this.sorting === Sorting.DESCENDING) {
       this.sorting = Sorting.NOT
       this.initData(null, null, null, true, this.searchValue)
       this.currentField = null
