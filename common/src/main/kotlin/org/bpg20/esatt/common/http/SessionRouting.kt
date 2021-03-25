@@ -65,17 +65,20 @@ class SessionRouting @Inject constructor(
         val userName = credentials[0]
         val password = credentials[1]
 
-        logger.info("Attempted login for $userName @ ${call.request.origin.remoteHost}")
 
         val principal = ldapAuthenticate(
           UserPasswordCredential(userName, password),
           config.ldapConnection!!,
           config.ldapUserDNFormat!!
         ) {
-          logger.info("Successful login for ${it.name} with LDAP")
+          logger.info("Successful login (LDAP) for $userName @ ${call.request.origin.remoteHost}")
           userRepository.getOneOrCreateFromUserName(it.name, linkLDAP = true)
           UserIdPrincipal(it.name)
-        } ?: return@post call.respond(HttpStatusCode.BadRequest, LoginStatus.INVALID)
+        }
+        if (principal == null) {
+          logger.info("Failed login (LDAP) for $userName @ ${call.request.origin.remoteHost}")
+          return@post call.respond(HttpStatusCode.BadRequest, LoginStatus.INVALID)
+        }
 
         call.sessions.set("LOGIN_SESSION", LoginSession(principal.name))
         call.respond(HttpStatusCode.OK, LoginStatus.SUCCESS)

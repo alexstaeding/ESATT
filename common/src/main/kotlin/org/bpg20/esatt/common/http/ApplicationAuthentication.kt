@@ -21,6 +21,7 @@ package org.bpg20.esatt.common.http
 import com.google.inject.Inject
 import io.ktor.application.*
 import io.ktor.auth.*
+import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.sessions.*
@@ -37,7 +38,7 @@ class ApplicationAuthentication @Inject constructor(
       session<LoginSession> {
         challenge {
           if (call.sessions.get<LoginSession>() == null) {
-            logger.info("Challenging user")
+            logger.info("Redirecting unauthenticated client ${call.request.origin.remoteHost}")
             call.respond(HttpStatusCode.Unauthorized, "/sign-in")
           }
         }
