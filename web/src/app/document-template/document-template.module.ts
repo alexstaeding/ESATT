@@ -36,9 +36,9 @@ import {MatNativeDateModule} from "@angular/material/core"
 import {MatSelectModule} from "@angular/material/select"
 import {MatSnackBarModule} from "@angular/material/snack-bar"
 import {MatTableModule} from "@angular/material/table"
+import {MatTabsModule} from "@angular/material/tabs"
 import {MatTooltipModule} from "@angular/material/tooltip"
 import {MatTreeModule} from "@angular/material/tree"
-import {MatTabsModule} from "@angular/material/tabs"
 import {TranslateModule} from "@ngx-translate/core"
 
 

@@ -39,7 +39,7 @@ export class DocumentTemplateComponent implements OnInit {
   placeHolderMap: any
   theses: Thesis[]
   currentThesis: Thesis
-  downloadDisabled: boolean = false
+  downloadDisabled = false
   downloadDisabledTimer: Timeout
 
   constructor(
@@ -87,12 +87,13 @@ export class DocumentTemplateComponent implements OnInit {
     const tmpTemplate = this.documentTemplates.find(s => s.id === id)
     this.placeHolderMap = {}
     if (tmpTemplate != null && tmpTemplate.placeholders != null) {
-      for (let placeholder of tmpTemplate.placeholders) {
+      for (const placeholder of tmpTemplate.placeholders) {
         this.placeHolderMap[placeholder] = ""
       }
       if (this.currentThesis != null && this.currentThesis.grading != null) {
-        this.placeHolderMap["calculatedGrade"] = this.currentThesis.calculatedGrade == null ? "" : this.currentThesis.calculatedGrade.toString()
-        this.placeHolderMap["overwrittenGrade"] = this.currentThesis.grade == null ? "" : this.currentThesis.grade.toString()
+        this.placeHolderMap.calculatedGrade = this.currentThesis.calculatedGrade == null ? ""
+          : this.currentThesis.calculatedGrade.toString()
+        this.placeHolderMap.overwrittenGrade = this.currentThesis.grade == null ? "" : this.currentThesis.grade.toString()
         this.setAllCounters(this.currentThesis.grading.grades)
         this.setAllGradingPlaceholders(this.currentThesis.grading.grades)
       }
@@ -109,7 +110,7 @@ export class DocumentTemplateComponent implements OnInit {
   async generateDocs() {
     this.downloadDisabled = true
     const self = this
-    this.downloadDisabledTimer = setTimeout(function() {
+    this.downloadDisabledTimer = setTimeout(() => {
       self.downloadDisabled = false
     }, 5000)
     this.snackBar.open(this.translate.instant("document-template.snackbar.download"), null, {
@@ -129,7 +130,7 @@ export class DocumentTemplateComponent implements OnInit {
     link.href = pdfUrl
     link.download = "GeneratedPdf.pdf"
     link.dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}))
-    setTimeout(function() {
+    setTimeout(() => {
       window.URL.revokeObjectURL(pdfUrl)
       link.remove()
     }, 100)
@@ -137,7 +138,7 @@ export class DocumentTemplateComponent implements OnInit {
     link.href = texUrl
     link.download = "GeneratedLatex.tex"
     link.dispatchEvent(new MouseEvent("click", {bubbles: true, cancelable: true, view: window}))
-    setTimeout(function() {
+    setTimeout(() => {
       window.URL.revokeObjectURL(texUrl)
       link.remove()
     }, 100)
@@ -163,7 +164,7 @@ export class DocumentTemplateComponent implements OnInit {
   }
 
   setAllGradingPlaceholders(grades: Grade[]) {
-    if (grades == null || grades.length == 0) {
+    if (grades == null || grades.length === 0) {
       return
     }
     for (const grade of grades) {

@@ -38,7 +38,7 @@ export class DocumentTemplateService extends BaseRepositoryService<DocumentTempl
     for (const key of Object.keys(dataToSend.placeholders)) {
       headerMap[key] = dataToSend.placeholders[key]
     }
-    headerMap["id"] = dataToSend.id
+    headerMap.id = dataToSend.id
     headerMap["Content-Type"] = "application/json"
     return new HttpHeaders(headerMap)
   }

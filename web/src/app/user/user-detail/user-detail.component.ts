@@ -32,7 +32,7 @@ export class UserDetailComponent implements OnInit {
   user: User = new User()
   userWithChanges: User
   originalUser: User
-  editorEnabled: Boolean = false
+  editorEnabled = false
   displayedColumns: string[] = [
     "title",
     "firstName",
@@ -53,7 +53,7 @@ export class UserDetailComponent implements OnInit {
   sorting = Sorting.NOT
   sortMode = Sorting
   currentField: string = null
-  searchValue: string = ""
+  searchValue = ""
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -147,8 +147,8 @@ export class UserDetailComponent implements OnInit {
   async save() {
     this.userWithChanges = new User()
     this.userWithChanges.id = this.user.id
-    for (let key in this.user) {
-      if (this.originalUser[key] != this.user[key]) {
+    for (const key in this.user) {
+      if (this.originalUser[key] !== this.user[key]) {
         this.userWithChanges[key] = this.user[key]
       }
     }
@@ -173,7 +173,7 @@ export class UserDetailComponent implements OnInit {
   titlePreview(title): string {
     if (title != null) {
       let preview = title.substring(0, 30)
-      if (preview != title) {
+      if (preview !== title) {
         preview = preview + " ..."
       }
       return preview

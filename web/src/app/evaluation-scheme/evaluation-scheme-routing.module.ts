@@ -16,9 +16,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {NgModule} from "@angular/core"
 import {EvaluationSchemeComponent} from "./evaluation-scheme.component"
 import {EvaluationSchemeDetailComponent} from "./evaluation-scheme-detail/evaluation-scheme-detail.component"
-import {NgModule} from "@angular/core"
 import {RouterModule, Routes} from "@angular/router"
 
 const routes: Routes = [

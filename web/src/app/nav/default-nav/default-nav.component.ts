@@ -41,7 +41,7 @@ export class DefaultNavComponent implements OnInit {
     this.translateService.setDefaultLang("de")
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   /**
