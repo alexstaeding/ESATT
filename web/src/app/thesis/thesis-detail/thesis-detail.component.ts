@@ -95,12 +95,12 @@ export class ThesisDetailComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAll().then(result => {
-      if (result != null){
+      if (result != null) {
         this.users = result
       }
     })
     this.departmentService.getAll().then(result => {
-      if (result != null){
+      if (result != null) {
         this.departments = result
       }
     })

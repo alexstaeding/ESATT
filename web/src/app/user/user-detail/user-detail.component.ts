@@ -91,7 +91,7 @@ export class UserDetailComponent implements OnInit {
     const usersTheses = []
     this.searchValue = search
     await this.thesisService.getAll(ascending, field, limit, preview, search).then(result => {
-      if (result == null){
+      if (result == null) {
         return
       }
       for (const thesis of result) {

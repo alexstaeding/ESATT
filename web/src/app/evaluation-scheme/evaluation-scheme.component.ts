@@ -63,7 +63,7 @@ export class EvaluationSchemeComponent implements OnInit {
   ) {
     this.searchValue = search
     this.evaluationSchemeService.getAll(ascending, field, limit, preview, search).then(result => {
-      if (result != null){
+      if (result != null) {
         this.data = new MatTableDataSource(result)
       }
     })

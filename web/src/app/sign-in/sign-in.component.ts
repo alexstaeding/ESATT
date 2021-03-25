@@ -1,9 +1,9 @@
+import {ActivatedRoute, Router} from "@angular/router"
 import {Component, OnInit} from "@angular/core"
 import {FormBuilder, FormGroup, Validators} from "@angular/forms"
 import {LoginStatus, UserService} from "../service/user.service"
-import {ActivatedRoute, Router} from "@angular/router"
-import {TranslateService} from "@ngx-translate/core"
 import {MatSnackBar} from "@angular/material/snack-bar"
+import {TranslateService} from "@ngx-translate/core"
 
 @Component({
   selector: "app-sign-in",
@@ -62,7 +62,7 @@ export class SignInComponent implements OnInit {
   signIn() {
     if (this.form.valid) {
       this.userService.signIn(this.f.userName.value, this.f.password.value).then(result => {
-        if (result == null){
+        if (result == null) {
           return
         }
         if (result === LoginStatus.SUCCESS) {

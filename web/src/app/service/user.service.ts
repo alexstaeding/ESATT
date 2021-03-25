@@ -16,11 +16,10 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Injectable} from "@angular/core"
-import {HttpClient} from "@angular/common/http"
 import {BaseRepositoryService} from "./BaseRepositoryService"
+import {HttpClient} from "@angular/common/http"
+import {Injectable} from "@angular/core"
 import {Router} from "@angular/router"
-import {logging} from "protractor"
 
 @Injectable({
   providedIn: "root"
