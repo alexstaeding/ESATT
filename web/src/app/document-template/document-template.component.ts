@@ -91,9 +91,10 @@ export class DocumentTemplateComponent implements OnInit {
         this.placeHolderMap[placeholder] = ""
       }
       if (this.currentThesis != null && this.currentThesis.grading != null) {
-        this.placeHolderMap.calculatedGrade = this.currentThesis.calculatedGrade == null ? ""
-          : this.currentThesis.calculatedGrade.toString()
-        this.placeHolderMap.overwrittenGrade = this.currentThesis.grade == null ? "" : this.currentThesis.grade.toString()
+        this.placeHolderMap.calculatedGrade = this.currentThesis.calculatedGrade == null
+          ? "" : this.currentThesis.calculatedGrade.toString()
+        this.placeHolderMap.overwrittenGrade = this.currentThesis.grade == null
+          ? "" : this.currentThesis.grade.toString()
         this.setAllCounters(this.currentThesis.grading.grades)
         this.setAllGradingPlaceholders(this.currentThesis.grading.grades)
       }
